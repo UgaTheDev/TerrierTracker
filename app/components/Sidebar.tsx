@@ -61,7 +61,6 @@ export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
 
   return (
     <Card className="h-screen w-72 rounded-none border-r border-default-200 bg-background/60 backdrop-blur-lg p-4">
-      {/* Logo Section */}
       <div className="flex items-center gap-3 mb-8 px-2">
         <Avatar
           src="/logo.png"
@@ -80,8 +79,6 @@ export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
       </div>
 
       <Divider className="mb-6" />
-
-      {/* Navigation Menu */}
       <nav className="space-y-2">
         {menuItems.map((item) => (
           <div key={item.id}>
@@ -104,8 +101,6 @@ export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
             >
               <span className="flex-1 text-left">{item.label}</span>
             </Button>
-
-            {/* Submenu for Courses */}
             {item.expandable && coursesExpanded && (
               <div className="ml-6 mt-2 space-y-1">
                 {item.submenu?.map((subitem) => (
@@ -125,8 +120,6 @@ export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
           </div>
         ))}
       </nav>
-
-      {/* Bottom Section */}
       <div className="mt-auto pt-6">
         <Divider className="mb-4" />
         <div className="px-2 text-center">
