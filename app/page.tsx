@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { title, subtitle } from "@/components/primitives";
+import { title, subtitle } from "@/app/components/Primitives";
 import ReqTable from "./components/HubRequirementsTable";
 import Sidebar from "./components/Sidebar";
 

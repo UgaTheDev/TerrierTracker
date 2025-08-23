@@ -63,7 +63,7 @@ export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
     <Card className="h-screen w-72 rounded-none border-r border-default-200 bg-background/60 backdrop-blur-lg p-4">
       <div className="flex items-center gap-3 mb-8 px-2">
         <Avatar
-          src="/logo.png"
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCwX8PlKDGl3Zz5YsKZ3TL6ROXuebh89ZLm-Qa9q1zEchvK9BY5T6ppKEZCKLqcJD7gno&usqp=CAU"
           alt="Terrier Tracker"
           className="w-8 h-8"
           fallback={
