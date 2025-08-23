@@ -8,16 +8,20 @@ import {
   Bookmark,
 } from "lucide-react";
 
-export default function Sidebar() {
+interface SidebarProps {
+  onNavigate: (page: string) => void;
+  currentPage: string;
+}
+
+export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
   const [coursesExpanded, setCoursesExpanded] = useState(false);
-  const [activeItem, setActiveItem] = useState("dashboard");
 
   const menuItems = [
     {
       id: "dashboard",
       label: "Dashboard",
       icon: <LayoutDashboard size={20} />,
-      href: "/dashboard",
+      page: "dashboard",
     },
     {
       id: "courses",
@@ -25,34 +29,39 @@ export default function Sidebar() {
       icon: <BookOpen size={20} />,
       expandable: true,
       submenu: [
-        { id: "your-courses", label: "Your Courses", href: "/courses" },
-        { id: "add-course", label: "Add Course", href: "/courses/add" },
+        { id: "your-courses", label: "Your Courses", page: "your-courses" },
+        { id: "add-course", label: "Add Course", page: "add-courses" },
       ],
     },
     {
       id: "hub-tracker",
       label: "Hub Tracker",
       icon: <Target size={20} />,
-      href: "/hub-tracker",
+      page: "hub-tracker",
     },
     {
       id: "bookmarks",
       label: "Bookmarks",
       icon: <Bookmark size={20} />,
-      href: "/bookmarks",
+      page: "bookmarks",
     },
   ];
 
-  const handleItemClick = (itemId) => {
-    if (itemId === "courses") {
+  const handleItemClick = (item) => {
+    if (item.expandable) {
       setCoursesExpanded(!coursesExpanded);
     } else {
-      setActiveItem(itemId);
+      onNavigate(item.page);
     }
+  };
+
+  const handleSubmenuClick = (submenuItem) => {
+    onNavigate(submenuItem.page);
   };
 
   return (
     <Card className="h-screen w-72 rounded-none border-r border-default-200 bg-background/60 backdrop-blur-lg p-4">
+      {/* Logo Section */}
       <div className="flex items-center gap-3 mb-8 px-2">
         <Avatar
           src="/logo.png"
@@ -71,12 +80,14 @@ export default function Sidebar() {
       </div>
 
       <Divider className="mb-6" />
+
+      {/* Navigation Menu */}
       <nav className="space-y-2">
         {menuItems.map((item) => (
           <div key={item.id}>
             <Button
-              variant={activeItem === item.id ? "flat" : "light"}
-              color={activeItem === item.id ? "primary" : "default"}
+              variant={currentPage === item.page ? "flat" : "light"}
+              color={currentPage === item.page ? "primary" : "default"}
               className="w-full justify-start h-12 px-4"
               startContent={item.icon}
               endContent={
@@ -89,7 +100,7 @@ export default function Sidebar() {
                   />
                 ) : null
               }
-              onPress={() => handleItemClick(item.id)}
+              onPress={() => handleItemClick(item)}
             >
               <span className="flex-1 text-left">{item.label}</span>
             </Button>
@@ -100,11 +111,11 @@ export default function Sidebar() {
                 {item.submenu?.map((subitem) => (
                   <Button
                     key={subitem.id}
-                    variant={activeItem === subitem.id ? "flat" : "light"}
-                    color={activeItem === subitem.id ? "primary" : "default"}
+                    variant={currentPage === subitem.page ? "flat" : "light"}
+                    color={currentPage === subitem.page ? "primary" : "default"}
                     size="sm"
                     className="w-full justify-start h-10 px-4 text-sm"
-                    onPress={() => setActiveItem(subitem.id)}
+                    onPress={() => handleSubmenuClick(subitem)}
                   >
                     {subitem.label}
                   </Button>
@@ -115,6 +126,7 @@ export default function Sidebar() {
         ))}
       </nav>
 
+      {/* Bottom Section */}
       <div className="mt-auto pt-6">
         <Divider className="mb-4" />
         <div className="px-2 text-center">
