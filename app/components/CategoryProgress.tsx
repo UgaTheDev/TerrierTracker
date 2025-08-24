@@ -15,11 +15,8 @@ interface CategoryProgressProps {
 export default function CategoryProgress({
   categories,
 }: CategoryProgressProps) {
-  // Calculate percentages from hub requirements data
   const calculateCategoryPercentages = (): CategoryData[] => {
     const categoryMap = new Map();
-
-    // Group requirements by category and calculate percentages
     hubRequirements.forEach((req) => {
       const category = req.category;
       if (!categoryMap.has(category)) {
@@ -33,7 +30,6 @@ export default function CategoryProgress({
       }
     });
 
-    // Convert to CategoryData format with colors
     const colorMap: Record<
       string,
       { color: CategoryData["color"]; customColor?: string }

@@ -25,7 +25,6 @@ export const columns = [
 ];
 
 export const hubRequirements = [
-  // PHILOSOPHICAL, AESTHETIC, AND HISTORICAL INTERPRETATION
   {
     id: 1,
     name: "Philosophical Inquiry and Life's Meanings",
@@ -50,7 +49,7 @@ export const hubRequirements = [
     units: 1,
     status: "unfulfilled",
   },
-  // SCIENTIFIC AND SOCIAL INQUIRY
+
   {
     id: 4,
     name: "Scientific Inquiry I",
@@ -75,7 +74,6 @@ export const hubRequirements = [
     units: 1,
     status: "unfulfilled",
   },
-  // QUANTITATIVE REASONING
   {
     id: 7,
     name: "Quantitative Reasoning I",
@@ -92,7 +90,6 @@ export const hubRequirements = [
     units: 1,
     status: "unfulfilled",
   },
-  // DIVERSITY, CIVIC ENGAGEMENT, AND GLOBAL CITIZENSHIP
   {
     id: 9,
     name: "The Individual in Community",
@@ -117,7 +114,6 @@ export const hubRequirements = [
     units: 1,
     status: "unfulfilled",
   },
-  // COMMUNICATION
   {
     id: 12,
     name: "First-Year Writing Seminar",
@@ -158,7 +154,6 @@ export const hubRequirements = [
     units: 1,
     status: "unfulfilled",
   },
-  // INTELLECTUAL TOOLKIT
   {
     id: 17,
     name: "Critical Thinking",

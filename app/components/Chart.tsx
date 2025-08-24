@@ -6,7 +6,6 @@ interface ChartProps {
 }
 
 export default function Chart({ percentage }: ChartProps) {
-  // Calculate percentage from hub requirements if not provided
   const calculateOverallPercentage = () => {
     const fulfilledCount = hubRequirements.filter(
       (req) => req.status === "fulfilled"
