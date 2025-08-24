@@ -1,7 +1,5 @@
-
-import type {SVGProps} from "react";
-import type {ChipProps} from "@heroui/react";
-
+import type { SVGProps } from "react";
+import AddCourses from "../childr_pages/AddCourses";
 import React from "react";
 import {
   Table,
@@ -10,72 +8,103 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  User,
-  Chip,
   Tooltip,
+  Card,
+  Button,
 } from "@heroui/react";
+import { Plus } from "lucide-react";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
 export const columns = [
-  {name: "NAME", uid: "name"},
-  {name: "HUBS", uid: "role"},
-  {name: "STATUS", uid: "status"},
-  {name: "ACTIONS", uid: "actions"},
+  { name: "ID", uid: "id" },
+  { name: "COURSE", uid: "course" },
+  { name: "CREDITS", uid: "credits" },
+  { name: "ACTIONS", uid: "actions" },
 ];
 
-export const users = [
+export const courses = [
   {
     id: 1,
-    name: "Tony Reichert",
-    role: "CEO",
-    team: "Management",
-    status: "active",
-    age: "29",
-    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    email: "tony.reichert@example.com",
+    courseId: "CAS CS 101",
+    course: "Introduction to Computer Science I",
+    credits: 4,
+    semester: "Fall 2024",
+    professor: "Dr. Smith",
   },
   {
     id: 2,
-    name: "Zoey Lang",
-    role: "Technical Lead",
-    team: "Development",
-    status: "paused",
-    age: "25",
-    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-    email: "zoey.lang@example.com",
+    courseId: "CAS MA 123",
+    course: "Calculus I",
+    credits: 4,
+    semester: "Fall 2024",
+    professor: "Prof. Johnson",
   },
   {
     id: 3,
-    name: "Jane Fisher",
-    role: "Senior Developer",
-    team: "Development",
-    status: "active",
-    age: "22",
-    avatar: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-    email: "jane.fisher@example.com",
+    courseId: "CAS WR 100",
+    course: "Writing, Research, and Inquiry",
+    credits: 4,
+    semester: "Fall 2024",
+    professor: "Dr. Williams",
   },
   {
     id: 4,
-    name: "William Howard",
-    role: "Community Manager",
-    team: "Marketing",
-    status: "vacation",
-    age: "28",
-    avatar: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
-    email: "william.howard@example.com",
+    courseId: "CAS HI 151",
+    course: "The World in the Twentieth Century",
+    credits: 4,
+    semester: "Fall 2024",
+    professor: "Prof. Davis",
   },
   {
     id: 5,
-    name: "Kristen Copper",
-    role: "Sales Manager",
-    team: "Sales",
-    status: "active",
-    age: "24",
-    avatar: "https://i.pravatar.cc/150?u=a092581d4ef9026700d",
-    email: "kristen.cooper@example.com",
+    courseId: "CAS PY 105",
+    course: "Introduction to Psychology",
+    credits: 4,
+    semester: "Fall 2024",
+    professor: "Dr. Brown",
+  },
+  {
+    id: 6,
+    courseId: "CAS CS 112",
+    course: "Introduction to Computer Science II",
+    credits: 4,
+    semester: "Spring 2025",
+    professor: "Dr. Smith",
+  },
+  {
+    id: 7,
+    courseId: "CAS MA 124",
+    course: "Calculus II",
+    credits: 4,
+    semester: "Spring 2025",
+    professor: "Prof. Johnson",
+  },
+  {
+    id: 8,
+    courseId: "CAS PH 211",
+    course: "General Physics I",
+    credits: 4,
+    semester: "Spring 2025",
+    professor: "Dr. Wilson",
+  },
+  {
+    id: 9,
+    courseId: "CAS EN 102",
+    course: "First-Year Writing Seminar",
+    credits: 4,
+    semester: "Spring 2025",
+    professor: "Prof. Garcia",
+  },
+  {
+    id: 10,
+    courseId: "CAS SO 101",
+    course: "Introduction to Sociology",
+    credits: 4,
+    semester: "Spring 2025",
+    professor: "Dr. Martinez",
   },
 ];
 
@@ -199,83 +228,122 @@ export const EditIcon = (props: IconSvgProps) => {
     </svg>
   );
 };
-const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
-};
 
-type User = (typeof users)[0];
+type Course = (typeof courses)[0];
+export default function CourseTable() {
+  const [showAddCourses, setShowAddCourses] = React.useState(false);
+  const renderCell = React.useCallback(
+    (course: Course, columnKey: React.Key) => {
+      const cellValue = course[columnKey as keyof Course];
 
-export default function ReqTable() {
-  const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
+      switch (columnKey) {
+        case "id":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-sm font-mono">{course.courseId}</p>
+              <p className="text-bold text-xs text-default-400">
+                {course.semester}
+              </p>
+            </div>
+          );
+        case "course":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-sm">{course.course}</p>
+              <p className="text-bold text-xs text-default-400">
+                {course.professor}
+              </p>
+            </div>
+          );
+        case "credits":
+          return (
+            <div className="flex items-center">
+              <p className="text-sm font-semibold">{course.credits}</p>
+            </div>
+          );
+        case "actions":
+          return (
+            <div className="relative flex items-center gap-2">
+              <Tooltip content="Course Details">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                  <EyeIcon />
+                </span>
+              </Tooltip>
+              <Tooltip content="Edit Course">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                  <EditIcon />
+                </span>
+              </Tooltip>
+              <Tooltip color="danger" content="Remove Course">
+                <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                  <DeleteIcon />
+                </span>
+              </Tooltip>
+            </div>
+          );
+        default:
+          return cellValue;
+      }
+    },
+    []
+  );
 
-    switch (columnKey) {
-      case "name":
-        return (
-          <User
-            avatarProps={{radius: "lg", src: user.avatar}}
-            description={user.email}
-            name={cellValue}
-          >
-            {user.email}
-          </User>
-        );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">{cellValue}</p>
-            <p className="text-bold text-sm capitalize text-default-400">{user.team}</p>
-          </div>
-        );
-      case "status":
-        return (
-          <Chip className="capitalize" color={statusColorMap[user.status]} size="sm" variant="flat">
-            {cellValue}
-          </Chip>
-        );
-      case "actions":
-        return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip content="Details">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <EyeIcon />
-              </span>
-            </Tooltip>
-            <Tooltip content="Edit user">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <EditIcon />
-              </span>
-            </Tooltip>
-            <Tooltip color="danger" content="Delete user">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <DeleteIcon />
-              </span>
-            </Tooltip>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }, []);
+  const totalCredits = courses.reduce((sum, course) => sum + course.credits, 0);
+  if (showAddCourses) {
+    return <AddCourses />;
+  }
 
   return (
-    <Table aria-label="Example table with custom cells">
-      <TableHeader columns={columns}>
-        {(column) => (
-          <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
-            {column.name}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody items={users}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+    <div className="space-y-6">
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="text-2xl font-bold text-foreground">Your Courses</h1>
+          <p className="text-default-500 mt-1">Manage your enrolled courses</p>
+        </div>
+        <div className="flex items-center gap-4">
+          <Button
+            size="sm"
+            color="primary"
+            variant="flat"
+            startContent={<Plus size={16} />}
+            onClick={() => setShowAddCourses(true)}
+            className="h-8 px-3 text-sm"
+          >
+            Add Courses
+          </Button>
+          <Card className="p-4">
+            <div className="text-center">
+              <p className="text-2xl font-bold text-primary">{totalCredits}</p>
+              <p className="text-sm text-default-500">Total Credits</p>
+            </div>
+          </Card>
+        </div>
+      </div>
+      <Card className="p-6">
+        <div className="h-96 overflow-auto">
+          <Table aria-label="Your courses table" className="h-full">
+            <TableHeader columns={columns}>
+              {(column) => (
+                <TableColumn
+                  key={column.uid}
+                  align={column.uid === "actions" ? "center" : "start"}
+                >
+                  {column.name}
+                </TableColumn>
+              )}
+            </TableHeader>
+            <TableBody items={courses}>
+              {(item) => (
+                <TableRow key={item.id}>
+                  {(columnKey) => (
+                    <TableCell>{renderCell(item, columnKey)}</TableCell>
+                  )}
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </div>
+      </Card>
+    </div>
   );
 }
