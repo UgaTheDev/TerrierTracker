@@ -68,7 +68,7 @@ export default function CategoryProgress({
   return (
     <div className="w-full max-w-2xl p-6 space-y-6 h-96">
       <h2 className="text-xl font-semibold text-center mb-6">
-        Categorical Hub Requirement Tracker
+        Categorical Tracker
       </h2>
       <div className="space-y-4">
         {categoryData.map((category, index) => (

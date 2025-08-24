@@ -31,7 +31,7 @@ export const hubRequirements = [
     courses: "",
     category: "Philosophical, Aesthetic, and Historical Interpretation",
     units: 1,
-    status: "unfulfilled",
+    status: "fulfilled",
   },
   {
     id: 2,
@@ -337,9 +337,7 @@ export default function HubRequirementTable() {
         case "courses":
           return (
             <div className="flex flex-col">
-              <p className="text-sm">
-                {requirement.courses || "No courses assigned"}
-              </p>
+              <p className="text-sm">{requirement.courses || "N/A"}</p>
             </div>
           );
         case "status":
