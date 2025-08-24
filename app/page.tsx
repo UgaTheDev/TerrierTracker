@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import { title, subtitle } from "@/app/components/Primitives";
+import { title, subtitle } from "./components/Primitives";
 import ReqTable from "./components/HubRequirementsTable";
 import Sidebar from "./components/Sidebar";
-
-// Import your child page components
+import Chart from "./components/Chart";
+import CategoryProgress from "./components/CategoryProgress";
 import YourCourses from "./childr_pages/YourCourses";
 import AddCourses from "./childr_pages/AddCourses";
 import HubTracker from "./childr_pages/HubTracker";
@@ -30,8 +30,18 @@ export default function Home() {
                 Track all courses and hub requirements with a single click.
               </div>
             </div>
-            <div className="w-full max-w-6xl">
-              <ReqTable />
+            <div className="w-full max-w-7xl">
+              <div className="flex justify-center">
+                <Chart percentage={78} />
+              </div>
+            </div>
+            <div className="flex gap-6 w-full max-w-7xl">
+              <div className="w-[30%] flex-shrink-0">
+                <CategoryProgress />
+              </div>
+              <div className="w-[70%]">
+                <ReqTable />
+              </div>
             </div>
           </section>
         );
