@@ -1,4 +1,5 @@
 import { Progress } from "@heroui/react";
+import { hubRequirements } from "./HubRequirementsTable";
 
 interface CategoryData {
   label: string;
@@ -14,50 +15,65 @@ interface CategoryProgressProps {
 export default function CategoryProgress({
   categories,
 }: CategoryProgressProps) {
-  const defaultCategories: CategoryData[] = [
-    {
-      label: "Philosophical, Aesthetic and Historical Interpretation",
-      percentage: 85,
-      color: "danger",
-    },
-    {
-      label: "Scientific and Social Inquiry",
-      percentage: 70,
-      color: "default",
-      customColor: "#8B4513",
-    },
-    {
-      label: "Quantitative Reasoning",
-      percentage: 90,
-      color: "success",
-    },
-    {
-      label: "Diversity, Civic Engagement and Global Citizenship",
-      percentage: 60,
-      color: "primary",
-      customColor: "#20B2AA",
-    },
-    {
-      label: "Communication",
-      percentage: 95,
-      color: "warning",
-    },
-    {
-      label: "Intellectual Toolkit",
-      percentage: 75,
-      color: "primary",
-      customColor: "#007BA7",
-    },
-  ];
+  // Calculate percentages from hub requirements data
+  const calculateCategoryPercentages = (): CategoryData[] => {
+    const categoryMap = new Map();
 
-  const categoryData = categories || defaultCategories;
+    // Group requirements by category and calculate percentages
+    hubRequirements.forEach((req) => {
+      const category = req.category;
+      if (!categoryMap.has(category)) {
+        categoryMap.set(category, { fulfilled: 0, total: 0 });
+      }
+
+      const data = categoryMap.get(category);
+      data.total += 1;
+      if (req.status === "fulfilled") {
+        data.fulfilled += 1;
+      }
+    });
+
+    // Convert to CategoryData format with colors
+    const colorMap: Record<
+      string,
+      { color: CategoryData["color"]; customColor?: string }
+    > = {
+      "Philosophical, Aesthetic, and Historical Interpretation": {
+        color: "danger",
+      },
+      "Scientific and Social Inquiry": {
+        color: "default",
+        customColor: "#8B4513",
+      },
+      "Quantitative Reasoning": { color: "success" },
+      "Diversity, Civic Engagement, and Global Citizenship": {
+        color: "primary",
+        customColor: "#20B2AA",
+      },
+      Communication: { color: "warning" },
+      "Intellectual Toolkit": { color: "primary", customColor: "#007BA7" },
+    };
+
+    return Array.from(categoryMap.entries()).map(([category, data]) => {
+      const percentage = Math.round((data.fulfilled / data.total) * 100);
+      const colorInfo = colorMap[category] || { color: "default" as const };
+
+      return {
+        label: category,
+        percentage,
+        color: colorInfo.color,
+        customColor: colorInfo.customColor,
+      };
+    });
+  };
+
+  const categoryData = categories || calculateCategoryPercentages();
 
   return (
-    <div className="w-full max-w-2xl p-6 space-y-6">
+    <div className="w-full max-w-2xl p-6 space-y-6 h-96">
       <h2 className="text-xl font-semibold text-center mb-6">
         Categorical Hub Requirement Tracker
       </h2>
-
       <div className="space-y-4">
         {categoryData.map((category, index) => (
           <div key={index} className="space-y-2">

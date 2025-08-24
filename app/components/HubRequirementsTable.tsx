@@ -1,6 +1,5 @@
-
-import type {SVGProps} from "react";
-import type {ChipProps} from "@heroui/react";
+import type { SVGProps } from "react";
+import type { ChipProps } from "@heroui/react";
 
 import React from "react";
 import {
@@ -10,7 +9,6 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  User,
   Chip,
   Tooltip,
 } from "@heroui/react";
@@ -20,62 +18,178 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 };
 
 export const columns = [
-  {name: "NAME", uid: "name"},
-  {name: "ROLE", uid: "role"},
-  {name: "STATUS", uid: "status"},
-  {name: "ACTIONS", uid: "actions"},
+  { name: "NAME", uid: "name" },
+  { name: "COURSES", uid: "courses" },
+  { name: "STATUS", uid: "status" },
+  { name: "ACTIONS", uid: "actions" },
 ];
 
-export const users = [
+export const hubRequirements = [
+  // PHILOSOPHICAL, AESTHETIC, AND HISTORICAL INTERPRETATION
   {
     id: 1,
-    name: "Tony Reichert",
-    role: "CEO",
-    team: "Management",
-    status: "active",
-    age: "29",
-    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026024d",
-    email: "tony.reichert@example.com",
+    name: "Philosophical Inquiry and Life's Meanings",
+    courses: "",
+    category: "Philosophical, Aesthetic, and Historical Interpretation",
+    units: 1,
+    status: "unfulfilled",
   },
   {
     id: 2,
-    name: "Zoey Lang",
-    role: "Technical Lead",
-    team: "Development",
-    status: "paused",
-    age: "25",
-    avatar: "https://i.pravatar.cc/150?u=a042581f4e29026704d",
-    email: "zoey.lang@example.com",
+    name: "Aesthetic Exploration",
+    courses: "",
+    category: "Philosophical, Aesthetic, and Historical Interpretation",
+    units: 1,
+    status: "unfulfilled",
   },
   {
     id: 3,
-    name: "Jane Fisher",
-    role: "Senior Developer",
-    team: "Development",
-    status: "active",
-    age: "22",
-    avatar: "https://i.pravatar.cc/150?u=a04258114e29026702d",
-    email: "jane.fisher@example.com",
+    name: "Historical Consciousness",
+    courses: "",
+    category: "Philosophical, Aesthetic, and Historical Interpretation",
+    units: 1,
+    status: "unfulfilled",
   },
+  // SCIENTIFIC AND SOCIAL INQUIRY
   {
     id: 4,
-    name: "William Howard",
-    role: "Community Manager",
-    team: "Marketing",
-    status: "vacation",
-    age: "28",
-    avatar: "https://i.pravatar.cc/150?u=a048581f4e29026701d",
-    email: "william.howard@example.com",
+    name: "Scientific Inquiry I",
+    courses: "",
+    category: "Scientific and Social Inquiry",
+    units: 1,
+    status: "unfulfilled",
   },
   {
     id: 5,
-    name: "Kristen Copper",
-    role: "Sales Manager",
-    team: "Sales",
-    status: "active",
-    age: "24",
-    avatar: "https://i.pravatar.cc/150?u=a092581d4ef9026700d",
-    email: "kristen.cooper@example.com",
+    name: "Social Inquiry I",
+    courses: "",
+    category: "Scientific and Social Inquiry",
+    units: 1,
+    status: "unfulfilled",
+  },
+  {
+    id: 6,
+    name: "Scientific Inquiry II or Social Inquiry II",
+    courses: "",
+    category: "Scientific and Social Inquiry",
+    units: 1,
+    status: "unfulfilled",
+  },
+  // QUANTITATIVE REASONING
+  {
+    id: 7,
+    name: "Quantitative Reasoning I",
+    courses: "",
+    category: "Quantitative Reasoning",
+    units: 1,
+    status: "unfulfilled",
+  },
+  {
+    id: 8,
+    name: "Quantitative Reasoning II",
+    courses: "",
+    category: "Quantitative Reasoning",
+    units: 1,
+    status: "unfulfilled",
+  },
+  // DIVERSITY, CIVIC ENGAGEMENT, AND GLOBAL CITIZENSHIP
+  {
+    id: 9,
+    name: "The Individual in Community",
+    courses: "",
+    category: "Diversity, Civic Engagement, and Global Citizenship",
+    units: 1,
+    status: "unfulfilled",
+  },
+  {
+    id: 10,
+    name: "Global Citizenship and Intercultural Literacy",
+    courses: "",
+    category: "Diversity, Civic Engagement, and Global Citizenship",
+    units: 2,
+    status: "unfulfilled",
+  },
+  {
+    id: 11,
+    name: "Ethical Reasoning",
+    courses: "",
+    category: "Diversity, Civic Engagement, and Global Citizenship",
+    units: 1,
+    status: "unfulfilled",
+  },
+  // COMMUNICATION
+  {
+    id: 12,
+    name: "First-Year Writing Seminar",
+    courses: "",
+    category: "Communication",
+    units: 1,
+    status: "unfulfilled",
+  },
+  {
+    id: 13,
+    name: "Writing, Research, and Inquiry",
+    courses: "",
+    category: "Communication",
+    units: 1,
+    status: "unfulfilled",
+  },
+  {
+    id: 14,
+    name: "Writing-Intensive Course",
+    courses: "",
+    category: "Communication",
+    units: 2,
+    status: "unfulfilled",
+  },
+  {
+    id: 15,
+    name: "Oral and/or Signed Communication",
+    courses: "",
+    category: "Communication",
+    units: 1,
+    status: "unfulfilled",
+  },
+  {
+    id: 16,
+    name: "Digital/Multimedia Expression",
+    courses: "",
+    category: "Communication",
+    units: 1,
+    status: "unfulfilled",
+  },
+  // INTELLECTUAL TOOLKIT
+  {
+    id: 17,
+    name: "Critical Thinking",
+    courses: "",
+    category: "Intellectual Toolkit",
+    units: 2,
+    status: "unfulfilled",
+  },
+  {
+    id: 18,
+    name: "Research and Information Literacy",
+    courses: "",
+    category: "Intellectual Toolkit",
+    units: 2,
+    status: "unfulfilled",
+  },
+  {
+    id: 19,
+    name: "Teamwork/Collaboration",
+    courses: "",
+    category: "Intellectual Toolkit",
+    units: 2,
+    status: "unfulfilled",
+  },
+  {
+    id: 20,
+    name: "Creativity/Innovation",
+    courses: "",
+    category: "Intellectual Toolkit",
+    units: 2,
+    status: "unfulfilled",
   },
 ];
 
@@ -199,83 +313,101 @@ export const EditIcon = (props: IconSvgProps) => {
     </svg>
   );
 };
+
 const statusColorMap: Record<string, ChipProps["color"]> = {
-  active: "success",
-  paused: "danger",
-  vacation: "warning",
+  fulfilled: "success",
+  unfulfilled: "danger",
 };
 
-type User = (typeof users)[0];
+type HubRequirement = (typeof hubRequirements)[0];
 
-export default function ReqTable() {
-  const renderCell = React.useCallback((user: User, columnKey: React.Key) => {
-    const cellValue = user[columnKey as keyof User];
+export default function HubRequirementTable() {
+  const renderCell = React.useCallback(
+    (requirement: HubRequirement, columnKey: React.Key) => {
+      const cellValue = requirement[columnKey as keyof HubRequirement];
 
-    switch (columnKey) {
-      case "name":
-        return (
-          <User
-            avatarProps={{radius: "lg", src: user.avatar}}
-            description={user.email}
-            name={cellValue}
-          >
-            {user.email}
-          </User>
-        );
-      case "role":
-        return (
-          <div className="flex flex-col">
-            <p className="text-bold text-sm capitalize">{cellValue}</p>
-            <p className="text-bold text-sm capitalize text-default-400">{user.team}</p>
-          </div>
-        );
-      case "status":
-        return (
-          <Chip className="capitalize" color={statusColorMap[user.status]} size="sm" variant="flat">
-            {cellValue}
-          </Chip>
-        );
-      case "actions":
-        return (
-          <div className="relative flex items-center gap-2">
-            <Tooltip content="Details">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <EyeIcon />
-              </span>
-            </Tooltip>
-            <Tooltip content="Edit user">
-              <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                <EditIcon />
-              </span>
-            </Tooltip>
-            <Tooltip color="danger" content="Delete user">
-              <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                <DeleteIcon />
-              </span>
-            </Tooltip>
-          </div>
-        );
-      default:
-        return cellValue;
-    }
-  }, []);
+      switch (columnKey) {
+        case "name":
+          return (
+            <div className="flex flex-col">
+              <p className="text-bold text-sm">{requirement.name}</p>
+              <p className="text-bold text-xs text-default-400">
+                {requirement.category}
+              </p>
+              <p className="text-bold text-xs text-default-500">
+                {requirement.units} unit{requirement.units > 1 ? "s" : ""}
+              </p>
+            </div>
+          );
+        case "courses":
+          return (
+            <div className="flex flex-col">
+              <p className="text-sm">
+                {requirement.courses || "No courses assigned"}
+              </p>
+            </div>
+          );
+        case "status":
+          return (
+            <Chip
+              className="capitalize"
+              color={statusColorMap[requirement.status]}
+              size="sm"
+              variant="flat"
+            >
+              {requirement.status}
+            </Chip>
+          );
+        case "actions":
+          return (
+            <div className="relative flex items-center gap-2">
+              <Tooltip content="Details">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                  <EyeIcon />
+                </span>
+              </Tooltip>
+              <Tooltip content="Edit requirement">
+                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                  <EditIcon />
+                </span>
+              </Tooltip>
+              <Tooltip color="danger" content="Delete requirement">
+                <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                  <DeleteIcon />
+                </span>
+              </Tooltip>
+            </div>
+          );
+        default:
+          return cellValue;
+      }
+    },
+    []
+  );
 
   return (
-    <Table aria-label="Example table with custom cells">
-      <TableHeader columns={columns}>
-        {(column) => (
-          <TableColumn key={column.uid} align={column.uid === "actions" ? "center" : "start"}>
-            {column.name}
-          </TableColumn>
-        )}
-      </TableHeader>
-      <TableBody items={users}>
-        {(item) => (
-          <TableRow key={item.id}>
-            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
-          </TableRow>
-        )}
-      </TableBody>
-    </Table>
+    <div className="h-[510px] overflow-auto">
+      <Table aria-label="Hub requirements table" className="h-full">
+        <TableHeader columns={columns}>
+          {(column) => (
+            <TableColumn
+              key={column.uid}
+              align={column.uid === "actions" ? "center" : "start"}
+            >
+              {column.name}
+            </TableColumn>
+          )}
+        </TableHeader>
+        <TableBody items={hubRequirements}>
+          {(item) => (
+            <TableRow key={item.id}>
+              {(columnKey) => (
+                <TableCell>{renderCell(item, columnKey)}</TableCell>
+              )}
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+    </div>
   );
 }

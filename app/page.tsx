@@ -32,7 +32,7 @@ export default function Home() {
             </div>
             <div className="w-full max-w-7xl">
               <div className="flex justify-center">
-                <Chart percentage={78} />
+                <Chart />
               </div>
             </div>
             <div className="flex gap-6 w-full max-w-7xl">
