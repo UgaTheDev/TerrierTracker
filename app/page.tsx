@@ -7,7 +7,7 @@ import Chart from "./components/Chart";
 import CategoryProgress from "./components/CategoryProgress";
 import YourCourses from "./childr_pages/YourCourses";
 import AddCourses from "./childr_pages/AddCourses";
-import HubTracker from "./childr_pages/HubTracker";
+import HubHelper from "./childr_pages/HubHelper";
 import YourBookmarks from "./childr_pages/YourBookmarks";
 
 export default function Home() {
@@ -49,8 +49,8 @@ export default function Home() {
         return <YourCourses />;
       case "add-courses":
         return <AddCourses />;
-      case "hub-tracker":
-        return <HubTracker />;
+      case "hub-helper":
+        return <HubHelper />;
       case "bookmarks":
         return <YourBookmarks />;
       default:

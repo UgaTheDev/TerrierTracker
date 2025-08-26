@@ -18,7 +18,7 @@ import {
   ModalFooter,
   Input,
 } from "@heroui/react";
-import { Plus, ChevronUp } from "lucide-react";
+import { Plus } from "lucide-react";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -135,7 +135,7 @@ type Course = {
 
 type SortDescriptor = {
   column: string;
-  direction: "ascending";
+  direction: "ascending" | "descending";
 };
 
 const initialCourses: Course[] = [
@@ -229,7 +229,7 @@ export default function CourseTable() {
   });
   const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
     column: "",
-    direction: "ascending",
+    direction: "descending",
   });
 
   const handleDelete = (course: Course) => {
@@ -267,9 +267,16 @@ export default function CourseTable() {
 
   const handleSort = (column: string) => {
     if (sortDescriptor.column === column) {
-      setSortDescriptor({ column: "", direction: "ascending" });
+      if (sortDescriptor.direction === "descending") {
+        setSortDescriptor({
+          column: sortDescriptor.column,
+          direction: "ascending",
+        });
+      } else {
+        setSortDescriptor({ column: "", direction: "descending" });
+      }
     } else {
-      setSortDescriptor({ column, direction: "ascending" });
+      setSortDescriptor({ column, direction: "descending" });
     }
   };
 
@@ -290,11 +297,14 @@ export default function CourseTable() {
         return 0;
       }
 
+      let comparison = 0;
       if (typeof aValue === "string" && typeof bValue === "string") {
-        return aValue.localeCompare(bValue);
+        comparison = aValue.localeCompare(bValue);
       }
 
-      return 0;
+      return sortDescriptor.direction === "descending"
+        ? -comparison
+        : comparison;
     });
   }, [courses, sortDescriptor]);
 
@@ -399,24 +409,18 @@ export default function CourseTable() {
                 <TableColumn
                   key={column.uid}
                   align={column.uid === "actions" ? "center" : "start"}
-                  allowsSorting={column.sortable}
+                  allowsSorting={false}
                 >
                   <div className="flex items-center gap-1">
-                    {column.name}
-                    {column.sortable && (
-                      <Button
-                        size="sm"
-                        variant="light"
-                        isIconOnly
+                    {column.sortable ? (
+                      <button
                         onClick={() => handleSort(column.uid)}
-                        className="h-6 w-6 min-w-6"
+                        className="hover:text-primary cursor-pointer"
                       >
-                        {sortDescriptor.column === column.uid ? (
-                          <ChevronUp size={14} />
-                        ) : (
-                          <ChevronUp size={14} className="opacity-30" />
-                        )}
-                      </Button>
+                        {column.name}
+                      </button>
+                    ) : (
+                      column.name
                     )}
                   </div>
                 </TableColumn>
