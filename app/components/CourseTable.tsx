@@ -11,132 +11,25 @@ import {
   Tooltip,
   Card,
   Button,
+  Modal,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Input,
 } from "@heroui/react";
-import { Plus } from "lucide-react";
+import { Plus, ChevronUp } from "lucide-react";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
 
 export const columns = [
-  { name: "ID", uid: "id" },
-  { name: "COURSE", uid: "course" },
+  { name: "ID", uid: "id", sortable: true },
+  { name: "COURSE", uid: "course", sortable: true },
   { name: "CREDITS", uid: "credits" },
   { name: "ACTIONS", uid: "actions" },
 ];
-
-export const courses = [
-  {
-    id: 1,
-    courseId: "CAS CS 101",
-    course: "Introduction to Computer Science I",
-    credits: 4,
-    semester: "Fall 2024",
-    professor: "Dr. Smith",
-  },
-  {
-    id: 2,
-    courseId: "CAS MA 123",
-    course: "Calculus I",
-    credits: 4,
-    semester: "Fall 2024",
-    professor: "Prof. Johnson",
-  },
-  {
-    id: 3,
-    courseId: "CAS WR 100",
-    course: "Writing, Research, and Inquiry",
-    credits: 4,
-    semester: "Fall 2024",
-    professor: "Dr. Williams",
-  },
-  {
-    id: 4,
-    courseId: "CAS HI 151",
-    course: "The World in the Twentieth Century",
-    credits: 4,
-    semester: "Fall 2024",
-    professor: "Prof. Davis",
-  },
-  {
-    id: 5,
-    courseId: "CAS PY 105",
-    course: "Introduction to Psychology",
-    credits: 4,
-    semester: "Fall 2024",
-    professor: "Dr. Brown",
-  },
-  {
-    id: 6,
-    courseId: "CAS CS 112",
-    course: "Introduction to Computer Science II",
-    credits: 4,
-    semester: "Spring 2025",
-    professor: "Dr. Smith",
-  },
-  {
-    id: 7,
-    courseId: "CAS MA 124",
-    course: "Calculus II",
-    credits: 4,
-    semester: "Spring 2025",
-    professor: "Prof. Johnson",
-  },
-  {
-    id: 8,
-    courseId: "CAS PH 211",
-    course: "General Physics I",
-    credits: 4,
-    semester: "Spring 2025",
-    professor: "Dr. Wilson",
-  },
-  {
-    id: 9,
-    courseId: "CAS EN 102",
-    course: "First-Year Writing Seminar",
-    credits: 4,
-    semester: "Spring 2025",
-    professor: "Prof. Garcia",
-  },
-  {
-    id: 10,
-    courseId: "CAS SO 101",
-    course: "Introduction to Sociology",
-    credits: 4,
-    semester: "Spring 2025",
-    professor: "Dr. Martinez",
-  },
-];
-
-export const EyeIcon = (props: IconSvgProps) => {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="none"
-      focusable="false"
-      height="1em"
-      role="presentation"
-      viewBox="0 0 20 20"
-      width="1em"
-      {...props}
-    >
-      <path
-        d="M12.9833 10C12.9833 11.65 11.65 12.9833 10 12.9833C8.35 12.9833 7.01666 11.65 7.01666 10C7.01666 8.35 8.35 7.01666 10 7.01666C11.65 7.01666 12.9833 8.35 12.9833 10Z"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.5}
-      />
-      <path
-        d="M9.99999 16.8916C12.9417 16.8916 15.6833 15.1583 17.5917 12.1583C18.3417 10.9833 18.3417 9.00831 17.5917 7.83331C15.6833 4.83331 12.9417 3.09998 9.99999 3.09998C7.05833 3.09998 4.31666 4.83331 2.40833 7.83331C1.65833 9.00831 1.65833 10.9833 2.40833 12.1583C4.31666 15.1583 7.05833 16.8916 9.99999 16.8916Z"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.5}
-      />
-    </svg>
-  );
-};
 
 export const DeleteIcon = (props: IconSvgProps) => {
   return (
@@ -229,9 +122,182 @@ export const EditIcon = (props: IconSvgProps) => {
   );
 };
 
-type Course = (typeof courses)[0];
+type Course = {
+  id: number;
+  courseId: string;
+  course: string;
+  credits: number;
+  requirements: string;
+  semester?: string;
+  professor?: string;
+  description?: string;
+};
+
+type SortDescriptor = {
+  column: string;
+  direction: "ascending";
+};
+
+const initialCourses: Course[] = [
+  {
+    id: 1,
+    courseId: "CAS CS 101",
+    course: "Introduction to Computer Science I",
+    credits: 4,
+    requirements: "",
+  },
+  {
+    id: 2,
+    courseId: "CAS MA 123",
+    course: "Calculus I",
+    credits: 4,
+    requirements: "",
+  },
+  {
+    id: 3,
+    courseId: "CAS WR 100",
+    course: "Writing, Research, and Inquiry",
+    credits: 4,
+    requirements: "",
+  },
+  {
+    id: 4,
+    courseId: "CAS HI 151",
+    course: "The World in the Twentieth Century",
+    credits: 4,
+    requirements: "",
+  },
+  {
+    id: 5,
+    courseId: "CAS PY 105",
+    course: "Introduction to Psychology",
+    credits: 4,
+    requirements: "",
+  },
+  {
+    id: 6,
+    courseId: "CAS CS 112",
+    course: "Introduction to Computer Science II",
+    credits: 4,
+    requirements: "",
+  },
+  {
+    id: 7,
+    courseId: "CAS MA 124",
+    course: "Calculus II",
+    credits: 4,
+    requirements: "",
+  },
+  {
+    id: 8,
+    courseId: "CAS PH 211",
+    course: "General Physics I",
+    credits: 4,
+    requirements: "",
+  },
+  {
+    id: 9,
+    courseId: "CAS EN 102",
+    course: "First-Year Writing Seminar",
+    credits: 4,
+    requirements: "",
+  },
+  {
+    id: 10,
+    courseId: "CAS SO 101",
+    course: "Introduction to Sociology",
+    credits: 4,
+    requirements: "",
+  },
+];
+
 export default function CourseTable() {
   const [showAddCourses, setShowAddCourses] = React.useState(false);
+  const [courses, setCourses] = React.useState<Course[]>(initialCourses);
+  const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
+  const [editModalOpen, setEditModalOpen] = React.useState(false);
+  const [courseToDelete, setCourseToDelete] = React.useState<Course | null>(
+    null
+  );
+  const [courseToEdit, setCourseToEdit] = React.useState<Course | null>(null);
+  const [editForm, setEditForm] = React.useState<Course>({
+    id: 0,
+    courseId: "",
+    course: "",
+    credits: 0,
+    requirements: "",
+  });
+  const [sortDescriptor, setSortDescriptor] = React.useState<SortDescriptor>({
+    column: "",
+    direction: "ascending",
+  });
+
+  const handleDelete = (course: Course) => {
+    setCourseToDelete(course);
+    setDeleteModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (courseToDelete) {
+      setCourses(courses.filter((c) => c.id !== courseToDelete.id));
+      setDeleteModalOpen(false);
+      setCourseToDelete(null);
+    }
+  };
+
+  const handleEdit = (course: Course) => {
+    setCourseToEdit(course);
+    setEditForm({ ...course });
+    setEditModalOpen(true);
+  };
+
+  const saveEdit = () => {
+    if (courseToEdit) {
+      setCourses(courses.map((c) => (c.id === courseToEdit.id ? editForm : c)));
+      setEditModalOpen(false);
+      setCourseToEdit(null);
+    }
+  };
+
+  const handleAddCourse = (newCourse: Course) => {
+    const newId = Math.max(...courses.map((c) => c.id), 0) + 1;
+    const courseToAdd = { ...newCourse, id: newId };
+    setCourses([...courses, courseToAdd]);
+  };
+
+  const handleSort = (column: string) => {
+    if (sortDescriptor.column === column) {
+      setSortDescriptor({ column: "", direction: "ascending" });
+    } else {
+      setSortDescriptor({ column, direction: "ascending" });
+    }
+  };
+
+  const sortedCourses = React.useMemo(() => {
+    if (!sortDescriptor.column) return courses;
+
+    return [...courses].sort((a, b) => {
+      let aValue: string | number;
+      let bValue: string | number;
+
+      if (sortDescriptor.column === "id") {
+        aValue = a.courseId;
+        bValue = b.courseId;
+      } else if (sortDescriptor.column === "course") {
+        aValue = a.course;
+        bValue = b.course;
+      } else {
+        return 0;
+      }
+
+      if (typeof aValue === "string" && typeof bValue === "string") {
+        return aValue.localeCompare(bValue);
+      }
+
+      return 0;
+    });
+  }, [courses, sortDescriptor]);
+
   const renderCell = React.useCallback(
     (course: Course, columnKey: React.Key) => {
       const cellValue = course[columnKey as keyof Course];
@@ -241,9 +307,6 @@ export default function CourseTable() {
           return (
             <div className="flex flex-col">
               <p className="text-bold text-sm font-mono">{course.courseId}</p>
-              <p className="text-bold text-xs text-default-400">
-                {course.semester}
-              </p>
             </div>
           );
         case "course":
@@ -251,7 +314,7 @@ export default function CourseTable() {
             <div className="flex flex-col">
               <p className="text-bold text-sm">{course.course}</p>
               <p className="text-bold text-xs text-default-400">
-                {course.professor}
+                {course.requirements}
               </p>
             </div>
           );
@@ -264,18 +327,19 @@ export default function CourseTable() {
         case "actions":
           return (
             <div className="relative flex items-center gap-2">
-              <Tooltip content="Course Details">
-                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <EyeIcon />
-                </span>
-              </Tooltip>
               <Tooltip content="Edit Course">
-                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <span
+                  className="text-lg text-default-400 cursor-pointer active:opacity-50"
+                  onClick={() => handleEdit(course)}
+                >
                   <EditIcon />
                 </span>
               </Tooltip>
               <Tooltip color="danger" content="Remove Course">
-                <span className="text-lg text-danger cursor-pointer active:opacity-50">
+                <span
+                  className="text-lg text-danger cursor-pointer active:opacity-50"
+                  onClick={() => handleDelete(course)}
+                >
                   <DeleteIcon />
                 </span>
               </Tooltip>
@@ -289,8 +353,15 @@ export default function CourseTable() {
   );
 
   const totalCredits = courses.reduce((sum, course) => sum + course.credits, 0);
+
   if (showAddCourses) {
-    return <AddCourses />;
+    return (
+      <AddCourses
+        enrolledCourses={courses}
+        onAddCourse={handleAddCourse}
+        onGoBack={() => setShowAddCourses(false)}
+      />
+    );
   }
 
   return (
@@ -319,6 +390,7 @@ export default function CourseTable() {
           </Card>
         </div>
       </div>
+
       <Card className="p-6">
         <div className="h-96 overflow-auto">
           <Table aria-label="Your courses table" className="h-full">
@@ -327,12 +399,30 @@ export default function CourseTable() {
                 <TableColumn
                   key={column.uid}
                   align={column.uid === "actions" ? "center" : "start"}
+                  allowsSorting={column.sortable}
                 >
-                  {column.name}
+                  <div className="flex items-center gap-1">
+                    {column.name}
+                    {column.sortable && (
+                      <Button
+                        size="sm"
+                        variant="light"
+                        isIconOnly
+                        onClick={() => handleSort(column.uid)}
+                        className="h-6 w-6 min-w-6"
+                      >
+                        {sortDescriptor.column === column.uid ? (
+                          <ChevronUp size={14} />
+                        ) : (
+                          <ChevronUp size={14} className="opacity-30" />
+                        )}
+                      </Button>
+                    )}
+                  </div>
                 </TableColumn>
               )}
             </TableHeader>
-            <TableBody items={courses}>
+            <TableBody items={sortedCourses}>
               {(item) => (
                 <TableRow key={item.id}>
                   {(columnKey) => (
@@ -344,6 +434,82 @@ export default function CourseTable() {
           </Table>
         </div>
       </Card>
+
+      {/* Delete Confirmation Modal */}
+      <Modal isOpen={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
+        <ModalContent>
+          <ModalHeader>Confirm Delete</ModalHeader>
+          <ModalBody>
+            <p>
+              Are you sure you want to delete{" "}
+              <strong>{courseToDelete?.courseId}</strong> -{" "}
+              <strong>{courseToDelete?.course}</strong>?
+            </p>
+            <p className="text-danger text-sm">This action cannot be undone.</p>
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="light" onClick={() => setDeleteModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button color="danger" onClick={confirmDelete}>
+              Confirm Delete
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      {/* Edit Course Modal */}
+      <Modal isOpen={editModalOpen} onOpenChange={setEditModalOpen} size="2xl">
+        <ModalContent>
+          <ModalHeader>Edit Course</ModalHeader>
+          <ModalBody className="space-y-4">
+            <Input
+              label="Course ID"
+              value={editForm.courseId}
+              onChange={(e) =>
+                setEditForm({ ...editForm, courseId: e.target.value })
+              }
+              placeholder="e.g., CAS CS 101"
+            />
+            <Input
+              label="Course Name"
+              value={editForm.course}
+              onChange={(e) =>
+                setEditForm({ ...editForm, course: e.target.value })
+              }
+              placeholder="e.g., Introduction to Computer Science I"
+            />
+            <Input
+              type="number"
+              label="Credits"
+              value={editForm.credits.toString()}
+              onChange={(e) =>
+                setEditForm({
+                  ...editForm,
+                  credits: parseInt(e.target.value) || 0,
+                })
+              }
+              placeholder="4"
+            />
+            <Input
+              label="Requirements"
+              value={editForm.requirements}
+              onChange={(e) =>
+                setEditForm({ ...editForm, requirements: e.target.value })
+              }
+              placeholder="Prerequisites or requirements"
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="light" onClick={() => setEditModalOpen(false)}>
+              Cancel
+            </Button>
+            <Button color="primary" onClick={saveEdit}>
+              Save Changes
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

@@ -4,7 +4,7 @@ import {
   ChevronRight,
   LayoutDashboard,
   BookOpen,
-  Target,
+  Search,
   Bookmark,
   Menu,
   X,
@@ -37,10 +37,10 @@ export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
       ],
     },
     {
-      id: "hub-tracker",
-      label: "Hub Tracker",
-      icon: <Target size={20} />,
-      page: "hub-tracker",
+      id: "hub-helper",
+      label: "Hub Helper",
+      icon: <Search size={20} />,
+      page: "hub-helper",
     },
     {
       id: "bookmarks",
