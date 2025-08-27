@@ -95,7 +95,7 @@ export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
               <h1 className="text-lg font-bold text-foreground">
                 Terrier Tracker
               </h1>
-              <p className="text-xs text-default-500">Course Management</p>
+              <p className="text-xs text-default-500">Course Manager</p>
             </div>
           </>
         ) : (
@@ -195,7 +195,7 @@ export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
           <Divider className="mb-4" />
           <div className="px-2 text-center">
             <p className="text-xs text-default-400">
-              Built for Boston University Students
+              Built for Boston University Students Developed by Kush Zingade
             </p>
           </div>
         </div>
