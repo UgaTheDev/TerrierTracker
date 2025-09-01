@@ -326,7 +326,6 @@ export default function AddCourses({
             }
           >
             <CourseBrowseTable
-              availableCourses={availableCourses}
               isEnrolled={isEnrolled}
               handleAddCourse={handleAddCourse}
             />

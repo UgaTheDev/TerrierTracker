@@ -50,7 +50,7 @@ export const NavBar = () => {
               src="https://www.bu.edu/chemistry/files/2010/10/boston_univ_black.gif"
               width={85}
             />
-            <p className="font-bold text-inherit">TerrierTracker</p>
+            <p className="font-bold text-inherit"> TerrierTracker</p>
           </NextLink>
         </NavbarBrand>
       </NavbarContent>
