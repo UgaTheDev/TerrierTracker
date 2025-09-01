@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { Card, Button, Divider, Avatar, Tooltip } from "@heroui/react";
 import {

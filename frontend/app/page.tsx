@@ -10,11 +10,29 @@ import AddCourses from "./childr_pages/AddCourses";
 import HubHelper from "./childr_pages/HubHelper";
 import YourBookmarks from "./childr_pages/YourBookmarks";
 
+type Course = {
+  id: number;
+  courseId: string;
+  course: string;
+  credits: number;
+  requirements: string;
+  semester?: string;
+  professor?: string;
+  description?: string;
+};
+
 export default function Home() {
   const [currentPage, setCurrentPage] = useState("dashboard");
+  const [enrolledCourses, setEnrolledCourses] = useState<Course[]>([]);
 
   const handleNavigate = (page: string) => {
     setCurrentPage(page);
+  };
+
+  const handleAddCourse = (course: Course) => {
+    const newId = Math.max(...enrolledCourses.map((c) => c.id), 0) + 1;
+    const courseToAdd = { ...course, id: newId };
+    setEnrolledCourses((prev) => [...prev, courseToAdd]);
   };
 
   const renderContent = () => {
@@ -46,9 +64,21 @@ export default function Home() {
           </section>
         );
       case "your-courses":
-        return <YourCourses />;
+        return (
+          <YourCourses
+            enrolledCourses={enrolledCourses}
+            onAddCourse={handleAddCourse}
+            onNavigate={handleNavigate}
+          />
+        );
       case "add-courses":
-        return <AddCourses />;
+        return (
+          <AddCourses
+            enrolledCourses={enrolledCourses}
+            onAddCourse={handleAddCourse}
+            onNavigate={handleNavigate}
+          />
+        );
       case "hub-helper":
         return <HubHelper />;
       case "bookmarks":

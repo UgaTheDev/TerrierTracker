@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import { Search, Bookmark, BookmarkCheck, GraduationCap } from "lucide-react";
 import CourseSearch from "../components/CourseSearch";

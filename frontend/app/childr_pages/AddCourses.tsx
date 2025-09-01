@@ -147,15 +147,14 @@ type Course = {
 interface AddCoursesProps {
   enrolledCourses?: Course[];
   onAddCourse?: (course: Course) => void;
-  onGoBack?: () => void;
+  onNavigate: (page: string) => void;
 }
 
-export default function AddCourses(props: AddCoursesProps) {
-  const {
-    enrolledCourses = [],
-    onAddCourse = () => {},
-    onGoBack = () => {},
-  } = props;
+export default function AddCourses({
+  enrolledCourses = [],
+  onAddCourse = () => {},
+  onNavigate,
+}: AddCoursesProps) {
   const [activeTab, setActiveTab] = React.useState("manual");
   const [confirmModalOpen, setConfirmModalOpen] = React.useState(false);
   const [courseToAdd, setCourseToAdd] = React.useState<Course | null>(null);
@@ -172,6 +171,7 @@ export default function AddCourses(props: AddCoursesProps) {
   });
   const [pdfFile, setPdfFile] = React.useState<File | null>(null);
   const [pdfProcessing, setPdfProcessing] = React.useState(false);
+
   const isEnrolled = (courseId: string) => {
     if (!enrolledCourses || !Array.isArray(enrolledCourses)) {
       return false;
@@ -189,6 +189,7 @@ export default function AddCourses(props: AddCoursesProps) {
         course.course.toLowerCase().includes(searchValue.toLowerCase())
     );
   }, [searchValue]);
+
   const handleAddCourse = (course: Course) => {
     setCourseToAdd(course);
     setConfirmModalOpen(true);
@@ -208,6 +209,8 @@ export default function AddCourses(props: AddCoursesProps) {
         requirements: "",
         description: "",
       });
+      // Navigate to your courses after adding
+      onNavigate("your-courses");
     }
   };
 
@@ -263,10 +266,10 @@ export default function AddCourses(props: AddCoursesProps) {
             size="sm"
             variant="light"
             startContent={<ArrowLeft size={16} />}
-            onClick={onGoBack}
+            onClick={() => onNavigate("your-courses")}
             className="h-8 px-3 text-sm"
           >
-            Back to Your Courses
+            Go to Your Courses
           </Button>
           <div>
             <h1 className="text-2xl font-bold text-foreground">Add Courses</h1>
