@@ -108,7 +108,7 @@ class CourseDataManager:
 
 # Example usage:
 if __name__ == "__main__":
-    manager = CourseDataManager(Path('CSV Files/bu_hub_courses.csv'))
+    manager = CourseDataManager(Path('CSVFiles/bu_hub_courses.csv'))
     
     # Test course name lookup
     course_code = manager.find_course_code('Combinatoric Structures')
