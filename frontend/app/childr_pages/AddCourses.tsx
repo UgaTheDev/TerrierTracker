@@ -209,7 +209,6 @@ export default function AddCourses({
         requirements: "",
         description: "",
       });
-      // Navigate to your courses after adding
       onNavigate("your-courses");
     }
   };

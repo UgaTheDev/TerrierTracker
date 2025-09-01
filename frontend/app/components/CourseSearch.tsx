@@ -24,10 +24,8 @@ interface CourseSearchProps {
   isEnrolled: (courseId: string) => boolean;
 }
 
-// API base URL - should match your Flask server
 const API_BASE_URL = "http://localhost:5000/api";
 
-// API helper functions
 const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
@@ -55,12 +53,11 @@ const fetchAllCourses = async (): Promise<CourseData[]> => {
   try {
     const data = await apiRequest("/all-courses", { method: "GET" });
 
-    // Convert the courses object to array format
     const coursesArray = Object.entries(data.courses || {}).map(
       ([code, name]) => ({
         courseId: code,
         courseName: name as string,
-        hubRequirements: [], // Will be fetched when needed
+        hubRequirements: [],
         requirementsText: "Loading requirements...",
       })
     );
@@ -99,7 +96,6 @@ export default function CourseSearch({
   const [error, setError] = useState<string | null>(null);
   const [apiHealthy, setApiHealthy] = useState(false);
 
-  // Check API health on component mount
   useEffect(() => {
     const checkApiHealth = async () => {
       try {
@@ -117,7 +113,6 @@ export default function CourseSearch({
     checkApiHealth();
   }, []);
 
-  // Load courses when API is healthy
   useEffect(() => {
     if (!apiHealthy) return;
 
@@ -140,7 +135,6 @@ export default function CourseSearch({
     loadCourses();
   }, [apiHealthy]);
 
-  // Filter courses when search value changes
   useEffect(() => {
     if (!searchValue.trim()) {
       setFilteredCourses(allCourses.slice(0, 50));
@@ -157,7 +151,6 @@ export default function CourseSearch({
   const handleCourseSelect = async (course: CourseData) => {
     setSelectedCourse(course);
 
-    // Fetch hub requirements if not already loaded
     if (
       course.hubRequirements.length === 0 &&
       course.requirementsText === "Loading requirements..."
@@ -175,7 +168,6 @@ export default function CourseSearch({
           requirementsText,
         };
 
-        // Update the course in both arrays
         const updateCourse = (courses: CourseData[]) =>
           courses.map((c) =>
             c.courseId === course.courseId ? updatedCourse : c
@@ -196,14 +188,14 @@ export default function CourseSearch({
       id: Date.now(),
       courseId: courseData.courseId,
       course: courseData.courseName,
-      credits: 4, // Default credits, you might want to get this from your data
+      credits: 4,
       requirements: courseData.requirementsText,
       description: `Hub Requirements: ${courseData.requirementsText}`,
       hubRequirements: courseData.hubRequirements,
     };
 
     handleAddCourse(courseToAdd);
-    setSelectedCourse(null); // Clear selection after adding
+    setSelectedCourse(null);
   };
 
   if (!apiHealthy && error) {
