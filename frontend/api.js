@@ -1,6 +1,5 @@
 const API_BASE_URL = "http://localhost:5000/api";
 
-// Generic API request handler
 const apiRequest = async (endpoint, options = {}) => {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
@@ -24,21 +23,18 @@ const apiRequest = async (endpoint, options = {}) => {
   }
 };
 
-// Health check endpoint
 export const checkHealth = async () => {
   return apiRequest("/health", {
     method: "GET",
   });
 };
 
-// Get all courses
 export const getAllCourses = async () => {
   return apiRequest("/all-courses", {
     method: "GET",
   });
 };
 
-// Search for a single course
 export const searchCourse = async (courseIdentifier) => {
   if (!courseIdentifier || typeof courseIdentifier !== "string") {
     throw new Error("Course identifier is required and must be a string");
@@ -52,7 +48,6 @@ export const searchCourse = async (courseIdentifier) => {
   });
 };
 
-// Get hub requirements for multiple courses
 export const getMultipleCourseHubs = async (courses) => {
   if (!Array.isArray(courses) || courses.length === 0) {
     throw new Error("Courses must be a non-empty array");
@@ -66,7 +61,6 @@ export const getMultipleCourseHubs = async (courses) => {
   });
 };
 
-// Optional: Add a function to check if the API is available
 export const isApiAvailable = async () => {
   try {
     await checkHealth();

@@ -16,7 +16,7 @@ interface CourseSearcherProps {
   isEnrolled: (courseId: string) => boolean;
 }
 
-export default function CourseSearcher({
+export default function ManualCourseAdd({
   handleAddCourse,
   isEnrolled,
 }: CourseSearcherProps) {
@@ -28,7 +28,6 @@ export default function CourseSearcher({
   const [csvUploaded, setCsvUploaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Parse CSV and extract hub requirements
   const parseCSVAndGetRequirements = async (csvText: string) => {
     try {
       const lines = csvText.split("\n").filter((line) => line.trim());
@@ -51,7 +50,6 @@ export default function CourseSearcher({
         const courseCode = row[0];
         const courseName = row[1];
 
-        // Find hub requirements for this course
         const hubRequirements = [];
         for (let j = 0; j < hubColumns.length; j++) {
           if (row[j + 2] === "1") {
@@ -76,7 +74,6 @@ export default function CourseSearcher({
     }
   };
 
-  // Handle CSV file upload
   const handleFileUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -106,7 +103,6 @@ export default function CourseSearcher({
     }
   };
 
-  // Filter courses when search value changes
   useEffect(() => {
     if (!searchValue.trim()) {
       setFilteredCourses(allCourses.slice(0, 50));
@@ -136,13 +132,13 @@ export default function CourseSearcher({
     };
 
     handleAddCourse(courseToAdd);
-    setSelectedCourse(null); // Clear selection after adding
+    setSelectedCourse(null);
   };
 
   if (!csvUploaded) {
     return (
       <div className="max-w-2xl mx-auto p-6">
-        <div className="bg-white rounded-lg shadow-lg p-8 text-center">
+        <div className="bg-gray rounded-lg shadow-lg p-8 text-center">
           <Upload size={64} className="mx-auto text-gray-400 mb-4" />
           <h3 className="text-xl font-semibold mb-2">Upload Course Data</h3>
           <p className="text-gray-600 mb-6">
@@ -210,7 +206,6 @@ export default function CourseSearcher({
         </div>
       </div>
 
-      {/* Search Input */}
       <div className="relative">
         <input
           type="text"
@@ -236,18 +231,16 @@ export default function CourseSearcher({
         </div>
       </div>
 
-      {/* Results Count */}
       <p className="text-sm text-gray-500">
         Showing {filteredCourses.length} courses
         {filteredCourses.length === 100 ? " (results limited to 100)" : ""}
       </p>
 
-      {/* Course Results */}
       <div className="space-y-3 max-h-96 overflow-y-auto">
         {filteredCourses.map((course) => (
           <div
             key={course.courseId}
-            className={`bg-white border rounded-lg p-4 cursor-pointer transition-all ${
+            className={`bg-gray border rounded-lg p-4 cursor-pointer transition-all ${
               selectedCourse?.courseId === course.courseId
                 ? "border-blue-500 bg-blue-50"
                 : "border-gray-200 hover:border-gray-300 hover:shadow-sm"

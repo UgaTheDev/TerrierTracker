@@ -2,7 +2,7 @@ import type { SVGProps } from "react";
 import React from "react";
 import { Card, Button, Tabs, Tab } from "@heroui/react";
 import { ArrowLeft, Search, Upload, FileText } from "lucide-react";
-import ManualCourseSearch from "../components/ManualCourseSearch";
+import CourseSearch from "../components/CourseSearch";
 import CourseBrowseTable from "../components/CourseBrowseTable";
 import PdfUploadTab from "../components/ImportPDF";
 import AddCourseModal from "../components/AddCourseModal";
@@ -248,7 +248,6 @@ export default function AddCourses(props: AddCoursesProps) {
     }
   };
 
-  // Calculate statistics
   const availableCount = availableCourses.filter(
     (course) => !isEnrolled(course.courseId)
   ).length;
@@ -309,17 +308,9 @@ export default function AddCourses(props: AddCoursesProps) {
               </div>
             }
           >
-            <ManualCourseSearch
-              searchValue={searchValue}
-              setSearchValue={setSearchValue}
-              filteredCourses={filteredCourses}
-              selectedCourse={selectedCourse}
-              handleSearchSelect={handleSearchSelect}
+            <CourseSearch
               handleAddCourse={handleAddCourse}
               isEnrolled={isEnrolled}
-              manualCourse={manualCourse}
-              setManualCourse={setManualCourse}
-              handleManualAdd={handleManualAdd}
             />
           </Tab>
 
