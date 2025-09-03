@@ -29,6 +29,20 @@ export default function Home() {
     setCurrentPage(page);
   };
 
+  const handleRemoveCourse = (courseId: number) => {
+    setEnrolledCourses((prev) =>
+      prev.filter((course) => course.id !== courseId)
+    );
+  };
+
+  const handleUpdateCourse = (updatedCourse: Course) => {
+    setEnrolledCourses((prev) =>
+      prev.map((course) =>
+        course.id === updatedCourse.id ? updatedCourse : course
+      )
+    );
+  };
+
   const handleAddCourse = (course: Course) => {
     const newId = Math.max(...enrolledCourses.map((c) => c.id), 0) + 1;
     const courseToAdd = { ...course, id: newId };
@@ -69,6 +83,8 @@ export default function Home() {
             enrolledCourses={enrolledCourses}
             onAddCourse={handleAddCourse}
             onNavigate={handleNavigate}
+            onRemoveCourse={handleRemoveCourse}
+            onUpdateCourse={handleUpdateCourse}
           />
         );
       case "add-courses":

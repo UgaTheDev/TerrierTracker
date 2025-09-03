@@ -34,105 +34,6 @@ export const AddIcon = (props: IconSvgProps) => {
   );
 };
 
-export const availableCourses = [
-  {
-    id: 11,
-    courseId: "CAS CS 210",
-    course: "Computer Systems",
-    credits: 4,
-    requirements: "CS 112",
-    description: "Introduction to computer systems programming",
-  },
-  {
-    id: 12,
-    courseId: "CAS MA 225",
-    course: "Multivariate Calculus",
-    credits: 4,
-    requirements: "MA 124",
-    description: "Vector calculus and multivariable functions",
-  },
-  {
-    id: 13,
-    courseId: "CAS PH 212",
-    course: "General Physics II",
-    credits: 4,
-    requirements: "PH 211, MA 124",
-    description: "Electricity, magnetism, and modern physics",
-  },
-  {
-    id: 14,
-    courseId: "CAS CS 330",
-    course: "Introduction to Analysis of Algorithms",
-    credits: 4,
-    requirements: "CS 112, MA 123",
-    description: "Algorithm design and complexity analysis",
-  },
-  {
-    id: 15,
-    courseId: "CAS WR 150",
-    course: "Reasoning and Argument",
-    credits: 4,
-    requirements: "WR 100",
-    description: "Advanced writing and argumentation skills",
-  },
-  {
-    id: 16,
-    courseId: "CAS BI 108",
-    course: "Introduction to Biology",
-    credits: 4,
-    requirements: "",
-    description: "Fundamentals of biological sciences",
-  },
-  {
-    id: 17,
-    courseId: "CAS CH 101",
-    course: "General Chemistry I",
-    credits: 4,
-    requirements: "",
-    description: "Principles of general chemistry",
-  },
-  {
-    id: 18,
-    courseId: "CAS EC 101",
-    course: "Introduction to Microeconomics",
-    credits: 4,
-    requirements: "",
-    description: "Basic principles of microeconomic theory",
-  },
-  {
-    id: 19,
-    courseId: "CAS LX 250",
-    course: "Introduction to Linguistics",
-    credits: 4,
-    requirements: "",
-    description: "Scientific study of human language",
-  },
-  {
-    id: 20,
-    courseId: "CAS CS 320",
-    course: "Concepts of Programming Languages",
-    credits: 4,
-    requirements: "CS 112",
-    description: "Programming language design and implementation",
-  },
-  {
-    id: 21,
-    courseId: "CAS CS 131",
-    course: "Combinatoric Structures",
-    credits: 4,
-    requirements: "MA 123",
-    description: "Mathematical structures and discrete mathematics",
-  },
-  {
-    id: 22,
-    courseId: "CAS CS 132",
-    course: "Geometric Algorithms",
-    credits: 4,
-    requirements: "CS 112, MA 225",
-    description: "Computational geometry and spatial algorithms",
-  },
-];
-
 type Course = {
   id: number;
   courseId: string;
@@ -158,10 +59,6 @@ export default function AddCourses({
   const [activeTab, setActiveTab] = React.useState("manual");
   const [confirmModalOpen, setConfirmModalOpen] = React.useState(false);
   const [courseToAdd, setCourseToAdd] = React.useState<Course | null>(null);
-  const [searchValue, setSearchValue] = React.useState("");
-  const [selectedCourse, setSelectedCourse] = React.useState<Course | null>(
-    null
-  );
   const [manualCourse, setManualCourse] = React.useState({
     courseId: "",
     course: "",
@@ -181,15 +78,6 @@ export default function AddCourses({
     );
   };
 
-  const filteredCourses = React.useMemo(() => {
-    if (!searchValue) return availableCourses;
-    return availableCourses.filter(
-      (course) =>
-        course.courseId.toLowerCase().includes(searchValue.toLowerCase()) ||
-        course.course.toLowerCase().includes(searchValue.toLowerCase())
-    );
-  }, [searchValue]);
-
   const handleAddCourse = (course: Course) => {
     setCourseToAdd(course);
     setConfirmModalOpen(true);
@@ -200,8 +88,6 @@ export default function AddCourses({
       onAddCourse(courseToAdd);
       setConfirmModalOpen(false);
       setCourseToAdd(null);
-      setSearchValue("");
-      setSelectedCourse(null);
       setManualCourse({
         courseId: "",
         course: "",
@@ -213,17 +99,10 @@ export default function AddCourses({
     }
   };
 
-  const handleSearchSelect = (courseId: string | null) => {
-    if (courseId) {
-      const course = availableCourses.find((c) => c.courseId === courseId);
-      setSelectedCourse(course || null);
-    }
-  };
-
   const handleManualAdd = () => {
     if (manualCourse.courseId && manualCourse.course) {
       const newCourse: Course = {
-        id: Math.max(...availableCourses.map((c) => c.id)) + 1,
+        id: Date.now(),
         courseId: manualCourse.courseId,
         course: manualCourse.course,
         credits: manualCourse.credits,
@@ -250,15 +129,8 @@ export default function AddCourses({
     }
   };
 
-  const availableCount = availableCourses.filter(
-    (course) => !isEnrolled(course.courseId)
-  ).length;
-  const enrolledFromAvailable = availableCourses.filter((course) =>
-    isEnrolled(course.courseId)
-  ).length;
-
   return (
-    <div className="space-y-6">
+    <div className="flex flex-col gap-6 p-6 md:p-10 ml-[5%]">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           <Button
@@ -280,18 +152,10 @@ export default function AddCourses({
         <div className="flex items-center gap-4">
           <Card className="p-4">
             <div className="text-center">
-              <p className="text-2xl font-bold text-success">
-                {availableCount}
-              </p>
-              <p className="text-sm text-default-500">Available</p>
-            </div>
-          </Card>
-          <Card className="p-4">
-            <div className="text-center">
               <p className="text-2xl font-bold text-primary">
-                {enrolledFromAvailable}
+                {enrolledCourses.length}
               </p>
-              <p className="text-sm text-default-500">Enrolled</p>
+              <p className="text-sm text-default-500">Total Enrolled</p>
             </div>
           </Card>
         </div>
@@ -306,7 +170,7 @@ export default function AddCourses({
             title={
               <div className="flex items-center space-x-2">
                 <Search size={16} />
-                <span>Manual Input</span>
+                <span>Search Courses</span>
               </div>
             }
           >
@@ -321,7 +185,7 @@ export default function AddCourses({
             title={
               <div className="flex items-center space-x-2">
                 <FileText size={16} />
-                <span>Browse Courses</span>
+                <span>Browse All Courses</span>
               </div>
             }
           >

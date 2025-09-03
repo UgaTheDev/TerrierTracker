@@ -46,4 +46,4 @@ def find_course_requirements(courses):
             requirements = m.get_hub_requirements_for_course(i[0])
             print(requirements)
 
-find_course_requirements(raw_fetch_courses_info(reader))
+

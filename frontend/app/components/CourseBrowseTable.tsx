@@ -49,15 +49,13 @@ interface CourseBrowseTableProps {
 
 const API_BASE_URL = "http://localhost:5000/api";
 
-// Cache for API responses
 const apiCache = new Map<string, any>();
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+const CACHE_DURATION = 5 * 60 * 1000;
 
 const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
   const cacheKey = `${endpoint}-${JSON.stringify(options)}`;
   const cached = apiCache.get(cacheKey);
 
-  // Return cached result if still valid
   if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
     return cached.data;
   }
@@ -77,7 +75,6 @@ const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
       throw new Error(data.error || `HTTP error! status: ${response.status}`);
     }
 
-    // Cache the result
     apiCache.set(cacheKey, {
       data,
       timestamp: Date.now(),
@@ -125,13 +122,11 @@ const fetchHubRequirements = async (courseCode: string): Promise<string[]> => {
   }
 };
 
-// Batch load hub requirements for multiple courses
 const fetchMultipleHubRequirements = async (
   courseCodes: string[]
 ): Promise<Map<string, string[]>> => {
   const results = new Map<string, string[]>();
 
-  // Process in batches of 5 to avoid overwhelming the API
   const batchSize = 5;
   const batches: string[][] = [];
 
@@ -155,7 +150,6 @@ const fetchMultipleHubRequirements = async (
       results.set(courseCode, requirements);
     });
 
-    // Small delay between batches to be nice to the API
     if (batches.indexOf(batch) < batches.length - 1) {
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
@@ -398,7 +392,6 @@ export default function CourseBrowseTable({
     [isEnrolled, handleAddCourse, loadingRequirements, batchLoading]
   );
 
-  // Memoize the table body items for performance
   const tableItems = useMemo(() => filteredCourses, [filteredCourses]);
 
   if (isLoading) {

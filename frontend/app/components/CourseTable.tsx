@@ -1,5 +1,4 @@
 import type { SVGProps } from "react";
-import AddCourses from "../childr_pages/AddCourses";
 import React from "react";
 import {
   Table,
@@ -138,82 +137,17 @@ type SortDescriptor = {
   direction: "ascending" | "descending";
 };
 
-const initialCourses: Course[] = [
-  {
-    id: 1,
-    courseId: "CAS CS 101",
-    course: "Introduction to Computer Science I",
-    credits: 4,
-    requirements: "",
-  },
-  {
-    id: 2,
-    courseId: "CAS MA 123",
-    course: "Calculus I",
-    credits: 4,
-    requirements: "",
-  },
-  {
-    id: 3,
-    courseId: "CAS WR 100",
-    course: "Writing, Research, and Inquiry",
-    credits: 4,
-    requirements: "",
-  },
-  {
-    id: 4,
-    courseId: "CAS HI 151",
-    course: "The World in the Twentieth Century",
-    credits: 4,
-    requirements: "",
-  },
-  {
-    id: 5,
-    courseId: "CAS PY 105",
-    course: "Introduction to Psychology",
-    credits: 4,
-    requirements: "",
-  },
-  {
-    id: 6,
-    courseId: "CAS CS 112",
-    course: "Introduction to Computer Science II",
-    credits: 4,
-    requirements: "",
-  },
-  {
-    id: 7,
-    courseId: "CAS MA 124",
-    course: "Calculus II",
-    credits: 4,
-    requirements: "",
-  },
-  {
-    id: 8,
-    courseId: "CAS PH 211",
-    course: "General Physics I",
-    credits: 4,
-    requirements: "",
-  },
-  {
-    id: 9,
-    courseId: "CAS EN 102",
-    course: "First-Year Writing Seminar",
-    credits: 4,
-    requirements: "",
-  },
-  {
-    id: 10,
-    courseId: "CAS SO 101",
-    course: "Introduction to Sociology",
-    credits: 4,
-    requirements: "",
-  },
-];
+interface CourseTableProps {
+  enrolledCourses: Course[];
+  onAddCourse: (course: Course) => void;
+  onNavigate: (page: string) => void;
+}
 
-export default function CourseTable() {
-  const [showAddCourses, setShowAddCourses] = React.useState(false);
-  const [courses, setCourses] = React.useState<Course[]>(initialCourses);
+export default function CourseTable({
+  enrolledCourses,
+  onAddCourse,
+  onNavigate,
+}: CourseTableProps) {
   const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
   const [editModalOpen, setEditModalOpen] = React.useState(false);
   const [courseToDelete, setCourseToDelete] = React.useState<Course | null>(
@@ -239,7 +173,9 @@ export default function CourseTable() {
 
   const confirmDelete = () => {
     if (courseToDelete) {
-      setCourses(courses.filter((c) => c.id !== courseToDelete.id));
+      console.warn(
+        "Delete functionality needs to be implemented in parent component"
+      );
       setDeleteModalOpen(false);
       setCourseToDelete(null);
     }
@@ -253,16 +189,12 @@ export default function CourseTable() {
 
   const saveEdit = () => {
     if (courseToEdit) {
-      setCourses(courses.map((c) => (c.id === courseToEdit.id ? editForm : c)));
+      console.warn(
+        "Edit functionality needs to be implemented in parent component"
+      );
       setEditModalOpen(false);
       setCourseToEdit(null);
     }
-  };
-
-  const handleAddCourse = (newCourse: Course) => {
-    const newId = Math.max(...courses.map((c) => c.id), 0) + 1;
-    const courseToAdd = { ...newCourse, id: newId };
-    setCourses([...courses, courseToAdd]);
   };
 
   const handleSort = (column: string) => {
@@ -281,9 +213,9 @@ export default function CourseTable() {
   };
 
   const sortedCourses = React.useMemo(() => {
-    if (!sortDescriptor.column) return courses;
+    if (!sortDescriptor.column) return enrolledCourses;
 
-    return [...courses].sort((a, b) => {
+    return [...enrolledCourses].sort((a, b) => {
       let aValue: string | number;
       let bValue: string | number;
 
@@ -306,12 +238,10 @@ export default function CourseTable() {
         ? -comparison
         : comparison;
     });
-  }, [courses, sortDescriptor]);
+  }, [enrolledCourses, sortDescriptor]);
 
   const renderCell = React.useCallback(
     (course: Course, columnKey: React.Key) => {
-      const cellValue = course[columnKey as keyof Course];
-
       switch (columnKey) {
         case "id":
           return (
@@ -356,23 +286,16 @@ export default function CourseTable() {
             </div>
           );
         default:
-          return cellValue;
+          return course[columnKey as keyof Course];
       }
     },
     []
   );
 
-  const totalCredits = courses.reduce((sum, course) => sum + course.credits, 0);
-
-  if (showAddCourses) {
-    return (
-      <AddCourses
-        enrolledCourses={courses}
-        onAddCourse={handleAddCourse}
-        onGoBack={() => setShowAddCourses(false)}
-      />
-    );
-  }
+  const totalCredits = enrolledCourses.reduce(
+    (sum, course) => sum + course.credits,
+    0
+  );
 
   return (
     <div className="space-y-6">
@@ -387,7 +310,7 @@ export default function CourseTable() {
             color="primary"
             variant="flat"
             startContent={<Plus size={16} />}
-            onClick={() => setShowAddCourses(true)}
+            onClick={() => onNavigate("add-courses")}
             className="h-8 px-3 text-sm"
           >
             Add Courses
@@ -401,43 +324,63 @@ export default function CourseTable() {
         </div>
       </div>
 
-      <Card className="p-6">
-        <div className="h-96 overflow-auto">
-          <Table aria-label="Your courses table" className="h-full">
-            <TableHeader columns={columns}>
-              {(column) => (
-                <TableColumn
-                  key={column.uid}
-                  align={column.uid === "actions" ? "center" : "start"}
-                  allowsSorting={false}
-                >
-                  <div className="flex items-center gap-1">
-                    {column.sortable ? (
-                      <button
-                        onClick={() => handleSort(column.uid)}
-                        className="hover:text-primary cursor-pointer"
-                      >
-                        {column.name}
-                      </button>
-                    ) : (
-                      column.name
+      {enrolledCourses.length === 0 ? (
+        <Card className="p-8">
+          <div className="text-center">
+            <p className="text-lg text-default-500 mb-4">
+              No courses enrolled yet
+            </p>
+            <Button
+              color="primary"
+              variant="flat"
+              startContent={<Plus size={16} />}
+              onClick={() => onNavigate("add-courses")}
+            >
+              Add Your First Course
+            </Button>
+          </div>
+        </Card>
+      ) : (
+        <Card className="p-6">
+          <div className="h-96 overflow-auto">
+            <Table aria-label="Your courses table" className="h-full">
+              <TableHeader columns={columns}>
+                {(column) => (
+                  <TableColumn
+                    key={column.uid}
+                    align={column.uid === "actions" ? "center" : "start"}
+                    allowsSorting={false}
+                  >
+                    <div className="flex items-center gap-1">
+                      {column.sortable ? (
+                        <button
+                          onClick={() => handleSort(column.uid)}
+                          className="hover:text-primary cursor-pointer"
+                        >
+                          {column.name}
+                        </button>
+                      ) : (
+                        column.name
+                      )}
+                    </div>
+                  </TableColumn>
+                )}
+              </TableHeader>
+              <TableBody items={sortedCourses}>
+                {(item) => (
+                  <TableRow key={item.id}>
+                    {(columnKey) => (
+                      <TableCell>{renderCell(item, columnKey)}</TableCell>
                     )}
-                  </div>
-                </TableColumn>
-              )}
-            </TableHeader>
-            <TableBody items={sortedCourses}>
-              {(item) => (
-                <TableRow key={item.id}>
-                  {(columnKey) => (
-                    <TableCell>{renderCell(item, columnKey)}</TableCell>
-                  )}
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
-      </Card>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </Card>
+      )}
+
+      {/* Delete Modal */}
       <Modal isOpen={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
         <ModalContent>
           <ModalHeader>Confirm Delete</ModalHeader>
@@ -459,6 +402,8 @@ export default function CourseTable() {
           </ModalFooter>
         </ModalContent>
       </Modal>
+
+      {/* Edit Modal */}
       <Modal isOpen={editModalOpen} onOpenChange={setEditModalOpen} size="2xl">
         <ModalContent>
           <ModalHeader>Edit Course</ModalHeader>
