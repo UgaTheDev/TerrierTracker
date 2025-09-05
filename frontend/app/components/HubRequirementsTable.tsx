@@ -1,6 +1,5 @@
 import type { SVGProps } from "react";
 import type { ChipProps } from "@heroui/react";
-
 import React from "react";
 import {
   Table,
@@ -19,174 +18,95 @@ export type IconSvgProps = SVGProps<SVGSVGElement> & {
 
 export const columns = [
   { name: "NAME", uid: "name" },
-  { name: "COURSES", uid: "courses" },
+  { name: "PROGRESS", uid: "progress" },
   { name: "STATUS", uid: "status" },
   { name: "ACTIONS", uid: "actions" },
 ];
 
-export const hubRequirements = [
+// Static hub requirement categories and info
+const hubRequirementInfo: Record<string, { category: string; units: number }> =
   {
-    id: 1,
-    name: "Philosophical Inquiry and Life's Meanings",
-    courses: "",
-    category: "Philosophical, Aesthetic, and Historical Interpretation",
-    units: 1,
-    status: "fulfilled",
-  },
-  {
-    id: 2,
-    name: "Aesthetic Exploration",
-    courses: "",
-    category: "Philosophical, Aesthetic, and Historical Interpretation",
-    units: 1,
-    status: "unfulfilled",
-  },
-  {
-    id: 3,
-    name: "Historical Consciousness",
-    courses: "",
-    category: "Philosophical, Aesthetic, and Historical Interpretation",
-    units: 1,
-    status: "unfulfilled",
-  },
-
-  {
-    id: 4,
-    name: "Scientific Inquiry I",
-    courses: "",
-    category: "Scientific and Social Inquiry",
-    units: 1,
-    status: "unfulfilled",
-  },
-  {
-    id: 5,
-    name: "Social Inquiry I",
-    courses: "",
-    category: "Scientific and Social Inquiry",
-    units: 1,
-    status: "unfulfilled",
-  },
-  {
-    id: 6,
-    name: "Scientific Inquiry II or Social Inquiry II",
-    courses: "",
-    category: "Scientific and Social Inquiry",
-    units: 1,
-    status: "unfulfilled",
-  },
-  {
-    id: 7,
-    name: "Quantitative Reasoning I",
-    courses: "",
-    category: "Quantitative Reasoning",
-    units: 1,
-    status: "unfulfilled",
-  },
-  {
-    id: 8,
-    name: "Quantitative Reasoning II",
-    courses: "",
-    category: "Quantitative Reasoning",
-    units: 1,
-    status: "unfulfilled",
-  },
-  {
-    id: 9,
-    name: "The Individual in Community",
-    courses: "",
-    category: "Diversity, Civic Engagement, and Global Citizenship",
-    units: 1,
-    status: "unfulfilled",
-  },
-  {
-    id: 10,
-    name: "Global Citizenship and Intercultural Literacy",
-    courses: "",
-    category: "Diversity, Civic Engagement, and Global Citizenship",
-    units: 2,
-    status: "unfulfilled",
-  },
-  {
-    id: 11,
-    name: "Ethical Reasoning",
-    courses: "",
-    category: "Diversity, Civic Engagement, and Global Citizenship",
-    units: 1,
-    status: "unfulfilled",
-  },
-  {
-    id: 12,
-    name: "First-Year Writing Seminar",
-    courses: "",
-    category: "Communication",
-    units: 1,
-    status: "unfulfilled",
-  },
-  {
-    id: 13,
-    name: "Writing, Research, and Inquiry",
-    courses: "",
-    category: "Communication",
-    units: 1,
-    status: "unfulfilled",
-  },
-  {
-    id: 14,
-    name: "Writing-Intensive Course",
-    courses: "",
-    category: "Communication",
-    units: 2,
-    status: "unfulfilled",
-  },
-  {
-    id: 15,
-    name: "Oral and/or Signed Communication",
-    courses: "",
-    category: "Communication",
-    units: 1,
-    status: "unfulfilled",
-  },
-  {
-    id: 16,
-    name: "Digital/Multimedia Expression",
-    courses: "",
-    category: "Communication",
-    units: 1,
-    status: "unfulfilled",
-  },
-  {
-    id: 17,
-    name: "Critical Thinking",
-    courses: "",
-    category: "Intellectual Toolkit",
-    units: 2,
-    status: "unfulfilled",
-  },
-  {
-    id: 18,
-    name: "Research and Information Literacy",
-    courses: "",
-    category: "Intellectual Toolkit",
-    units: 2,
-    status: "unfulfilled",
-  },
-  {
-    id: 19,
-    name: "Teamwork/Collaboration",
-    courses: "",
-    category: "Intellectual Toolkit",
-    units: 2,
-    status: "unfulfilled",
-  },
-  {
-    id: 20,
-    name: "Creativity/Innovation",
-    courses: "",
-    category: "Intellectual Toolkit",
-    units: 2,
-    status: "unfulfilled",
-  },
-];
+    "Philosophical Inquiry and Life's Meanings": {
+      category: "Philosophical, Aesthetic, and Historical Interpretation",
+      units: 1,
+    },
+    "Aesthetic Exploration": {
+      category: "Philosophical, Aesthetic, and Historical Interpretation",
+      units: 1,
+    },
+    "Historical Consciousness": {
+      category: "Philosophical, Aesthetic, and Historical Interpretation",
+      units: 1,
+    },
+    "Scientific Inquiry I": {
+      category: "Scientific and Social Inquiry",
+      units: 1,
+    },
+    "Social Inquiry I": {
+      category: "Scientific and Social Inquiry",
+      units: 1,
+    },
+    "Scientific Inquiry II or Social Inquiry II": {
+      category: "Scientific and Social Inquiry",
+      units: 1,
+    },
+    "Quantitative Reasoning I": {
+      category: "Quantitative Reasoning",
+      units: 1,
+    },
+    "Quantitative Reasoning II": {
+      category: "Quantitative Reasoning",
+      units: 1,
+    },
+    "The Individual in Community": {
+      category: "Diversity, Civic Engagement, and Global Citizenship",
+      units: 1,
+    },
+    "Global Citizenship and Intercultural Literacy": {
+      category: "Diversity, Civic Engagement, and Global Citizenship",
+      units: 2,
+    },
+    "Ethical Reasoning": {
+      category: "Diversity, Civic Engagement, and Global Citizenship",
+      units: 1,
+    },
+    "First-Year Writing Seminar": {
+      category: "Communication",
+      units: 1,
+    },
+    "Writing, Research, and Inquiry": {
+      category: "Communication",
+      units: 1,
+    },
+    "Writing-Intensive Course": {
+      category: "Communication",
+      units: 2,
+    },
+    "Oral and/or Signed Communication": {
+      category: "Communication",
+      units: 1,
+    },
+    "Digital/Multimedia Expression": {
+      category: "Communication",
+      units: 1,
+    },
+    "Critical Thinking": {
+      category: "Intellectual Toolkit",
+      units: 2,
+    },
+    "Research and Information Literacy": {
+      category: "Intellectual Toolkit",
+      units: 2,
+    },
+    "Teamwork/Collaboration": {
+      category: "Intellectual Toolkit",
+      units: 2,
+    },
+    "Creativity/Innovation": {
+      category: "Intellectual Toolkit",
+      units: 2,
+    },
+  };
 
 export const EyeIcon = (props: IconSvgProps) => {
   return (
@@ -209,57 +129,6 @@ export const EyeIcon = (props: IconSvgProps) => {
       />
       <path
         d="M9.99999 16.8916C12.9417 16.8916 15.6833 15.1583 17.5917 12.1583C18.3417 10.9833 18.3417 9.00831 17.5917 7.83331C15.6833 4.83331 12.9417 3.09998 9.99999 3.09998C7.05833 3.09998 4.31666 4.83331 2.40833 7.83331C1.65833 9.00831 1.65833 10.9833 2.40833 12.1583C4.31666 15.1583 7.05833 16.8916 9.99999 16.8916Z"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.5}
-      />
-    </svg>
-  );
-};
-
-export const DeleteIcon = (props: IconSvgProps) => {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="none"
-      focusable="false"
-      height="1em"
-      role="presentation"
-      viewBox="0 0 20 20"
-      width="1em"
-      {...props}
-    >
-      <path
-        d="M17.5 4.98332C14.725 4.70832 11.9333 4.56665 9.15 4.56665C7.5 4.56665 5.85 4.64998 4.2 4.81665L2.5 4.98332"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.5}
-      />
-      <path
-        d="M7.08331 4.14169L7.26665 3.05002C7.39998 2.25835 7.49998 1.66669 8.90831 1.66669H11.0916C12.5 1.66669 12.6083 2.29169 12.7333 3.05835L12.9166 4.14169"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.5}
-      />
-      <path
-        d="M15.7084 7.61664L15.1667 16.0083C15.075 17.3166 15 18.3333 12.675 18.3333H7.32502C5.00002 18.3333 4.92502 17.3166 4.83335 16.0083L4.29169 7.61664"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.5}
-      />
-      <path
-        d="M8.60834 13.75H11.3833"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={1.5}
-      />
-      <path
-        d="M7.91669 10.4167H12.0834"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -312,14 +181,31 @@ export const EditIcon = (props: IconSvgProps) => {
 const statusColorMap: Record<string, ChipProps["color"]> = {
   fulfilled: "success",
   unfulfilled: "danger",
+  "in-progress": "warning",
 };
 
-type HubRequirement = (typeof hubRequirements)[0];
+type HubRequirement = {
+  name: string;
+  required: number;
+  current: number;
+};
 
-export default function HubRequirementTable() {
+interface HubRequirementsTableProps {
+  hubRequirements: HubRequirement[];
+}
+
+export default function HubRequirementsTable({
+  hubRequirements,
+}: HubRequirementsTableProps) {
   const renderCell = React.useCallback(
     (requirement: HubRequirement, columnKey: React.Key) => {
-      const cellValue = requirement[columnKey as keyof HubRequirement];
+      const info = hubRequirementInfo[requirement.name];
+      const status =
+        requirement.current >= requirement.required
+          ? "fulfilled"
+          : requirement.current > 0
+            ? "in-progress"
+            : "unfulfilled";
 
       switch (columnKey) {
         case "name":
@@ -327,34 +213,41 @@ export default function HubRequirementTable() {
             <div className="flex flex-col">
               <p className="text-bold text-sm">{requirement.name}</p>
               <p className="text-bold text-xs text-default-400">
-                {requirement.category}
+                {info?.category || "Unknown Category"}
               </p>
               <p className="text-bold text-xs text-default-500">
-                {requirement.units} unit{requirement.units > 1 ? "s" : ""}
+                {info?.units || 1} unit{(info?.units || 1) > 1 ? "s" : ""}
               </p>
             </div>
           );
-        case "courses":
+        case "progress":
           return (
             <div className="flex flex-col">
-              <p className="text-sm">{requirement.courses || "N/A"}</p>
+              <p className="text-sm font-medium">
+                {requirement.current} / {requirement.required}
+              </p>
+              <p className="text-xs text-default-400">
+                {requirement.current >= requirement.required
+                  ? "Complete"
+                  : `${requirement.required - requirement.current} remaining`}
+              </p>
             </div>
           );
         case "status":
           return (
             <Chip
               className="capitalize"
-              color={statusColorMap[requirement.status]}
+              color={statusColorMap[status]}
               size="sm"
               variant="flat"
             >
-              {requirement.status}
+              {status === "in-progress" ? "In Progress" : status}
             </Chip>
           );
         case "actions":
           return (
             <div className="relative flex items-center gap-2">
-              <Tooltip content="Details">
+              <Tooltip content="View courses fulfilling this requirement">
                 <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
                   <EyeIcon />
                 </span>
@@ -364,15 +257,10 @@ export default function HubRequirementTable() {
                   <EditIcon />
                 </span>
               </Tooltip>
-              <Tooltip color="danger" content="Delete requirement">
-                <span className="text-lg text-danger cursor-pointer active:opacity-50">
-                  <DeleteIcon />
-                </span>
-              </Tooltip>
             </div>
           );
         default:
-          return cellValue;
+          return null;
       }
     },
     []
@@ -393,7 +281,7 @@ export default function HubRequirementTable() {
         </TableHeader>
         <TableBody items={hubRequirements}>
           {(item) => (
-            <TableRow key={item.id}>
+            <TableRow key={item.name}>
               {(columnKey) => (
                 <TableCell>{renderCell(item, columnKey)}</TableCell>
               )}

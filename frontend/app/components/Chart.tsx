@@ -1,14 +1,20 @@
 import { CircularProgress } from "@heroui/react";
-import { hubRequirements } from "./HubRequirementsTable";
+
+type HubRequirement = {
+  name: string;
+  required: number;
+  current: number;
+};
 
 interface ChartProps {
   percentage?: number;
+  hubRequirements: HubRequirement[];
 }
 
-export default function Chart({ percentage }: ChartProps) {
+export default function Chart({ percentage, hubRequirements }: ChartProps) {
   const calculateOverallPercentage = () => {
     const fulfilledCount = hubRequirements.filter(
-      (req) => req.status === "fulfilled"
+      (req) => req.current >= req.required
     ).length;
     const totalCount = hubRequirements.length;
     return Math.round((fulfilledCount / totalCount) * 100);

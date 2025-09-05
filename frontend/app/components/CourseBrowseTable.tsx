@@ -12,8 +12,17 @@ import {
   Select,
   SelectItem,
   Button,
+  Checkbox,
+  Divider,
 } from "@heroui/react";
-import { Check, AlertCircle, Filter } from "lucide-react";
+import {
+  Check,
+  AlertCircle,
+  Filter,
+  X,
+  Bookmark,
+  BookmarkCheck,
+} from "lucide-react";
 import { AddIcon } from "../childr_pages/AddCourses";
 
 type Course = {
@@ -39,23 +48,28 @@ const columns = [
   { name: "CREDITS", uid: "credits" },
   { name: "HUB REQUIREMENTS", uid: "hubRequirements" },
   { name: "STATUS", uid: "status" },
+  { name: "BOOKMARK", uid: "bookmark" },
   { name: "ACTIONS", uid: "actions" },
 ];
 
 interface CourseBrowseTableProps {
   isEnrolled: (courseId: string) => boolean;
   handleAddCourse: (course: Course) => void;
+  isBookmarked: (courseId: string) => boolean;
+  handleBookmark: (courseId: string, courseData: CourseData) => void;
 }
 
 const API_BASE_URL = "http://localhost:5000/api";
 
+// Cache for API responses
 const apiCache = new Map<string, any>();
-const CACHE_DURATION = 5 * 60 * 1000;
+const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
 
 const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
   const cacheKey = `${endpoint}-${JSON.stringify(options)}`;
   const cached = apiCache.get(cacheKey);
 
+  // Return cached result if still valid
   if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
     return cached.data;
   }
@@ -75,6 +89,7 @@ const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
       throw new Error(data.error || `HTTP error! status: ${response.status}`);
     }
 
+    // Cache the result
     apiCache.set(cacheKey, {
       data,
       timestamp: Date.now(),
@@ -122,11 +137,13 @@ const fetchHubRequirements = async (courseCode: string): Promise<string[]> => {
   }
 };
 
+// Batch load hub requirements for multiple courses
 const fetchMultipleHubRequirements = async (
   courseCodes: string[]
 ): Promise<Map<string, string[]>> => {
   const results = new Map<string, string[]>();
 
+  // Process in batches of 5 to avoid overwhelming the API
   const batchSize = 5;
   const batches: string[][] = [];
 
@@ -150,6 +167,7 @@ const fetchMultipleHubRequirements = async (
       results.set(courseCode, requirements);
     });
 
+    // Small delay between batches to be nice to the API
     if (batches.indexOf(batch) < batches.length - 1) {
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
@@ -161,6 +179,8 @@ const fetchMultipleHubRequirements = async (
 export default function CourseBrowseTable({
   isEnrolled,
   handleAddCourse,
+  isBookmarked,
+  handleBookmark,
 }: CourseBrowseTableProps) {
   const [apiCourses, setApiCourses] = useState<CourseData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -171,8 +191,12 @@ export default function CourseBrowseTable({
   );
   const [batchLoading, setBatchLoading] = useState(false);
   const [selectedDepartment, setSelectedDepartment] = useState<string>("all");
+  const [selectedHubRequirements, setSelectedHubRequirements] = useState<
+    Set<string>
+  >(new Set());
   const [showFilters, setShowFilters] = useState(false);
 
+  // Extract unique departments from courses
   const departments = useMemo(() => {
     const deptSet = new Set<string>();
     apiCourses.forEach((course) => {
@@ -184,16 +208,62 @@ export default function CourseBrowseTable({
     return Array.from(deptSet).sort();
   }, [apiCourses]);
 
-  const filteredCourses = useMemo(() => {
-    if (selectedDepartment === "all") {
-      return apiCourses;
-    }
-    return apiCourses.filter((course) => {
-      const parts = course.courseId.split(" ");
-      return parts.length >= 2 && parts[1] === selectedDepartment;
+  // Extract unique hub requirements from courses
+  const allHubRequirements = useMemo(() => {
+    const hubSet = new Set<string>();
+    apiCourses.forEach((course) => {
+      course.hubRequirements.forEach((req) => {
+        if (req && req.trim()) {
+          hubSet.add(req.trim());
+        }
+      });
     });
-  }, [apiCourses, selectedDepartment]);
+    return Array.from(hubSet).sort();
+  }, [apiCourses]);
 
+  // Filter courses by selected department and hub requirements
+  const filteredCourses = useMemo(() => {
+    let filtered = apiCourses;
+
+    // Filter by department
+    if (selectedDepartment !== "all") {
+      filtered = filtered.filter((course) => {
+        const parts = course.courseId.split(" ");
+        return parts.length >= 2 && parts[1] === selectedDepartment;
+      });
+    }
+
+    // Filter by hub requirements (AND logic - course must have ALL selected hubs)
+    if (selectedHubRequirements.size > 0) {
+      filtered = filtered.filter((course) => {
+        const courseHubsSet = new Set(course.hubRequirements);
+        return Array.from(selectedHubRequirements).every((selectedHub) =>
+          courseHubsSet.has(selectedHub)
+        );
+      });
+    }
+
+    return filtered;
+  }, [apiCourses, selectedDepartment, selectedHubRequirements]);
+
+  const toggleHubRequirement = (hubReq: string) => {
+    setSelectedHubRequirements((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(hubReq)) {
+        newSet.delete(hubReq);
+      } else {
+        newSet.add(hubReq);
+      }
+      return newSet;
+    });
+  };
+
+  const clearAllFilters = () => {
+    setSelectedDepartment("all");
+    setSelectedHubRequirements(new Set());
+  };
+
+  // Check API health and load courses
   useEffect(() => {
     const initializeData = async () => {
       try {
@@ -219,6 +289,7 @@ export default function CourseBrowseTable({
     initializeData();
   }, []);
 
+  // Load hub requirements for a single course
   const loadHubRequirements = async (courseId: string) => {
     if (loadingRequirements.has(courseId) || batchLoading) return;
 
@@ -249,6 +320,7 @@ export default function CourseBrowseTable({
     }
   };
 
+  // Load hub requirements for all filtered courses
   const loadAllHubRequirements = async () => {
     if (batchLoading) return;
 
@@ -298,6 +370,8 @@ export default function CourseBrowseTable({
     description: `Hub Requirements: ${courseData.requirementsText}`,
     hubRequirements: courseData.hubRequirements,
   });
+
+  // Memoize the render cell function for better performance
   const renderCell = React.useCallback(
     (courseData: CourseData, columnKey: React.Key) => {
       switch (columnKey) {
@@ -364,6 +438,30 @@ export default function CourseBrowseTable({
               )}
             </div>
           );
+        case "bookmark":
+          return (
+            <div className="flex items-center justify-center">
+              <button
+                onClick={() => handleBookmark(courseData.courseId, courseData)}
+                className={`p-2 rounded-full transition-colors ${
+                  isBookmarked(courseData.courseId)
+                    ? "text-yellow-600 bg-yellow-50 hover:bg-yellow-100"
+                    : "text-gray-400 hover:text-yellow-600 hover:bg-yellow-50"
+                }`}
+                title={
+                  isBookmarked(courseData.courseId)
+                    ? "Remove bookmark"
+                    : "Bookmark course"
+                }
+              >
+                {isBookmarked(courseData.courseId) ? (
+                  <BookmarkCheck className="w-4 h-4" />
+                ) : (
+                  <Bookmark className="w-4 h-4" />
+                )}
+              </button>
+            </div>
+          );
         case "actions":
           return (
             <div className="relative flex items-center gap-2">
@@ -389,9 +487,17 @@ export default function CourseBrowseTable({
           return courseData[columnKey as keyof CourseData];
       }
     },
-    [isEnrolled, handleAddCourse, loadingRequirements, batchLoading]
+    [
+      isEnrolled,
+      handleAddCourse,
+      isBookmarked,
+      handleBookmark,
+      loadingRequirements,
+      batchLoading,
+    ]
   );
 
+  // Memoize the table body items for performance
   const tableItems = useMemo(() => filteredCourses, [filteredCourses]);
 
   if (isLoading) {
@@ -457,35 +563,129 @@ export default function CourseBrowseTable({
         </div>
 
         {showFilters && (
-          <div className="flex gap-4 p-4 bg-default-50 rounded-lg">
-            <Select
-              label="Department"
-              placeholder="Filter by department"
-              selectedKeys={
-                selectedDepartment === "all" ? [] : [selectedDepartment]
-              }
-              onSelectionChange={(keys) => {
-                const selected = Array.from(keys)[0] as string;
-                setSelectedDepartment(selected || "all");
-              }}
-              className="max-w-xs"
-              size="sm"
-            >
-              <SelectItem key="all" value="all">
-                All Departments ({apiCourses.length})
-              </SelectItem>
-              {departments.map((dept) => {
-                const count = apiCourses.filter((course) => {
-                  const parts = course.courseId.split(" ");
-                  return parts.length >= 2 && parts[1] === dept;
-                }).length;
-                return (
-                  <SelectItem key={dept} value={dept}>
-                    {dept} ({count})
+          <div className="space-y-4 p-4 bg-default-50 rounded-lg">
+            <div className="flex items-center justify-between">
+              <h3 className="text-sm font-semibold text-default-700">
+                Filters
+              </h3>
+              <Button
+                size="sm"
+                variant="light"
+                startContent={<X size={14} />}
+                onPress={clearAllFilters}
+                className="text-xs"
+              >
+                Clear All
+              </Button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {/* Department Filter */}
+              <div>
+                <Select
+                  label="Department"
+                  placeholder="Filter by department"
+                  selectedKeys={
+                    selectedDepartment === "all" ? [] : [selectedDepartment]
+                  }
+                  onSelectionChange={(keys) => {
+                    const selected = Array.from(keys)[0] as string;
+                    setSelectedDepartment(selected || "all");
+                  }}
+                  size="sm"
+                >
+                  <SelectItem key="all" value="all">
+                    All Departments ({apiCourses.length})
                   </SelectItem>
-                );
-              })}
-            </Select>
+                  {departments.map((dept) => {
+                    const count = apiCourses.filter((course) => {
+                      const parts = course.courseId.split(" ");
+                      return parts.length >= 2 && parts[1] === dept;
+                    }).length;
+                    return (
+                      <SelectItem key={dept} value={dept}>
+                        {dept} ({count})
+                      </SelectItem>
+                    );
+                  })}
+                </Select>
+              </div>
+
+              {/* Hub Requirements Filter */}
+              <div>
+                <label className="block text-sm font-medium text-default-700 mb-2">
+                  Hub Requirements
+                  {selectedHubRequirements.size > 0 && (
+                    <span className="ml-2 text-xs text-primary">
+                      ({selectedHubRequirements.size} selected)
+                    </span>
+                  )}
+                </label>
+                <div className="max-h-32 overflow-y-auto space-y-1 p-2 border border-default-200 rounded-lg bg-white">
+                  {allHubRequirements.length === 0 ? (
+                    <p className="text-xs text-default-400 italic">
+                      Load hub requirements to see available filters
+                    </p>
+                  ) : (
+                    allHubRequirements.map((hubReq) => {
+                      const coursesWithHub = apiCourses.filter((course) =>
+                        course.hubRequirements.includes(hubReq)
+                      ).length;
+
+                      return (
+                        <div key={hubReq} className="flex items-center">
+                          <Checkbox
+                            size="sm"
+                            isSelected={selectedHubRequirements.has(hubReq)}
+                            onValueChange={() => toggleHubRequirement(hubReq)}
+                            className="flex-1"
+                          >
+                            <div className="flex items-center justify-between w-full">
+                              <span className="text-xs">{hubReq}</span>
+                              <span className="text-xs text-default-400 ml-2">
+                                ({coursesWithHub})
+                              </span>
+                            </div>
+                          </Checkbox>
+                        </div>
+                      );
+                    })
+                  )}
+                </div>
+                {selectedHubRequirements.size > 0 && (
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {Array.from(selectedHubRequirements).map((hubReq) => (
+                      <Chip
+                        key={hubReq}
+                        size="sm"
+                        variant="flat"
+                        color="primary"
+                        onClose={() => toggleHubRequirement(hubReq)}
+                        className="text-xs"
+                      >
+                        {hubReq}
+                      </Chip>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Filter Summary */}
+            <Divider />
+            <div className="text-xs text-default-500">
+              <strong>Active Filters:</strong>{" "}
+              {selectedDepartment !== "all" &&
+                `Department: ${selectedDepartment}`}
+              {selectedDepartment !== "all" &&
+                selectedHubRequirements.size > 0 &&
+                ", "}
+              {selectedHubRequirements.size > 0 &&
+                `Hub Requirements: ${Array.from(selectedHubRequirements).join(", ")}`}
+              {selectedDepartment === "all" &&
+                selectedHubRequirements.size === 0 &&
+                "None"}
+            </div>
           </div>
         )}
       </div>
@@ -496,7 +696,11 @@ export default function CourseBrowseTable({
             {(column) => (
               <TableColumn
                 key={column.uid}
-                align={column.uid === "actions" ? "center" : "start"}
+                align={
+                  column.uid === "actions" || column.uid === "bookmark"
+                    ? "center"
+                    : "start"
+                }
                 allowsSorting={false}
               >
                 {column.name}

@@ -95,14 +95,14 @@ export default function AddCourses({
         requirements: "",
         description: "",
       });
-      onNavigate("your-courses");
+      // Remove automatic navigation after adding course
     }
   };
 
   const handleManualAdd = () => {
     if (manualCourse.courseId && manualCourse.course) {
       const newCourse: Course = {
-        id: Date.now(),
+        id: Date.now(), // Use timestamp for unique ID
         courseId: manualCourse.courseId,
         course: manualCourse.course,
         credits: manualCourse.credits,
@@ -130,7 +130,7 @@ export default function AddCourses({
   };
 
   return (
-    <div className="flex flex-col gap-6 p-6 md:p-10 ml-[5%]">
+    <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           <Button
@@ -192,6 +192,8 @@ export default function AddCourses({
             <CourseBrowseTable
               isEnrolled={isEnrolled}
               handleAddCourse={handleAddCourse}
+              isBookmarked={isBookmarked}
+              handleBookmark={handleBookmark}
             />
           </Tab>
 

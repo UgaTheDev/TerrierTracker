@@ -29,8 +29,13 @@ type HubRequirement = {
   name: string;
   required: number;
   current: number;
-  phantom: number;
 };
+
+interface YourBookmarksProps {
+  bookmarkedCourses: BookmarkedCourse[];
+  hubRequirements: HubRequirement[];
+  onRemoveBookmark: (courseId: string) => void;
+}
 
 const columns = [
   { name: "SELECT", uid: "select" },
@@ -40,96 +45,19 @@ const columns = [
   { name: "ACTIONS", uid: "actions" },
 ];
 
-const initialBookmarkedCourses: BookmarkedCourse[] = [
-  {
-    id: "cas-cs-131",
-    code: "CAS CS 131",
-    name: "Combinatoric Structures",
-    credits: 4,
-    hubRequirements: ["Quantitative Reasoning II", "Mathematical Modeling"],
-    school: "CAS",
-  },
-  {
-    id: "cas-cs-132",
-    code: "CAS CS 132",
-    name: "Geometric Algorithms",
-    credits: 4,
-    hubRequirements: [
-      "Quantitative Reasoning II",
-      "Digital/Multimedia Expression",
-    ],
-    school: "CAS",
-  },
-  {
-    id: "cas-ma-121",
-    code: "CAS MA 121",
-    name: "Calculus I",
-    credits: 4,
-    hubRequirements: ["Quantitative Reasoning II"],
-    school: "CAS",
-  },
-  {
-    id: "cas-bi-108",
-    code: "CAS BI 108",
-    name: "Introduction to Biology",
-    credits: 4,
-    hubRequirements: ["Scientific Inquiry I", "Scientific Inquiry II"],
-    school: "CAS",
-  },
-  {
-    id: "cas-ec-101",
-    code: "CAS EC 101",
-    name: "Introductory Microeconomics",
-    credits: 4,
-    hubRequirements: ["Social Inquiry I", "Quantitative Reasoning I"],
-    school: "CAS",
-  },
-  {
-    id: "cas-wr-100",
-    code: "CAS WR 100",
-    name: "Writing, Research, and Inquiry",
-    credits: 4,
-    hubRequirements: ["Writing, Research, and Inquiry"],
-    school: "CAS",
-  },
-];
-
-const initialHubRequirements: HubRequirement[] = [
-  {
-    name: "Writing, Research, and Inquiry",
-    required: 1,
-    current: 1,
-    phantom: 0,
-  },
-  { name: "Quantitative Reasoning I", required: 1, current: 0, phantom: 0 },
-  { name: "Quantitative Reasoning II", required: 1, current: 1, phantom: 0 },
-  {
-    name: "Digital/Multimedia Expression",
-    required: 1,
-    current: 0,
-    phantom: 0,
-  },
-  { name: "Scientific Inquiry I", required: 2, current: 1, phantom: 0 },
-  { name: "Scientific Inquiry II", required: 1, current: 0, phantom: 0 },
-  { name: "Social Inquiry I", required: 2, current: 1, phantom: 0 },
-  { name: "Social Inquiry II", required: 1, current: 0, phantom: 0 },
-  { name: "Mathematical Modeling", required: 1, current: 0, phantom: 0 },
-  { name: "Ethical Reasoning", required: 1, current: 0, phantom: 0 },
-];
-
-export default function YourBookmarks() {
-  const [bookmarkedCourses, setBookmarkedCourses] = useState<
-    BookmarkedCourse[]
-  >(initialBookmarkedCourses);
+export default function YourBookmarks({
+  bookmarkedCourses = [],
+  hubRequirements = [],
+  onRemoveBookmark = () => {},
+}: YourBookmarksProps) {
   const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
-  const [hubRequirements, setHubRequirements] = useState<HubRequirement[]>(
-    initialHubRequirements
-  );
   const [showVisualization, setShowVisualization] = useState(false);
 
+  // Calculate hub impact with proper logic
   const updatedHubRequirements = useMemo(() => {
     const phantomCounts: { [key: string]: number } = {};
 
+    // Only count hub requirements from SELECTED courses
     selectedCourses.forEach((courseId) => {
       const course = bookmarkedCourses.find((c) => c.id === courseId);
       if (course) {
@@ -146,9 +74,8 @@ export default function YourBookmarks() {
   }, [selectedCourses, bookmarkedCourses, hubRequirements]);
 
   const handleUnbookmark = (courseId: string) => {
-    setBookmarkedCourses((prev) =>
-      prev.filter((course) => course.id !== courseId)
-    );
+    onRemoveBookmark(courseId);
+    // Remove from selected courses if it was selected
     setSelectedCourses((prev) => prev.filter((id) => id !== courseId));
   };
 
@@ -238,7 +165,7 @@ export default function YourBookmarks() {
   ) => {
     const total = current + phantom;
     if (total >= required) return "success";
-    if (total > current) return "warning";
+    if (phantom > 0) return "warning"; // Show warning when phantom courses are helping
     return "danger";
   };
 
@@ -362,8 +289,8 @@ export default function YourBookmarks() {
               </div>
 
               <p className="text-sm text-default-500 mb-4">
-                See how selecting courses affects your hub requirements in
-                real-time.
+                Select courses above to see how they would impact your hub
+                requirements.
               </p>
 
               <div className="space-y-4 max-h-80 overflow-auto">
@@ -404,7 +331,7 @@ export default function YourBookmarks() {
                       />
                       {req.phantom > 0 && (
                         <p className="text-xs text-warning">
-                          +{req.phantom} from selected courses
+                          +{req.phantom} from selected bookmarks
                         </p>
                       )}
                       {index < updatedHubRequirements.length - 1 && (
@@ -427,7 +354,7 @@ export default function YourBookmarks() {
                       / {updatedHubRequirements.length}
                     </p>
                     <p className="text-xs text-default-500">
-                      requirements completed
+                      requirements would be completed
                     </p>
                   </div>
                 </div>
