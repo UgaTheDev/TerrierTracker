@@ -61,15 +61,13 @@ interface CourseBrowseTableProps {
 
 const API_BASE_URL = "http://localhost:5000/api";
 
-// Cache for API responses
 const apiCache = new Map<string, any>();
-const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
+const CACHE_DURATION = 5 * 60 * 1000;
 
 const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
   const cacheKey = `${endpoint}-${JSON.stringify(options)}`;
   const cached = apiCache.get(cacheKey);
 
-  // Return cached result if still valid
   if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
     return cached.data;
   }
@@ -89,7 +87,6 @@ const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
       throw new Error(data.error || `HTTP error! status: ${response.status}`);
     }
 
-    // Cache the result
     apiCache.set(cacheKey, {
       data,
       timestamp: Date.now(),
@@ -137,13 +134,11 @@ const fetchHubRequirements = async (courseCode: string): Promise<string[]> => {
   }
 };
 
-// Batch load hub requirements for multiple courses
 const fetchMultipleHubRequirements = async (
   courseCodes: string[]
 ): Promise<Map<string, string[]>> => {
   const results = new Map<string, string[]>();
 
-  // Process in batches of 5 to avoid overwhelming the API
   const batchSize = 5;
   const batches: string[][] = [];
 
@@ -166,8 +161,6 @@ const fetchMultipleHubRequirements = async (
     batchResults.forEach(({ courseCode, requirements }) => {
       results.set(courseCode, requirements);
     });
-
-    // Small delay between batches to be nice to the API
     if (batches.indexOf(batch) < batches.length - 1) {
       await new Promise((resolve) => setTimeout(resolve, 100));
     }
@@ -196,7 +189,6 @@ export default function CourseBrowseTable({
   >(new Set());
   const [showFilters, setShowFilters] = useState(false);
 
-  // Extract unique departments from courses
   const departments = useMemo(() => {
     const deptSet = new Set<string>();
     apiCourses.forEach((course) => {
@@ -208,7 +200,6 @@ export default function CourseBrowseTable({
     return Array.from(deptSet).sort();
   }, [apiCourses]);
 
-  // Extract unique hub requirements from courses
   const allHubRequirements = useMemo(() => {
     const hubSet = new Set<string>();
     apiCourses.forEach((course) => {
@@ -221,11 +212,9 @@ export default function CourseBrowseTable({
     return Array.from(hubSet).sort();
   }, [apiCourses]);
 
-  // Filter courses by selected department and hub requirements
   const filteredCourses = useMemo(() => {
     let filtered = apiCourses;
 
-    // Filter by department
     if (selectedDepartment !== "all") {
       filtered = filtered.filter((course) => {
         const parts = course.courseId.split(" ");
@@ -233,7 +222,6 @@ export default function CourseBrowseTable({
       });
     }
 
-    // Filter by hub requirements (AND logic - course must have ALL selected hubs)
     if (selectedHubRequirements.size > 0) {
       filtered = filtered.filter((course) => {
         const courseHubsSet = new Set(course.hubRequirements);
@@ -263,7 +251,6 @@ export default function CourseBrowseTable({
     setSelectedHubRequirements(new Set());
   };
 
-  // Check API health and load courses
   useEffect(() => {
     const initializeData = async () => {
       try {
@@ -289,7 +276,6 @@ export default function CourseBrowseTable({
     initializeData();
   }, []);
 
-  // Load hub requirements for a single course
   const loadHubRequirements = async (courseId: string) => {
     if (loadingRequirements.has(courseId) || batchLoading) return;
 
@@ -320,7 +306,6 @@ export default function CourseBrowseTable({
     }
   };
 
-  // Load hub requirements for all filtered courses
   const loadAllHubRequirements = async () => {
     if (batchLoading) return;
 
@@ -371,7 +356,6 @@ export default function CourseBrowseTable({
     hubRequirements: courseData.hubRequirements,
   });
 
-  // Memoize the render cell function for better performance
   const renderCell = React.useCallback(
     (courseData: CourseData, columnKey: React.Key) => {
       switch (columnKey) {
@@ -497,7 +481,6 @@ export default function CourseBrowseTable({
     ]
   );
 
-  // Memoize the table body items for performance
   const tableItems = useMemo(() => filteredCourses, [filteredCourses]);
 
   if (isLoading) {
@@ -531,7 +514,6 @@ export default function CourseBrowseTable({
 
   return (
     <div className="pt-4">
-      {/* Filters and batch load section */}
       <div className="mb-4 space-y-3">
         <div className="flex items-center justify-between">
           <Button
@@ -580,7 +562,6 @@ export default function CourseBrowseTable({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {/* Department Filter */}
               <div>
                 <Select
                   label="Department"
@@ -611,7 +592,6 @@ export default function CourseBrowseTable({
                 </Select>
               </div>
 
-              {/* Hub Requirements Filter */}
               <div>
                 <label className="block text-sm font-medium text-default-700 mb-2">
                   Hub Requirements
@@ -671,7 +651,6 @@ export default function CourseBrowseTable({
               </div>
             </div>
 
-            {/* Filter Summary */}
             <Divider />
             <div className="text-xs text-default-500">
               <strong>Active Filters:</strong>{" "}

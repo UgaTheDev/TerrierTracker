@@ -47,13 +47,17 @@ type Course = {
 
 interface AddCoursesProps {
   enrolledCourses?: Course[];
+  bookmarkedCourses?: Course[];
   onAddCourse?: (course: Course) => void;
+  onBookmarkCourse?: (course: Course) => void;
   onNavigate: (page: string) => void;
 }
 
 export default function AddCourses({
   enrolledCourses = [],
+  bookmarkedCourses = [],
   onAddCourse = () => {},
+  onBookmarkCourse = () => {},
   onNavigate,
 }: AddCoursesProps) {
   const [activeTab, setActiveTab] = React.useState("manual");
@@ -78,6 +82,21 @@ export default function AddCourses({
     );
   };
 
+  const isBookmarked = (courseId: string) => {
+    if (!bookmarkedCourses || !Array.isArray(bookmarkedCourses)) {
+      return false;
+    }
+    return bookmarkedCourses.some(
+      (course) => course && course.courseId === courseId
+    );
+  };
+
+  const handleBookmark = (course: Course) => {
+    if (onBookmarkCourse) {
+      onBookmarkCourse(course);
+    }
+  };
+
   const handleAddCourse = (course: Course) => {
     setCourseToAdd(course);
     setConfirmModalOpen(true);
@@ -95,14 +114,13 @@ export default function AddCourses({
         requirements: "",
         description: "",
       });
-      // Remove automatic navigation after adding course
     }
   };
 
   const handleManualAdd = () => {
     if (manualCourse.courseId && manualCourse.course) {
       const newCourse: Course = {
-        id: Date.now(), // Use timestamp for unique ID
+        id: Date.now(),
         courseId: manualCourse.courseId,
         course: manualCourse.course,
         credits: manualCourse.credits,

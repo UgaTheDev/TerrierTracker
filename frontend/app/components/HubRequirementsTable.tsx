@@ -23,7 +23,6 @@ export const columns = [
   { name: "ACTIONS", uid: "actions" },
 ];
 
-// Static hub requirement categories and info
 const hubRequirementInfo: Record<string, { category: string; units: number }> =
   {
     "Philosophical Inquiry and Life's Meanings": {

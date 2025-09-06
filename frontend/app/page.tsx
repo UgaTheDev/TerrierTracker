@@ -43,7 +43,6 @@ export default function Home() {
     BookmarkedCourse[]
   >([]);
 
-  // Define the required counts for each hub requirement (this can be configurable)
   const hubRequirementDefinitions = {
     "Writing, Research, and Inquiry": 1,
     "Quantitative Reasoning I": 1,
@@ -55,14 +54,10 @@ export default function Home() {
     "Social Inquiry II": 1,
     "Mathematical Modeling": 1,
     "Ethical Reasoning": 1,
-    // Add more hub requirements as needed
   };
 
-  // Calculate hub requirements dynamically from enrolled courses
   const calculateHubRequirements = (): HubRequirement[] => {
     const hubCounts: { [key: string]: number } = {};
-
-    // Count hub requirements from enrolled courses
     enrolledCourses.forEach((course) => {
       if (course.hubRequirements && Array.isArray(course.hubRequirements)) {
         course.hubRequirements.forEach((hub) => {
@@ -70,8 +65,6 @@ export default function Home() {
         });
       }
     });
-
-    // Create hub requirements array with current progress
     return Object.entries(hubRequirementDefinitions).map(
       ([name, required]) => ({
         name,
@@ -81,7 +74,6 @@ export default function Home() {
     );
   };
 
-  // Get dynamic hub requirements
   const hubRequirements = calculateHubRequirements();
 
   const handleNavigate = (page: string) => {
@@ -107,18 +99,14 @@ export default function Home() {
       )
     );
   };
-
-  // Bookmark functions
   const isBookmarked = (courseId: string) => {
     return bookmarkedCourses.some((course) => course.id === courseId);
   };
 
   const handleBookmark = (courseId: string, courseData: any) => {
     if (isBookmarked(courseId)) {
-      // Remove bookmark
       handleRemoveBookmark(courseId);
     } else {
-      // Add bookmark
       const bookmarkedCourse: BookmarkedCourse = {
         id: courseId,
         code: courseData.courseId,

@@ -53,11 +53,9 @@ export default function YourBookmarks({
   const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
   const [showVisualization, setShowVisualization] = useState(false);
 
-  // Calculate hub impact with proper logic
   const updatedHubRequirements = useMemo(() => {
     const phantomCounts: { [key: string]: number } = {};
 
-    // Only count hub requirements from SELECTED courses
     selectedCourses.forEach((courseId) => {
       const course = bookmarkedCourses.find((c) => c.id === courseId);
       if (course) {
@@ -75,7 +73,6 @@ export default function YourBookmarks({
 
   const handleUnbookmark = (courseId: string) => {
     onRemoveBookmark(courseId);
-    // Remove from selected courses if it was selected
     setSelectedCourses((prev) => prev.filter((id) => id !== courseId));
   };
 
@@ -165,7 +162,7 @@ export default function YourBookmarks({
   ) => {
     const total = current + phantom;
     if (total >= required) return "success";
-    if (phantom > 0) return "warning"; // Show warning when phantom courses are helping
+    if (phantom > 0) return "warning";
     return "danger";
   };
 

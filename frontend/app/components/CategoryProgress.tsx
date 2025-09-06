@@ -18,7 +18,6 @@ interface CategoryProgressProps {
   hubRequirements: HubRequirement[];
 }
 
-// Category mapping for hub requirements
 const hubRequirementCategories: Record<string, string> = {
   "Philosophical Inquiry and Life's Meanings":
     "Philosophical, Aesthetic, and Historical Interpretation",
