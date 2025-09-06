@@ -19,6 +19,7 @@ type Course = {
   semester?: string;
   professor?: string;
   description?: string;
+  hubRequirements?: string[];
 };
 
 type BookmarkedCourse = {
@@ -44,20 +45,36 @@ export default function Home() {
   >([]);
 
   const hubRequirementDefinitions = {
-    "Writing, Research, and Inquiry": 1,
+    "Philosophical Inquiry and Life's Meanings": 1,
+    "Aesthetic Exploration": 1,
+    "Historical Consciousness": 1,
+
+    "Scientific Inquiry I": 1,
+    "Social Inquiry I": 1,
+    "Scientific Inquiry II or Social Inquiry II": 1,
+
     "Quantitative Reasoning I": 1,
     "Quantitative Reasoning II": 1,
-    "Digital/Multimedia Expression": 1,
-    "Scientific Inquiry I": 2,
-    "Scientific Inquiry II": 1,
-    "Social Inquiry I": 2,
-    "Social Inquiry II": 1,
-    "Mathematical Modeling": 1,
+
+    "The Individual in Community": 1,
+    "Global Citizenship and Intercultural Literacy": 2,
     "Ethical Reasoning": 1,
+
+    "First-Year Writing Seminar": 1,
+    "Writing, Research, and Inquiry": 1,
+    "Writing-Intensive Course": 2,
+    "Oral and/or Signed Communication": 1,
+    "Digital/Multimedia Expression": 1,
+
+    "Critical Thinking": 2,
+    "Research and Information Literacy": 2,
+    "Teamwork/Collaboration": 2,
+    "Creativity/Innovation": 2,
   };
 
   const calculateHubRequirements = (): HubRequirement[] => {
     const hubCounts: { [key: string]: number } = {};
+
     enrolledCourses.forEach((course) => {
       if (course.hubRequirements && Array.isArray(course.hubRequirements)) {
         course.hubRequirements.forEach((hub) => {
@@ -65,6 +82,7 @@ export default function Home() {
         });
       }
     });
+
     return Object.entries(hubRequirementDefinitions).map(
       ([name, required]) => ({
         name,
@@ -99,6 +117,24 @@ export default function Home() {
       )
     );
   };
+
+  const handleBookmarkCourse = (course: Course) => {
+    const courseId = course.courseId;
+    if (isBookmarked(courseId)) {
+      handleRemoveBookmark(courseId);
+    } else {
+      const bookmarkedCourse: BookmarkedCourse = {
+        id: courseId,
+        code: course.courseId,
+        name: course.course,
+        credits: course.credits || 4,
+        hubRequirements: course.hubRequirements || [],
+        school: course.courseId.split(" ")[0] || "CAS",
+      };
+      setBookmarkedCourses((prev) => [...prev, bookmarkedCourse]);
+    }
+  };
+
   const isBookmarked = (courseId: string) => {
     return bookmarkedCourses.some((course) => course.id === courseId);
   };
@@ -109,11 +145,11 @@ export default function Home() {
     } else {
       const bookmarkedCourse: BookmarkedCourse = {
         id: courseId,
-        code: courseData.courseId,
-        name: courseData.course || courseData.courseName,
+        code: courseData.courseId || courseId,
+        name: courseData.course || courseData.courseName || courseData.name,
         credits: courseData.credits || 4,
         hubRequirements: courseData.hubRequirements || [],
-        school: courseData.courseId.split(" ")[0] || "CAS",
+        school: (courseData.courseId || courseId).split(" ")[0] || "CAS",
       };
       setBookmarkedCourses((prev) => [...prev, bookmarkedCourse]);
     }
@@ -167,10 +203,10 @@ export default function Home() {
         return (
           <AddCourses
             enrolledCourses={enrolledCourses}
+            bookmarkedCourses={bookmarkedCourses}
             onAddCourse={handleAddCourse}
+            onBookmarkCourse={handleBookmarkCourse}
             onNavigate={handleNavigate}
-            isBookmarked={isBookmarked}
-            handleBookmark={handleBookmark}
           />
         );
       case "hub-helper":

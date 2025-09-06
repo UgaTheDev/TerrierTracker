@@ -10,6 +10,7 @@ import {
   TableCell,
   Chip,
   Tooltip,
+  Progress,
 } from "@heroui/react";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
@@ -22,90 +23,6 @@ export const columns = [
   { name: "STATUS", uid: "status" },
   { name: "ACTIONS", uid: "actions" },
 ];
-
-const hubRequirementInfo: Record<string, { category: string; units: number }> =
-  {
-    "Philosophical Inquiry and Life's Meanings": {
-      category: "Philosophical, Aesthetic, and Historical Interpretation",
-      units: 1,
-    },
-    "Aesthetic Exploration": {
-      category: "Philosophical, Aesthetic, and Historical Interpretation",
-      units: 1,
-    },
-    "Historical Consciousness": {
-      category: "Philosophical, Aesthetic, and Historical Interpretation",
-      units: 1,
-    },
-    "Scientific Inquiry I": {
-      category: "Scientific and Social Inquiry",
-      units: 1,
-    },
-    "Social Inquiry I": {
-      category: "Scientific and Social Inquiry",
-      units: 1,
-    },
-    "Scientific Inquiry II or Social Inquiry II": {
-      category: "Scientific and Social Inquiry",
-      units: 1,
-    },
-    "Quantitative Reasoning I": {
-      category: "Quantitative Reasoning",
-      units: 1,
-    },
-    "Quantitative Reasoning II": {
-      category: "Quantitative Reasoning",
-      units: 1,
-    },
-    "The Individual in Community": {
-      category: "Diversity, Civic Engagement, and Global Citizenship",
-      units: 1,
-    },
-    "Global Citizenship and Intercultural Literacy": {
-      category: "Diversity, Civic Engagement, and Global Citizenship",
-      units: 2,
-    },
-    "Ethical Reasoning": {
-      category: "Diversity, Civic Engagement, and Global Citizenship",
-      units: 1,
-    },
-    "First-Year Writing Seminar": {
-      category: "Communication",
-      units: 1,
-    },
-    "Writing, Research, and Inquiry": {
-      category: "Communication",
-      units: 1,
-    },
-    "Writing-Intensive Course": {
-      category: "Communication",
-      units: 2,
-    },
-    "Oral and/or Signed Communication": {
-      category: "Communication",
-      units: 1,
-    },
-    "Digital/Multimedia Expression": {
-      category: "Communication",
-      units: 1,
-    },
-    "Critical Thinking": {
-      category: "Intellectual Toolkit",
-      units: 2,
-    },
-    "Research and Information Literacy": {
-      category: "Intellectual Toolkit",
-      units: 2,
-    },
-    "Teamwork/Collaboration": {
-      category: "Intellectual Toolkit",
-      units: 2,
-    },
-    "Creativity/Innovation": {
-      category: "Intellectual Toolkit",
-      units: 2,
-    },
-  };
 
 export const EyeIcon = (props: IconSvgProps) => {
   return (
@@ -198,7 +115,6 @@ export default function HubRequirementsTable({
 }: HubRequirementsTableProps) {
   const renderCell = React.useCallback(
     (requirement: HubRequirement, columnKey: React.Key) => {
-      const info = hubRequirementInfo[requirement.name];
       const status =
         requirement.current >= requirement.required
           ? "fulfilled"
@@ -211,20 +127,38 @@ export default function HubRequirementsTable({
           return (
             <div className="flex flex-col">
               <p className="text-bold text-sm">{requirement.name}</p>
-              <p className="text-bold text-xs text-default-400">
-                {info?.category || "Unknown Category"}
-              </p>
               <p className="text-bold text-xs text-default-500">
-                {info?.units || 1} unit{(info?.units || 1) > 1 ? "s" : ""}
+                {requirement.required} unit{requirement.required > 1 ? "s" : ""}
               </p>
             </div>
           );
         case "progress":
+          const progressPercentage = Math.min(
+            (requirement.current / requirement.required) * 100,
+            100
+          );
           return (
-            <div className="flex flex-col">
-              <p className="text-sm font-medium">
-                {requirement.current} / {requirement.required}
-              </p>
+            <div className="flex flex-col gap-2 w-32">
+              <div className="flex justify-between">
+                <p className="text-sm font-medium">
+                  {requirement.current} / {requirement.required}
+                </p>
+                <p className="text-xs text-default-500">
+                  {Math.round(progressPercentage)}%
+                </p>
+              </div>
+              <Progress
+                value={progressPercentage}
+                size="sm"
+                color={
+                  progressPercentage === 100
+                    ? "success"
+                    : progressPercentage > 0
+                      ? "warning"
+                      : "danger"
+                }
+                className="w-full"
+              />
               <p className="text-xs text-default-400">
                 {requirement.current >= requirement.required
                   ? "Complete"
