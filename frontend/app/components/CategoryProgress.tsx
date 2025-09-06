@@ -55,7 +55,7 @@ export default function CategoryProgress({
 
     hubRequirements.forEach((req) => {
       const category = hubRequirementCategories[req.name];
-      if (!category) return; // Skip if category not found
+      if (!category) return;
 
       if (!categoryMap.has(category)) {
         categoryMap.set(category, {
@@ -96,14 +96,13 @@ export default function CategoryProgress({
     };
 
     return Array.from(categoryMap.entries()).map(([category, data]) => {
-      // Calculate percentage based on units fulfilled vs required
       const percentage = Math.round(
         (data.totalCurrent / data.totalRequired) * 100
       );
       const colorInfo = colorMap[category] || { color: "default" as const };
       return {
         label: category,
-        percentage: Math.min(percentage, 100), // Cap at 100%
+        percentage: Math.min(percentage, 100),
         color: colorInfo.color,
         customColor: colorInfo.customColor,
       };
