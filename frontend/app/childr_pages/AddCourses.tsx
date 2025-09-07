@@ -64,6 +64,11 @@ interface AddCoursesProps {
   // New props for CourseBrowseTable
   isBookmarked?: (courseId: string) => boolean;
   handleBookmark?: (bookmarkedCourse: BookmarkedCourse) => void;
+  // PDF upload props
+  pdfFile?: File | null;
+  pdfProcessing?: boolean;
+  handlePdfUpload?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  pdfError?: string | null;
 }
 
 export default function AddCourses({
@@ -74,6 +79,10 @@ export default function AddCourses({
   onNavigate,
   isBookmarked = () => false,
   handleBookmark = () => {},
+  pdfFile,
+  pdfProcessing,
+  handlePdfUpload,
+  pdfError,
 }: AddCoursesProps) {
   const [activeTab, setActiveTab] = React.useState("manual");
   const [confirmModalOpen, setConfirmModalOpen] = React.useState(false);
@@ -85,8 +94,6 @@ export default function AddCourses({
     requirements: "",
     description: "",
   });
-  const [pdfFile, setPdfFile] = React.useState<File | null>(null);
-  const [pdfProcessing, setPdfProcessing] = React.useState(false);
 
   const isEnrolled = (courseId: string) => {
     if (!enrolledCourses || !Array.isArray(enrolledCourses)) {
@@ -144,22 +151,6 @@ export default function AddCourses({
         description: manualCourse.description,
       };
       handleAddCourse(newCourse);
-    }
-  };
-
-  const handlePdfUpload = async (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const file = event.target.files?.[0];
-    if (file && file.type === "application/pdf") {
-      setPdfFile(file);
-      setPdfProcessing(true);
-      setTimeout(() => {
-        setPdfProcessing(false);
-        alert(
-          "PDF processing complete! In a real implementation, this would parse the PDF and extract course data."
-        );
-      }, 2000);
     }
   };
 
@@ -249,9 +240,12 @@ export default function AddCourses({
             }
           >
             <PdfUploadTab
-              pdfFile={pdfFile}
-              pdfProcessing={pdfProcessing}
-              handlePdfUpload={handlePdfUpload}
+              pdfFile={pdfFile || null}
+              pdfProcessing={pdfProcessing || false}
+              handlePdfUpload={handlePdfUpload || (() => {})}
+              pdfError={pdfError}
+              enrolledCourses={enrolledCourses}
+              onNavigate={onNavigate}
             />
           </Tab>
         </Tabs>

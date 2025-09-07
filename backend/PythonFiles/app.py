@@ -4,6 +4,8 @@ from pathlib import Path
 import logging
 import traceback
 import os
+import tempfile
+from werkzeug.utils import secure_filename
 
 from course_data_manager import CourseDataManager
 
@@ -70,7 +72,8 @@ def root():
             "health": "/api/health",
             "search_course": "/api/search-course (POST)",
             "multiple_courses": "/api/multiple-courses (POST)",
-            "all_courses": "/api/all-courses (GET)"
+            "all_courses": "/api/all-courses (GET)",
+            "process_pdf": "/api/process-pdf (POST)"
         }
     })
 
@@ -159,6 +162,75 @@ def multiple_courses():
     
     except Exception as e:
         logger.error(f"Error in multiple_courses: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/process-pdf', methods=['POST'])
+def process_pdf():
+    if not course_manager:
+        return jsonify({"error": "Course manager not initialized"}), 500
+    
+    try:
+        # Check if a file was uploaded
+        if 'pdf_file' not in request.files:
+            return jsonify({"error": "No PDF file provided"}), 400
+        
+        file = request.files['pdf_file']
+        
+        if file.filename == '':
+            return jsonify({"error": "No file selected"}), 400
+        
+        if not file.filename.lower().endswith('.pdf'):
+            return jsonify({"error": "File must be a PDF"}), 400
+        
+        # Create a temporary file to save the uploaded PDF
+        with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
+            file.save(temp_file.name)
+            temp_file_path = temp_file.name
+        
+        try:
+            # Import PDF processing functions
+            from pdf_reader import raw_fetch_courses_info, fetch_semester
+            from pypdf import PdfReader
+            
+            reader = PdfReader(temp_file_path)
+            
+            # Extract semester information
+            semester = fetch_semester(reader)
+            
+            # Extract courses from PDF
+            courses = raw_fetch_courses_info(reader)
+            
+            # Get requirements for each course
+            course_results = []
+            for course_info in courses:
+                course_code = course_info[0]  # e.g., "CAS CS111"
+                
+                # Use your existing course manager to find requirements
+                hub_requirements = course_manager.get_hub_requirements_for_course(course_code)
+                
+                course_results.append({
+                    "course_code": course_code,
+                    "school": course_info[1],
+                    "department": course_info[2],
+                    "credits": course_info[3],
+                    "hub_requirements": hub_requirements,
+                    "semester": semester
+                })
+            
+            return jsonify({
+                "success": True,
+                "courses": course_results,
+                "total_courses": len(course_results),
+                "semester": semester
+            })
+            
+        finally:
+            # Clean up the temporary file
+            os.unlink(temp_file_path)
+    
+    except Exception as e:
+        logger.error(f"Error processing PDF: {e}")
+        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({"error": str(e)}), 500
 
 @app.errorhandler(404)

@@ -44,6 +44,11 @@ export default function Home() {
     BookmarkedCourse[]
   >([]);
 
+  // PDF upload related state
+  const [pdfFile, setPdfFile] = useState<File | null>(null);
+  const [pdfProcessing, setPdfProcessing] = useState(false);
+  const [pdfError, setPdfError] = useState<string | null>(null);
+
   const hubRequirementDefinitions = {
     "Philosophical Inquiry and Life's Meanings": 1,
     "Aesthetic Exploration": 1,
@@ -96,6 +101,58 @@ export default function Home() {
 
   const handleNavigate = (page: string) => {
     setCurrentPage(page);
+  };
+
+  // PDF Upload Handler for AddCourses page
+  const handlePdfUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    setPdfFile(file);
+    setPdfProcessing(true);
+    setPdfError(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("pdf_file", file);
+
+      const response = await fetch("http://localhost:5000/api/process-pdf", {
+        method: "POST",
+        body: formData,
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        // Convert the API response to Course type and add to enrolled courses
+        const newCourses: Course[] = result.courses.map(
+          (apiCourse: any, index: number) => ({
+            id: Math.max(...enrolledCourses.map((c) => c.id), 0) + index + 1,
+            courseId: apiCourse.course_code,
+            course: apiCourse.course_code, // You might want to enhance this with full course names
+            credits: parseInt(apiCourse.credits) || 4,
+            requirements: apiCourse.hub_requirements.join(", "),
+            hubRequirements: apiCourse.hub_requirements,
+            semester: apiCourse.semester || "Current",
+          })
+        );
+
+        // Add extracted courses to enrolled courses
+        setEnrolledCourses((prev) => [...prev, ...newCourses]);
+
+        console.log("PDF processed successfully. Added courses:", newCourses);
+      } else {
+        setPdfError(result.error || "Failed to process PDF");
+        console.error("Error processing PDF:", result.error);
+      }
+    } catch (error) {
+      setPdfError("Network error while processing PDF");
+      console.error("Network error:", error);
+    } finally {
+      setPdfProcessing(false);
+    }
   };
 
   const handleAddCourse = (course: Course) => {
@@ -248,6 +305,11 @@ export default function Home() {
             // Pass the new bookmark handler for CourseBrowseTable
             isBookmarked={isBookmarked}
             handleBookmark={handleBookmark}
+            // PDF upload props for AddCourses
+            pdfFile={pdfFile}
+            pdfProcessing={pdfProcessing}
+            handlePdfUpload={handlePdfUpload}
+            pdfError={pdfError}
           />
         );
       case "hub-helper":

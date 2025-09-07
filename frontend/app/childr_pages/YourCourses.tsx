@@ -1,3 +1,4 @@
+import React from "react";
 import CourseTable from "../components/CourseTable";
 
 type Course = {
@@ -9,18 +10,23 @@ type Course = {
   semester?: string;
   professor?: string;
   description?: string;
+  hubRequirements?: string[];
 };
 
 interface YourCoursesProps {
   enrolledCourses: Course[];
   onAddCourse: (course: Course) => void;
   onNavigate: (page: string) => void;
+  onDeleteCourse: (courseId: string) => void;
+  onUpdateCourse: (course: Course) => void;
 }
 
 export default function YourCourses({
   enrolledCourses,
   onAddCourse,
   onNavigate,
+  onDeleteCourse,
+  onUpdateCourse,
 }: YourCoursesProps) {
   return (
     <>
@@ -29,6 +35,8 @@ export default function YourCourses({
           enrolledCourses={enrolledCourses}
           onAddCourse={onAddCourse}
           onNavigate={onNavigate}
+          onDeleteCourse={onDeleteCourse}
+          onUpdateCourse={onUpdateCourse}
         />
       </div>
     </>

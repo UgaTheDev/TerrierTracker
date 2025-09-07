@@ -130,6 +130,7 @@ type Course = {
   semester?: string;
   professor?: string;
   description?: string;
+  hubRequirements?: string[];
 };
 
 type SortDescriptor = {
@@ -141,12 +142,16 @@ interface CourseTableProps {
   enrolledCourses: Course[];
   onAddCourse: (course: Course) => void;
   onNavigate: (page: string) => void;
+  onDeleteCourse?: (courseId: string) => void;
+  onUpdateCourse?: (course: Course) => void;
 }
 
 export default function CourseTable({
   enrolledCourses,
   onAddCourse,
   onNavigate,
+  onDeleteCourse,
+  onUpdateCourse,
 }: CourseTableProps) {
   const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
   const [editModalOpen, setEditModalOpen] = React.useState(false);
@@ -172,10 +177,8 @@ export default function CourseTable({
   };
 
   const confirmDelete = () => {
-    if (courseToDelete) {
-      console.warn(
-        "Delete functionality needs to be implemented in parent component"
-      );
+    if (courseToDelete && onDeleteCourse) {
+      onDeleteCourse(courseToDelete.courseId);
       setDeleteModalOpen(false);
       setCourseToDelete(null);
     }
@@ -188,10 +191,8 @@ export default function CourseTable({
   };
 
   const saveEdit = () => {
-    if (courseToEdit) {
-      console.warn(
-        "Edit functionality needs to be implemented in parent component"
-      );
+    if (courseToEdit && onUpdateCourse) {
+      onUpdateCourse(editForm);
       setEditModalOpen(false);
       setCourseToEdit(null);
     }
@@ -247,6 +248,9 @@ export default function CourseTable({
           return (
             <div className="flex flex-col">
               <p className="text-bold text-sm font-mono">{course.courseId}</p>
+              {course.semester && (
+                <p className="text-xs text-default-400">{course.semester}</p>
+              )}
             </div>
           );
         case "course":
@@ -256,6 +260,11 @@ export default function CourseTable({
               <p className="text-bold text-xs text-default-400">
                 {course.requirements}
               </p>
+              {course.hubRequirements && course.hubRequirements.length > 0 && (
+                <p className="text-xs text-primary mt-1">
+                  {course.hubRequirements.length} Hub Requirements
+                </p>
+              )}
             </div>
           );
         case "credits":
@@ -267,29 +276,33 @@ export default function CourseTable({
         case "actions":
           return (
             <div className="relative flex items-center gap-2">
-              <Tooltip content="Edit Course">
-                <span
-                  className="text-lg text-default-400 cursor-pointer active:opacity-50"
-                  onClick={() => handleEdit(course)}
-                >
-                  <EditIcon />
-                </span>
-              </Tooltip>
-              <Tooltip color="danger" content="Remove Course">
-                <span
-                  className="text-lg text-danger cursor-pointer active:opacity-50"
-                  onClick={() => handleDelete(course)}
-                >
-                  <DeleteIcon />
-                </span>
-              </Tooltip>
+              {onUpdateCourse && (
+                <Tooltip content="Edit Course">
+                  <span
+                    className="text-lg text-default-400 cursor-pointer active:opacity-50"
+                    onClick={() => handleEdit(course)}
+                  >
+                    <EditIcon />
+                  </span>
+                </Tooltip>
+              )}
+              {onDeleteCourse && (
+                <Tooltip color="danger" content="Remove Course">
+                  <span
+                    className="text-lg text-danger cursor-pointer active:opacity-50"
+                    onClick={() => handleDelete(course)}
+                  >
+                    <DeleteIcon />
+                  </span>
+                </Tooltip>
+              )}
             </div>
           );
         default:
           return course[columnKey as keyof Course];
       }
     },
-    []
+    [onUpdateCourse, onDeleteCourse]
   );
 
   const totalCredits = enrolledCourses.reduce(
@@ -380,6 +393,7 @@ export default function CourseTable({
         </Card>
       )}
 
+      {/* Delete Modal */}
       <Modal isOpen={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
         <ModalContent>
           <ModalHeader>Confirm Delete</ModalHeader>
@@ -402,6 +416,7 @@ export default function CourseTable({
         </ModalContent>
       </Modal>
 
+      {/* Edit Modal */}
       <Modal isOpen={editModalOpen} onOpenChange={setEditModalOpen} size="2xl">
         <ModalContent>
           <ModalHeader>Edit Course</ModalHeader>
@@ -442,6 +457,16 @@ export default function CourseTable({
               }
               placeholder="Prerequisites or requirements"
             />
+            {editForm.semester !== undefined && (
+              <Input
+                label="Semester"
+                value={editForm.semester || ""}
+                onChange={(e) =>
+                  setEditForm({ ...editForm, semester: e.target.value })
+                }
+                placeholder="e.g., Fall 2024"
+              />
+            )}
           </ModalBody>
           <ModalFooter>
             <Button variant="light" onClick={() => setEditModalOpen(false)}>
