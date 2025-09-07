@@ -59,12 +59,10 @@ interface AddCoursesProps {
   enrolledCourses?: Course[];
   bookmarkedCourses?: BookmarkedCourse[];
   onAddCourse?: (course: Course) => void;
-  onBookmarkCourse?: (course: Course) => void; // Legacy handler
+  onBookmarkCourse?: (course: Course) => void;
   onNavigate: (page: string) => void;
-  // New props for CourseBrowseTable
   isBookmarked?: (courseId: string) => boolean;
   handleBookmark?: (bookmarkedCourse: BookmarkedCourse) => void;
-  // PDF upload props
   pdfFile?: File | null;
   pdfProcessing?: boolean;
   handlePdfUpload?: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -113,7 +111,6 @@ export default function AddCourses({
     );
   };
 
-  // Legacy bookmark handler for CourseSearch and other components
   const handleBookmarkLegacy = (course: Course) => {
     if (onBookmarkCourse) {
       onBookmarkCourse(course);

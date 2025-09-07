@@ -38,10 +38,7 @@ def scrape_page(page_num):
         
         courses = []
         for course in soup.select('ul.course-feed li'):
-            # Initialize course data with all requirements set to 0
             course_data = {req: 0 for req in ['code', 'name'] + hub_requirements}
-            
-            # Extract course code and name
             title = course.find('a')
             if title:
                 title_text = title.get_text(strip=True)
@@ -50,7 +47,6 @@ def scrape_page(page_num):
                 else:
                     course_data['code'] = title_text.strip()
             
-            # Extract Hub requirements
             hub_div = course.find('div', class_='cf-hub-ind')
             if hub_div:
                 for item in hub_div.select('ul.cf-hub-offerings li'):
@@ -71,7 +67,7 @@ def scrape_page(page_num):
 
 def main():
     all_courses = []
-    total_pages = 4  # KHC has 4 pages
+    total_pages = 4 
     
     print(f"Starting KHC Hub course scraping (pages 1-{total_pages})...")
     
@@ -85,9 +81,8 @@ def main():
                 print(f"Page {i}: Scraped {len(result)} courses")
             else:
                 print(f"Page {i}: No courses found")
-            time.sleep(1)  # Be polite to server
+            time.sleep(1) 
     
-    # Save to CSV
     if all_courses:
         with open('khc_hub_courses.csv', 'w', newline='', encoding='utf-8') as f:
             writer = csv.DictWriter(f, fieldnames=['code', 'name'] + hub_requirements)
@@ -95,7 +90,6 @@ def main():
             writer.writerows(all_courses)
         print(f"\nSuccess! Saved {len(all_courses)} KHC Hub courses to khc_hub_courses.csv")
         
-        # Print sample data
         print("\nSample course:")
         sample = all_courses[0]
         print(f"Code: {sample['code']}")

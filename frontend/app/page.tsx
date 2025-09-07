@@ -43,8 +43,6 @@ export default function Home() {
   const [bookmarkedCourses, setBookmarkedCourses] = useState<
     BookmarkedCourse[]
   >([]);
-
-  // PDF upload related state
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfProcessing, setPdfProcessing] = useState(false);
   const [pdfError, setPdfError] = useState<string | null>(null);
@@ -103,55 +101,90 @@ export default function Home() {
     setCurrentPage(page);
   };
 
-  // PDF Upload Handler for AddCourses page
   const handlePdfUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    console.log("=== FRONTEND PDF UPLOAD STARTED ===");
+
     const file = event.target.files?.[0];
-    if (!file) return;
+    if (!file) {
+      console.log("No file selected");
+      return;
+    }
+
+    console.log("Selected file:", {
+      name: file.name,
+      size: file.size,
+      type: file.type,
+    });
 
     setPdfFile(file);
     setPdfProcessing(true);
     setPdfError(null);
 
+    console.log("State updated: pdfProcessing = true");
+
     try {
       const formData = new FormData();
       formData.append("pdf_file", file);
+
+      console.log("FormData created, making API call to Flask...");
 
       const response = await fetch("http://localhost:5000/api/process-pdf", {
         method: "POST",
         body: formData,
       });
 
+      console.log("Response received:", {
+        status: response.status,
+        statusText: response.statusText,
+        ok: response.ok,
+      });
+
       const result = await response.json();
+      console.log("Response JSON:", result);
 
       if (response.ok && result.success) {
-        // Convert the API response to Course type and add to enrolled courses
+        console.log("PDF processing successful!");
+        console.log("Raw API courses:", result.courses);
+
         const newCourses: Course[] = result.courses.map(
-          (apiCourse: any, index: number) => ({
-            id: Math.max(...enrolledCourses.map((c) => c.id), 0) + index + 1,
-            courseId: apiCourse.course_code,
-            course: apiCourse.course_code, // You might want to enhance this with full course names
-            credits: parseInt(apiCourse.credits) || 4,
-            requirements: apiCourse.hub_requirements.join(", "),
-            hubRequirements: apiCourse.hub_requirements,
-            semester: apiCourse.semester || "Current",
-          })
+          (apiCourse: any, index: number) => {
+            const convertedCourse = {
+              id: Math.max(...enrolledCourses.map((c) => c.id), 0) + index + 1,
+              courseId: apiCourse.course_code,
+              course: apiCourse.course_code,
+              credits: parseInt(apiCourse.credits) || 4,
+              requirements: apiCourse.hub_requirements.join(", "),
+              hubRequirements: apiCourse.hub_requirements,
+              semester: apiCourse.semester || "Current",
+            };
+            console.log(`Converted course ${index + 1}:`, convertedCourse);
+            return convertedCourse;
+          }
         );
 
-        // Add extracted courses to enrolled courses
-        setEnrolledCourses((prev) => [...prev, ...newCourses]);
+        console.log("All converted courses:", newCourses);
+        console.log("Current enrolled courses before adding:", enrolledCourses);
+
+        setEnrolledCourses((prev) => {
+          const updated = [...prev, ...newCourses];
+          console.log("Updated enrolled courses:", updated);
+          return updated;
+        });
 
         console.log("PDF processed successfully. Added courses:", newCourses);
       } else {
+        console.error("PDF processing failed:", result.error);
         setPdfError(result.error || "Failed to process PDF");
-        console.error("Error processing PDF:", result.error);
       }
     } catch (error) {
+      console.error("Network error during PDF upload:", error);
       setPdfError("Network error while processing PDF");
-      console.error("Network error:", error);
     } finally {
       setPdfProcessing(false);
+      console.log("State updated: pdfProcessing = false");
+      console.log("=== FRONTEND PDF UPLOAD COMPLETED ===");
     }
   };
 
@@ -181,14 +214,12 @@ export default function Home() {
     );
   };
 
-  // Check if a course is bookmarked
   const isBookmarked = (courseId: string): boolean => {
     const result = bookmarkedCourses.some((course) => course.id === courseId);
     console.log(`Checking if ${courseId} is bookmarked:`, result);
     return result;
   };
 
-  // FIXED: Main bookmark handler for CourseBrowseTable - expects BookmarkedCourse object
   const handleBookmark = (bookmarkedCourse: BookmarkedCourse) => {
     console.log("Handling bookmark for:", bookmarkedCourse);
 
@@ -198,18 +229,15 @@ export default function Home() {
       );
 
       if (isCurrentlyBookmarked) {
-        // Remove bookmark
         console.log("Removing bookmark for:", bookmarkedCourse.id);
         return prev.filter((course) => course.id !== bookmarkedCourse.id);
       } else {
-        // Add bookmark
         console.log("Adding bookmark:", bookmarkedCourse);
         return [...prev, bookmarkedCourse];
       }
     });
   };
 
-  // Legacy bookmark handler for old Course objects (keeping for compatibility)
   const handleBookmarkCourse = (course: Course) => {
     const courseId = course.courseId;
     console.log("Legacy bookmark handler called for:", courseId);
@@ -229,7 +257,6 @@ export default function Home() {
     }
   };
 
-  // FIXED: HubHelper bookmark handler - expects (courseId, courseData)
   const handleHubHelperBookmark = (courseId: string, courseData: any) => {
     console.log("Hub Helper bookmark for:", courseId, courseData);
 
@@ -302,10 +329,8 @@ export default function Home() {
             onAddCourse={handleAddCourse}
             onBookmarkCourse={handleBookmarkCourse}
             onNavigate={handleNavigate}
-            // Pass the new bookmark handler for CourseBrowseTable
             isBookmarked={isBookmarked}
             handleBookmark={handleBookmark}
-            // PDF upload props for AddCourses
             pdfFile={pdfFile}
             pdfProcessing={pdfProcessing}
             handlePdfUpload={handlePdfUpload}

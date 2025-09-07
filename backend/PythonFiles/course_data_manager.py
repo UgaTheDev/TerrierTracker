@@ -26,22 +26,17 @@ class CourseDataManager:
             with open(self.csv_path, 'r', encoding='utf-8') as file:
                 reader = csv.reader(file)
                 headers = next(reader)
-                hub_columns = headers[2:]  # Skip course_code and course_name columns
-                
-                # Initialize hub requirements cache
+                hub_columns = headers[2:]  
                 for hub in hub_columns:
                     self._hub_requirements_cache[hub] = set()
                 
-                # Process each course row
                 for row in reader:
                     course_code = row[0].strip()
                     course_name = row[1].strip()
                     
-                    # Cache course mappings separately
                     self._course_code_to_name[course_code.upper()] = course_name
                     self._course_name_to_code[course_name.upper()] = course_code
                     
-                    # Process hub requirements for this course
                     course_hubs = []
                     for i, hub in enumerate(hub_columns):
                         if len(row) > i + 2 and row[i + 2] == '1':
@@ -66,11 +61,9 @@ class CourseDataManager:
         
         search_key = search_term.strip().upper()
         
-        # Check if it's already a course code
         if search_key in self._course_code_to_name:
             return search_key
         
-        # Check if it's a course name
         if search_key in self._course_name_to_code:
             return self._course_name_to_code[search_key]
         
@@ -80,12 +73,10 @@ class CourseDataManager:
         """Get all hub requirements fulfilled by a course."""
         self._load_data()
         
-        # First try to get the course code
         course_code = self.find_course_code(course_identifier)
         if not course_code:
             return []
-        
-        # Return cached hub requirements
+    
         return self._course_to_hubs_cache.get(course_code, [])
     
     def get_courses_for_hub(self, hub_requirement: str) -> List[str]:
@@ -105,23 +96,17 @@ class CourseDataManager:
         """Get course name from course code."""
         self._load_data()
         return self._course_code_to_name.get(course_code.upper())
-
-# Example usage:
 if __name__ == "__main__":
     manager = CourseDataManager(Path('CSVFiles/bu_hub_courses.csv'))
     
-    # Test course name lookup
     course_code = manager.find_course_code('Combinatoric Structures')
     print(f"Course code for 'Combinatoric Structures': {course_code}")
     
-    # Test hub requirements
     hub_reqs = manager.get_hub_requirements_for_course('CAS CS 131')
     print(f"Hub requirements for 'CAS CS 131': {hub_reqs}")
     
-    # Test course code lookup
     code_lookup = manager.find_course_code('CAS CS 131')
     print(f"Course code lookup for 'CAS CS 131': {code_lookup}")
     
-    # Test course name retrieval
     course_name = manager.get_course_name('CAS CS 131')
     print(f"Course name for 'CAS CS 131': {course_name}")

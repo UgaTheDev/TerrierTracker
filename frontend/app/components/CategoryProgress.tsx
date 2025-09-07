@@ -4,7 +4,7 @@ interface CategoryData {
   label: string;
   percentage: number;
   color: "danger" | "warning" | "success" | "primary" | "secondary" | "default";
-  customColor?: string;
+  customStyle?: string;
 }
 
 type HubRequirement = {
@@ -46,6 +46,42 @@ const hubRequirementCategories: Record<string, string> = {
   "Creativity/Innovation": "Intellectual Toolkit",
 };
 
+const CustomProgress = ({
+  value,
+  color,
+  customStyle,
+  className = "",
+}: {
+  value: number;
+  color: CategoryData["color"];
+  customStyle?: string;
+  className?: string;
+}) => {
+  if (customStyle) {
+    return (
+      <div className={`w-full bg-gray-200 rounded-full h-3 ${className}`}>
+        <div
+          className={`h-3 rounded-full transition-all duration-300 ease-out ${customStyle}`}
+          style={{ width: `${Math.min(value, 100)}%` }}
+        />
+      </div>
+    );
+  }
+
+  return (
+    <Progress
+      value={value}
+      color={color}
+      size="md"
+      className="w-full"
+      classNames={{
+        base: "max-w-none",
+        track: "drop-shadow-md border border-default-200",
+      }}
+    />
+  );
+};
+
 export default function CategoryProgress({
   categories,
   hubRequirements,
@@ -77,22 +113,29 @@ export default function CategoryProgress({
 
     const colorMap: Record<
       string,
-      { color: CategoryData["color"]; customColor?: string }
+      { color: CategoryData["color"]; customStyle?: string }
     > = {
       "Philosophical, Aesthetic, and Historical Interpretation": {
         color: "danger",
       },
       "Scientific and Social Inquiry": {
         color: "default",
-        customColor: "#8B4513",
+        customStyle: "bg-amber-600",
       },
-      "Quantitative Reasoning": { color: "success" },
+      "Quantitative Reasoning": {
+        color: "success",
+      },
       "Diversity, Civic Engagement, and Global Citizenship": {
         color: "primary",
-        customColor: "#20B2AA",
+        customStyle: "bg-teal-500",
       },
-      Communication: { color: "warning" },
-      "Intellectual Toolkit": { color: "primary", customColor: "#007BA7" },
+      Communication: {
+        color: "warning",
+      },
+      "Intellectual Toolkit": {
+        color: "primary",
+        customStyle: "bg-blue-600",
+      },
     };
 
     return Array.from(categoryMap.entries()).map(([category, data]) => {
@@ -104,7 +147,7 @@ export default function CategoryProgress({
         label: category,
         percentage: Math.min(percentage, 100),
         color: colorInfo.color,
-        customColor: colorInfo.customColor,
+        customStyle: colorInfo.customStyle,
       };
     });
   };
@@ -127,25 +170,11 @@ export default function CategoryProgress({
                 {category.percentage}%
               </span>
             </div>
-            <Progress
+            <CustomProgress
               value={category.percentage}
               color={category.color}
-              size="md"
-              className="w-full"
-              classNames={{
-                base: "max-w-none",
-                track: "drop-shadow-md border border-default-200",
-                indicator: category.customColor
-                  ? `bg-[${category.customColor}]`
-                  : "",
-              }}
-              style={
-                category.customColor
-                  ? ({
-                      "--heroui-progress-indicator": category.customColor,
-                    } as React.CSSProperties)
-                  : undefined
-              }
+              customStyle={category.customStyle}
+              className="drop-shadow-md border border-default-200 rounded-full overflow-hidden"
             />
           </div>
         ))}
