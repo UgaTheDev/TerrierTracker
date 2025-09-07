@@ -241,7 +241,10 @@ export default function YourBookmarks({
               </div>
             ) : (
               <div className="max-h-96 overflow-auto">
-                <Table aria-label="Bookmarked courses table">
+                <Table
+                  aria-label="Bookmarked courses table"
+                  selectionMode="none"
+                >
                   <TableHeader columns={columns}>
                     {(column) => (
                       <TableColumn
@@ -257,9 +260,12 @@ export default function YourBookmarks({
                       </TableColumn>
                     )}
                   </TableHeader>
-                  <TableBody items={bookmarkedCourses}>
+                  <TableBody
+                    items={bookmarkedCourses}
+                    emptyContent="No bookmarked courses found."
+                  >
                     {(item) => (
-                      <TableRow key={item.id}>
+                      <TableRow key={`bookmark-${item.id}`}>
                         {(columnKey) => (
                           <TableCell>{renderCell(item, columnKey)}</TableCell>
                         )}
@@ -305,7 +311,7 @@ export default function YourBookmarks({
                   const total = req.current + req.phantom;
 
                   return (
-                    <div key={index} className="space-y-2">
+                    <div key={`hub-req-${index}`} className="space-y-2">
                       <div className="flex justify-between items-start">
                         <p className="text-sm font-medium leading-tight">
                           {req.name}

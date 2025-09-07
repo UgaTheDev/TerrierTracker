@@ -43,14 +43,27 @@ type Course = {
   semester?: string;
   professor?: string;
   description?: string;
+  hubRequirements?: string[];
+};
+
+type BookmarkedCourse = {
+  id: string;
+  code: string;
+  name: string;
+  credits: number;
+  hubRequirements: string[];
+  school: string;
 };
 
 interface AddCoursesProps {
   enrolledCourses?: Course[];
-  bookmarkedCourses?: Course[];
+  bookmarkedCourses?: BookmarkedCourse[];
   onAddCourse?: (course: Course) => void;
-  onBookmarkCourse?: (course: Course) => void;
+  onBookmarkCourse?: (course: Course) => void; // Legacy handler
   onNavigate: (page: string) => void;
+  // New props for CourseBrowseTable
+  isBookmarked?: (courseId: string) => boolean;
+  handleBookmark?: (bookmarkedCourse: BookmarkedCourse) => void;
 }
 
 export default function AddCourses({
@@ -59,6 +72,8 @@ export default function AddCourses({
   onAddCourse = () => {},
   onBookmarkCourse = () => {},
   onNavigate,
+  isBookmarked = () => false,
+  handleBookmark = () => {},
 }: AddCoursesProps) {
   const [activeTab, setActiveTab] = React.useState("manual");
   const [confirmModalOpen, setConfirmModalOpen] = React.useState(false);
@@ -82,16 +97,17 @@ export default function AddCourses({
     );
   };
 
-  const isBookmarked = (courseId: string) => {
+  const isBookmarkedLegacy = (courseId: string) => {
     if (!bookmarkedCourses || !Array.isArray(bookmarkedCourses)) {
       return false;
     }
     return bookmarkedCourses.some(
-      (course) => course && course.courseId === courseId
+      (course) => course && course.code === courseId
     );
   };
 
-  const handleBookmark = (course: Course) => {
+  // Legacy bookmark handler for CourseSearch and other components
+  const handleBookmarkLegacy = (course: Course) => {
     if (onBookmarkCourse) {
       onBookmarkCourse(course);
     }
@@ -168,6 +184,14 @@ export default function AddCourses({
           </div>
         </div>
         <div className="flex items-center gap-4">
+          <Button
+            size="sm"
+            variant="flat"
+            onClick={() => onNavigate("bookmarks")}
+            className="h-8 px-3 text-sm"
+          >
+            View Bookmarks ({bookmarkedCourses.length})
+          </Button>
           <Card className="p-4">
             <div className="text-center">
               <p className="text-2xl font-bold text-primary">

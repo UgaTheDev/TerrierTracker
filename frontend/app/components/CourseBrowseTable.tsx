@@ -42,6 +42,16 @@ interface CourseData {
   requirementsText: string;
 }
 
+// Updated type to match what the parent expects
+type BookmarkedCourse = {
+  id: string;
+  code: string;
+  name: string;
+  credits: number;
+  hubRequirements: string[];
+  school: string;
+};
+
 const columns = [
   { name: "ID", uid: "id" },
   { name: "COURSE", uid: "course" },
@@ -56,7 +66,7 @@ interface CourseBrowseTableProps {
   isEnrolled: (courseId: string) => boolean;
   handleAddCourse: (course: Course) => void;
   isBookmarked: (courseId: string) => boolean;
-  handleBookmark: (courseId: string, courseData: CourseData) => void;
+  handleBookmark: (bookmarkedCourse: BookmarkedCourse) => void; // Updated to pass the full object
 }
 
 const API_BASE_URL = "http://localhost:5000/api";
@@ -139,7 +149,7 @@ const fetchMultipleHubRequirements = async (
 ): Promise<Map<string, string[]>> => {
   const results = new Map<string, string[]>();
 
-  const batchSize = 5;
+  const batchSize = 50;
   const batches: string[][] = [];
 
   for (let i = 0; i < courseCodes.length; i += batchSize) {
@@ -188,6 +198,11 @@ export default function CourseBrowseTable({
     Set<string>
   >(new Set());
   const [showFilters, setShowFilters] = useState(false);
+
+  // Local state for immediate bookmark feedback
+  const [localBookmarkStates, setLocalBookmarkStates] = useState<
+    Map<string, boolean>
+  >(new Map());
 
   const departments = useMemo(() => {
     const deptSet = new Set<string>();
@@ -356,6 +371,63 @@ export default function CourseBrowseTable({
     hubRequirements: courseData.hubRequirements,
   });
 
+  // Convert CourseData to BookmarkedCourse format
+  const convertToBookmarkedCourse = (
+    courseData: CourseData
+  ): BookmarkedCourse => ({
+    id: courseData.courseId, // Use courseId as unique identifier
+    code: courseData.courseId, // Course code (e.g., "CAS CS 101")
+    name: courseData.courseName, // Course name
+    credits: 4, // Default credits
+    hubRequirements: courseData.hubRequirements || [], // Hub requirements array
+    school: courseData.courseId.split(" ")[0] || "Unknown", // Extract school from course code
+  });
+
+  const handleBookmarkClick = async (courseData: CourseData) => {
+    const currentlyBookmarked =
+      localBookmarkStates.get(courseData.courseId) ??
+      isBookmarked(courseData.courseId);
+
+    console.log(
+      "Bookmark button clicked for:",
+      courseData.courseId,
+      "Currently bookmarked:",
+      currentlyBookmarked
+    );
+
+    // Update local state immediately for instant visual feedback
+    const newBookmarkState = !currentlyBookmarked;
+    setLocalBookmarkStates((prev) =>
+      new Map(prev).set(courseData.courseId, newBookmarkState)
+    );
+
+    // If hub requirements aren't loaded and we're bookmarking, load them first
+    if (!currentlyBookmarked && courseData.hubRequirements.length === 0) {
+      console.log("Loading hub requirements before bookmarking...");
+      await loadHubRequirements(courseData.courseId);
+
+      // Get the updated course data with hub requirements
+      const updatedCourse = apiCourses.find(
+        (c) => c.courseId === courseData.courseId
+      );
+      if (updatedCourse) {
+        const bookmarkedCourse = convertToBookmarkedCourse(updatedCourse);
+        console.log("Bookmarking with updated data:", bookmarkedCourse);
+        handleBookmark(bookmarkedCourse);
+      } else {
+        // Fallback to original data if update not found
+        const bookmarkedCourse = convertToBookmarkedCourse(courseData);
+        console.log("Bookmarking with original data:", bookmarkedCourse);
+        handleBookmark(bookmarkedCourse);
+      }
+    } else {
+      // Use current data
+      const bookmarkedCourse = convertToBookmarkedCourse(courseData);
+      console.log("Bookmarking:", bookmarkedCourse);
+      handleBookmark(bookmarkedCourse);
+    }
+  };
+
   const renderCell = React.useCallback(
     (courseData: CourseData, columnKey: React.Key) => {
       switch (columnKey) {
@@ -423,22 +495,25 @@ export default function CourseBrowseTable({
             </div>
           );
         case "bookmark":
+          // Use local state for immediate feedback, fall back to parent state
+          const currentlyBookmarked =
+            localBookmarkStates.get(courseData.courseId) ??
+            isBookmarked(courseData.courseId);
+
           return (
             <div className="flex items-center justify-center">
               <button
-                onClick={() => handleBookmark(courseData.courseId, courseData)}
+                onClick={() => handleBookmarkClick(courseData)}
                 className={`p-2 rounded-full transition-colors ${
-                  isBookmarked(courseData.courseId)
+                  currentlyBookmarked
                     ? "text-yellow-600 bg-yellow-50 hover:bg-yellow-100"
                     : "text-gray-400 hover:text-yellow-600 hover:bg-yellow-50"
                 }`}
                 title={
-                  isBookmarked(courseData.courseId)
-                    ? "Remove bookmark"
-                    : "Bookmark course"
+                  currentlyBookmarked ? "Remove bookmark" : "Bookmark course"
                 }
               >
-                {isBookmarked(courseData.courseId) ? (
+                {currentlyBookmarked ? (
                   <BookmarkCheck className="w-4 h-4" />
                 ) : (
                   <Bookmark className="w-4 h-4" />
@@ -478,6 +553,8 @@ export default function CourseBrowseTable({
       handleBookmark,
       loadingRequirements,
       batchLoading,
+      localBookmarkStates,
+      apiCourses,
     ]
   );
 
@@ -691,7 +768,7 @@ export default function CourseBrowseTable({
             emptyContent="No courses found for the selected filters."
           >
             {(item) => (
-              <TableRow key={item.courseId}>
+              <TableRow key={`course-browse-${item.courseId}`}>
                 {(columnKey) => (
                   <TableCell>{renderCell(item, columnKey)}</TableCell>
                 )}

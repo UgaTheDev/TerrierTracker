@@ -110,6 +110,12 @@ export default function Home() {
     );
   };
 
+  const handleDeleteCourse = (courseId: string) => {
+    setEnrolledCourses((prev) =>
+      prev.filter((course) => course.courseId !== courseId)
+    );
+  };
+
   const handleUpdateCourse = (updatedCourse: Course) => {
     setEnrolledCourses((prev) =>
       prev.map((course) =>
@@ -118,8 +124,39 @@ export default function Home() {
     );
   };
 
+  // Check if a course is bookmarked
+  const isBookmarked = (courseId: string): boolean => {
+    const result = bookmarkedCourses.some((course) => course.id === courseId);
+    console.log(`Checking if ${courseId} is bookmarked:`, result);
+    return result;
+  };
+
+  // FIXED: Main bookmark handler for CourseBrowseTable - expects BookmarkedCourse object
+  const handleBookmark = (bookmarkedCourse: BookmarkedCourse) => {
+    console.log("Handling bookmark for:", bookmarkedCourse);
+
+    setBookmarkedCourses((prev) => {
+      const isCurrentlyBookmarked = prev.some(
+        (course) => course.id === bookmarkedCourse.id
+      );
+
+      if (isCurrentlyBookmarked) {
+        // Remove bookmark
+        console.log("Removing bookmark for:", bookmarkedCourse.id);
+        return prev.filter((course) => course.id !== bookmarkedCourse.id);
+      } else {
+        // Add bookmark
+        console.log("Adding bookmark:", bookmarkedCourse);
+        return [...prev, bookmarkedCourse];
+      }
+    });
+  };
+
+  // Legacy bookmark handler for old Course objects (keeping for compatibility)
   const handleBookmarkCourse = (course: Course) => {
     const courseId = course.courseId;
+    console.log("Legacy bookmark handler called for:", courseId);
+
     if (isBookmarked(courseId)) {
       handleRemoveBookmark(courseId);
     } else {
@@ -129,17 +166,16 @@ export default function Home() {
         name: course.course,
         credits: course.credits || 4,
         hubRequirements: course.hubRequirements || [],
-        school: course.courseId.split(" ")[0] || "CAS",
+        school: course.courseId?.split(" ")[0] || "CAS",
       };
       setBookmarkedCourses((prev) => [...prev, bookmarkedCourse]);
     }
   };
 
-  const isBookmarked = (courseId: string) => {
-    return bookmarkedCourses.some((course) => course.id === courseId);
-  };
+  // FIXED: HubHelper bookmark handler - expects (courseId, courseData)
+  const handleHubHelperBookmark = (courseId: string, courseData: any) => {
+    console.log("Hub Helper bookmark for:", courseId, courseData);
 
-  const handleBookmark = (courseId: string, courseData: any) => {
     if (isBookmarked(courseId)) {
       handleRemoveBookmark(courseId);
     } else {
@@ -151,11 +187,13 @@ export default function Home() {
         hubRequirements: courseData.hubRequirements || [],
         school: (courseData.courseId || courseId).split(" ")[0] || "CAS",
       };
+      console.log("Adding bookmark from Hub Helper:", bookmarkedCourse);
       setBookmarkedCourses((prev) => [...prev, bookmarkedCourse]);
     }
   };
 
   const handleRemoveBookmark = (courseId: string) => {
+    console.log("Removing bookmark:", courseId);
     setBookmarkedCourses((prev) =>
       prev.filter((course) => course.id !== courseId)
     );
@@ -195,7 +233,7 @@ export default function Home() {
             enrolledCourses={enrolledCourses}
             onAddCourse={handleAddCourse}
             onNavigate={handleNavigate}
-            onRemoveCourse={handleRemoveCourse}
+            onDeleteCourse={handleDeleteCourse}
             onUpdateCourse={handleUpdateCourse}
           />
         );
@@ -207,12 +245,15 @@ export default function Home() {
             onAddCourse={handleAddCourse}
             onBookmarkCourse={handleBookmarkCourse}
             onNavigate={handleNavigate}
+            // Pass the new bookmark handler for CourseBrowseTable
+            isBookmarked={isBookmarked}
+            handleBookmark={handleBookmark}
           />
         );
       case "hub-helper":
         return (
           <HubHelper
-            onBookmark={handleBookmark}
+            onBookmark={handleHubHelperBookmark}
             bookmarkedCourses={bookmarkedCourses}
             isBookmarked={isBookmarked}
           />
@@ -223,6 +264,7 @@ export default function Home() {
             bookmarkedCourses={bookmarkedCourses}
             hubRequirements={hubRequirements}
             onRemoveBookmark={handleRemoveBookmark}
+            onNavigate={handleNavigate}
           />
         );
       default:
