@@ -19,17 +19,40 @@ logger = logging.getLogger(__name__)
 # Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent.absolute()
 logger.info(f"Script directory: {SCRIPT_DIR}")
-CSV_PATH = SCRIPT_DIR.parent / 'CSVFiles' / 'bu_hub_courses.csv'
-logger.info(f"Looking for CSV at: {CSV_PATH.absolute()}")
 
-# Initialize your course manager
+# Define paths for multiple CSV files
+CSV_DIR = SCRIPT_DIR.parent / 'CSVFiles'
+BU_ALL_COURSES_PATH = CSV_DIR / 'bu_all_courses.csv'
+KHC_HUB_COURSES_PATH = CSV_DIR / 'khc_hub_courses.csv'
+
+logger.info(f"Looking for BU all courses CSV at: {BU_ALL_COURSES_PATH.absolute()}")
+logger.info(f"Looking for KHC hub courses CSV at: {KHC_HUB_COURSES_PATH.absolute()}")
+
+# Initialize your course manager with multiple CSV files
 course_manager = None
 try:
-    if CSV_PATH.exists():
-        course_manager = CourseDataManager(CSV_PATH)
-        logger.info("CourseDataManager initialized successfully")
+    csv_files = []
+    
+    if BU_ALL_COURSES_PATH.exists():
+        csv_files.append(BU_ALL_COURSES_PATH)
+        logger.info(f"Found BU all courses CSV: {BU_ALL_COURSES_PATH}")
     else:
-        raise FileNotFoundError(f"CSV file not found at: {CSV_PATH.absolute()}")
+        logger.warning(f"BU all courses CSV not found at: {BU_ALL_COURSES_PATH.absolute()}")
+    
+    if KHC_HUB_COURSES_PATH.exists():
+        csv_files.append(KHC_HUB_COURSES_PATH)
+        logger.info(f"Found KHC hub courses CSV: {KHC_HUB_COURSES_PATH}")
+    else:
+        logger.warning(f"KHC hub courses CSV not found at: {KHC_HUB_COURSES_PATH.absolute()}")
+    
+    if not csv_files:
+        raise FileNotFoundError(f"No CSV files found. Checked: {BU_ALL_COURSES_PATH}, {KHC_HUB_COURSES_PATH}")
+    
+    # Initialize CourseDataManager with multiple CSV files
+    # If CourseDataManager doesn't support multiple files, we'll need to modify it
+    # For now, assuming it can take a list of files or we'll modify it
+    course_manager = CourseDataManager(csv_files)
+    logger.info(f"CourseDataManager initialized successfully with {len(csv_files)} CSV files")
     
 except Exception as e:
     logger.error(f"Failed to initialize CourseDataManager: {e}")
@@ -39,8 +62,8 @@ except Exception as e:
     logger.info("Current file structure:")
     logger.info(f"Script is in: {SCRIPT_DIR}")
     logger.info(f"Parent directory: {SCRIPT_DIR.parent}")
-    logger.info(f"Looking for CSV at: {CSV_PATH}")
-    logger.info(f"CSV exists: {CSV_PATH.exists()}")
+    logger.info(f"CSV directory: {CSV_DIR}")
+    logger.info(f"CSV directory exists: {CSV_DIR.exists()}")
     
     # List contents of relevant directories
     try:
@@ -48,10 +71,9 @@ except Exception as e:
         for item in SCRIPT_DIR.parent.iterdir():
             logger.info(f"  {item.name} ({'dir' if item.is_dir() else 'file'})")
         
-        csv_dir = SCRIPT_DIR.parent / 'CSV Files'
-        if csv_dir.exists():
+        if CSV_DIR.exists():
             logger.info("Contents of CSV Files directory:")
-            for item in csv_dir.iterdir():
+            for item in CSV_DIR.iterdir():
                 logger.info(f"  {item.name}")
         else:
             logger.info("CSV Files directory does not exist")
@@ -64,6 +86,7 @@ except Exception as e:
 def root():
     return jsonify({
         "message": "BU Course API is running!",
+        "data_sources": ["bu_all_courses.csv", "khc_hub_courses.csv"],
         "endpoints": {
             "health": "/api/health",
             "search_course": "/api/search-course (POST)",
@@ -75,13 +98,24 @@ def root():
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
+    data_sources_status = {
+        "bu_all_courses": {
+            "path": str(BU_ALL_COURSES_PATH),
+            "exists": BU_ALL_COURSES_PATH.exists()
+        },
+        "khc_hub_courses": {
+            "path": str(KHC_HUB_COURSES_PATH),
+            "exists": KHC_HUB_COURSES_PATH.exists()
+        }
+    }
+    
     return jsonify({
         "status": "healthy", 
         "service": "BU Course API",
         "course_manager_status": "ready" if course_manager else "not initialized",
         "script_directory": str(SCRIPT_DIR),
-        "csv_path": str(CSV_PATH),
-        "csv_exists": CSV_PATH.exists()
+        "csv_directory": str(CSV_DIR),
+        "data_sources": data_sources_status
     })
 
 @app.route('/api/search-course', methods=['POST'])
@@ -127,7 +161,8 @@ def get_all_courses():
         all_courses = course_manager.get_all_courses()
         return jsonify({
             "courses": all_courses,
-            "total_courses": len(all_courses)
+            "total_courses": len(all_courses),
+            "data_sources": ["bu_all_courses.csv", "khc_hub_courses.csv"]
         })
     
     except Exception as e:
