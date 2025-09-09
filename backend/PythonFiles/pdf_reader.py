@@ -38,7 +38,6 @@ def raw_fetch_courses_info(reader):
             text_lines = page.extract_text().split("\n")
             print(f"Page {page_num + 1} has {len(text_lines)} lines")
             
-            # Show all lines to debug
             print("All lines on this page:")
             for line_idx, line_text in enumerate(text_lines):
                 print(f"Line {line_idx}: '{line_text}'")
@@ -48,54 +47,44 @@ def raw_fetch_courses_info(reader):
             for line_idx, line_text in enumerate(text_lines):
                 print(f"Checking line {line_idx}: '{line_text}' (length: {len(line_text)})")
                 
-                # NEW LOGIC - Check each condition separately  
                 contains_cas = "CAS" in line_text
                 contains_khc = "KHC" in line_text
                 no_room_keyword = "Room" not in line_text
-                minimum_length = len(line_text) > 5  # NEW: Changed from 10 to 5
+                minimum_length = len(line_text) > 5  
                 
                 print(f"  - Contains CAS: {contains_cas}")
                 print(f"  - Contains KHC: {contains_khc}")
                 print(f"  - No Room keyword: {no_room_keyword}")
                 print(f"  - Minimum length (>5): {minimum_length}")
                 
-                # Course detection logic
                 is_course_line = (contains_cas or contains_khc) and no_room_keyword and minimum_length
                 
                 if is_course_line:
                     print(f"*** FOUND POTENTIAL COURSE LINE {line_idx}: '{line_text}' ***")
                     
                     try:
-                        # Parse course code - handle format like "CASCS 131", "KHCST 111"
                         parts = line_text.split()
                         if len(parts) >= 2:
-                            # First part contains school + department
-                            school_dept = parts[0]  # e.g., "KHCST", "CASCS" 
-                            course_num = parts[1]   # e.g., "111", "131"
+                            school_dept = parts[0]
+                            course_num = parts[1]   
                             
-                            # Extract school code (first 3 characters)
                             school = school_dept[0:3] if len(school_dept) >= 3 else school_dept
-                            # Extract department code (remaining characters)
                             dept = school_dept[3:] if len(school_dept) > 3 else ""
                             
                             print(f"Parsed: school='{school}', dept='{dept}', course_num='{course_num}'")
                             
-                            # Create full course code in standard format: "SCHOOL DEPT COURSENUM"
                             full_course_code = f"{school} {dept} {course_num}"
                             print(f"Full course code: '{full_course_code}'")
                         else:
-                            # Fallback to original parsing if split doesn't work
                             school = line_text[0:3]
                             dept = line_text[3:5] if len(line_text) > 5 else ""
                             course_code = line_text[3:10] if len(line_text) > 10 else line_text[3:]
                             full_course_code = school + " " + course_code
                             print(f"Fallback parsing: school='{school}', dept='{dept}', full='{full_course_code}'")
                         
-                        # Initialize course entry
                         course_entry = [full_course_code, school, dept, ""]
                         print(f"Initial course entry: {course_entry}")
                         
-                        # Look for Units in next few lines
                         print(f"Looking for Units in lines {line_idx+1} to {min(line_idx+5, len(text_lines))}...")
                         
                         for k in range(line_idx + 1, min(line_idx + 5, len(text_lines))):
@@ -126,7 +115,7 @@ def raw_fetch_courses_info(reader):
                                         print(f"*** ADDED COURSE WITHOUT CREDITS: {course_entry} ***")
                                         break
                         else:
-                            # No Units line found, add with default credits
+                           
                             course_entry[3] = "4"
                             courses.append(course_entry)
                             print(f"*** NO UNITS FOUND, ADDED WITH DEFAULT 4 CREDITS: {course_entry} ***")
@@ -152,7 +141,7 @@ def find_course_requirements(courses):
     results = []
     
     for course in courses:
-        course_code = course[0]  # Full course code like "CAS CS111"
+        course_code = course[0]
         school = course[1]
         
         try:
@@ -186,7 +175,6 @@ def find_course_requirements(courses):
     
     return results
 
-# For testing purposes
 if __name__ == "__main__":
     try:
         reader = PdfReader("schedule.pdf")
