@@ -19,11 +19,7 @@ logger = logging.getLogger(__name__)
 # Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent.absolute()
 logger.info(f"Script directory: {SCRIPT_DIR}")
-
-# Navigate to the CSV file using absolute path
-# From Python Files/ go up to frontend/ then into CSV Files/
 CSV_PATH = SCRIPT_DIR.parent / 'CSVFiles' / 'bu_hub_courses.csv'
-
 logger.info(f"Looking for CSV at: {CSV_PATH.absolute()}")
 
 # Initialize your course manager

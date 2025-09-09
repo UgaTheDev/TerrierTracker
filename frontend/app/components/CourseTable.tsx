@@ -393,7 +393,6 @@ export default function CourseTable({
         </Card>
       )}
 
-      {/* Delete Modal */}
       <Modal isOpen={deleteModalOpen} onOpenChange={setDeleteModalOpen}>
         <ModalContent>
           <ModalHeader>Confirm Delete</ModalHeader>
@@ -415,8 +414,6 @@ export default function CourseTable({
           </ModalFooter>
         </ModalContent>
       </Modal>
-
-      {/* Edit Modal */}
       <Modal isOpen={editModalOpen} onOpenChange={setEditModalOpen} size="2xl">
         <ModalContent>
           <ModalHeader>Edit Course</ModalHeader>

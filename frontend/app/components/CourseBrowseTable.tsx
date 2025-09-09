@@ -668,7 +668,7 @@ export default function CourseBrowseTable({
                     </span>
                   )}
                 </label>
-                <div className="max-h-32 overflow-y-auto space-y-1 p-2 border border-default-200 rounded-lg bg-white">
+                <div className="max-h-32 overflow-y-auto space-y-1 p-2 border border-default-200 rounded-lg bg-gray">
                   {allHubRequirements.length === 0 ? (
                     <p className="text-xs text-default-400 italic">
                       Load hub requirements to see available filters
