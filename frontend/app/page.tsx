@@ -82,6 +82,10 @@ export default function Home() {
       if (course.hubRequirements && Array.isArray(course.hubRequirements)) {
         course.hubRequirements.forEach((hub) => {
           hubCounts[hub] = (hubCounts[hub] || 0) + 1;
+          if (hub === "Scientific Inquiry II" || hub === "Social Inquiry II") {
+            const orRequirement = "Scientific Inquiry II or Social Inquiry II";
+            hubCounts[orRequirement] = (hubCounts[orRequirement] || 0) + 1;
+          }
         });
       }
     });
