@@ -72,7 +72,7 @@ def scrape_page(page_num):
 def main():
     all_courses = []
     with ThreadPoolExecutor(max_workers=10) as executor:
-        futures = [executor.submit(scrape_page, page_num) for page_num in range(1, 113)] #if the number of pages on the CAS courses website is greater, change upper bound in range
+        futures = [executor.submit(scrape_page, page_num) for page_num in range(1, 113)] 
         for i, future in enumerate(futures, 1):
             result = future.result()
             all_courses.extend(result)

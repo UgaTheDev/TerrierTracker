@@ -7,7 +7,6 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class CourseDataManager:
-    #manage course data loading/caching/searching operations from multiple CSV sources
     
     def __init__(self, csv_paths: Union[str, Path, List[Union[str, Path]]]):
         if isinstance(csv_paths, (str, Path)):
@@ -24,7 +23,6 @@ class CourseDataManager:
         logger.info(f"Initialized CourseDataManager with {len(self.csv_paths)} CSV files")
     
     def _load_data(self) -> None:
-        #load/cache all course data from multiple CSV files
         if self._data_loaded:
             return
             
@@ -117,7 +115,7 @@ class CourseDataManager:
         logger.info(f"Total hub requirements: {len(all_hub_columns)}")
     
     def find_course_code(self, search_term: str) -> Optional[str]:
-        #find course code by course code/name
+        
         self._load_data()
         
         search_key = search_term.strip().upper()
@@ -131,7 +129,6 @@ class CourseDataManager:
         return None
     
     def get_hub_requirements_for_course(self, course_identifier: str) -> List[str]:
-        #get all hub requirements fulfilled by a course
         self._load_data()
         
         course_code = self.find_course_code(course_identifier)
@@ -141,7 +138,6 @@ class CourseDataManager:
         return self._course_to_hubs_cache.get(course_code.upper(), [])
     
     def get_courses_for_hub(self, hub_requirement: str) -> List[str]:
-        #get all courses that fulfill a specific hub
         self._load_data()
         
         if hub_requirement in self._hub_requirements_cache:
@@ -153,17 +149,14 @@ class CourseDataManager:
         return self._course_code_to_name.copy()
     
     def get_course_name(self, course_code: str) -> Optional[str]:
-        #input code, get course name
         self._load_data()
         return self._course_code_to_name.get(course_code.upper())
     
     def get_course_source(self, course_code: str) -> Optional[str]:
-        #get source CSV file for a course
         self._load_data()
         return self._course_to_source.get(course_code.upper())
     
     def print_multiple_hub_requirements(self, course_list: List[str]) -> Tuple[List[Dict], Set[str]]:
-        #return hub requirements for multiple courses
         self._load_data()
         
         results = []

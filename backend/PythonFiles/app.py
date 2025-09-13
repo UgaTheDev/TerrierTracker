@@ -236,13 +236,9 @@ def process_pdf():
             logger.info("Creating PDF reader...")
             reader = PdfReader(temp_file_path)
             logger.info(f"PDF has {len(reader.pages)} pages")
-            
-            # Extract semester information
             logger.info("Extracting semester information...")
             semester = fetch_semester(reader)
             logger.info(f"Extracted semester: {semester}")
-            
-            # Extract courses from PDF
             logger.info("Extracting courses from PDF...")
             courses = raw_fetch_courses_info(reader)
             logger.info(f"Extracted {len(courses)} courses: {courses}")

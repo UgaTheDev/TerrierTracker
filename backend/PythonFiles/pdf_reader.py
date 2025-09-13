@@ -10,7 +10,7 @@ def fetch_semester(reader):
         text_lines = page.extract_text().split("\n")
         print(f"First page has {len(text_lines)} lines of text")
         
-        for i, row in enumerate(text_lines[:10]):  # Show first 10 lines
+        for i, row in enumerate(text_lines[:10]): 
             print(f"Line {i}: '{row}'")
             
         for row in text_lines:
