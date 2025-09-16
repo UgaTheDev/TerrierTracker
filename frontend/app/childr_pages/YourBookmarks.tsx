@@ -35,6 +35,7 @@ interface YourBookmarksProps {
   bookmarkedCourses: BookmarkedCourse[];
   hubRequirements: HubRequirement[];
   onRemoveBookmark: (courseId: string) => void;
+  onNavigate?: (page: string) => void;
 }
 
 const columns = [
@@ -49,9 +50,12 @@ export default function YourBookmarks({
   bookmarkedCourses = [],
   hubRequirements = [],
   onRemoveBookmark = () => {},
+  onNavigate,
 }: YourBookmarksProps) {
   const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
   const [showVisualization, setShowVisualization] = useState(false);
+
+  const isSelected = (courseId: string) => selectedCourses.includes(courseId);
 
   const updatedHubRequirements = useMemo(() => {
     const phantomCounts: { [key: string]: number } = {};
@@ -104,8 +108,11 @@ export default function YourBookmarks({
       case "select":
         return (
           <Checkbox
-            isSelected={selectedCourses.includes(course.id)}
-            onChange={(isSelected) => handleCourseSelect(course.id, isSelected)}
+            key={`checkbox-${course.id}`}
+            isSelected={isSelected(course.id)}
+            onValueChange={(selected) =>
+              handleCourseSelect(course.id, selected)
+            }
             color="primary"
           />
         );
@@ -221,7 +228,7 @@ export default function YourBookmarks({
                   <Checkbox
                     isSelected={isAllSelected}
                     isIndeterminate={isIndeterminate}
-                    onChange={handleSelectAll}
+                    onValueChange={handleSelectAll}
                     color="primary"
                   >
                     Select All ({selectedCourses.length}/
