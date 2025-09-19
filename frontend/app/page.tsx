@@ -9,6 +9,7 @@ import YourCourses from "./childr_pages/YourCourses";
 import AddCourses from "./childr_pages/AddCourses";
 import HubHelper from "./childr_pages/HubHelper";
 import YourBookmarks from "./childr_pages/YourBookmarks";
+import Login from "./childr_pages/Login";
 
 type Course = {
   id: number;
@@ -38,6 +39,8 @@ type HubRequirement = {
 };
 
 export default function Home() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   const [currentPage, setCurrentPage] = useState("dashboard");
   const [enrolledCourses, setEnrolledCourses] = useState<Course[]>([]);
   const [bookmarkedCourses, setBookmarkedCourses] = useState<
@@ -100,6 +103,16 @@ export default function Home() {
   };
 
   const hubRequirements = calculateHubRequirements();
+
+  const handleLoginSuccess = () => {
+    setIsAuthenticated(true);
+    setCurrentPage("dashboard");
+  };
+
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setCurrentPage("dashboard");
+  };
 
   const handleNavigate = (page: string) => {
     setCurrentPage(page);
@@ -363,9 +376,17 @@ export default function Home() {
     }
   };
 
+  if (!isAuthenticated) {
+    return <Login onLoginSuccess={handleLoginSuccess} />;
+  }
+
   return (
     <div className="flex h-screen">
-      <Sidebar onNavigate={handleNavigate} currentPage={currentPage} />
+      <Sidebar
+        onNavigate={handleNavigate}
+        currentPage={currentPage}
+        onLogout={handleLogout}
+      />
       <main className="flex-1 overflow-auto">{renderContent()}</main>
     </div>
   );

@@ -257,7 +257,7 @@ export default function CourseSearch({
         {filteredCourses.map((course) => (
           <div
             key={course.courseId}
-            className={`bg-gray border rounded-lg p-4 cursor-pointer transition-all ${
+            className={`bg-white border rounded-lg p-4 cursor-pointer transition-all ${
               selectedCourse?.courseId === course.courseId
                 ? "border-blue-500 bg-blue-50"
                 : "border-gray-200 hover:border-gray-300 hover:shadow-sm"

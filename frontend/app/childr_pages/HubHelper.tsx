@@ -40,7 +40,7 @@ export default function HubHelper() {
     bookmarkedCourses.includes(courseId);
 
   const CourseCard = ({ course }: { course: Course }) => (
-    <div className="bg-gray border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-white dark:bg-gray-800 border border-gray-200 rounded-lg p-4 shadow-sm hover:shadow-md transition-shadow">
       <div className="flex justify-between items-start mb-3">
         <div>
           <h3 className="text-lg font-semibold text-gray-900">
