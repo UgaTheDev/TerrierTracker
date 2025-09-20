@@ -6,12 +6,14 @@ interface LoginFormProps {
   onLogin: (email: string, password: string) => Promise<void>;
   isLoading?: boolean;
   error?: string | null;
+  onGoToRegister: () => void;
 }
 
 export default function LoginForm({
   onLogin,
   isLoading = false,
   error = null,
+  onGoToRegister,
 }: LoginFormProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -77,10 +79,10 @@ export default function LoginForm({
                   setFormErrors((prev) => ({ ...prev, email: undefined }));
                 }
               }}
-              className={`w-full px-4 py-3 pl-11 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
+              className={`w-full px-4 py-3 pl-11 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
                 formErrors.email
                   ? "border-danger bg-danger-50 dark:bg-danger/10"
-                  : "border-default-200 hover:border-default-300"
+                  : "border-default-200 dark:border-default-700 hover:border-default-300 dark:hover:border-default-600"
               }`}
               placeholder="Enter your email"
               disabled={isLoading}
@@ -94,6 +96,7 @@ export default function LoginForm({
             </div>
           )}
         </div>
+
         <div className="space-y-2">
           <label
             htmlFor="password"
@@ -112,7 +115,7 @@ export default function LoginForm({
                   setFormErrors((prev) => ({ ...prev, password: undefined }));
                 }
               }}
-              className={`w-full px-4 py-3 pl-11 pr-11 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
+              className={`w-full px-4 py-3 pl-11 pr-11 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
                 formErrors.password
                   ? "border-danger bg-danger-50 dark:bg-danger/10"
                   : "border-default-200 dark:border-default-700 hover:border-default-300 dark:hover:border-default-600"
@@ -165,6 +168,7 @@ export default function LoginForm({
             "Sign In"
           )}
         </button>
+
         <div className="text-center space-y-2">
           <button
             type="button"
@@ -177,6 +181,7 @@ export default function LoginForm({
             Don't have an account?{" "}
             <button
               type="button"
+              onClick={onGoToRegister}
               className="text-primary hover:text-primary/80 hover:underline transition-colors"
               disabled={isLoading}
             >

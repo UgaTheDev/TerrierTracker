@@ -5,9 +5,10 @@ import LoginForm from "../components/LoginForm";
 
 interface LoginProps {
   onLoginSuccess: () => void;
+  onGoToRegister: () => void;
 }
 
-export default function Login({ onLoginSuccess }: LoginProps) {
+export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -96,15 +97,15 @@ export default function Login({ onLoginSuccess }: LoginProps) {
 
           <div className="mt-12 p-6 bg-white/10 rounded-3xl backdrop-blur-sm">
             <blockquote className="text-lg italic mb-2">
-              "Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Deserunt numquam laudantium velit obcaecati cum maxime."
+              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
+              officia perferendis deserunt nam itaque pariatur!"
             </blockquote>
             <cite className="text-white/70 text-sm">— Lorem, ipsum.</cite>
           </div>
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-8 bg-content1 rounded-3xl shadow-small">
+      <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-8 bg-content1 rounded-3xl border border-default-200 dark:border-default-700 shadow-small">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <div className="lg:hidden flex items-center justify-center gap-3 mb-8">
             <div className="bg-red-600 p-3 rounded-3xl">
@@ -128,14 +129,14 @@ export default function Login({ onLoginSuccess }: LoginProps) {
             </p>
           </div>
 
-          <div className="bg-content2 py-8 px-6 shadow-medium rounded-3xl">
+          <div className="bg-content2 py-8 px-6 shadow-medium rounded-3xl border border-default-200 dark:border-default-700">
             <LoginForm
               onLogin={handleLogin}
               isLoading={isLoading}
               error={error}
+              onGoToRegister={onGoToRegister}
             />
           </div>
-
           <div className="mt-8 text-center">
             <p className="text-sm text-default-500">
               Need help?{" "}

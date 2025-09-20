@@ -25,11 +25,8 @@ export default function Registration({
     setError(null);
 
     try {
-      // Simulate API call
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
-      // For demo purposes, accept any valid form data
-      // In a real app, you'd make an actual API call here
       if (email && password && firstName && lastName) {
         console.log("Registration successful for:", {
           email,
@@ -50,9 +47,7 @@ export default function Registration({
 
   return (
     <div className="min-h-screen flex bg-background p-4">
-      {/* Left Side - Benefits */}
       <div className="hidden lg:flex lg:flex-1 bg-gradient-to-br from-blue-600 to-blue-800 dark:from-blue-700 dark:to-blue-900 text-white relative overflow-hidden rounded-3xl mr-4">
-        {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-20 left-20 w-32 h-32 rounded-full bg-white/20"></div>
           <div className="absolute bottom-40 right-16 w-24 h-24 rounded-full bg-white/20"></div>
@@ -60,7 +55,6 @@ export default function Registration({
         </div>
 
         <div className="relative z-10 flex flex-col justify-center px-12 lg:px-16">
-          {/* Logo */}
           <div className="flex items-center gap-3 mb-8">
             <div className="bg-white/20 p-3 rounded-xl backdrop-blur-sm">
               <GraduationCap className="h-8 w-8" />
@@ -71,7 +65,6 @@ export default function Registration({
             </div>
           </div>
 
-          {/* Benefits */}
           <div className="space-y-6">
             <div className="flex items-start gap-4">
               <div className="bg-white/20 p-2 rounded-lg backdrop-blur-sm">
@@ -114,8 +107,6 @@ export default function Registration({
               </div>
             </div>
           </div>
-
-          {/* Success Stats */}
           <div className="mt-12 p-6 bg-white/10 rounded-3xl backdrop-blur-sm">
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
@@ -135,10 +126,8 @@ export default function Registration({
         </div>
       </div>
 
-      {/* Right Side - Registration Form */}
       <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-8 bg-content1 rounded-3xl border border-default-200 dark:border-default-700 shadow-small">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          {/* Mobile Logo */}
           <div className="lg:hidden flex items-center justify-center gap-3 mb-8">
             <div className="bg-blue-600 p-3 rounded-3xl">
               <GraduationCap className="h-8 w-8 text-white" />
@@ -151,7 +140,6 @@ export default function Registration({
             </div>
           </div>
 
-          {/* Welcome Message */}
           <div className="text-center mb-8">
             <h2 className="text-3xl font-bold text-foreground mb-2">
               Create Account
@@ -162,7 +150,6 @@ export default function Registration({
             </p>
           </div>
 
-          {/* Registration Form */}
           <div className="bg-content2 py-8 px-6 shadow-medium rounded-3xl border border-default-200 dark:border-default-700">
             <RegistrationForm
               onRegister={handleRegistration}
@@ -171,7 +158,6 @@ export default function Registration({
             />
           </div>
 
-          {/* Back to Login */}
           <div className="mt-8 text-center">
             <p className="text-sm text-default-600">
               Already have an account?{" "}
