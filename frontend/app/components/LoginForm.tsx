@@ -79,10 +79,10 @@ export default function LoginForm({
                   setFormErrors((prev) => ({ ...prev, email: undefined }));
                 }
               }}
-              className={`w-full px-4 py-3 pl-11 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
+              className={`w-full px-4 py-3 pl-11 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
                 formErrors.email
                   ? "border-danger bg-danger-50 dark:bg-danger/10"
-                  : "border-default-200 dark:border-default-700 hover:border-default-300 dark:hover:border-default-600"
+                  : "border-default-200 hover:border-default-300"
               }`}
               placeholder="Enter your email"
               disabled={isLoading}
@@ -115,10 +115,10 @@ export default function LoginForm({
                   setFormErrors((prev) => ({ ...prev, password: undefined }));
                 }
               }}
-              className={`w-full px-4 py-3 pl-11 pr-11 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
+              className={`w-full px-4 py-3 pl-11 pr-11  rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
                 formErrors.password
                   ? "border-danger bg-danger-50 dark:bg-danger/10"
-                  : "border-default-200 dark:border-default-700 hover:border-default-300 dark:hover:border-default-600"
+                  : "border-default-200 hover:border-default-300 dark:hover:border-default-600"
               }`}
               placeholder="Enter your password"
               disabled={isLoading}
@@ -142,7 +142,7 @@ export default function LoginForm({
         </div>
 
         {error && (
-          <div className="bg-danger-50 dark:bg-danger/10 border border-danger-200 dark:border-danger/30 rounded-lg p-4">
+          <div className="bg-danger-50 dark:bg-danger/10 border-danger-200 dark:border-danger/30 rounded-lg p-4">
             <div className="flex items-center gap-2 text-sm text-danger">
               <AlertCircle className="h-5 w-5 flex-shrink-0" />
               <span>{error}</span>

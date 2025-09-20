@@ -105,7 +105,7 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-8 bg-content1 rounded-3xl border border-default-200 dark:border-default-700 shadow-small">
+      <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-8 bg-content1 rounded-3xl  border-default-200 dark:border-default-700 shadow-small">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <div className="lg:hidden flex items-center justify-center gap-3 mb-8">
             <div className="bg-red-600 p-3 rounded-3xl">
@@ -129,7 +129,7 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
             </p>
           </div>
 
-          <div className="bg-content2 py-8 px-6 shadow-medium rounded-3xl border border-default-200 dark:border-default-700">
+          <div className="bg-content2 py-8 px-6 shadow-medium rounded-3xl  border-default-200 dark:border-default-700">
             <LoginForm
               onLogin={handleLogin}
               isLoading={isLoading}
