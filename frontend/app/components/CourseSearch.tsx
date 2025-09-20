@@ -200,7 +200,7 @@ export default function CourseSearch({
 
   if (!apiHealthy && error) {
     return (
-      <div className="flex items-center justify-center gap-2 text-red-600 bg-red-50 p-4 rounded-lg">
+      <div className="flex items-center justify-center gap-2 text-danger bg-danger-50 dark:bg-danger/10 p-4 rounded-lg border border-danger-200 dark:border-danger/30">
         <AlertCircle size={20} />
         <div>
           <p className="font-medium">API Connection Error</p>
@@ -216,8 +216,8 @@ export default function CourseSearch({
   if (isLoadingCourses) {
     return (
       <div className="flex items-center justify-center py-8">
-        <div className="flex items-center gap-2 text-blue-600">
-          <div className="animate-spin rounded-full h-6 w-6 border-2 border-blue-600 border-t-transparent"></div>
+        <div className="flex items-center gap-2 text-primary">
+          <div className="animate-spin rounded-full h-6 w-6 border-2 border-primary border-t-transparent"></div>
           <span>Loading courses...</span>
         </div>
       </div>
@@ -226,7 +226,7 @@ export default function CourseSearch({
 
   if (error) {
     return (
-      <div className="flex items-center justify-center gap-2 text-red-600 bg-red-50 p-4 rounded-lg">
+      <div className="flex items-center justify-center gap-2 text-danger bg-danger-50 dark:bg-danger/10 p-4 rounded-lg border border-danger-200 dark:border-danger/30">
         <AlertCircle size={20} />
         <span>Error loading courses: {error}</span>
       </div>
@@ -241,14 +241,14 @@ export default function CourseSearch({
           placeholder="Search by course code (e.g., CAS CS 131) or course name..."
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
-          className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          className="w-full px-4 py-3 border border-default-200 dark:border-default-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-background text-foreground placeholder-default-400"
         />
-        <div className="absolute right-3 top-3 text-gray-400">
+        <div className="absolute right-3 top-3 text-default-400">
           <Search className="w-5 h-5" />
         </div>
       </div>
 
-      <p className="text-sm text-gray-500">
+      <p className="text-sm text-default-500">
         Showing {filteredCourses.length} courses
         {filteredCourses.length === 100 ? " (results limited to 100)" : ""}
       </p>
@@ -257,20 +257,20 @@ export default function CourseSearch({
         {filteredCourses.map((course) => (
           <div
             key={course.courseId}
-            className={`bg-white border rounded-lg p-4 cursor-pointer transition-all ${
+            className={`bg-content1 border rounded-lg p-4 cursor-pointer transition-all ${
               selectedCourse?.courseId === course.courseId
-                ? "border-blue-500 bg-blue-50"
-                : "border-gray-200 hover:border-gray-300 hover:shadow-sm"
+                ? "border-primary-500 bg-primary-50 dark:bg-primary-100/10"
+                : "border-default-200 dark:border-default-700 hover:border-default-300 dark:hover:border-default-600 hover:shadow-small"
             }`}
             onClick={() => handleCourseSelect(course)}
           >
             <div className="flex justify-between items-start">
               <div className="flex-1">
-                <h4 className="font-semibold text-gray-900">
+                <h4 className="font-semibold text-foreground">
                   {course.courseId}
                 </h4>
-                <p className="text-gray-700 mt-1">{course.courseName}</p>
-                <div className="text-xs text-gray-500 mt-2">
+                <p className="text-default-700 mt-1">{course.courseName}</p>
+                <div className="text-xs text-default-500 mt-2">
                   {course.hubRequirements.length > 0
                     ? course.hubRequirements.join(" • ")
                     : course.requirementsText === "Loading requirements..."
@@ -281,10 +281,10 @@ export default function CourseSearch({
 
               {selectedCourse?.courseId === course.courseId && (
                 <button
-                  className={`ml-4 px-4 py-2 rounded-lg font-medium text-sm inline-flex items-center gap-2 ${
+                  className={`ml-4 px-4 py-2 rounded-lg font-medium text-sm inline-flex items-center gap-2 transition-colors ${
                     isEnrolled(course.courseId)
-                      ? "bg-gray-100 text-gray-500 cursor-not-allowed"
-                      : "bg-green-600 hover:bg-green-700 text-white"
+                      ? "bg-default-100 dark:bg-default-200/20 text-default-500 cursor-not-allowed"
+                      : "bg-success text-success-foreground hover:bg-success/90"
                   }`}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -304,7 +304,7 @@ export default function CourseSearch({
       </div>
 
       {filteredCourses.length === 0 && searchValue && (
-        <div className="text-center py-8 text-gray-500">
+        <div className="text-center py-8 text-default-500">
           <p>No courses found matching "{searchValue}"</p>
         </div>
       )}

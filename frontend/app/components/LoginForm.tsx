@@ -62,7 +62,7 @@ export default function LoginForm({
         <div className="space-y-2">
           <label
             htmlFor="email"
-            className="text-sm font-medium text-gray-700 dark:text-gray-300"
+            className="text-sm font-medium text-foreground"
           >
             Email Address
           </label>
@@ -77,28 +77,27 @@ export default function LoginForm({
                   setFormErrors((prev) => ({ ...prev, email: undefined }));
                 }
               }}
-              className={`w-full px-4 py-3 pl-11 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors dark:bg-gray-800 dark:text-white ${
+              className={`w-full px-4 py-3 pl-11 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
                 formErrors.email
-                  ? "border-red-300 bg-red-50 dark:border-red-500 dark:bg-red-900/20"
-                  : "border-gray-300 hover:border-gray-400 dark:border-gray-600 dark:hover:border-gray-500"
+                  ? "border-danger bg-danger-50 dark:bg-danger/10"
+                  : "border-default-200 hover:border-default-300"
               }`}
               placeholder="Enter your email"
               disabled={isLoading}
             />
-            <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 dark:text-gray-500" />
+            <Mail className="absolute left-3 top-3.5 h-5 w-5 text-default-400" />
           </div>
           {formErrors.email && (
-            <div className="flex items-center gap-1 text-sm text-red-600 dark:text-red-400">
+            <div className="flex items-center gap-1 text-sm text-danger">
               <AlertCircle className="h-4 w-4" />
               <span>{formErrors.email}</span>
             </div>
           )}
         </div>
-
         <div className="space-y-2">
           <label
             htmlFor="password"
-            className="text-sm font-medium text-gray-700 dark:text-gray-300"
+            className="text-sm font-medium text-foreground"
           >
             Password
           </label>
@@ -113,26 +112,26 @@ export default function LoginForm({
                   setFormErrors((prev) => ({ ...prev, password: undefined }));
                 }
               }}
-              className={`w-full px-4 py-3 pl-11 pr-11 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors dark:bg-gray-800 dark:text-white ${
+              className={`w-full px-4 py-3 pl-11 pr-11 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
                 formErrors.password
-                  ? "border-red-300 bg-red-50 dark:border-red-500 dark:bg-red-900/20"
-                  : "border-gray-300 hover:border-gray-400 dark:border-gray-600 dark:hover:border-gray-500"
+                  ? "border-danger bg-danger-50 dark:bg-danger/10"
+                  : "border-default-200 dark:border-default-700 hover:border-default-300 dark:hover:border-default-600"
               }`}
               placeholder="Enter your password"
               disabled={isLoading}
             />
-            <Lock className="absolute left-3 top-3.5 h-5 w-5 text-gray-400 dark:text-gray-500" />
+            <Lock className="absolute left-3 top-3.5 h-5 w-5 text-default-400" />
             <button
               type="button"
               onClick={togglePasswordVisibility}
-              className="absolute right-3 top-3.5 h-5 w-5 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-400 transition-colors"
+              className="absolute right-3 top-3.5 h-5 w-5 text-default-400 hover:text-default-600 transition-colors"
               disabled={isLoading}
             >
               {showPassword ? <EyeOff /> : <Eye />}
             </button>
           </div>
           {formErrors.password && (
-            <div className="flex items-center gap-1 text-sm text-red-600 dark:text-red-400">
+            <div className="flex items-center gap-1 text-sm text-danger">
               <AlertCircle className="h-4 w-4" />
               <span>{formErrors.password}</span>
             </div>
@@ -140,8 +139,8 @@ export default function LoginForm({
         </div>
 
         {error && (
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-500 rounded-lg p-4">
-            <div className="flex items-center gap-2 text-sm text-red-700 dark:text-red-400">
+          <div className="bg-danger-50 dark:bg-danger/10 border border-danger-200 dark:border-danger/30 rounded-lg p-4">
+            <div className="flex items-center gap-2 text-sm text-danger">
               <AlertCircle className="h-5 w-5 flex-shrink-0" />
               <span>{error}</span>
             </div>
@@ -153,8 +152,8 @@ export default function LoginForm({
           disabled={isLoading}
           className={`w-full py-3 px-4 rounded-lg font-medium text-white transition-all duration-200 ${
             isLoading
-              ? "bg-gray-400 dark:bg-gray-600 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700 dark:bg-blue-700 dark:hover:bg-blue-800 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-800"
+              ? "bg-default-400 cursor-not-allowed"
+              : "bg-primary hover:bg-primary/90 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 dark:focus:ring-offset-background shadow-small hover:shadow-medium"
           }`}
         >
           {isLoading ? (
@@ -169,16 +168,16 @@ export default function LoginForm({
         <div className="text-center space-y-2">
           <button
             type="button"
-            className="text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 hover:underline transition-colors"
+            className="text-sm text-primary hover:text-primary/80 hover:underline transition-colors"
             disabled={isLoading}
           >
             Forgot your password?
           </button>
-          <div className="text-sm text-gray-600 dark:text-gray-400">
+          <div className="text-sm text-default-600">
             Don't have an account?{" "}
             <button
               type="button"
-              className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 hover:underline transition-colors"
+              className="text-primary hover:text-primary/80 hover:underline transition-colors"
               disabled={isLoading}
             >
               Sign up
