@@ -19,7 +19,18 @@ import { siteConfig } from "@/config/site";
 import { ThemeSwitch } from "./ThemeSwitcher";
 import { GithubIcon, SearchIcon } from "@/app/components/icons";
 
-export const NavBar = () => {
+interface NavBarProps {
+  onNavigate?: (page: string) => void;
+}
+
+export const NavBar = ({ onNavigate }: NavBarProps) => {
+  const handleDashboardClick = (e: React.MouseEvent) => {
+    if (onNavigate) {
+      e.preventDefault();
+      onNavigate("dashboard");
+    }
+  };
+
   const searchInput = (
     <Input
       aria-label="Search"
@@ -45,7 +56,11 @@ export const NavBar = () => {
     <HeroUINavbar maxWidth="xl" position="sticky">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
+          <NextLink
+            className="flex justify-start items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity"
+            href="/"
+            onClick={handleDashboardClick}
+          >
             <Image
               src="https://www.bu.edu/chemistry/files/2010/10/boston_univ_black.gif"
               width={85}
@@ -54,7 +69,6 @@ export const NavBar = () => {
           </NextLink>
         </NavbarBrand>
       </NavbarContent>
-
       <NavbarContent
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
@@ -66,7 +80,6 @@ export const NavBar = () => {
           <ThemeSwitch />
         </NavbarItem>
       </NavbarContent>
-
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <Link isExternal aria-label="Github" href={siteConfig.links.github}>
           <GithubIcon className="text-default-500" />

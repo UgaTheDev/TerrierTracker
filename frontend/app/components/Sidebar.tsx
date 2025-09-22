@@ -15,7 +15,7 @@ import {
 interface SidebarProps {
   onNavigate: (page: string) => void;
   currentPage: string;
-  onLogout: () => void;
+  onLogout: () => void; // Add this prop
 }
 
 export default function Sidebar({
@@ -85,7 +85,10 @@ export default function Sidebar({
     <Card
       className={`h-screen ${isCollapsed ? "w-16" : "w-72"} rounded-none border-r border-default-200 bg-background/60 backdrop-blur-lg p-4 transition-all duration-300 ease-in-out flex flex-col`}
     >
-      <div className="flex items-center gap-3 mb-8 px-2">
+      <div
+        className="flex items-center gap-3 mb-8 px-2 cursor-pointer hover:opacity-80 transition-opacity"
+        onClick={() => onNavigate("dashboard")}
+      >
         {!isCollapsed ? (
           <>
             <Avatar
@@ -137,6 +140,7 @@ export default function Sidebar({
 
       <Divider className="mb-6" />
 
+      {/* Navigation - now with flex-1 to take available space */}
       <nav className="space-y-2 flex-1">
         {menuItems.map((item) => (
           <div key={item.id}>
