@@ -104,6 +104,7 @@ export default function RegistrationForm({
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
+
     if (formErrors[field as keyof typeof formErrors]) {
       setFormErrors((prev) => ({ ...prev, [field]: undefined }));
     }
@@ -134,7 +135,7 @@ export default function RegistrationForm({
                 type="text"
                 value={formData.firstName}
                 onChange={(e) => handleInputChange("firstName", e.target.value)}
-                className={`w-full px-4 py-3 pl-11 rounded-lg focus:ring-2 focus:ring-primary-500 transition-colors bg-background text-foreground placeholder-default-400 ${
+                className={`w-full px-4 py-3 pl-11 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
                   formErrors.firstName
                     ? "border-danger bg-danger-50 dark:bg-danger/10"
                     : "border-default-200 dark:border-default-700 hover:border-default-300 dark:hover:border-default-600"
@@ -165,7 +166,7 @@ export default function RegistrationForm({
                 type="text"
                 value={formData.lastName}
                 onChange={(e) => handleInputChange("lastName", e.target.value)}
-                className={`w-full px-4 py-3 pl-11 rounded-lg focus:ring-2 focus:ring-primary-500 transition-colors bg-background text-foreground placeholder-default-400 ${
+                className={`w-full px-4 py-3 pl-11 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
                   formErrors.lastName
                     ? "border-danger bg-danger-50 dark:bg-danger/10"
                     : "border-default-200 dark:border-default-700 hover:border-default-300 dark:hover:border-default-600"
@@ -197,7 +198,7 @@ export default function RegistrationForm({
               type="email"
               value={formData.email}
               onChange={(e) => handleInputChange("email", e.target.value)}
-              className={`w-full px-4 py-3 pl-11  rounded-lg focus:ring-2 focus:ring-primary-500 transition-colors bg-background text-foreground placeholder-default-400 ${
+              className={`w-full px-4 py-3 pl-11 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
                 formErrors.email
                   ? "border-danger bg-danger-50 dark:bg-danger/10"
                   : "border-default-200 dark:border-default-700 hover:border-default-300 dark:hover:border-default-600"
@@ -228,7 +229,7 @@ export default function RegistrationForm({
               type={showPassword ? "text" : "password"}
               value={formData.password}
               onChange={(e) => handleInputChange("password", e.target.value)}
-              className={`w-full px-4 py-3 pl-11 pr-11 rounded-lg focus:ring-2 focus:ring-primary-500 transition-colors bg-background text-foreground placeholder-default-400 ${
+              className={`w-full px-4 py-3 pl-11 pr-11 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
                 formErrors.password
                   ? "border-danger bg-danger-50 dark:bg-danger/10"
                   : "border-default-200 dark:border-default-700 hover:border-default-300 dark:hover:border-default-600"
@@ -269,7 +270,7 @@ export default function RegistrationForm({
               onChange={(e) =>
                 handleInputChange("confirmPassword", e.target.value)
               }
-              className={`w-full px-4 py-3 pl-11 pr-11 rounded-lg focus:ring-2 focus:ring-primary-500 transition-colors bg-background text-foreground placeholder-default-400 ${
+              className={`w-full px-4 py-3 pl-11 pr-11 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors bg-background text-foreground placeholder-default-400 ${
                 formErrors.confirmPassword
                   ? "border-danger bg-danger-50 dark:bg-danger/10"
                   : "border-default-200 dark:border-default-700 hover:border-default-300 dark:hover:border-default-600"

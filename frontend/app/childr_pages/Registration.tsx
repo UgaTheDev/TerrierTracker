@@ -26,20 +26,38 @@ export default function Registration({
 
     console.log("=== REGISTRATION FUNCTION CALLED ===");
     console.log("Data:", { email, password, firstName, lastName });
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      e;
-      if (email && password && firstName && lastName) {
-        console.log("Registration successful for:", {
+      console.log("=== ABOUT TO CALL API ===");
+      console.log("URL:", "http://localhost:5000/api/register");
+
+      const response = await fetch("http://localhost:5000/api/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           email,
+          password,
           firstName,
           lastName,
-        });
+        }),
+      });
+
+      console.log("=== API RESPONSE ===");
+      console.log("Response status:", response.status);
+
+      const data = await response.json();
+      console.log("Response data:", data);
+
+      if (response.ok && data.success) {
+        console.log("Registration successful:", data);
         onRegistrationSuccess();
       } else {
-        throw new Error("Registration failed. Please check your information.");
+        throw new Error(data.error || "Registration failed");
       }
     } catch (err: any) {
+      console.error("Registration error:", err);
       setError(err.message || "Registration failed. Please try again.");
       throw err;
     } finally {

@@ -11,22 +11,17 @@ import bcrypt
 from dotenv import load_dotenv
 
 from course_data_manager import CourseDataManager
-
-# Load environment variables
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for React frontend
+CORS(app)
 
-# Set up logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# Get the directory where this script is located
 SCRIPT_DIR = Path(__file__).parent.absolute()
 logger.info(f"Script directory: {SCRIPT_DIR}")
 
-# Define paths for multiple CSV files
 CSV_DIR = SCRIPT_DIR.parent / 'CSVFiles'
 BU_ALL_COURSES_PATH = CSV_DIR / 'bu_all_courses.csv'
 KHC_HUB_COURSES_PATH = CSV_DIR / 'khc_hub_courses.csv'
@@ -34,7 +29,6 @@ KHC_HUB_COURSES_PATH = CSV_DIR / 'khc_hub_courses.csv'
 logger.info(f"Looking for BU all courses CSV at: {BU_ALL_COURSES_PATH.absolute()}")
 logger.info(f"Looking for KHC hub courses CSV at: {KHC_HUB_COURSES_PATH.absolute()}")
 
-# Database connection function
 def get_db_connection():
     try:
         conn = psycopg2.connect(
@@ -48,7 +42,6 @@ def get_db_connection():
         logger.error(f"Database connection failed: {e}")
         return None
 
-# Initialize your course manager with multiple CSV files
 course_manager = None
 try:
     csv_files = []
@@ -68,7 +61,6 @@ try:
     if not csv_files:
         raise FileNotFoundError(f"No CSV files found. Checked: {BU_ALL_COURSES_PATH}, {KHC_HUB_COURSES_PATH}")
     
-    # Initialize CourseDataManager with multiple CSV files
     course_manager = CourseDataManager(csv_files)
     logger.info(f"CourseDataManager initialized successfully with {len(csv_files)} CSV files")
     
@@ -76,14 +68,12 @@ except Exception as e:
     logger.error(f"Failed to initialize CourseDataManager: {e}")
     logger.error(f"Full traceback: {traceback.format_exc()}")
     
-    # Debug file structure
     logger.info("Current file structure:")
     logger.info(f"Script is in: {SCRIPT_DIR}")
     logger.info(f"Parent directory: {SCRIPT_DIR.parent}")
     logger.info(f"CSV directory: {CSV_DIR}")
     logger.info(f"CSV directory exists: {CSV_DIR.exists()}")
     
-    # List contents of relevant directories
     try:
         logger.info("Contents of parent directory:")
         for item in SCRIPT_DIR.parent.iterdir():
@@ -100,7 +90,6 @@ except Exception as e:
     
     course_manager = None
 
-# Authentication Routes
 @app.route('/api/register', methods=['POST'])
 def register():
     logger.info("Registration attempt started")
@@ -119,7 +108,6 @@ def register():
             logger.warning("Missing email or password in registration")
             return jsonify({"error": "Email and password are required"}), 400
         
-        # Hash password
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         
         conn = get_db_connection()
@@ -130,13 +118,11 @@ def register():
         cur = conn.cursor()
         
         try:
-            # Check if user already exists
             cur.execute('SELECT user_id FROM userinfo WHERE email = %s', (email,))
             if cur.fetchone():
                 logger.info(f"Registration failed - user already exists: {email}")
                 return jsonify({'error': 'User already exists'}), 400
             
-            # Insert new user
             cur.execute(
     'INSERT INTO userinfo (email, password, first_name, last_name) VALUES (%s, %s, %s, %s) RETURNING user_id',
     (email, hashed_password.decode('utf-8'), first_name, last_name)
@@ -185,7 +171,6 @@ def login():
         cur = conn.cursor()
         
         try:
-            # Find user
             cur.execute('SELECT user_id, email, password FROM userinfo WHERE email = %s', (email,))
             user = cur.fetchone()
             
@@ -213,7 +198,6 @@ def login():
         logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({'error': 'Login failed', 'success': False}), 500
 
-# Root and Health Routes
 @app.route('/', methods=['GET'])
 def root():
     return jsonify({
@@ -233,7 +217,6 @@ def root():
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
-    # Check database connection
     db_status = "connected"
     try:
         conn = get_db_connection()
@@ -270,7 +253,6 @@ def health_check():
         }
     })
 
-# Course Management Routes
 @app.route('/api/search-course', methods=['POST'])
 def search_course():
     if not course_manager:
@@ -365,7 +347,6 @@ def process_pdf():
         return jsonify({"error": "Course manager not initialized"}), 500
     
     try:
-        # Check if a file was uploaded
         if 'pdf_file' not in request.files:
             logger.error("No PDF file in request")
             return jsonify({"error": "No PDF file provided"}), 400
@@ -381,7 +362,6 @@ def process_pdf():
             logger.error(f"Invalid file type: {file.filename}")
             return jsonify({"error": "File must be a PDF"}), 400
         
-        # Create a temporary file to save the uploaded PDF
         with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
             file.save(temp_file.name)
             temp_file_path = temp_file.name
@@ -389,7 +369,6 @@ def process_pdf():
         logger.info(f"PDF saved to temporary file: {temp_file_path}")
         
         try:
-            # Import PDF processing functions
             logger.info("Importing PDF processing functions...")
             from pdf_reader import raw_fetch_courses_info, fetch_semester
             from pypdf import PdfReader
@@ -406,14 +385,12 @@ def process_pdf():
             courses = raw_fetch_courses_info(reader)
             logger.info(f"Extracted {len(courses)} courses: {courses}")
             
-            # Get requirements for each course
             logger.info("Processing course requirements...")
             course_results = []
             for i, course_info in enumerate(courses):
-                course_code = course_info[0]  # e.g., "CAS CS111"
+                course_code = course_info[0]  
                 logger.info(f"Processing course {i+1}/{len(courses)}: {course_code}")
                 
-                # Use your existing course manager to find requirements
                 hub_requirements = course_manager.get_hub_requirements_for_course(course_code)
                 logger.info(f"Found hub requirements for {course_code}: {hub_requirements}")
                 
@@ -443,7 +420,6 @@ def process_pdf():
             return jsonify(response_data)
             
         finally:
-            # Clean up the temporary file
             logger.info(f"Cleaning up temporary file: {temp_file_path}")
             os.unlink(temp_file_path)
     
@@ -453,7 +429,6 @@ def process_pdf():
         logger.error("=== PDF PROCESSING FAILED ===")
         return jsonify({"error": str(e)}), 500
 
-# Error Handlers
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({"error": "Endpoint not found"}), 404
