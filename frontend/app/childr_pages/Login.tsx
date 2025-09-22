@@ -17,12 +17,23 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
     setError(null);
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      if (email && password) {
-        console.log("Login successful for:", email);
+      const response = await fetch("http://localhost:5000/api/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        console.log("Login successful for:", data.user);
+        // Store user data in localStorage for session management
+        localStorage.setItem("user", JSON.stringify(data.user));
         onLoginSuccess();
       } else {
-        throw new Error("Invalid credentials");
+        throw new Error(data.error || "Login failed");
       }
     } catch (err: any) {
       setError(err.message || "Login failed. Please try again.");
@@ -97,15 +108,15 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
 
           <div className="mt-12 p-6 bg-white/10 rounded-3xl backdrop-blur-sm">
             <blockquote className="text-lg italic mb-2">
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
-              officia perferendis deserunt nam itaque pariatur!"
+              "Education is the passport to the future, for tomorrow belongs to
+              those who prepare for it today."
             </blockquote>
-            <cite className="text-white/70 text-sm">— Lorem, ipsum.</cite>
+            <cite className="text-white/70 text-sm">— Malcolm X</cite>
           </div>
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-8 bg-content1 rounded-3xl  border-default-200 dark:border-default-700 shadow-small">
+      <div className="flex-1 flex flex-col justify-center px-6 py-12 lg:px-8 bg-content1 rounded-3xl border border-default-200 dark:border-default-700 shadow-small">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <div className="lg:hidden flex items-center justify-center gap-3 mb-8">
             <div className="bg-red-600 p-3 rounded-3xl">
@@ -129,7 +140,7 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
             </p>
           </div>
 
-          <div className="bg-content2 py-8 px-6 shadow-medium rounded-3xl  border-default-200 dark:border-default-700">
+          <div className="bg-content2 py-8 px-6 shadow-medium rounded-3xl border border-default-200 dark:border-default-700">
             <LoginForm
               onLogin={handleLogin}
               isLoading={isLoading}
@@ -137,6 +148,7 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
               onGoToRegister={onGoToRegister}
             />
           </div>
+
           <div className="mt-8 text-center">
             <p className="text-sm text-default-500">
               Need help?{" "}

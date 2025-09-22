@@ -10,6 +10,7 @@ import AddCourses from "./childr_pages/AddCourses";
 import HubHelper from "./childr_pages/HubHelper";
 import YourBookmarks from "./childr_pages/YourBookmarks";
 import Login from "./childr_pages/Login";
+import Registration from "./childr_pages/Registration";
 
 type Course = {
   id: number;
@@ -40,6 +41,7 @@ type HubRequirement = {
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authPage, setAuthPage] = useState<"login" | "register">("login");
 
   const [currentPage, setCurrentPage] = useState("dashboard");
   const [enrolledCourses, setEnrolledCourses] = useState<Course[]>([]);
@@ -109,8 +111,14 @@ export default function Home() {
     setCurrentPage("dashboard");
   };
 
+  const handleRegistrationSuccess = () => {
+    setIsAuthenticated(true);
+    setCurrentPage("dashboard");
+  };
+
   const handleLogout = () => {
     setIsAuthenticated(false);
+    setAuthPage("login");
     setCurrentPage("dashboard");
   };
 
@@ -377,7 +385,21 @@ export default function Home() {
   };
 
   if (!isAuthenticated) {
-    return <Login onLoginSuccess={handleLoginSuccess} />;
+    if (authPage === "register") {
+      return (
+        <Registration
+          onRegistrationSuccess={handleRegistrationSuccess}
+          onBackToLogin={() => setAuthPage("login")}
+        />
+      );
+    }
+
+    return (
+      <Login
+        onLoginSuccess={handleLoginSuccess}
+        onGoToRegister={() => setAuthPage("register")}
+      />
+    );
   }
 
   return (

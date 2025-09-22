@@ -6,8 +6,14 @@ import traceback
 import os
 import tempfile
 from werkzeug.utils import secure_filename
+import psycopg2
+import bcrypt
+from dotenv import load_dotenv
 
 from course_data_manager import CourseDataManager
+
+# Load environment variables
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for React frontend
@@ -27,6 +33,20 @@ KHC_HUB_COURSES_PATH = CSV_DIR / 'khc_hub_courses.csv'
 
 logger.info(f"Looking for BU all courses CSV at: {BU_ALL_COURSES_PATH.absolute()}")
 logger.info(f"Looking for KHC hub courses CSV at: {KHC_HUB_COURSES_PATH.absolute()}")
+
+# Database connection function
+def get_db_connection():
+    try:
+        conn = psycopg2.connect(
+            host=os.getenv('DB_HOST', 'localhost'),
+            database=os.getenv('DB_NAME', 'terriertracker'),
+            user=os.getenv('DB_USER', 'kushzingade'),
+            password=os.getenv('DB_PASSWORD', '')
+        )
+        return conn
+    except Exception as e:
+        logger.error(f"Database connection failed: {e}")
+        return None
 
 # Initialize your course manager with multiple CSV files
 course_manager = None
@@ -49,8 +69,6 @@ try:
         raise FileNotFoundError(f"No CSV files found. Checked: {BU_ALL_COURSES_PATH}, {KHC_HUB_COURSES_PATH}")
     
     # Initialize CourseDataManager with multiple CSV files
-    # If CourseDataManager doesn't support multiple files, we'll need to modify it
-    # For now, assuming it can take a list of files or we'll modify it
     course_manager = CourseDataManager(csv_files)
     logger.info(f"CourseDataManager initialized successfully with {len(csv_files)} CSV files")
     
@@ -82,13 +100,130 @@ except Exception as e:
     
     course_manager = None
 
+# Authentication Routes
+@app.route('/api/register', methods=['POST'])
+def register():
+    logger.info("Registration attempt started")
+    try:
+        data = request.json
+        if not data:
+            logger.warning("No JSON data provided for registration")
+            return jsonify({"error": "No JSON data provided"}), 400
+            
+        email = data.get('email')
+        password = data.get('password')
+        first_name = data.get('firstName', '')
+        last_name = data.get('lastName', '')
+        
+        if not email or not password:
+            logger.warning("Missing email or password in registration")
+            return jsonify({"error": "Email and password are required"}), 400
+        
+        # Hash password
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        
+        conn = get_db_connection()
+        if not conn:
+            logger.error("Database connection failed during registration")
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        
+        try:
+            # Check if user already exists
+            cur.execute('SELECT user_id FROM userinfo WHERE email = %s', (email,))
+            if cur.fetchone():
+                logger.info(f"Registration failed - user already exists: {email}")
+                return jsonify({'error': 'User already exists'}), 400
+            
+            # Insert new user
+            cur.execute(
+    'INSERT INTO userinfo (email, password, first_name, last_name) VALUES (%s, %s, %s, %s) RETURNING user_id',
+    (email, hashed_password.decode('utf-8'), first_name, last_name)
+)
+            user_id = cur.fetchone()[0]
+            
+            conn.commit()
+            logger.info(f"User registered successfully: {email} (ID: {user_id})")
+            
+            return jsonify({
+                'message': 'User created successfully', 
+                'user_id': user_id,
+                'success': True
+            }), 201
+            
+        finally:
+            cur.close()
+            conn.close()
+        
+    except Exception as e:
+        logger.error(f"Registration error: {e}")
+        logger.error(f"Full traceback: {traceback.format_exc()}")
+        return jsonify({'error': 'Registration failed', 'success': False}), 500
+
+@app.route('/api/login', methods=['POST'])
+def login():
+    logger.info("Login attempt started")
+    try:
+        data = request.json
+        if not data:
+            logger.warning("No JSON data provided for login")
+            return jsonify({"error": "No JSON data provided"}), 400
+            
+        email = data.get('email')
+        password = data.get('password')
+        
+        if not email or not password:
+            logger.warning("Missing email or password in login")
+            return jsonify({"error": "Email and password are required"}), 400
+        
+        conn = get_db_connection()
+        if not conn:
+            logger.error("Database connection failed during login")
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        
+        try:
+            # Find user
+            cur.execute('SELECT user_id, email, password FROM userinfo WHERE email = %s', (email,))
+            user = cur.fetchone()
+            
+
+            if user and bcrypt.checkpw(password.encode('utf-8'), user[2].encode('utf-8')):
+                logger.info(f"User logged in successfully: {email} (ID: {user[0]})")
+                return jsonify({
+                    'message': 'Login successful',
+                    'user': {
+                        'id': user[0],
+                        'email': user[1]
+                    },
+                    'success': True
+                }), 200
+            else:
+                logger.warning(f"Failed login attempt for: {email}")
+                return jsonify({'error': 'Invalid credentials', 'success': False}), 401
+                
+        finally:
+            cur.close()
+            conn.close()
+            
+    except Exception as e:
+        logger.error(f"Login error: {e}")
+        logger.error(f"Full traceback: {traceback.format_exc()}")
+        return jsonify({'error': 'Login failed', 'success': False}), 500
+
+# Root and Health Routes
 @app.route('/', methods=['GET'])
 def root():
     return jsonify({
         "message": "BU Course API is running!",
+        "version": "1.0.0",
         "data_sources": ["bu_all_courses.csv", "khc_hub_courses.csv"],
         "endpoints": {
-            "health": "/api/health",
+            "health": "/api/health (GET)",
+            "register": "/api/register (POST)",
+            "login": "/api/login (POST)",
             "search_course": "/api/search-course (POST)",
             "multiple_courses": "/api/multiple-courses (POST)",
             "all_courses": "/api/all-courses (GET)",
@@ -98,6 +233,17 @@ def root():
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
+    # Check database connection
+    db_status = "connected"
+    try:
+        conn = get_db_connection()
+        if conn:
+            conn.close()
+        else:
+            db_status = "disconnected"
+    except Exception as e:
+        db_status = f"error: {str(e)}"
+    
     data_sources_status = {
         "bu_all_courses": {
             "path": str(BU_ALL_COURSES_PATH),
@@ -112,12 +258,19 @@ def health_check():
     return jsonify({
         "status": "healthy", 
         "service": "BU Course API",
+        "database_status": db_status,
         "course_manager_status": "ready" if course_manager else "not initialized",
         "script_directory": str(SCRIPT_DIR),
         "csv_directory": str(CSV_DIR),
-        "data_sources": data_sources_status
+        "data_sources": data_sources_status,
+        "environment": {
+            "db_host": os.getenv('DB_HOST', 'localhost'),
+            "db_name": os.getenv('DB_NAME', 'not set'),
+            "db_user": os.getenv('DB_USER', 'not set')
+        }
     })
 
+# Course Management Routes
 @app.route('/api/search-course', methods=['POST'])
 def search_course():
     if not course_manager:
@@ -132,9 +285,11 @@ def search_course():
         if not course_identifier:
             return jsonify({"error": "course_identifier is required"}), 400
         
+        logger.info(f"Searching for course: {course_identifier}")
         course_code = course_manager.find_course_code(course_identifier)
         
         if not course_code:
+            logger.info(f"Course not found: {course_identifier}")
             return jsonify({
                 "found": False,
                 "course_code": None,
@@ -142,6 +297,8 @@ def search_course():
             })
         
         hub_requirements = course_manager.get_hub_requirements_for_course(course_code)
+        logger.info(f"Found course {course_code} with {len(hub_requirements)} hub requirements")
+        
         return jsonify({
             "found": True,
             "course_code": course_code,
@@ -158,7 +315,10 @@ def get_all_courses():
         return jsonify({"error": "Course manager not initialized"}), 500
     
     try:
+        logger.info("Fetching all courses")
         all_courses = course_manager.get_all_courses()
+        logger.info(f"Retrieved {len(all_courses)} courses")
+        
         return jsonify({
             "courses": all_courses,
             "total_courses": len(all_courses),
@@ -183,6 +343,7 @@ def multiple_courses():
         if not courses:
             return jsonify({"error": "courses array is required"}), 400
         
+        logger.info(f"Processing multiple courses: {courses}")
         results, hub_req_set = course_manager.print_multiple_hub_requirements(courses)
         
         return jsonify({
@@ -236,9 +397,11 @@ def process_pdf():
             logger.info("Creating PDF reader...")
             reader = PdfReader(temp_file_path)
             logger.info(f"PDF has {len(reader.pages)} pages")
+            
             logger.info("Extracting semester information...")
             semester = fetch_semester(reader)
             logger.info(f"Extracted semester: {semester}")
+            
             logger.info("Extracting courses from PDF...")
             courses = raw_fetch_courses_info(reader)
             logger.info(f"Extracted {len(courses)} courses: {courses}")
@@ -290,13 +453,17 @@ def process_pdf():
         logger.error("=== PDF PROCESSING FAILED ===")
         return jsonify({"error": str(e)}), 500
 
+# Error Handlers
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({"error": "Endpoint not found"}), 404
 
 @app.errorhandler(500)
 def internal_error(error):
+    logger.error(f"Internal server error: {error}")
     return jsonify({"error": "Internal server error"}), 500
 
 if __name__ == '__main__':
+    logger.info("Starting Flask application...")
+    logger.info(f"Database configuration: Host={os.getenv('DB_HOST', 'localhost')}, DB={os.getenv('DB_NAME', 'not set')}")
     app.run(debug=True, port=5000)

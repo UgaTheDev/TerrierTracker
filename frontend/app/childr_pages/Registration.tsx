@@ -24,9 +24,11 @@ export default function Registration({
     setIsLoading(true);
     setError(null);
 
+    console.log("=== REGISTRATION FUNCTION CALLED ===");
+    console.log("Data:", { email, password, firstName, lastName });
     try {
       await new Promise((resolve) => setTimeout(resolve, 2000));
-
+      e;
       if (email && password && firstName && lastName) {
         console.log("Registration successful for:", {
           email,
@@ -107,6 +109,7 @@ export default function Registration({
               </div>
             </div>
           </div>
+
           <div className="mt-12 p-6 bg-white/10 rounded-3xl backdrop-blur-sm">
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>

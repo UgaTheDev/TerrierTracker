@@ -40,7 +40,7 @@ export default function HubHelper() {
     bookmarkedCourses.includes(courseId);
 
   const CourseCard = ({ course }: { course: Course }) => (
-    <div className="bg-content1 border border-default-200 dark:border-default-700 rounded-lg p-4 shadow-small hover:shadow-medium transition-shadow">
+    <div className="bg-content1 rounded-lg p-4 shadow-medium hover:shadow-large transition-shadow">
       <div className="flex justify-between items-start mb-3">
         <div>
           <h3 className="text-lg font-semibold text-foreground">
@@ -75,7 +75,7 @@ export default function HubHelper() {
             {course.hubRequirements.map((req, index) => (
               <span
                 key={index}
-                className="px-3 py-1 bg-primary-50 dark:bg-primary/20 text-primary text-xs rounded-full border border-primary-200 dark:border-primary/30"
+                className="px-3 py-1 bg-primary-50 dark:bg-primary/20 text-primary text-xs rounded-full"
               >
                 {req}
               </span>
@@ -113,7 +113,7 @@ export default function HubHelper() {
       </div>
 
       {enrolledCourses.length > 0 && (
-        <div className="bg-success-50 dark:bg-success/10 rounded-xl border border-success-200 dark:border-success/30 p-6 mb-8 shadow-small">
+        <div className="bg-success-50 dark:bg-success/10 rounded-xl p-6 mb-8 shadow-small">
           <div className="flex items-center gap-2 mb-4">
             <GraduationCap className="w-5 h-5 text-success" />
             <h2 className="text-xl font-semibold text-success-700 dark:text-success-300">
@@ -130,7 +130,7 @@ export default function HubHelper() {
       )}
 
       {bookmarkedCourses.length > 0 && (
-        <div className="mt-8 bg-warning-50 dark:bg-warning/10 border border-warning-200 dark:border-warning/30 rounded-xl p-6">
+        <div className="mt-8 bg-warning-50 dark:bg-warning/10 rounded-xl p-6">
           <div className="flex items-center gap-2 mb-3">
             <BookmarkCheck className="w-5 h-5 text-warning-600 dark:text-warning-400" />
             <h3 className="text-lg font-semibold text-warning-700 dark:text-warning-300">

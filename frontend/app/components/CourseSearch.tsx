@@ -200,7 +200,7 @@ export default function CourseSearch({
 
   if (!apiHealthy && error) {
     return (
-      <div className="flex items-center justify-center gap-2 text-danger bg-danger-50 dark:bg-danger/10 p-4 rounded-lg border border-danger-200 dark:border-danger/30">
+      <div className="flex items-center justify-center gap-2 text-danger bg-danger-50 dark:bg-danger/10 p-4 rounded-lg">
         <AlertCircle size={20} />
         <div>
           <p className="font-medium">API Connection Error</p>
@@ -226,7 +226,7 @@ export default function CourseSearch({
 
   if (error) {
     return (
-      <div className="flex items-center justify-center gap-2 text-danger bg-danger-50 dark:bg-danger/10 p-4 rounded-lg border border-danger-200 dark:border-danger/30">
+      <div className="flex items-center justify-center gap-2 text-danger bg-danger-50 dark:bg-danger/10 p-4 rounded-lg">
         <AlertCircle size={20} />
         <span>Error loading courses: {error}</span>
       </div>
@@ -241,7 +241,7 @@ export default function CourseSearch({
           placeholder="Search by course code (e.g., CAS CS 131) or course name..."
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
-          className="w-full px-4 py-3 border border-default-200 dark:border-default-700 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-background text-foreground placeholder-default-400"
+          className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary-500 bg-background text-foreground placeholder-default-400"
         />
         <div className="absolute right-3 top-3 text-default-400">
           <Search className="w-5 h-5" />
@@ -257,7 +257,7 @@ export default function CourseSearch({
         {filteredCourses.map((course) => (
           <div
             key={course.courseId}
-            className={`bg-content1 border rounded-lg p-4 cursor-pointer transition-all ${
+            className={`bg-content1 rounded-lg p-4 cursor-pointer transition-all ${
               selectedCourse?.courseId === course.courseId
                 ? "border-primary-500 bg-primary-50 dark:bg-primary-100/10"
                 : "border-default-200 dark:border-default-700 hover:border-default-300 dark:hover:border-default-600 hover:shadow-small"
