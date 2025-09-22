@@ -15,7 +15,7 @@ import {
 interface SidebarProps {
   onNavigate: (page: string) => void;
   currentPage: string;
-  onLogout: () => void; // Add this prop
+  onLogout: () => void;
 }
 
 export default function Sidebar({
@@ -140,7 +140,6 @@ export default function Sidebar({
 
       <Divider className="mb-6" />
 
-      {/* Navigation - now with flex-1 to take available space */}
       <nav className="space-y-2 flex-1">
         {menuItems.map((item) => (
           <div key={item.id}>
