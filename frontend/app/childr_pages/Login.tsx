@@ -29,7 +29,6 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
 
       if (response.ok && data.success) {
         console.log("Login successful for:", data.user);
-        // Store user data in localStorage for session management
         localStorage.setItem("user", JSON.stringify(data.user));
         onLoginSuccess();
       } else {

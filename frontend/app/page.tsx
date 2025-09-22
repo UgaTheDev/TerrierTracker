@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { title, subtitle } from "./components/Primitives";
 import ReqTable from "./components/HubRequirementsTable";
 import Sidebar from "./components/Sidebar";
@@ -42,6 +42,7 @@ type HubRequirement = {
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authPage, setAuthPage] = useState<"login" | "register">("login");
+  const [isLoading, setIsLoading] = useState(true);
 
   const [currentPage, setCurrentPage] = useState("dashboard");
   const [enrolledCourses, setEnrolledCourses] = useState<Course[]>([]);
@@ -51,6 +52,63 @@ export default function Home() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfProcessing, setPdfProcessing] = useState(false);
   const [pdfError, setPdfError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkAuthStatus = () => {
+      try {
+        const savedAuthState = localStorage.getItem(
+          "terrierTracker_isAuthenticated"
+        );
+        const savedEnrolledCourses = localStorage.getItem(
+          "terrierTracker_enrolledCourses"
+        );
+        const savedBookmarkedCourses = localStorage.getItem(
+          "terrierTracker_bookmarkedCourses"
+        );
+        const savedCurrentPage = localStorage.getItem(
+          "terrierTracker_currentPage"
+        );
+
+        if (savedAuthState === "true") {
+          setIsAuthenticated(true);
+
+          if (savedEnrolledCourses) {
+            setEnrolledCourses(JSON.parse(savedEnrolledCourses));
+          }
+          if (savedBookmarkedCourses) {
+            setBookmarkedCourses(JSON.parse(savedBookmarkedCourses));
+          }
+          if (savedCurrentPage) {
+            setCurrentPage(savedCurrentPage);
+          }
+        }
+      } catch (error) {
+        console.error("Error loading saved auth state:", error);
+        localStorage.removeItem("terrierTracker_isAuthenticated");
+        localStorage.removeItem("terrierTracker_enrolledCourses");
+        localStorage.removeItem("terrierTracker_bookmarkedCourses");
+        localStorage.removeItem("terrierTracker_currentPage");
+      }
+      setIsLoading(false);
+    };
+
+    checkAuthStatus();
+  }, []);
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      localStorage.setItem("terrierTracker_isAuthenticated", "true");
+      localStorage.setItem(
+        "terrierTracker_enrolledCourses",
+        JSON.stringify(enrolledCourses)
+      );
+      localStorage.setItem(
+        "terrierTracker_bookmarkedCourses",
+        JSON.stringify(bookmarkedCourses)
+      );
+      localStorage.setItem("terrierTracker_currentPage", currentPage);
+    }
+  }, [isAuthenticated, enrolledCourses, bookmarkedCourses, currentPage]);
 
   const hubRequirementDefinitions = {
     "Philosophical Inquiry and Life's Meanings": 1,
@@ -120,6 +178,13 @@ export default function Home() {
     setIsAuthenticated(false);
     setAuthPage("login");
     setCurrentPage("dashboard");
+    setEnrolledCourses([]);
+    setBookmarkedCourses([]);
+
+    localStorage.removeItem("terrierTracker_isAuthenticated");
+    localStorage.removeItem("terrierTracker_enrolledCourses");
+    localStorage.removeItem("terrierTracker_bookmarkedCourses");
+    localStorage.removeItem("terrierTracker_currentPage");
   };
 
   const handleNavigate = (page: string) => {
@@ -383,6 +448,13 @@ export default function Home() {
         return <div>Page not found</div>;
     }
   };
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <div className="text-lg">Loading...</div>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     if (authPage === "register") {

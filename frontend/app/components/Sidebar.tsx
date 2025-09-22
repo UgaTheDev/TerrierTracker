@@ -9,14 +9,20 @@ import {
   Bookmark,
   Menu,
   X,
+  LogOut,
 } from "lucide-react";
 
 interface SidebarProps {
   onNavigate: (page: string) => void;
   currentPage: string;
+  onLogout: () => void;
 }
 
-export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
+export default function Sidebar({
+  onNavigate,
+  currentPage,
+  onLogout,
+}: SidebarProps) {
   const [coursesExpanded, setCoursesExpanded] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
@@ -77,7 +83,7 @@ export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
 
   return (
     <Card
-      className={`h-screen ${isCollapsed ? "w-16" : "w-72"} rounded-none border-r border-default-200 bg-background/60 backdrop-blur-lg p-4 transition-all duration-300 ease-in-out`}
+      className={`h-screen ${isCollapsed ? "w-16" : "w-72"} rounded-none border-r border-default-200 bg-background/60 backdrop-blur-lg p-4 transition-all duration-300 ease-in-out flex flex-col`}
     >
       <div className="flex items-center gap-3 mb-8 px-2">
         {!isCollapsed ? (
@@ -130,7 +136,8 @@ export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
       </div>
 
       <Divider className="mb-6" />
-      <nav className="space-y-2">
+
+      <nav className="space-y-2 flex-1">
         {menuItems.map((item) => (
           <div key={item.id}>
             {isCollapsed ? (
@@ -191,8 +198,38 @@ export default function Sidebar({ onNavigate, currentPage }: SidebarProps) {
           </div>
         ))}
       </nav>
+
+      {/* Logout Button Section */}
+      <div className="mt-4">
+        <Divider className="mb-4" />
+        {isCollapsed ? (
+          <Tooltip content="Logout" placement="right" delay={300}>
+            <Button
+              isIconOnly
+              variant="light"
+              color="danger"
+              className="w-full h-12"
+              onPress={onLogout}
+            >
+              <LogOut size={20} />
+            </Button>
+          </Tooltip>
+        ) : (
+          <Button
+            variant="light"
+            color="danger"
+            className="w-full justify-start h-12 px-4"
+            startContent={<LogOut size={20} />}
+            onPress={onLogout}
+          >
+            <span className="flex-1 text-left">Logout</span>
+          </Button>
+        )}
+      </div>
+
+      {/* Footer */}
       {!isCollapsed && (
-        <div className="mt-auto pt-6">
+        <div className="mt-4 pt-4">
           <Divider className="mb-4" />
           <div className="px-2 text-center">
             <p className="text-xs text-default-400">
