@@ -14,7 +14,7 @@ import {
   Progress,
   Divider,
 } from "@heroui/react";
-import { BookmarkCheck, Eye, EyeOff } from "lucide-react";
+import { BookmarkCheck, Eye, EyeOff, Trash2, X } from "lucide-react";
 
 type BookmarkedCourse = {
   id: string;
@@ -58,10 +58,23 @@ export default function YourBookmarks({
   const isSelected = (courseId: string) => selectedCourses.includes(courseId);
 
   const updatedHubRequirements = useMemo(() => {
+    // Early return if no courses selected to avoid unnecessary computation
+    if (selectedCourses.length === 0) {
+      return hubRequirements.map((req) => ({
+        ...req,
+        phantom: 0,
+      }));
+    }
+
     const phantomCounts: { [key: string]: number } = {};
 
+    // Create a lookup map for better performance
+    const courseMap = new Map(
+      bookmarkedCourses.map((course) => [course.id, course])
+    );
+
     selectedCourses.forEach((courseId) => {
-      const course = bookmarkedCourses.find((c) => c.id === courseId);
+      const course = courseMap.get(courseId);
       if (course) {
         course.hubRequirements.forEach((req) => {
           phantomCounts[req] = (phantomCounts[req] || 0) + 1;
@@ -78,6 +91,13 @@ export default function YourBookmarks({
   const handleUnbookmark = (courseId: string) => {
     onRemoveBookmark(courseId);
     setSelectedCourses((prev) => prev.filter((id) => id !== courseId));
+  };
+
+  const handleBulkDelete = () => {
+    selectedCourses.forEach((courseId) => {
+      onRemoveBookmark(courseId);
+    });
+    setSelectedCourses([]);
   };
 
   const handleCourseSelect = (courseId: string, isSelected: boolean) => {
@@ -147,13 +167,13 @@ export default function YourBookmarks({
         );
       case "actions":
         return (
-          <div className="flex items-center">
+          <div className="flex items-center gap-1">
             <button
               onClick={() => handleUnbookmark(course.id)}
-              className="p-2 rounded-full text-yellow-600 hover:bg-yellow-50 transition-colors"
+              className="p-2 rounded-full text-red-600 hover:bg-red-50 dark:hover:bg-red-500/20 transition-colors"
               title="Remove bookmark"
             >
-              <BookmarkCheck className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
           </div>
         );
@@ -225,6 +245,17 @@ export default function YourBookmarks({
               <h2 className="text-xl font-semibold">Bookmarked Courses</h2>
               {bookmarkedCourses.length > 0 && (
                 <div className="flex items-center gap-4">
+                  {selectedCourses.length > 0 && (
+                    <Button
+                      size="sm"
+                      color="danger"
+                      variant="flat"
+                      startContent={<Trash2 className="w-4 h-4" />}
+                      onClick={handleBulkDelete}
+                    >
+                      Delete Selected ({selectedCourses.length})
+                    </Button>
+                  )}
                   <Checkbox
                     isSelected={isAllSelected}
                     isIndeterminate={isIndeterminate}
