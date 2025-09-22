@@ -34,7 +34,6 @@ export default function HubHelper({
         </p>
       </div>
 
-      {/* Course Search Section */}
       <div className="bg-default-50 dark:bg-default-100/20 rounded-xl p-6 mb-8 shadow-large">
         <div className="flex items-center gap-2 mb-6">
           <Search className="w-5 h-5 text-primary" />
@@ -50,7 +49,6 @@ export default function HubHelper({
         />
       </div>
 
-      {/* Bookmarked Courses Summary */}
       {bookmarkedCourses.length > 0 && (
         <div className="bg-warning-50 dark:bg-warning/10 rounded-xl p-6 shadow-small">
           <div className="flex items-center gap-2 mb-4">
@@ -67,7 +65,6 @@ export default function HubHelper({
               page to see how they would impact your hub requirements.
             </p>
 
-            {/* Quick overview of bookmarked courses */}
             <div className="grid gap-2 md:grid-cols-2 lg:grid-cols-3">
               {bookmarkedCourses.slice(0, 6).map((course) => (
                 <div
@@ -129,7 +126,6 @@ export default function HubHelper({
         </div>
       )}
 
-      {/* Empty State */}
       {bookmarkedCourses.length === 0 && (
         <div className="text-center py-8">
           <div className="bg-default-100 dark:bg-default-200/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">

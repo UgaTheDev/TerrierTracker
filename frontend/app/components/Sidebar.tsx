@@ -15,7 +15,7 @@ import {
 interface SidebarProps {
   onNavigate: (page: string) => void;
   currentPage: string;
-  onLogout: () => void;
+  onLogout: () => void; // Add this prop
 }
 
 export default function Sidebar({
@@ -24,6 +24,7 @@ export default function Sidebar({
   onLogout,
 }: SidebarProps) {
   const [coursesExpanded, setCoursesExpanded] = useState(false);
+  const [hubHelperExpanded, setHubHelperExpanded] = useState(false);
   const [isCollapsed, setIsCollapsed] = useState(false);
 
   const menuItems = [
@@ -47,7 +48,15 @@ export default function Sidebar({
       id: "hub-helper",
       label: "Hub Helper",
       icon: <Search size={20} />,
-      page: "hub-helper",
+      expandable: true,
+      submenu: [
+        { id: "course-searcher", label: "Course Searcher", page: "hub-helper" },
+        {
+          id: "course-recommender",
+          label: "Course Recommender",
+          page: "recommender",
+        },
+      ],
     },
     {
       id: "bookmarks",
@@ -61,9 +70,17 @@ export default function Sidebar({
     if (item.expandable) {
       if (isCollapsed) {
         setIsCollapsed(false);
-        setCoursesExpanded(true);
+        if (item.id === "courses") {
+          setCoursesExpanded(true);
+        } else if (item.id === "hub-helper") {
+          setHubHelperExpanded(true);
+        }
       } else {
-        setCoursesExpanded(!coursesExpanded);
+        if (item.id === "courses") {
+          setCoursesExpanded(!coursesExpanded);
+        } else if (item.id === "hub-helper") {
+          setHubHelperExpanded(!hubHelperExpanded);
+        }
       }
     } else {
       onNavigate(item.page);
@@ -78,6 +95,7 @@ export default function Sidebar({
     setIsCollapsed(!isCollapsed);
     if (!isCollapsed) {
       setCoursesExpanded(false);
+      setHubHelperExpanded(false);
     }
   };
 
@@ -167,7 +185,10 @@ export default function Sidebar({
                       <ChevronRight
                         size={16}
                         className={`transition-transform duration-200 ${
-                          coursesExpanded ? "rotate-90" : ""
+                          (item.id === "courses" && coursesExpanded) ||
+                          (item.id === "hub-helper" && hubHelperExpanded)
+                            ? "rotate-90"
+                            : ""
                         }`}
                       />
                     ) : null
@@ -176,33 +197,35 @@ export default function Sidebar({
                 >
                   <span className="flex-1 text-left">{item.label}</span>
                 </Button>
-                {item.expandable && coursesExpanded && !isCollapsed && (
-                  <div className="ml-6 mt-2 space-y-1">
-                    {item.submenu?.map((subitem) => (
-                      <Button
-                        key={subitem.id}
-                        variant={
-                          currentPage === subitem.page ? "flat" : "light"
-                        }
-                        color={
-                          currentPage === subitem.page ? "primary" : "default"
-                        }
-                        size="sm"
-                        className="w-full justify-start h-10 px-4 text-sm"
-                        onPress={() => handleSubmenuClick(subitem)}
-                      >
-                        {subitem.label}
-                      </Button>
-                    ))}
-                  </div>
-                )}
+                {item.expandable &&
+                  ((item.id === "courses" && coursesExpanded) ||
+                    (item.id === "hub-helper" && hubHelperExpanded)) &&
+                  !isCollapsed && (
+                    <div className="ml-6 mt-2 space-y-1">
+                      {item.submenu?.map((subitem) => (
+                        <Button
+                          key={subitem.id}
+                          variant={
+                            currentPage === subitem.page ? "flat" : "light"
+                          }
+                          color={
+                            currentPage === subitem.page ? "primary" : "default"
+                          }
+                          size="sm"
+                          className="w-full justify-start h-10 px-4 text-sm"
+                          onPress={() => handleSubmenuClick(subitem)}
+                        >
+                          {subitem.label}
+                        </Button>
+                      ))}
+                    </div>
+                  )}
               </>
             )}
           </div>
         ))}
       </nav>
 
-      {/* Logout Button Section */}
       <div className="mt-4">
         <Divider className="mb-4" />
         {isCollapsed ? (
@@ -230,7 +253,6 @@ export default function Sidebar({
         )}
       </div>
 
-      {/* Footer */}
       {!isCollapsed && (
         <div className="mt-4 pt-4">
           <Divider className="mb-4" />

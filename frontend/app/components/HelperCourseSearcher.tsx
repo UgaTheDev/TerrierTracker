@@ -447,7 +447,6 @@ export default function HelperCourseSearcher({
 
   return (
     <div className="space-y-6">
-      {/* Search Bar */}
       <div className="relative">
         <input
           type="text"
@@ -461,7 +460,6 @@ export default function HelperCourseSearcher({
         </div>
       </div>
 
-      {/* Filter Controls */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <Button
@@ -581,7 +579,6 @@ export default function HelperCourseSearcher({
                   )}
                 </div>
 
-                {/* Selected Hub Requirements Display */}
                 {selectedHubRequirements.size > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
                     {Array.from(selectedHubRequirements).map((hubReq) => (
@@ -620,7 +617,6 @@ export default function HelperCourseSearcher({
         )}
       </div>
 
-      {/* Results */}
       <div className="space-y-3 max-h-96 overflow-y-auto">
         {filteredCourses.map((course) => {
           const currentlyBookmarked =
@@ -639,7 +635,6 @@ export default function HelperCourseSearcher({
                   </h4>
                   <p className="text-default-700 mt-1">{course.courseName}</p>
 
-                  {/* Hub Requirements Display */}
                   <div className="mt-2">
                     {course.hubRequirements.length > 0 ? (
                       <div className="flex flex-wrap gap-1">
@@ -698,7 +693,6 @@ export default function HelperCourseSearcher({
         })}
       </div>
 
-      {/* Empty State */}
       {filteredCourses.length === 0 &&
         (searchValue ||
           selectedDepartment !== "all" ||
