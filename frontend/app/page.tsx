@@ -11,6 +11,7 @@ import HubHelper from "./childr_pages/HubHelper";
 import YourBookmarks from "./childr_pages/YourBookmarks";
 import Login from "./childr_pages/Login";
 import Registration from "./childr_pages/Registration";
+import CourseRecommender from "./childr_pages/Recommender";
 
 type Course = {
   id: number;
@@ -435,6 +436,16 @@ export default function Home() {
             isBookmarked={isBookmarked}
           />
         );
+      case "recommender":
+        return (
+          <CourseRecommender
+            hubRequirements={hubRequirements}
+            onBookmark={handleHubHelperBookmark}
+            bookmarkedCourses={bookmarkedCourses}
+            isBookmarked={isBookmarked}
+          />
+        );
+
       case "bookmarks":
         return (
           <YourBookmarks

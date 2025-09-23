@@ -64,6 +64,7 @@ export const NavBar = ({ onNavigate }: NavBarProps) => {
             <Image
               src="https://www.bu.edu/chemistry/files/2010/10/boston_univ_black.gif"
               width={85}
+              className="rounded-none"
             />
             <p className="font-bold text-inherit"> TerrierTracker</p>
           </NextLink>

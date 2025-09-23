@@ -158,7 +158,6 @@ export default function Sidebar({
 
       <Divider className="mb-6" />
 
-      {/* Navigation - now with flex-1 to take available space */}
       <nav className="space-y-2 flex-1">
         {menuItems.map((item) => (
           <div key={item.id}>
@@ -227,7 +226,6 @@ export default function Sidebar({
         ))}
       </nav>
 
-      {/* Logout Button Section */}
       <div className="mt-4">
         <Divider className="mb-4" />
         {isCollapsed ? (
@@ -255,7 +253,6 @@ export default function Sidebar({
         )}
       </div>
 
-      {/* Footer */}
       {!isCollapsed && (
         <div className="mt-4 pt-4">
           <Divider className="mb-4" />

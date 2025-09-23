@@ -58,7 +58,6 @@ export default function YourBookmarks({
   const isSelected = (courseId: string) => selectedCourses.includes(courseId);
 
   const updatedHubRequirements = useMemo(() => {
-    // Early return if no courses selected to avoid unnecessary computation
     if (selectedCourses.length === 0) {
       return hubRequirements.map((req) => ({
         ...req,
@@ -68,7 +67,6 @@ export default function YourBookmarks({
 
     const phantomCounts: { [key: string]: number } = {};
 
-    // Create a lookup map for better performance
     const courseMap = new Map(
       bookmarkedCourses.map((course) => [course.id, course])
     );
