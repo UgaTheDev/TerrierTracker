@@ -15,7 +15,7 @@ import {
 interface SidebarProps {
   onNavigate: (page: string) => void;
   currentPage: string;
-  onLogout: () => void; // Add this prop
+  onLogout: () => void;
 }
 
 export default function Sidebar({
@@ -66,7 +66,7 @@ export default function Sidebar({
     },
   ];
 
-  const handleItemClick = (item) => {
+  const handleItemClick = (item: any) => {
     if (item.expandable) {
       if (isCollapsed) {
         setIsCollapsed(false);
@@ -87,7 +87,7 @@ export default function Sidebar({
     }
   };
 
-  const handleSubmenuClick = (submenuItem) => {
+  const handleSubmenuClick = (submenuItem: any) => {
     onNavigate(submenuItem.page);
   };
 

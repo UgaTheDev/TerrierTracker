@@ -405,7 +405,7 @@ export default function CourseRecommender({
                   return parts.length >= 2 && parts[1] === dept;
                 }).length;
                 return (
-                  <SelectItem key={dept} value={dept}>
+                  <SelectItem key={dept}>
                     {dept} ({count})
                   </SelectItem>
                 );

@@ -642,20 +642,21 @@ export default function CourseBrowseTable({
                   }}
                   size="sm"
                 >
-                  <SelectItem key="all" value="all">
-                    All Departments ({apiCourses.length})
-                  </SelectItem>
-                  {departments.map((dept) => {
-                    const count = apiCourses.filter((course) => {
-                      const parts = course.courseId.split(" ");
-                      return parts.length >= 2 && parts[1] === dept;
-                    }).length;
-                    return (
-                      <SelectItem key={dept} value={dept}>
-                        {dept} ({count})
-                      </SelectItem>
-                    );
-                  })}
+                  {[
+                    {
+                      key: "all",
+                      label: `All Departments (${apiCourses.length})`,
+                    },
+                    ...departments.map((dept) => {
+                      const count = apiCourses.filter((course) => {
+                        const parts = course.courseId.split(" ");
+                        return parts.length >= 2 && parts[1] === dept;
+                      }).length;
+                      return { key: dept, label: `${dept} (${count})` };
+                    }),
+                  ].map((item) => (
+                    <SelectItem key={item.key}>{item.label}</SelectItem>
+                  ))}
                 </Select>
               </div>
 

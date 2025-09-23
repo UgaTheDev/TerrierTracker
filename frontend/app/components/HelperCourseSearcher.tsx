@@ -209,6 +209,7 @@ export default function HelperCourseSearcher({
         return parts.length >= 2 && parts[1] === selectedDepartment;
       });
     }
+
     if (selectedHubRequirements.size > 0) {
       const selectedArray = Array.from(selectedHubRequirements);
       filtered = filtered.filter((course) => {
@@ -445,7 +446,7 @@ export default function HelperCourseSearcher({
           placeholder="Search by course code (e.g., CAS CS 131) or course name..."
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
-          className="w-full px-4 py-3 pr-10 rounded-lg focus:ring-2 focus:ring-primary-500 bg-background text-foreground placeholder-default-400 transition-colors"
+          className="w-full px-4 py-3 pr-10 rounded-lg border border-default-200 focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-background text-foreground placeholder-default-400 transition-colors"
         />
         <div className="absolute right-3 top-3 text-default-400">
           <Search className="w-5 h-5" />
@@ -483,7 +484,7 @@ export default function HelperCourseSearcher({
         </div>
 
         {showFilters && (
-          <div className="space-y-4 p-4 bg-default-50 dark:bg-default-100/20 rounded-lg ">
+          <div className="space-y-4 p-4 bg-default-50 dark:bg-default-100/20 rounded-lg border border-default-200">
             <div className="flex items-center justify-between">
               <h3 className="text-sm font-semibold text-default-700">
                 Filters
@@ -505,7 +506,9 @@ export default function HelperCourseSearcher({
                   label="Department"
                   placeholder="Filter by department"
                   selectedKeys={
-                    selectedDepartment === "all" ? [] : [selectedDepartment]
+                    selectedDepartment === "all"
+                      ? new Set([])
+                      : new Set([selectedDepartment])
                   }
                   onSelectionChange={(keys) => {
                     const selected = Array.from(keys)[0] as string;
@@ -513,20 +516,21 @@ export default function HelperCourseSearcher({
                   }}
                   size="sm"
                 >
-                  <SelectItem key="all" value="all">
-                    All Departments ({allCourses.length})
-                  </SelectItem>
-                  {departments.map((dept) => {
-                    const count = allCourses.filter((course) => {
-                      const parts = course.courseId.split(" ");
-                      return parts.length >= 2 && parts[1] === dept;
-                    }).length;
-                    return (
-                      <SelectItem key={dept} value={dept}>
-                        {dept} ({count})
-                      </SelectItem>
-                    );
-                  })}
+                  {[
+                    {
+                      key: "all",
+                      label: `All Departments (${allCourses.length})`,
+                    },
+                    ...departments.map((dept) => {
+                      const count = allCourses.filter((course) => {
+                        const parts = course.courseId.split(" ");
+                        return parts.length >= 2 && parts[1] === dept;
+                      }).length;
+                      return { key: dept, label: `${dept} (${count})` };
+                    }),
+                  ].map((item) => (
+                    <SelectItem key={item.key}>{item.label}</SelectItem>
+                  ))}
                 </Select>
               </div>
 
@@ -539,7 +543,7 @@ export default function HelperCourseSearcher({
                     </span>
                   )}
                 </label>
-                <div className="max-h-32 overflow-y-auto space-y-1 p-2 rounded-lg bg-background">
+                <div className="max-h-32 overflow-y-auto space-y-1 p-2 border border-default-200 rounded-lg bg-background">
                   {allHubRequirements.length === 0 ? (
                     <p className="text-xs text-default-400 italic">
                       Load hub requirements to see available filters
@@ -618,7 +622,7 @@ export default function HelperCourseSearcher({
           return (
             <div
               key={course.courseId}
-              className="bg-content1 rounded-lg p-4 hover:shadow-small transition-all"
+              className="bg-content1 border border-default-200 dark:border-default-700 rounded-lg p-4 hover:border-default-300 dark:hover:border-default-600 hover:shadow-small transition-all"
             >
               <div className="flex justify-between items-start">
                 <div className="flex-1">
