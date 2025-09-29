@@ -119,8 +119,7 @@ export default function CategoryProgress({
         color: "danger",
       },
       "Scientific and Social Inquiry": {
-        color: "default",
-        customStyle: "bg-amber-600",
+        color: "secondary",
       },
       "Quantitative Reasoning": {
         color: "success",
