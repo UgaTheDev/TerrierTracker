@@ -14,7 +14,18 @@ from course_data_manager import CourseDataManager
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={
+    r"/api/*": {
+        "origins": [
+            "https://terriertracker.vercel.app",
+            "https://terriertracker-9hsthqfhq-kzingade.vercel.app",
+            "http://localhost:3000",
+            "http://localhost:5000"
+        ],
+        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+        "allow_headers": ["Content-Type"]
+    }
+})
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -441,4 +452,5 @@ def internal_error(error):
 if __name__ == '__main__':
     logger.info("Starting Flask application...")
     logger.info(f"Database configuration: Host={os.getenv('DB_HOST', 'localhost')}, DB={os.getenv('DB_NAME', 'not set')}")
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(debug=False, host='0.0.0.0', port=port)
