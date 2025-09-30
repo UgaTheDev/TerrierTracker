@@ -73,6 +73,7 @@ def get_db_connection():
         logger.error(f"Database connection failed: {e}")
         return None
 
+
 course_manager = None
 try:
     csv_files = []
