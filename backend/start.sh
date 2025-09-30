@@ -1,2 +1,2 @@
 pip install -r requirements.txt
-python PythonFiles/app.py
+python PythonFiles/app.py 
