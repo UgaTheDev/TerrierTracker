@@ -147,15 +147,6 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
               onGoToRegister={onGoToRegister}
             />
           </div>
-
-          <div className="mt-8 text-center">
-            <p className="text-sm text-default-500">
-              Need help?{" "}
-              <button className="text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 hover:underline transition-colors">
-                Contact Support
-              </button>
-            </p>
-          </div>
         </div>
       </div>
     </div>
