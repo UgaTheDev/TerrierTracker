@@ -170,13 +170,6 @@ export default function LoginForm({
         </button>
 
         <div className="text-center space-y-2">
-          <button
-            type="button"
-            className="text-sm text-primary hover:text-primary/80 hover:underline transition-colors"
-            disabled={isLoading}
-          >
-            Forgot your password?
-          </button>
           <div className="text-sm text-default-600">
             Don't have an account?{" "}
             <button
