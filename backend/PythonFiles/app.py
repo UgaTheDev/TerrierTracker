@@ -620,6 +620,51 @@ def remove_bookmarked_course(user_id):
         cur.close()
         conn.close()
 
+@app.route('/api/user/<int:user_id>/courses/enrolled', methods=['POST'])
+def add_enrolled_course(user_id):
+    logger.info(f"Received request to add enrolled course for user {user_id}")
+    try:
+        data = request.json
+        course_code = data.get('course_code')
+        logger.info(f"Course code to add: {course_code}")
+
+        if not course_code:
+            logger.warning("No course_code provided in request")
+            return jsonify({"error": "course_code is required"}), 400
+        
+        conn = get_db_connection()
+        if not conn:
+            logger.error("DB connection failed in add_enrolled_course")
+            return jsonify({"error": "Database connection failed"}), 500
+        
+        cur = conn.cursor()
+        # Check if course is already enrolled to avoid duplicates
+        cur.execute("SELECT enrolled_courses FROM courseinfo WHERE user_id = %s", (user_id,))
+        row = cur.fetchone()
+        enrolled_courses = row[0] if row else []
+
+        if enrolled_courses and course_code in enrolled_courses:
+            logger.info(f"Course {course_code} already enrolled for user {user_id}")
+        else:
+            cur.execute('''
+                INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses)
+                VALUES (%s, ARRAY[%s], ARRAY[]::TEXT[])
+                ON CONFLICT (user_id) 
+                DO UPDATE SET enrolled_courses = array_append(courseinfo.enrolled_courses, %s)
+                WHERE NOT (%s = ANY(courseinfo.enrolled_courses))
+            ''', (user_id, course_code, course_code, course_code))
+            conn.commit()
+            logger.info(f"Course {course_code} added to enrolled_courses for user {user_id}")
+
+        return jsonify({'success': True, 'message': 'Course added'})
+    except Exception as e:
+        logger.error(f"Error in add_enrolled_course: {e}")
+        logger.error(traceback.format_exc())
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
 if __name__ == '__main__':
     logger.info("Starting Flask application...")
     logger.info(f"Database configuration: Host={os.getenv('DB_HOST', 'localhost')}, DB={os.getenv('DB_NAME', 'not set')}")

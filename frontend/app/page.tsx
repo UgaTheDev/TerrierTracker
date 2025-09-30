@@ -88,23 +88,18 @@ export default function Home() {
       const response = await fetch(`${API_BASE_URL}/user/${userId}/courses`);
       const data = await response.json();
 
-      // Convert bookmarked course codes to BookmarkedCourse objects
-      // Note: You may need to fetch additional course details or store more info in the database
       const bookmarkedCoursesData: BookmarkedCourse[] = (
         data.bookmarked_courses || []
       ).map((code: string) => ({
         id: code,
         code: code,
-        name: code, // You'll need to fetch the actual course name
+        name: code,
         credits: 4,
         hubRequirements: [],
         school: code.split(" ")[0] || "Unknown",
       }));
 
       setBookmarkedCourses(bookmarkedCoursesData);
-
-      // Handle enrolled courses similarly if needed
-      // For now, keeping local state for enrolled courses
       const savedEnrolledCourses = localStorage.getItem(
         "terrierTracker_enrolledCourses"
       );

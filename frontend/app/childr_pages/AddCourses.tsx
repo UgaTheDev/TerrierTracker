@@ -7,6 +7,37 @@ import CourseBrowseTable from "../components/CourseBrowseTable";
 import PdfUploadTab from "../components/ImportPDF";
 import AddCourseModal from "../components/AddCourseModal";
 
+const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
+
+async function addEnrolledCourse(
+  userId: number,
+  courseCode: string
+): Promise<boolean> {
+  console.log(`API: Adding enrolled course ${courseCode} for user ${userId}`);
+  try {
+    const response = await fetch(
+      `${API_BASE_URL}/user/${userId}/courses/enrolled`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ course_code: courseCode }),
+      }
+    );
+    const data = await response.json();
+    if (!response.ok) {
+      console.error(
+        `API error adding enrolled course: ${data.error || response.statusText}`
+      );
+      return false;
+    }
+    console.log("API: Successfully added enrolled course");
+    return true;
+  } catch (error) {
+    console.error("API error adding enrolled course:", error);
+    return false;
+  }
+}
+
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
@@ -55,6 +86,11 @@ type BookmarkedCourse = {
   school: string;
 };
 
+type UserData = {
+  id: number;
+  email: string;
+};
+
 interface AddCoursesProps {
   enrolledCourses?: Course[];
   bookmarkedCourses?: BookmarkedCourse[];
@@ -67,6 +103,7 @@ interface AddCoursesProps {
   pdfProcessing?: boolean;
   handlePdfUpload?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   pdfError?: string | null;
+  currentUser?: UserData | null;
 }
 
 export default function AddCourses({
@@ -81,6 +118,7 @@ export default function AddCourses({
   pdfProcessing,
   handlePdfUpload,
   pdfError,
+  currentUser = null,
 }: AddCoursesProps) {
   const [activeTab, setActiveTab] = React.useState("manual");
   const [confirmModalOpen, setConfirmModalOpen] = React.useState(false);
@@ -117,9 +155,18 @@ export default function AddCourses({
     }
   };
 
-  const handleAddCourse = (course: Course) => {
-    setCourseToAdd(course);
-    setConfirmModalOpen(true);
+  const handleAddCourse = async (course: Course) => {
+    console.log("handleAddCourse called with course:", course);
+    if (!currentUser) {
+      alert("Please login first");
+      return;
+    }
+    onAddCourse(course);
+
+    const success = await addEnrolledCourse(currentUser.id, course.courseId);
+    if (!success) {
+      alert("Failed to save course to database");
+    }
   };
 
   const confirmAdd = () => {

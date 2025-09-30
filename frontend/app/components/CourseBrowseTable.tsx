@@ -61,121 +61,56 @@ const columns = [
   { name: "ACTIONS", uid: "actions" },
 ];
 
-interface CourseBrowseTableProps {
-  isEnrolled: (courseId: string) => boolean;
-  handleAddCourse: (course: Course) => void;
-  isBookmarked: (courseId: string) => boolean;
-  handleBookmark: (bookmarkedCourse: BookmarkedCourse) => void;
-}
-
-const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
-
-const apiCache = new Map<string, any>();
-const CACHE_DURATION = 5 * 60 * 1000;
+const API_BASE_URL = "https://terriertracker-production.up.railway.app";
 
 const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
   const cacheKey = `${endpoint}-${JSON.stringify(options)}`;
-  const cached = apiCache.get(cacheKey);
-
-  if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
-    return cached.data;
-  }
-
-  try {
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-      headers: {
-        "Content-Type": "application/json",
-        ...options.headers,
-      },
-      ...options,
-    });
-
-    const data = await response.json();
-
-    if (!response.ok) {
-      throw new Error(data.error || `HTTP error! status: ${response.status}`);
+  const cached = localStorage.getItem(cacheKey);
+  if (cached) {
+    const parsed = JSON.parse(cached);
+    if (Date.now() - parsed.timestamp < 5 * 60 * 1000) {
+      return parsed.data;
     }
-
-    apiCache.set(cacheKey, {
-      data,
-      timestamp: Date.now(),
-    });
-
-    return data;
-  } catch (error) {
-    console.error(`API request failed for ${endpoint}:`, error);
-    throw error;
   }
+  const res = await fetch(`${API_BASE_URL}${endpoint}`, {
+    headers: {
+      "Content-Type": "application/json",
+      ...options.headers,
+    },
+    ...options,
+  });
+  if (!res.ok) {
+    let msg = await res.text();
+    throw new Error(msg || `HTTP error ${res.status}`);
+  }
+  const data = await res.json();
+  localStorage.setItem(
+    cacheKey,
+    JSON.stringify({ data, timestamp: Date.now() })
+  );
+  return data;
 };
 
 const fetchAllCourses = async (): Promise<CourseData[]> => {
-  try {
-    const data = await apiRequest("/all-courses", { method: "GET" });
-
-    const coursesArray = Object.entries(data.courses || {}).map(
-      ([code, name]) => ({
-        courseId: code,
-        courseName: name as string,
-        hubRequirements: [],
-        requirementsText: "Click to load requirements",
-      })
-    );
-
-    return coursesArray;
-  } catch (error: any) {
-    throw new Error(`Failed to fetch courses: ${error.message}`);
-  }
+  const data = await apiRequest("/all-courses", { method: "GET" });
+  return Object.entries(data.courses || {}).map(([code, name]) => ({
+    courseId: code,
+    courseName: name as string,
+    hubRequirements: [],
+    requirementsText: "Click to load requirements",
+  }));
 };
 
 const fetchHubRequirements = async (courseCode: string): Promise<string[]> => {
   try {
     const data = await apiRequest("/search-course", {
       method: "POST",
-      body: JSON.stringify({
-        course_identifier: courseCode,
-      }),
+      body: JSON.stringify({ course_identifier: courseCode }),
     });
-
     return data.hub_requirements || [];
-  } catch (error) {
-    console.error(`Error fetching hub requirements for ${courseCode}:`, error);
+  } catch {
     return [];
   }
-};
-
-const fetchMultipleHubRequirements = async (
-  courseCodes: string[]
-): Promise<Map<string, string[]>> => {
-  const results = new Map<string, string[]>();
-
-  const batchSize = 50;
-  const batches: string[][] = [];
-
-  for (let i = 0; i < courseCodes.length; i += batchSize) {
-    batches.push(courseCodes.slice(i, i + batchSize));
-  }
-
-  for (const batch of batches) {
-    const batchPromises = batch.map(async (courseCode) => {
-      try {
-        const requirements = await fetchHubRequirements(courseCode);
-        return { courseCode, requirements };
-      } catch (error) {
-        console.error(`Failed to load requirements for ${courseCode}:`, error);
-        return { courseCode, requirements: [] };
-      }
-    });
-
-    const batchResults = await Promise.all(batchPromises);
-    batchResults.forEach(({ courseCode, requirements }) => {
-      results.set(courseCode, requirements);
-    });
-    if (batches.indexOf(batch) < batches.length - 1) {
-      await new Promise((resolve) => setTimeout(resolve, 100));
-    }
-  }
-
-  return results;
 };
 
 export default function CourseBrowseTable({
@@ -183,591 +118,203 @@ export default function CourseBrowseTable({
   handleAddCourse,
   isBookmarked,
   handleBookmark,
-}: CourseBrowseTableProps) {
-  const [apiCourses, setApiCourses] = useState<CourseData[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+}: {
+  isEnrolled: (code: string) => boolean;
+  handleAddCourse: (c: Course) => void;
+  isBookmarked: (code: string) => boolean;
+  handleBookmark: (bookmark: BookmarkedCourse) => void;
+}) {
+  const [courses, setCourses] = useState<CourseData[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [apiHealthy, setApiHealthy] = useState(false);
-  const [loadingRequirements, setLoadingRequirements] = useState<Set<string>>(
-    new Set()
-  );
-  const [batchLoading, setBatchLoading] = useState(false);
-  const [selectedDepartment, setSelectedDepartment] = useState<string>("all");
-  const [selectedHubRequirements, setSelectedHubRequirements] = useState<
-    Set<string>
-  >(new Set());
-  const [showFilters, setShowFilters] = useState(false);
+  const [selected, setSelected] = useState<CourseData | null>(null);
+  const [loadingReqs, setLoadingReqs] = useState<Set<string>>(new Set());
 
-  const [localBookmarkStates, setLocalBookmarkStates] = useState<
-    Map<string, boolean>
-  >(new Map());
-
-  const departments = useMemo(() => {
-    const deptSet = new Set<string>();
-    apiCourses.forEach((course) => {
-      const parts = course.courseId.split(" ");
-      if (parts.length >= 2) {
-        deptSet.add(parts[1]);
+  useEffect(() => {
+    (async () => {
+      try {
+        const loaded = await fetchAllCourses();
+        setCourses(loaded.slice(0, 100)); // Limit to 100 to start
+      } catch (e) {
+        setError((e as Error).message || "Failed loading courses");
+      } finally {
+        setLoading(false);
       }
-    });
-    return Array.from(deptSet).sort();
-  }, [apiCourses]);
+    })();
+  }, []);
 
-  const allHubRequirements = useMemo(() => {
-    const hubSet = new Set<string>();
-    apiCourses.forEach((course) => {
-      course.hubRequirements.forEach((req) => {
-        if (req && req.trim()) {
-          hubSet.add(req.trim());
-        }
-      });
-    });
-    return Array.from(hubSet).sort();
-  }, [apiCourses]);
-
-  const filteredCourses = useMemo(() => {
-    let filtered = apiCourses;
-
-    if (selectedDepartment !== "all") {
-      filtered = filtered.filter((course) => {
-        const parts = course.courseId.split(" ");
-        return parts.length >= 2 && parts[1] === selectedDepartment;
-      });
-    }
-
-    if (selectedHubRequirements.size > 0) {
-      filtered = filtered.filter((course) => {
-        const courseHubsSet = new Set(course.hubRequirements);
-        return Array.from(selectedHubRequirements).every((selectedHub) =>
-          courseHubsSet.has(selectedHub)
-        );
-      });
-    }
-
-    return filtered;
-  }, [apiCourses, selectedDepartment, selectedHubRequirements]);
-
-  const toggleHubRequirement = (hubReq: string) => {
-    setSelectedHubRequirements((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(hubReq)) {
-        newSet.delete(hubReq);
-      } else {
-        newSet.add(hubReq);
-      }
+  const loadRequirements = async (code: string) => {
+    if (loadingReqs.has(code)) return;
+    setLoadingReqs(new Set(loadingReqs).add(code));
+    const reqs = await fetchHubRequirements(code);
+    setCourses((cs) =>
+      cs.map((course) =>
+        course.courseId === code
+          ? {
+              ...course,
+              hubRequirements: reqs,
+              requirementsText: reqs.length
+                ? reqs.join(", ")
+                : "No requirements",
+            }
+          : course
+      )
+    );
+    setLoadingReqs((s) => {
+      const newSet = new Set(s);
+      newSet.delete(code);
       return newSet;
     });
   };
 
-  const clearAllFilters = () => {
-    setSelectedDepartment("all");
-    setSelectedHubRequirements(new Set());
-  };
-
-  useEffect(() => {
-    const initializeData = async () => {
-      try {
-        console.log("Starting API health check...");
-        await apiRequest("/health", { method: "GET" });
-        console.log("API health check passed");
-        setApiHealthy(true);
-
-        console.log("Loading courses...");
-        const coursesData = await fetchAllCourses();
-        console.log(`Loaded ${coursesData.length} courses`);
-        setApiCourses(coursesData);
-      } catch (error: any) {
-        console.error("Failed to initialize course data:", error);
-        setError(error.message);
-        setApiHealthy(false);
-      } finally {
-        console.log("Finished loading");
-        setIsLoading(false);
-      }
-    };
-
-    initializeData();
-  }, []);
-
-  const loadHubRequirements = async (courseId: string) => {
-    if (loadingRequirements.has(courseId) || batchLoading) return;
-
-    setLoadingRequirements((prev) => new Set(prev).add(courseId));
-
-    try {
-      const hubRequirements = await fetchHubRequirements(courseId);
-      const requirementsText =
-        hubRequirements.length > 0
-          ? hubRequirements.join(", ")
-          : "No hub requirements";
-
-      setApiCourses((prev) =>
-        prev.map((course) =>
-          course.courseId === courseId
-            ? { ...course, hubRequirements, requirementsText }
-            : course
-        )
-      );
-    } catch (error) {
-      console.error(`Failed to load requirements for ${courseId}:`, error);
-    } finally {
-      setLoadingRequirements((prev) => {
-        const newSet = new Set(prev);
-        newSet.delete(courseId);
-        return newSet;
-      });
-    }
-  };
-
-  const loadAllHubRequirements = async () => {
-    if (batchLoading) return;
-
-    const coursesNeedingRequirements = filteredCourses
-      .filter((course) => course.hubRequirements.length === 0)
-      .map((course) => course.courseId);
-
-    if (coursesNeedingRequirements.length === 0) return;
-
-    console.log(
-      `Batch loading requirements for ${coursesNeedingRequirements.length} courses`
-    );
-    setBatchLoading(true);
-
-    try {
-      const requirementsMap = await fetchMultipleHubRequirements(
-        coursesNeedingRequirements
-      );
-
-      setApiCourses((prev) =>
-        prev.map((course) => {
-          const hubRequirements = requirementsMap.get(course.courseId);
-          if (hubRequirements !== undefined) {
-            const requirementsText =
-              hubRequirements.length > 0
-                ? hubRequirements.join(", ")
-                : "No hub requirements";
-            return { ...course, hubRequirements, requirementsText };
-          }
-          return course;
-        })
-      );
-      console.log("Batch loading complete");
-    } catch (error) {
-      console.error("Failed to batch load requirements:", error);
-    } finally {
-      setBatchLoading(false);
-    }
-  };
-
-  const convertToCourse = (courseData: CourseData): Course => ({
+  const convertToCourse = (data: CourseData): Course => ({
     id: Date.now() + Math.random(),
-    courseId: courseData.courseId,
-    course: courseData.courseName,
+    courseId: data.courseId,
+    course: data.courseName,
     credits: 4,
-    requirements: courseData.requirementsText,
-    description: `Hub Requirements: ${courseData.requirementsText}`,
-    hubRequirements: courseData.hubRequirements,
+    requirements: data.requirementsText,
+    description: `Requirements: ${data.requirementsText}`,
+    hubRequirements: data.hubRequirements,
   });
 
-  const convertToBookmarkedCourse = (
-    courseData: CourseData
-  ): BookmarkedCourse => ({
-    id: courseData.courseId,
-    code: courseData.courseId,
-    name: courseData.courseName,
+  const convertToBookmark = (data: CourseData): BookmarkedCourse => ({
+    id: data.courseId,
+    code: data.courseId,
+    name: data.courseName,
     credits: 4,
-    hubRequirements: courseData.hubRequirements || [],
-    school: courseData.courseId.split(" ")[0] || "Unknown",
+    hubRequirements: data.hubRequirements ?? [],
+    school: data.courseId.split(" ")[0] ?? "Unknown",
   });
 
-  const handleBookmarkClick = async (courseData: CourseData) => {
-    const currentlyBookmarked =
-      localBookmarkStates.get(courseData.courseId) ??
-      isBookmarked(courseData.courseId);
-
-    console.log(
-      "Bookmark button clicked for:",
-      courseData.courseId,
-      "Currently bookmarked:",
-      currentlyBookmarked
-    );
-
-    const newBookmarkState = !currentlyBookmarked;
-    setLocalBookmarkStates((prev) =>
-      new Map(prev).set(courseData.courseId, newBookmarkState)
-    );
-    if (!currentlyBookmarked && courseData.hubRequirements.length === 0) {
-      console.log("Loading hub requirements before bookmarking...");
-      await loadHubRequirements(courseData.courseId);
-
-      const updatedCourse = apiCourses.find(
-        (c) => c.courseId === courseData.courseId
-      );
-      if (updatedCourse) {
-        const bookmarkedCourse = convertToBookmarkedCourse(updatedCourse);
-        console.log("Bookmarking with updated data:", bookmarkedCourse);
-        handleBookmark(bookmarkedCourse);
-      } else {
-        const bookmarkedCourse = convertToBookmarkedCourse(courseData);
-        console.log("Bookmarking with original data:", bookmarkedCourse);
-        handleBookmark(bookmarkedCourse);
-      }
-    } else {
-      const bookmarkedCourse = convertToBookmarkedCourse(courseData);
-      console.log("Bookmarking:", bookmarkedCourse);
-      handleBookmark(bookmarkedCourse);
+  // Custom cell renderer with added logging on add-click
+  const renderCell = (course: CourseData, column: string) => {
+    switch (column) {
+      case "id":
+        return <>{course.courseId}</>;
+      case "course":
+        return <>{course.courseName}</>;
+      case "credits":
+        return <>4</>;
+      case "hubRequirements":
+        if (course.hubRequirements.length > 0) {
+          return (
+            <>
+              {course.hubRequirements.map((req, idx) => (
+                <Chip
+                  key={idx}
+                  size="sm"
+                  variant="flat"
+                  color="primary"
+                  className="mr-1"
+                >
+                  {req}
+                </Chip>
+              ))}
+            </>
+          );
+        } else {
+          return (
+            <button
+              className="text-primary underline cursor-pointer"
+              disabled={loadingReqs.has(course.courseId)}
+              onClick={() => loadRequirements(course.courseId)}
+            >
+              {loadingReqs.has(course.courseId)
+                ? "Loading..."
+                : "Load requirements"}
+            </button>
+          );
+        }
+      case "status":
+        return isEnrolled(course.courseId) ? (
+          <span className="text-green-600">Enrolled</span>
+        ) : (
+          <span>Available</span>
+        );
+      case "bookmark":
+        const bookmarked = isBookmarked(course.courseId);
+        return (
+          <button
+            onClick={() => {
+              console.log("Bookmark clicked for", course.courseId);
+              const bookmark = convertToBookmark(course);
+              handleBookmark(bookmark);
+            }}
+            title={bookmarked ? "Remove bookmark" : "Add bookmark"}
+            aria-label="Bookmark toggle"
+          >
+            {bookmarked ? <BookmarkCheck /> : <Bookmark />}
+          </button>
+        );
+      case "actions":
+        const enrolled = isEnrolled(course.courseId);
+        return enrolled ? (
+          <span className="text-gray-400" title="Already enrolled">
+            <Check />
+          </span>
+        ) : (
+          <button
+            onClick={() => {
+              console.log("Add clicked for", course.courseId);
+              const c = convertToCourse(course);
+              handleAddCourse(c);
+            }}
+            aria-label="Add course"
+          >
+            <AddIcon />
+          </button>
+        );
+      default:
+        return course[column as keyof CourseData];
     }
   };
 
-  const renderCell = React.useCallback(
-    (courseData: CourseData, columnKey: React.Key) => {
-      switch (columnKey) {
-        case "id":
-          return (
-            <div className="flex flex-col">
-              <p className="text-bold text-sm font-mono">
-                {courseData.courseId}
-              </p>
-            </div>
-          );
-        case "course":
-          return (
-            <div className="flex flex-col">
-              <p className="text-bold text-sm">{courseData.courseName}</p>
-            </div>
-          );
-        case "credits":
-          return (
-            <div className="flex items-center">
-              <p className="text-sm font-semibold">4</p>
-            </div>
-          );
-        case "hubRequirements":
-          return (
-            <div className="flex flex-wrap gap-1 max-w-xs">
-              {courseData.hubRequirements.length > 0 ? (
-                courseData.hubRequirements.map((req, index) => (
-                  <Chip
-                    key={index}
-                    size="sm"
-                    variant="flat"
-                    color="primary"
-                    className="text-xs"
-                  >
-                    {req}
-                  </Chip>
-                ))
-              ) : (
-                <button
-                  className="text-xs text-primary hover:text-primary-600 underline"
-                  onClick={() => loadHubRequirements(courseData.courseId)}
-                  disabled={
-                    loadingRequirements.has(courseData.courseId) || batchLoading
-                  }
-                >
-                  {loadingRequirements.has(courseData.courseId)
-                    ? "Loading..."
-                    : courseData.requirementsText}
-                </button>
-              )}
-            </div>
-          );
-        case "status":
-          return (
-            <div className="flex items-center">
-              {isEnrolled(courseData.courseId) ? (
-                <div className="flex items-center gap-1 text-success">
-                  <Check size={14} />
-                  <span className="text-xs font-medium">Enrolled</span>
-                </div>
-              ) : (
-                <span className="text-xs text-default-400">Available</span>
-              )}
-            </div>
-          );
-        case "bookmark":
-          const currentlyBookmarked =
-            localBookmarkStates.get(courseData.courseId) ??
-            isBookmarked(courseData.courseId);
-
-          return (
-            <div className="flex items-center justify-center">
-              <button
-                onClick={() => handleBookmarkClick(courseData)}
-                className={`p-2 rounded-full transition-colors ${
-                  currentlyBookmarked
-                    ? "text-yellow-600 bg-yellow-50 hover:bg-yellow-100"
-                    : "text-gray-400 hover:text-yellow-600 hover:bg-yellow-50"
-                }`}
-                title={
-                  currentlyBookmarked ? "Remove bookmark" : "Bookmark course"
-                }
-              >
-                {currentlyBookmarked ? (
-                  <BookmarkCheck className="w-4 h-4" />
-                ) : (
-                  <Bookmark className="w-4 h-4" />
-                )}
-              </button>
-            </div>
-          );
-        case "actions":
-          return (
-            <div className="relative flex items-center gap-2">
-              {!isEnrolled(courseData.courseId) ? (
-                <Tooltip content="Add Course">
-                  <span
-                    className="text-lg text-success cursor-pointer active:opacity-50"
-                    onClick={() => handleAddCourse(convertToCourse(courseData))}
-                  >
-                    <AddIcon />
-                  </span>
-                </Tooltip>
-              ) : (
-                <Tooltip content="Already Enrolled">
-                  <span className="text-lg text-default-300">
-                    <Check size={18} />
-                  </span>
-                </Tooltip>
-              )}
-            </div>
-          );
-        default:
-          return courseData[columnKey as keyof CourseData];
-      }
-    },
-    [
-      isEnrolled,
-      handleAddCourse,
-      isBookmarked,
-      handleBookmark,
-      loadingRequirements,
-      batchLoading,
-      localBookmarkStates,
-      apiCourses,
-    ]
-  );
-
-  const tableItems = useMemo(() => filteredCourses, [filteredCourses]);
-
-  if (isLoading) {
+  if (loading) {
     return (
-      <div className="pt-4">
-        <div className="h-96 overflow-auto space-y-2">
-          {[...Array(8)].map((_, i) => (
-            <Skeleton key={i} className="h-12 rounded-lg" />
-          ))}
-        </div>
+      <div>
+        {[...Array(8)].map((_, i) => (
+          <Skeleton key={i} />
+        ))}
       </div>
     );
   }
 
-  if (!apiHealthy && error) {
+  if (error) {
     return (
-      <div className="pt-4">
-        <div className="flex items-center justify-center gap-2 text-danger bg-danger-50 p-6 rounded-lg">
-          <AlertCircle size={20} />
-          <div>
-            <p className="font-medium">API Connection Error</p>
-            <p className="text-sm">{error}</p>
-            <p className="text-xs mt-1">
-              Make sure your Flask server is running: python app.py
-            </p>
-          </div>
-        </div>
+      <div className="error">
+        <AlertCircle />
+        <span>{error}</span>
       </div>
     );
   }
 
   return (
-    <div className="pt-4">
-      <div className="mb-4 space-y-3">
-        <div className="flex items-center justify-between">
-          <Button
-            variant="flat"
-            size="sm"
-            startContent={<Filter size={16} />}
-            onPress={() => setShowFilters(!showFilters)}
-          >
-            {showFilters ? "Hide Filters" : "Show Filters"}
-          </Button>
-
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-default-500">
-              Showing {filteredCourses.length} of {apiCourses.length} courses
-            </span>
-            <Button
-              size="sm"
-              color="primary"
-              variant="flat"
-              onPress={loadAllHubRequirements}
-              isDisabled={batchLoading}
-              isLoading={batchLoading}
+    <div>
+      <Table
+        aria-label="Browse Courses"
+        selectionMode="none"
+        sortDescriptor={null}
+      >
+        <TableHeader columns={columns}>
+          {(col) => (
+            <TableColumn
+              key={col.uid}
+              align={
+                ["actions", "bookmark"].includes(col.uid) ? "center" : "start"
+              }
             >
-              {batchLoading
-                ? "Loading requirements..."
-                : "Load all hub requirements"}
-            </Button>
-          </div>
-        </div>
-
-        {showFilters && (
-          <div className="space-y-4 p-4 bg-default-50 rounded-lg">
-            <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-default-700">
-                Filters
-              </h3>
-              <Button
-                size="sm"
-                variant="light"
-                startContent={<X size={14} />}
-                onPress={clearAllFilters}
-                className="text-xs"
-              >
-                Clear All
-              </Button>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div>
-                <Select
-                  label="Department"
-                  placeholder="Filter by department"
-                  selectedKeys={
-                    selectedDepartment === "all" ? [] : [selectedDepartment]
-                  }
-                  onSelectionChange={(keys) => {
-                    const selected = Array.from(keys)[0] as string;
-                    setSelectedDepartment(selected || "all");
-                  }}
-                  size="sm"
-                >
-                  {[
-                    {
-                      key: "all",
-                      label: `All Departments (${apiCourses.length})`,
-                    },
-                    ...departments.map((dept) => {
-                      const count = apiCourses.filter((course) => {
-                        const parts = course.courseId.split(" ");
-                        return parts.length >= 2 && parts[1] === dept;
-                      }).length;
-                      return { key: dept, label: `${dept} (${count})` };
-                    }),
-                  ].map((item) => (
-                    <SelectItem key={item.key}>{item.label}</SelectItem>
-                  ))}
-                </Select>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-default-700 mb-2">
-                  Hub Requirements
-                  {selectedHubRequirements.size > 0 && (
-                    <span className="ml-2 text-xs text-primary">
-                      ({selectedHubRequirements.size} selected)
-                    </span>
-                  )}
-                </label>
-                <div className="max-h-32 overflow-y-auto space-y-1 p-2 border border-default-200 rounded-lg bg-gray">
-                  {allHubRequirements.length === 0 ? (
-                    <p className="text-xs text-default-400 italic">
-                      Load hub requirements to see available filters
-                    </p>
-                  ) : (
-                    allHubRequirements.map((hubReq) => {
-                      const coursesWithHub = apiCourses.filter((course) =>
-                        course.hubRequirements.includes(hubReq)
-                      ).length;
-
-                      return (
-                        <div key={hubReq} className="flex items-center">
-                          <Checkbox
-                            size="sm"
-                            isSelected={selectedHubRequirements.has(hubReq)}
-                            onValueChange={() => toggleHubRequirement(hubReq)}
-                            className="flex-1"
-                          >
-                            <div className="flex items-center justify-between w-full">
-                              <span className="text-xs">{hubReq}</span>
-                              <span className="text-xs text-default-400 ml-2">
-                                ({coursesWithHub})
-                              </span>
-                            </div>
-                          </Checkbox>
-                        </div>
-                      );
-                    })
-                  )}
-                </div>
-                {selectedHubRequirements.size > 0 && (
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {Array.from(selectedHubRequirements).map((hubReq) => (
-                      <Chip
-                        key={hubReq}
-                        size="sm"
-                        variant="flat"
-                        color="primary"
-                        onClose={() => toggleHubRequirement(hubReq)}
-                        className="text-xs"
-                      >
-                        {hubReq}
-                      </Chip>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <Divider />
-            <div className="text-xs text-default-500">
-              <strong>Active Filters:</strong>{" "}
-              {selectedDepartment !== "all" &&
-                `Department: ${selectedDepartment}`}
-              {selectedDepartment !== "all" &&
-                selectedHubRequirements.size > 0 &&
-                ", "}
-              {selectedHubRequirements.size > 0 &&
-                `Hub Requirements: ${Array.from(selectedHubRequirements).join(", ")}`}
-              {selectedDepartment === "all" &&
-                selectedHubRequirements.size === 0 &&
-                "None"}
-            </div>
-          </div>
-        )}
-      </div>
-
-      <div className="h-96 overflow-auto">
-        <Table aria-label="Available courses table" className="h-full">
-          <TableHeader columns={columns}>
-            {(column) => (
-              <TableColumn
-                key={column.uid}
-                align={
-                  column.uid === "actions" || column.uid === "bookmark"
-                    ? "center"
-                    : "start"
-                }
-                allowsSorting={false}
-              >
-                {column.name}
-              </TableColumn>
-            )}
-          </TableHeader>
-          <TableBody
-            items={tableItems}
-            emptyContent="No courses found for the selected filters."
-          >
-            {(item) => (
-              <TableRow key={`course-browse-${item.courseId}`}>
-                {(columnKey) => (
-                  <TableCell>{renderCell(item, columnKey)}</TableCell>
-                )}
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+              {col.name}
+            </TableColumn>
+          )}
+        </TableHeader>
+        <TableBody items={courses}>
+          {(item) => (
+            <TableRow key={item.courseId}>
+              {(column) => <TableCell>{renderCell(item, column)}</TableCell>}
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
     </div>
   );
 }
