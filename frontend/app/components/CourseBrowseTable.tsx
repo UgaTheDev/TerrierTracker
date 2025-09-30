@@ -290,11 +290,7 @@ export default function CourseBrowseTable({
 
   return (
     <div>
-      <Table
-        aria-label="Browse Courses"
-        selectionMode="none"
-        sortDescriptor={null}
-      >
+      <Table aria-label="Browse Courses" selectionMode="none">
         <TableHeader columns={columns}>
           {(col) => (
             <TableColumn
@@ -310,7 +306,9 @@ export default function CourseBrowseTable({
         <TableBody items={courses}>
           {(item) => (
             <TableRow key={item.courseId}>
-              {(column) => <TableCell>{renderCell(item, column)}</TableCell>}
+              {(column) => (
+                <TableCell>{renderCell(item, column.toString())}</TableCell>
+              )}
             </TableRow>
           )}
         </TableBody>
