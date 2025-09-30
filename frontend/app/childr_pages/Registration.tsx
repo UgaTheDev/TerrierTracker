@@ -3,8 +3,13 @@ import React, { useState } from "react";
 import { GraduationCap, UserPlus, Shield, Clock } from "lucide-react";
 import RegistrationForm from "../components/RegistrationForm";
 
+interface UserData {
+  id: number;
+  email: string;
+}
+
 interface RegistrationProps {
-  onRegistrationSuccess: () => void;
+  onRegistrationSuccess: (userData: UserData) => void | Promise<void>;
   onBackToLogin: () => void;
 }
 
@@ -24,16 +29,7 @@ export default function Registration({
     setIsLoading(true);
     setError(null);
 
-    console.log("=== REGISTRATION FUNCTION CALLED ===");
-    console.log("Data:", { email, password, firstName, lastName });
-
     try {
-      console.log("=== ABOUT TO CALL API ===");
-      console.log(
-        "URL:",
-        "https://terriertracker-production.up.railway.app/api/register"
-      );
-
       const response = await fetch(
         "https://terriertracker-production.up.railway.app/api/register",
         {
@@ -50,20 +46,14 @@ export default function Registration({
         }
       );
 
-      console.log("=== API RESPONSE ===");
-      console.log("Response status:", response.status);
-
       const data = await response.json();
-      console.log("Response data:", data);
 
       if (response.ok && data.success) {
-        console.log("Registration successful:", data);
-        onRegistrationSuccess();
+        await onRegistrationSuccess({ id: data.user_id, email });
       } else {
         throw new Error(data.error || "Registration failed");
       }
     } catch (err: any) {
-      console.error("Registration error:", err);
       setError(err.message || "Registration failed. Please try again.");
       throw err;
     } finally {

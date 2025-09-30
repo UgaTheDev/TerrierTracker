@@ -13,6 +13,8 @@ import Login from "./childr_pages/Login";
 import Registration from "./childr_pages/Registration";
 import CourseRecommender from "./childr_pages/Recommender";
 
+const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
+
 type Course = {
   id: number;
   courseId: string;
@@ -40,10 +42,16 @@ type HubRequirement = {
   current: number;
 };
 
+type UserData = {
+  id: number;
+  email: string;
+};
+
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [authPage, setAuthPage] = useState<"login" | "register">("login");
   const [isLoading, setIsLoading] = useState(true);
+  const [currentUser, setCurrentUser] = useState<UserData | null>(null);
 
   const [currentPage, setCurrentPage] = useState("dashboard");
   const [enrolledCourses, setEnrolledCourses] = useState<Course[]>([]);
@@ -57,38 +65,17 @@ export default function Home() {
   useEffect(() => {
     const checkAuthStatus = () => {
       try {
-        const savedAuthState = localStorage.getItem(
-          "terrierTracker_isAuthenticated"
-        );
-        const savedEnrolledCourses = localStorage.getItem(
-          "terrierTracker_enrolledCourses"
-        );
-        const savedBookmarkedCourses = localStorage.getItem(
-          "terrierTracker_bookmarkedCourses"
-        );
-        const savedCurrentPage = localStorage.getItem(
-          "terrierTracker_currentPage"
-        );
+        const savedUser = localStorage.getItem("user");
 
-        if (savedAuthState === "true") {
+        if (savedUser) {
+          const userData = JSON.parse(savedUser);
+          setCurrentUser(userData);
           setIsAuthenticated(true);
-
-          if (savedEnrolledCourses) {
-            setEnrolledCourses(JSON.parse(savedEnrolledCourses));
-          }
-          if (savedBookmarkedCourses) {
-            setBookmarkedCourses(JSON.parse(savedBookmarkedCourses));
-          }
-          if (savedCurrentPage) {
-            setCurrentPage(savedCurrentPage);
-          }
+          loadUserData(userData.id);
         }
       } catch (error) {
         console.error("Error loading saved auth state:", error);
-        localStorage.removeItem("terrierTracker_isAuthenticated");
-        localStorage.removeItem("terrierTracker_enrolledCourses");
-        localStorage.removeItem("terrierTracker_bookmarkedCourses");
-        localStorage.removeItem("terrierTracker_currentPage");
+        localStorage.removeItem("user");
       }
       setIsLoading(false);
     };
@@ -96,43 +83,66 @@ export default function Home() {
     checkAuthStatus();
   }, []);
 
+  const loadUserData = async (userId: number) => {
+    try {
+      const response = await fetch(`${API_BASE_URL}/user/${userId}/courses`);
+      const data = await response.json();
+
+      // Convert bookmarked course codes to BookmarkedCourse objects
+      // Note: You may need to fetch additional course details or store more info in the database
+      const bookmarkedCoursesData: BookmarkedCourse[] = (
+        data.bookmarked_courses || []
+      ).map((code: string) => ({
+        id: code,
+        code: code,
+        name: code, // You'll need to fetch the actual course name
+        credits: 4,
+        hubRequirements: [],
+        school: code.split(" ")[0] || "Unknown",
+      }));
+
+      setBookmarkedCourses(bookmarkedCoursesData);
+
+      // Handle enrolled courses similarly if needed
+      // For now, keeping local state for enrolled courses
+      const savedEnrolledCourses = localStorage.getItem(
+        "terrierTracker_enrolledCourses"
+      );
+      if (savedEnrolledCourses) {
+        setEnrolledCourses(JSON.parse(savedEnrolledCourses));
+      }
+    } catch (error) {
+      console.error("Failed to load user data:", error);
+    }
+  };
+
   useEffect(() => {
     if (isAuthenticated) {
-      localStorage.setItem("terrierTracker_isAuthenticated", "true");
       localStorage.setItem(
         "terrierTracker_enrolledCourses",
         JSON.stringify(enrolledCourses)
       );
-      localStorage.setItem(
-        "terrierTracker_bookmarkedCourses",
-        JSON.stringify(bookmarkedCourses)
-      );
       localStorage.setItem("terrierTracker_currentPage", currentPage);
     }
-  }, [isAuthenticated, enrolledCourses, bookmarkedCourses, currentPage]);
+  }, [isAuthenticated, enrolledCourses, currentPage]);
 
   const hubRequirementDefinitions = {
     "Philosophical Inquiry and Life's Meanings": 1,
     "Aesthetic Exploration": 1,
     "Historical Consciousness": 1,
-
     "Scientific Inquiry I": 1,
     "Social Inquiry I": 1,
     "Scientific Inquiry II or Social Inquiry II": 1,
-
     "Quantitative Reasoning I": 1,
     "Quantitative Reasoning II": 1,
-
     "The Individual in Community": 1,
     "Global Citizenship and Intercultural Literacy": 2,
     "Ethical Reasoning": 1,
-
     "First-Year Writing Seminar": 1,
     "Writing, Research, and Inquiry": 1,
     "Writing-Intensive Course": 2,
     "Oral and/or Signed Communication": 1,
     "Digital/Multimedia Expression": 1,
-
     "Critical Thinking": 2,
     "Research and Information Literacy": 2,
     "Teamwork/Collaboration": 2,
@@ -165,26 +175,31 @@ export default function Home() {
 
   const hubRequirements = calculateHubRequirements();
 
-  const handleLoginSuccess = () => {
+  const handleLoginSuccess = async (userData: UserData) => {
     setIsAuthenticated(true);
+    setCurrentUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
+    await loadUserData(userData.id);
     setCurrentPage("dashboard");
   };
 
-  const handleRegistrationSuccess = () => {
+  const handleRegistrationSuccess = async (userData: UserData) => {
     setIsAuthenticated(true);
+    setCurrentUser(userData);
+    localStorage.setItem("user", JSON.stringify(userData));
     setCurrentPage("dashboard");
   };
 
   const handleLogout = () => {
     setIsAuthenticated(false);
+    setCurrentUser(null);
     setAuthPage("login");
     setCurrentPage("dashboard");
     setEnrolledCourses([]);
     setBookmarkedCourses([]);
 
-    localStorage.removeItem("terrierTracker_isAuthenticated");
+    localStorage.removeItem("user");
     localStorage.removeItem("terrierTracker_enrolledCourses");
-    localStorage.removeItem("terrierTracker_bookmarkedCourses");
     localStorage.removeItem("terrierTracker_currentPage");
   };
 
@@ -221,13 +236,10 @@ export default function Home() {
 
       console.log("FormData created, making API call to Flask...");
 
-      const response = await fetch(
-        "https://terriertracker-production.up.railway.app/api/process-pdf",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/process-pdf`, {
+        method: "POST",
+        body: formData,
+      });
 
       console.log("Response received:", {
         status: response.status,
@@ -310,71 +322,98 @@ export default function Home() {
 
   const isBookmarked = (courseId: string): boolean => {
     const result = bookmarkedCourses.some((course) => course.id === courseId);
-    console.log(`Checking if ${courseId} is bookmarked:`, result);
     return result;
   };
 
-  const handleBookmark = (bookmarkedCourse: BookmarkedCourse) => {
-    console.log("Handling bookmark for:", bookmarkedCourse);
+  const handleBookmark = async (bookmarkedCourse: BookmarkedCourse) => {
+    if (!currentUser) {
+      console.error("No user logged in");
+      return;
+    }
 
-    setBookmarkedCourses((prev) => {
-      const isCurrentlyBookmarked = prev.some(
-        (course) => course.id === bookmarkedCourse.id
-      );
+    const userId = currentUser.id;
+    const isCurrentlyBookmarked = bookmarkedCourses.some(
+      (course) => course.id === bookmarkedCourse.id
+    );
 
+    try {
       if (isCurrentlyBookmarked) {
-        console.log("Removing bookmark for:", bookmarkedCourse.id);
-        return prev.filter((course) => course.id !== bookmarkedCourse.id);
+        await fetch(`${API_BASE_URL}/user/${userId}/courses/bookmarked`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ course_code: bookmarkedCourse.code }),
+        });
+
+        setBookmarkedCourses((prev) =>
+          prev.filter((course) => course.id !== bookmarkedCourse.id)
+        );
+        console.log("Removed bookmark:", bookmarkedCourse.id);
       } else {
-        console.log("Adding bookmark:", bookmarkedCourse);
-        return [...prev, bookmarkedCourse];
+        await fetch(`${API_BASE_URL}/user/${userId}/courses/bookmarked`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ course_code: bookmarkedCourse.code }),
+        });
+
+        setBookmarkedCourses((prev) => [...prev, bookmarkedCourse]);
+        console.log("Added bookmark:", bookmarkedCourse);
       }
-    });
+    } catch (error) {
+      console.error("Failed to update bookmark:", error);
+    }
   };
 
-  const handleBookmarkCourse = (course: Course) => {
+  const handleBookmarkCourse = async (course: Course) => {
     const courseId = course.courseId;
     console.log("Legacy bookmark handler called for:", courseId);
 
-    if (isBookmarked(courseId)) {
-      handleRemoveBookmark(courseId);
-    } else {
-      const bookmarkedCourse: BookmarkedCourse = {
-        id: courseId,
-        code: course.courseId,
-        name: course.course,
-        credits: course.credits || 4,
-        hubRequirements: course.hubRequirements || [],
-        school: course.courseId?.split(" ")[0] || "CAS",
-      };
-      setBookmarkedCourses((prev) => [...prev, bookmarkedCourse]);
-    }
+    const bookmarkedCourse: BookmarkedCourse = {
+      id: courseId,
+      code: course.courseId,
+      name: course.course,
+      credits: course.credits || 4,
+      hubRequirements: course.hubRequirements || [],
+      school: course.courseId?.split(" ")[0] || "CAS",
+    };
+
+    await handleBookmark(bookmarkedCourse);
   };
 
-  const handleHubHelperBookmark = (courseId: string, courseData: any) => {
+  const handleHubHelperBookmark = async (courseId: string, courseData: any) => {
     console.log("Hub Helper bookmark for:", courseId, courseData);
 
-    if (isBookmarked(courseId)) {
-      handleRemoveBookmark(courseId);
-    } else {
-      const bookmarkedCourse: BookmarkedCourse = {
-        id: courseId,
-        code: courseData.courseId || courseId,
-        name: courseData.course || courseData.courseName || courseData.name,
-        credits: courseData.credits || 4,
-        hubRequirements: courseData.hubRequirements || [],
-        school: (courseData.courseId || courseId).split(" ")[0] || "CAS",
-      };
-      console.log("Adding bookmark from Hub Helper:", bookmarkedCourse);
-      setBookmarkedCourses((prev) => [...prev, bookmarkedCourse]);
-    }
+    const bookmarkedCourse: BookmarkedCourse = {
+      id: courseId,
+      code: courseData.courseId || courseId,
+      name: courseData.course || courseData.courseName || courseData.name,
+      credits: courseData.credits || 4,
+      hubRequirements: courseData.hubRequirements || [],
+      school: (courseData.courseId || courseId).split(" ")[0] || "CAS",
+    };
+
+    await handleBookmark(bookmarkedCourse);
   };
 
-  const handleRemoveBookmark = (courseId: string) => {
-    console.log("Removing bookmark:", courseId);
-    setBookmarkedCourses((prev) =>
-      prev.filter((course) => course.id !== courseId)
-    );
+  const handleRemoveBookmark = async (courseId: string) => {
+    if (!currentUser) {
+      console.error("No user logged in");
+      return;
+    }
+
+    try {
+      await fetch(`${API_BASE_URL}/user/${currentUser.id}/courses/bookmarked`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ course_code: courseId }),
+      });
+
+      setBookmarkedCourses((prev) =>
+        prev.filter((course) => course.id !== courseId)
+      );
+      console.log("Removed bookmark:", courseId);
+    } catch (error) {
+      console.error("Failed to remove bookmark:", error);
+    }
   };
 
   const renderContent = () => {
@@ -448,7 +487,6 @@ export default function Home() {
             isBookmarked={isBookmarked}
           />
         );
-
       case "bookmarks":
         return (
           <YourBookmarks
@@ -462,6 +500,7 @@ export default function Home() {
         return <div>Page not found</div>;
     }
   };
+
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">

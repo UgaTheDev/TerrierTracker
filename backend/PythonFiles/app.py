@@ -14,7 +14,6 @@ from urllib.parse import urlparse
 from course_data_manager import CourseDataManager
 load_dotenv()
 
-# Parse DATABASE_URL (PostgreSQL) into components and set as individual env vars
 database_url = os.getenv('DATABASE_URL')
 if database_url:
     parsed_url = urlparse(database_url)
@@ -468,6 +467,158 @@ def not_found(error):
 def internal_error(error):
     logger.error(f"Internal server error: {error}")
     return jsonify({"error": "Internal server error"}), 500
+
+@app.route('/api/user/<int:user_id>/courses', methods=['GET'])
+def get_user_courses(user_id):
+    """Get user's enrolled and bookmarked courses"""
+    try:
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        cur.execute(
+            'SELECT enrolled_courses, bookmarked_courses FROM courseinfo WHERE user_id = %s',
+            (user_id,)
+        )
+        result = cur.fetchone()
+        
+        if result:
+            return jsonify({
+                'enrolled_courses': result[0] or [],
+                'bookmarked_courses': result[1] or []
+            })
+        else:
+            
+            return jsonify({
+                'enrolled_courses': [],
+                'bookmarked_courses': []
+            })
+    except Exception as e:
+        logger.error(f"Error fetching courses: {e}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
+@app.route('/api/user/<int:user_id>/courses/enrolled', methods=['POST'])
+def add_enrolled_course(user_id):
+    """Add a course to enrolled_courses"""
+    try:
+        data = request.json
+        course_code = data.get('course_code')
+        
+        if not course_code:
+            return jsonify({"error": "course_code is required"}), 400
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+        cur = conn.cursor()
+        cur.execute('''
+            INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses)
+            VALUES (%s, ARRAY[%s], ARRAY[]::TEXT[])
+            ON CONFLICT (user_id) 
+            DO UPDATE SET enrolled_courses = array_append(courseinfo.enrolled_courses, %s)
+            WHERE NOT (%s = ANY(courseinfo.enrolled_courses))
+        ''', (user_id, course_code, course_code, course_code))
+        
+        conn.commit()
+        return jsonify({'success': True, 'message': 'Course added'})
+    except Exception as e:
+        logger.error(f"Error adding enrolled course: {e}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
+@app.route('/api/user/<int:user_id>/courses/enrolled', methods=['DELETE'])
+def remove_enrolled_course(user_id):
+    """Remove a course from enrolled_courses"""
+    try:
+        data = request.json
+        course_code = data.get('course_code')
+        
+        if not course_code:
+            return jsonify({"error": "course_code is required"}), 400
+            
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        cur.execute(
+            'UPDATE courseinfo SET enrolled_courses = array_remove(enrolled_courses, %s) WHERE user_id = %s',
+            (course_code, user_id)
+        )
+        conn.commit()
+        return jsonify({'success': True, 'message': 'Course removed'})
+    except Exception as e:
+        logger.error(f"Error removing enrolled course: {e}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
+@app.route('/api/user/<int:user_id>/courses/bookmarked', methods=['POST'])
+def add_bookmarked_course(user_id):
+    """Add a course to bookmarked_courses"""
+    try:
+        data = request.json
+        course_code = data.get('course_code')
+        
+        if not course_code:
+            return jsonify({"error": "course_code is required"}), 400
+            
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        
+        cur.execute('''
+            INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses)
+            VALUES (%s, ARRAY[]::TEXT[], ARRAY[%s])
+            ON CONFLICT (user_id) 
+            DO UPDATE SET bookmarked_courses = array_append(courseinfo.bookmarked_courses, %s)
+            WHERE NOT (%s = ANY(courseinfo.bookmarked_courses))
+        ''', (user_id, course_code, course_code, course_code))
+        
+        conn.commit()
+        return jsonify({'success': True, 'message': 'Course bookmarked'})
+    except Exception as e:
+        logger.error(f"Error adding bookmarked course: {e}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
+@app.route('/api/user/<int:user_id>/courses/bookmarked', methods=['DELETE'])
+def remove_bookmarked_course(user_id):
+    """Remove a course from bookmarked_courses"""
+    try:
+        data = request.json
+        course_code = data.get('course_code')
+        
+        if not course_code:
+            return jsonify({"error": "course_code is required"}), 400
+            
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        cur.execute(
+            'UPDATE courseinfo SET bookmarked_courses = array_remove(bookmarked_courses, %s) WHERE user_id = %s',
+            (course_code, user_id)
+        )
+        conn.commit()
+        return jsonify({'success': True, 'message': 'Bookmark removed'})
+    except Exception as e:
+        logger.error(f"Error removing bookmarked course: {e}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
 
 if __name__ == '__main__':
     logger.info("Starting Flask application...")

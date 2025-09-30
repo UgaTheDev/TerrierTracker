@@ -3,8 +3,13 @@ import React, { useState } from "react";
 import { GraduationCap, BookOpen, TrendingUp } from "lucide-react";
 import LoginForm from "../components/LoginForm";
 
+interface UserData {
+  id: number;
+  email: string;
+}
+
 interface LoginProps {
-  onLoginSuccess: () => void;
+  onLoginSuccess: (userData: UserData) => void | Promise<void>;
   onGoToRegister: () => void;
 }
 
@@ -31,9 +36,8 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
       const data = await response.json();
 
       if (response.ok && data.success) {
-        console.log("Login successful for:", data.user);
         localStorage.setItem("user", JSON.stringify(data.user));
-        onLoginSuccess();
+        await onLoginSuccess(data.user);
       } else {
         throw new Error(data.error || "Login failed");
       }
