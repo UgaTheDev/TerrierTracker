@@ -9,9 +9,21 @@ from werkzeug.utils import secure_filename
 import psycopg2
 import bcrypt
 from dotenv import load_dotenv
+from urllib.parse import urlparse
 
 from course_data_manager import CourseDataManager
 load_dotenv()
+
+# Parse DATABASE_URL (PostgreSQL) into components and set as individual env vars
+database_url = os.getenv('DATABASE_URL')
+if database_url:
+    parsed_url = urlparse(database_url)
+
+    os.environ['DB_HOST'] = parsed_url.hostname or ''
+    os.environ['DB_PORT'] = str(parsed_url.port) if parsed_url.port else ''
+    os.environ['DB_NAME'] = parsed_url.path.lstrip('/') if parsed_url.path else ''
+    os.environ['DB_USER'] = parsed_url.username or ''
+    os.environ['DB_PASSWORD'] = parsed_url.password or ''
 
 app = Flask(__name__)
 CORS(app, resources={
@@ -44,6 +56,7 @@ def get_db_connection():
     try:
         conn = psycopg2.connect(
             host=os.getenv('DB_HOST', 'localhost'),
+            port=os.getenv('DB_PORT', 5432),
             database=os.getenv('DB_NAME', 'terriertracker'),
             user=os.getenv('DB_USER', 'kushzingade'),
             password=os.getenv('DB_PASSWORD', '')
@@ -135,9 +148,9 @@ def register():
                 return jsonify({'error': 'User already exists'}), 400
             
             cur.execute(
-    'INSERT INTO userinfo (email, password, first_name, last_name) VALUES (%s, %s, %s, %s) RETURNING user_id',
-    (email, hashed_password.decode('utf-8'), first_name, last_name)
-)
+                'INSERT INTO userinfo (email, password, first_name, last_name) VALUES (%s, %s, %s, %s) RETURNING user_id',
+                (email, hashed_password.decode('utf-8'), first_name, last_name)
+            )
             user_id = cur.fetchone()[0]
             
             conn.commit()
@@ -185,7 +198,6 @@ def login():
             cur.execute('SELECT user_id, email, password FROM userinfo WHERE email = %s', (email,))
             user = cur.fetchone()
             
-
             if user and bcrypt.checkpw(password.encode('utf-8'), user[2].encode('utf-8')):
                 logger.info(f"User logged in successfully: {email} (ID: {user[0]})")
                 return jsonify({
