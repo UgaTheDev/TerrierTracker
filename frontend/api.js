@@ -1,5 +1,4 @@
-const API_BASE_URL = "http://localhost:5000/api";
-
+const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
 const apiRequest = async (endpoint, options = {}) => {
   try {
     const response = await fetch(`${API_BASE_URL}${endpoint}`, {
