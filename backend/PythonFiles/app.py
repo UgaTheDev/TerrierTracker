@@ -51,15 +51,22 @@ KHC_HUB_COURSES_PATH = CSV_DIR / 'khc_hub_courses.csv'
 
 logger.info(f"Looking for BU all courses CSV at: {BU_ALL_COURSES_PATH.absolute()}")
 logger.info(f"Looking for KHC hub courses CSV at: {KHC_HUB_COURSES_PATH.absolute()}")
-
 def get_db_connection():
     try:
+        host = os.getenv('DB_HOST')
+        port = os.getenv('DB_PORT')
+        database = os.getenv('DB_NAME')
+        user = os.getenv('DB_USER')
+        password = os.getenv('DB_PASSWORD')
+
+        logger.info(f"Trying DB connection with host={host}, port={port}, database={database}, user={user}")
+        
         conn = psycopg2.connect(
-            host=os.getenv('DB_HOST', 'localhost'),
-            port=os.getenv('DB_PORT', 5432),
-            database=os.getenv('DB_NAME', 'terriertracker'),
-            user=os.getenv('DB_USER', 'kushzingade'),
-            password=os.getenv('DB_PASSWORD', '')
+            host=host,
+            port=port,
+            database=database,
+            user=user,
+            password=password
         )
         return conn
     except Exception as e:
