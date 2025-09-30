@@ -1,1 +1,2 @@
-python3 PythonFiles/app.py
+pip install -r requirements.txt
+python PythonFiles/app.py
