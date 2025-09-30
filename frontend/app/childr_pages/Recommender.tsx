@@ -51,7 +51,7 @@ interface CourseRecommenderProps {
   isBookmarked: (courseId: string) => boolean;
 }
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
 
 const apiCache = new Map<string, any>();
 const CACHE_DURATION = 5 * 60 * 1000;

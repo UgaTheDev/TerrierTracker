@@ -221,10 +221,13 @@ export default function Home() {
 
       console.log("FormData created, making API call to Flask...");
 
-      const response = await fetch("http://localhost:5000/api/process-pdf", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://terriertracker-production.up.railway.app/api/process-pdf",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       console.log("Response received:", {
         status: response.status,

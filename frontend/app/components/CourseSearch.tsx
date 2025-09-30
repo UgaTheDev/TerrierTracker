@@ -24,7 +24,7 @@ interface CourseSearchProps {
   isEnrolled: (courseId: string) => boolean;
 }
 
-const API_BASE_URL = "http://localhost:5000/api";
+const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
 
 const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
   try {
@@ -104,7 +104,7 @@ export default function CourseSearch({
       } catch (error) {
         console.error("API health check failed:", error);
         setError(
-          "Cannot connect to the API server. Please ensure the Flask server is running on http://localhost:5000"
+          "Cannot connect to the API server. Please ensure the Flask server is running."
         );
         setApiHealthy(false);
       }

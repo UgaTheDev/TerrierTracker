@@ -29,20 +29,26 @@ export default function Registration({
 
     try {
       console.log("=== ABOUT TO CALL API ===");
-      console.log("URL:", "http://localhost:5000/api/register");
+      console.log(
+        "URL:",
+        "https://terriertracker-production.up.railway.app/api/register"
+      );
 
-      const response = await fetch("http://localhost:5000/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email,
-          password,
-          firstName,
-          lastName,
-        }),
-      });
+      const response = await fetch(
+        "https://terriertracker-production.up.railway.app/api/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email,
+            password,
+            firstName,
+            lastName,
+          }),
+        }
+      );
 
       console.log("=== API RESPONSE ===");
       console.log("Response status:", response.status);
