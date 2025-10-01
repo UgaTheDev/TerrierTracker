@@ -4,7 +4,7 @@ import { GraduationCap, BookOpen, TrendingUp } from "lucide-react";
 import LoginForm from "../components/LoginForm";
 
 interface LoginProps {
-  onLoginSuccess: () => void;
+  onLoginSuccess: (userData: { id: number; email: string }) => void;
   onGoToRegister: () => void;
 }
 
@@ -33,7 +33,7 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
       if (response.ok && data.success) {
         console.log("Login successful for:", data.user);
         localStorage.setItem("user", JSON.stringify(data.user));
-        onLoginSuccess();
+        onLoginSuccess(data.user); // Pass user data to callback
       } else {
         throw new Error(data.error || "Login failed");
       }

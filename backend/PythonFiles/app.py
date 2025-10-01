@@ -460,6 +460,101 @@ def process_pdf():
         logger.error("=== PDF PROCESSING FAILED ===")
         return jsonify({"error": str(e)}), 500
 
+@app.route('/api/user/<int:user_id>/courses', methods=['GET'])
+def get_user_courses(user_id):
+    """Get user's enrolled and bookmarked courses"""
+    try:
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        cur.execute(
+            'SELECT enrolled_courses, bookmarked_courses FROM courseinfo WHERE user_id = %s',
+            (user_id,)
+        )
+        result = cur.fetchone()
+        
+        if result:
+            return jsonify({
+                'enrolled_courses': result[0] or [],
+                'bookmarked_courses': result[1] or []
+            })
+        else:
+            # No entry yet, return empty arrays
+            return jsonify({
+                'enrolled_courses': [],
+                'bookmarked_courses': []
+            })
+    except Exception as e:
+        logger.error(f"Error fetching courses: {e}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
+@app.route('/api/user/<int:user_id>/courses/enrolled', methods=['POST'])
+def add_enrolled_course(user_id):
+    """Add a course to enrolled_courses"""
+    try:
+        data = request.json
+        course_code = data.get('course_code')
+        
+        if not course_code:
+            return jsonify({"error": "course_code is required"}), 400
+            
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        
+        # Insert or update
+        cur.execute('''
+            INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses)
+            VALUES (%s, ARRAY[%s], ARRAY[]::TEXT[])
+            ON CONFLICT (user_id) 
+            DO UPDATE SET enrolled_courses = array_append(courseinfo.enrolled_courses, %s)
+            WHERE NOT (%s = ANY(courseinfo.enrolled_courses))
+        ''', (user_id, course_code, course_code, course_code))
+        
+        conn.commit()
+        return jsonify({'success': True, 'message': 'Course added'})
+    except Exception as e:
+        logger.error(f"Error adding enrolled course: {e}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
+@app.route('/api/user/<int:user_id>/courses/enrolled', methods=['DELETE'])
+def remove_enrolled_course(user_id):
+    """Remove a course from enrolled_courses"""
+    try:
+        data = request.json
+        course_code = data.get('course_code')
+        
+        if not course_code:
+            return jsonify({"error": "course_code is required"}), 400
+            
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        cur.execute(
+            'UPDATE courseinfo SET enrolled_courses = array_remove(enrolled_courses, %s) WHERE user_id = %s',
+            (course_code, user_id)
+        )
+        conn.commit()
+        return jsonify({'success': True, 'message': 'Course removed'})
+    except Exception as e:
+        logger.error(f"Error removing enrolled course: {e}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+        
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({"error": "Endpoint not found"}), 404

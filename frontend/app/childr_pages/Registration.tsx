@@ -4,7 +4,7 @@ import { GraduationCap, UserPlus, Shield, Clock } from "lucide-react";
 import RegistrationForm from "../components/RegistrationForm";
 
 interface RegistrationProps {
-  onRegistrationSuccess: () => void;
+  onRegistrationSuccess: (userData: { id: number; email: string }) => void;
   onBackToLogin: () => void;
 }
 
@@ -58,7 +58,8 @@ export default function Registration({
 
       if (response.ok && data.success) {
         console.log("Registration successful:", data);
-        onRegistrationSuccess();
+        // Pass user data to callback
+        onRegistrationSuccess({ id: data.user_id, email: email });
       } else {
         throw new Error(data.error || "Registration failed");
       }
