@@ -40,7 +40,7 @@ interface HelperCourseSearcherProps {
   isBookmarked: (courseId: string) => boolean;
 }
 
-const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
+const API_BASE_URL = "https://terriertracker-production.up.railway.app";
 
 const apiCache = new Map<string, any>();
 const CACHE_DURATION = 5 * 60 * 1000;
@@ -82,7 +82,7 @@ const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
 
 const fetchAllCourses = async (): Promise<CourseData[]> => {
   try {
-    const data = await apiRequest("/all-courses", { method: "GET" });
+    const data = await apiRequest("/api/all-courses", { method: "GET" });
 
     const coursesArray = Object.entries(data.courses || {}).map(
       ([code, name]) => ({
@@ -101,7 +101,7 @@ const fetchAllCourses = async (): Promise<CourseData[]> => {
 
 const fetchHubRequirements = async (courseCode: string): Promise<string[]> => {
   try {
-    const data = await apiRequest("/search-course", {
+    const data = await apiRequest("/api/search-course", {
       method: "POST",
       body: JSON.stringify({
         course_identifier: courseCode,
@@ -255,7 +255,7 @@ export default function HelperCourseSearcher({
     const initializeData = async () => {
       try {
         console.log("Starting API health check...");
-        await apiRequest("/health", { method: "GET" });
+        await apiRequest("/api/health", { method: "GET" });
         console.log("API health check passed");
         setApiHealthy(true);
 
