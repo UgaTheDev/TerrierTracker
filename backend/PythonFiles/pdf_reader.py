@@ -25,8 +25,8 @@ def fetch_semester(reader):
     return "Unknown Semester"
 
 def raw_fetch_courses_info(reader):
-    """Extract course information from all pages of the PDF - UPDATED VERSION"""
-    print("=== EXTRACTING COURSES - NEW VERSION ===")
+    """Extract course information from all pages of the PDF - FIXED VERSION"""
+    print("=== EXTRACTING COURSES - FIXED VERSION ===")
     courses = []
     
     try:
@@ -87,6 +87,7 @@ def raw_fetch_courses_info(reader):
                         
                         print(f"Looking for Units in lines {line_idx+1} to {min(line_idx+5, len(text_lines))}...")
                         
+                        units_found = False
                         for k in range(line_idx + 1, min(line_idx + 5, len(text_lines))):
                             if k < len(text_lines):
                                 units_line = text_lines[k]
@@ -94,31 +95,33 @@ def raw_fetch_courses_info(reader):
                                 
                                 if "Units" in units_line:
                                     print(f"*** FOUND UNITS LINE {k}: '{units_line}' ***")
+                                    units_found = True
                                     
                                     try:
                                         if len(units_line) > 8:
                                             credits = units_line[8]
                                             print(f"Credits at position 8: '{credits}'")
                                             
-                                            if credits.isdigit() and credits != "0":
-                                                course_entry[3] = credits
-                                                courses.append(course_entry)
-                                                print(f"*** ADDED COURSE: {course_entry} ***")
-                                                break
+                                            if credits.isdigit():
+                                                if credits == "0":
+                                                    print(f"*** SKIPPING COURSE WITH 0 CREDITS: {course_entry} ***")
+                                                    break
+                                                else:
+                                                    course_entry[3] = credits
+                                                    courses.append(course_entry)
+                                                    print(f"*** ADDED COURSE: {course_entry} ***")
+                                                    break
                                             else:
-                                                print(f"Credits '{credits}' is not valid (not digit or is 0)")
+                                                print(f"Credits '{credits}' is not valid (not a digit)")
                                         else:
                                             print(f"Units line too short: {len(units_line)} chars")
                                     except (IndexError, ValueError) as e:
                                         print(f"Error extracting credits: {e}")
-                                        courses.append(course_entry)
-                                        print(f"*** ADDED COURSE WITHOUT CREDITS: {course_entry} ***")
+                                        print(f"*** SKIPPING COURSE DUE TO INVALID CREDITS: {course_entry} ***")
                                         break
-                        else:
-                           
-                            course_entry[3] = "4"
-                            courses.append(course_entry)
-                            print(f"*** NO UNITS FOUND, ADDED WITH DEFAULT 4 CREDITS: {course_entry} ***")
+                        
+                        if not units_found:
+                            print(f"*** NO UNITS LINE FOUND - SKIPPING COURSE: {course_entry} ***")
                             
                     except (IndexError, ValueError) as e:
                         print(f"Error processing course line: {line_text}, Error: {e}")
