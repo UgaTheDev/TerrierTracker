@@ -125,15 +125,13 @@ export default function CategoryProgress({
         color: "success",
       },
       "Diversity, Civic Engagement, and Global Citizenship": {
-        color: "primary",
-        customStyle: "bg-teal-500",
+        color: "default",
       },
       Communication: {
         color: "warning",
       },
       "Intellectual Toolkit": {
         color: "primary",
-        customStyle: "bg-blue-600",
       },
     };
 
