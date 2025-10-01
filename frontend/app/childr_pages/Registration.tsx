@@ -58,7 +58,7 @@ export default function Registration({
 
       if (response.ok && data.success) {
         console.log("Registration successful:", data);
-        // Pass user data to callback
+
         onRegistrationSuccess({ id: data.user_id, email: email });
       } else {
         throw new Error(data.error || "Registration failed");

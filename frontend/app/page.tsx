@@ -88,7 +88,6 @@ export default function Home() {
       const response = await fetch(`${API_BASE_URL}/user/${userId}/courses`);
       const data = await response.json();
 
-      // Load bookmarked courses
       const bookmarkedCoursesData: BookmarkedCourse[] = (
         data.bookmarked_courses || []
       ).map((code: string) => ({
@@ -101,13 +100,11 @@ export default function Home() {
       }));
       setBookmarkedCourses(bookmarkedCoursesData);
 
-      // Load enrolled courses and fetch their details
       const enrolledCourseCodes = data.enrolled_courses || [];
       if (enrolledCourseCodes.length > 0) {
         const enrolledCoursesData = await Promise.all(
           enrolledCourseCodes.map(async (code: string, index: number) => {
             try {
-              // Fetch hub requirements for each course
               const courseResponse = await fetch(
                 `${API_BASE_URL}/search-course`,
                 {
@@ -273,7 +270,6 @@ export default function Home() {
           })
         );
 
-        // Add courses to database
         if (currentUser) {
           for (const course of newCourses) {
             await handleAddCourse(course);
@@ -298,14 +294,12 @@ export default function Home() {
     }
 
     try {
-      // Add to database
       await fetch(`${API_BASE_URL}/user/${currentUser.id}/courses/enrolled`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ course_code: course.courseId }),
       });
 
-      // Update local state
       const newId = Math.max(...enrolledCourses.map((c) => c.id), 0) + 1;
       const courseToAdd = { ...course, id: newId };
       setEnrolledCourses((prev) => [...prev, courseToAdd]);
@@ -319,14 +313,12 @@ export default function Home() {
     if (!course || !currentUser) return;
 
     try {
-      // Remove from database
       await fetch(`${API_BASE_URL}/user/${currentUser.id}/courses/enrolled`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ course_code: course.courseId }),
       });
 
-      // Update local state
       setEnrolledCourses((prev) => prev.filter((c) => c.id !== courseId));
     } catch (error) {
       console.error("Failed to remove course:", error);
@@ -337,14 +329,12 @@ export default function Home() {
     if (!currentUser) return;
 
     try {
-      // Remove from database
       await fetch(`${API_BASE_URL}/user/${currentUser.id}/courses/enrolled`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ course_code: courseId }),
       });
 
-      // Update local state
       setEnrolledCourses((prev) =>
         prev.filter((course) => course.courseId !== courseId)
       );
@@ -355,10 +345,6 @@ export default function Home() {
 
   const handleUpdateCourse = async (updatedCourse: Course) => {
     if (!currentUser) return;
-
-    // For updates, we can't easily modify array items in PostgreSQL
-    // So we'll just update the local state
-    // If you need true updates in DB, consider using a separate table with individual rows
     setEnrolledCourses((prev) =>
       prev.map((course) =>
         course.id === updatedCourse.id ? updatedCourse : course

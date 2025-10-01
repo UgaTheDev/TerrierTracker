@@ -14,7 +14,7 @@ from urllib.parse import urlparse
 from course_data_manager import CourseDataManager
 load_dotenv()
 
-# Parse DATABASE_URL (PostgreSQL) into components and set as individual env vars
+
 database_url = os.getenv('DATABASE_URL')
 if database_url:
     parsed_url = urlparse(database_url)
@@ -26,18 +26,21 @@ if database_url:
     os.environ['DB_PASSWORD'] = parsed_url.password or ''
 
 app = Flask(__name__)
-CORS(app, resources={
-    r"/api/*": {
-        "origins": [
-            "https://terriertracker.vercel.app",
-            "https://terriertracker-9hsthqfhq-kzingade.vercel.app",
-            "http://localhost:3000",
-            "http://localhost:5000"
-        ],
-        "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-        "allow_headers": ["Content-Type"]
-    }
-})
+
+@app.after_request
+def after_request(response):
+    origin = request.headers.get('Origin')
+    
+    if origin and (
+        origin.endswith('.vercel.app') or 
+        origin == 'http://localhost:3000' or 
+        origin == 'http://localhost:5000'
+    ):
+        response.headers['Access-Control-Allow-Origin'] = origin
+        response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
+        response.headers['Access-Control-Max-Age'] = '3600'
+    return response
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -51,6 +54,7 @@ KHC_HUB_COURSES_PATH = CSV_DIR / 'khc_hub_courses.csv'
 
 logger.info(f"Looking for BU all courses CSV at: {BU_ALL_COURSES_PATH.absolute()}")
 logger.info(f"Looking for KHC hub courses CSV at: {KHC_HUB_COURSES_PATH.absolute()}")
+
 def get_db_connection():
     try:
         host = os.getenv('DB_HOST')
@@ -242,7 +246,12 @@ def root():
             "search_course": "/api/search-course (POST)",
             "multiple_courses": "/api/multiple-courses (POST)",
             "all_courses": "/api/all-courses (GET)",
-            "process_pdf": "/api/process-pdf (POST)"
+            "process_pdf": "/api/process-pdf (POST)",
+            "user_courses": "/api/user/<user_id>/courses (GET)",
+            "add_enrolled": "/api/user/<user_id>/courses/enrolled (POST)",
+            "remove_enrolled": "/api/user/<user_id>/courses/enrolled (DELETE)",
+            "add_bookmarked": "/api/user/<user_id>/courses/bookmarked (POST)",
+            "remove_bookmarked": "/api/user/<user_id>/courses/bookmarked (DELETE)"
         }
     })
 
@@ -481,7 +490,7 @@ def get_user_courses(user_id):
                 'bookmarked_courses': result[1] or []
             })
         else:
-            # No entry yet, return empty arrays
+            
             return jsonify({
                 'enrolled_courses': [],
                 'bookmarked_courses': []
@@ -509,7 +518,7 @@ def add_enrolled_course(user_id):
             
         cur = conn.cursor()
         
-        # Insert or update
+        
         cur.execute('''
             INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses)
             VALUES (%s, ARRAY[%s], ARRAY[]::TEXT[])
@@ -550,6 +559,67 @@ def remove_enrolled_course(user_id):
         return jsonify({'success': True, 'message': 'Course removed'})
     except Exception as e:
         logger.error(f"Error removing enrolled course: {e}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
+@app.route('/api/user/<int:user_id>/courses/bookmarked', methods=['POST'])
+def add_bookmarked_course(user_id):
+    """Add a course to bookmarked_courses"""
+    try:
+        data = request.json
+        course_code = data.get('course_code')
+        
+        if not course_code:
+            return jsonify({"error": "course_code is required"}), 400
+            
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        
+        cur.execute('''
+            INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses)
+            VALUES (%s, ARRAY[]::TEXT[], ARRAY[%s])
+            ON CONFLICT (user_id) 
+            DO UPDATE SET bookmarked_courses = array_append(courseinfo.bookmarked_courses, %s)
+            WHERE NOT (%s = ANY(courseinfo.bookmarked_courses))
+        ''', (user_id, course_code, course_code, course_code))
+        
+        conn.commit()
+        return jsonify({'success': True, 'message': 'Course bookmarked'})
+    except Exception as e:
+        logger.error(f"Error adding bookmarked course: {e}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
+@app.route('/api/user/<int:user_id>/courses/bookmarked', methods=['DELETE'])
+def remove_bookmarked_course(user_id):
+    """Remove a course from bookmarked_courses"""
+    try:
+        data = request.json
+        course_code = data.get('course_code')
+        
+        if not course_code:
+            return jsonify({"error": "course_code is required"}), 400
+            
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        cur.execute(
+            'UPDATE courseinfo SET bookmarked_courses = array_remove(bookmarked_courses, %s) WHERE user_id = %s',
+            (course_code, user_id)
+        )
+        conn.commit()
+        return jsonify({'success': True, 'message': 'Bookmark removed'})
+    except Exception as e:
+        logger.error(f"Error removing bookmarked course: {e}")
         return jsonify({'error': str(e)}), 500
     finally:
         cur.close()
