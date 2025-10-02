@@ -48,7 +48,6 @@ logger = logging.getLogger(__name__)
 SCRIPT_DIR = Path(__file__).parent.absolute()
 logger.info(f"Script directory: {SCRIPT_DIR}")
 
-# Define all CSV paths
 CSV_DIR = SCRIPT_DIR.parent / 'CSVFiles'
 CSV_FILES = {
     'cas': CSV_DIR / 'cas_all_courses.csv',
@@ -62,7 +61,6 @@ CSV_FILES = {
     'wheelock': CSV_DIR / 'wheelock_all_courses.csv',
 }
 
-# Log all paths
 for name, path in CSV_FILES.items():
     logger.info(f"Looking for {name} CSV at: {path.absolute()}")
 
@@ -88,8 +86,6 @@ def get_db_connection():
         logger.error(f"Database connection failed: {e}")
         return None
 
-
-# Initialize course manager
 course_manager = None
 try:
     csv_files = []

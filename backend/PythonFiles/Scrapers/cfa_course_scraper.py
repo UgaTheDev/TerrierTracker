@@ -85,10 +85,8 @@ def main():
             print(f"Processed page {i}/{PAGES} - found {len(result)} total courses ({hub_count} with Hub requirements)")
             time.sleep(0.5)
     
-    # Separate hub and non-hub courses
     hub_courses = [course for course in all_courses if any(course[req] == 1 for req in hub_requirements)]
     
-    # Write all courses CSV
     with open('cfa_all_courses.csv', 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['code', 'name'] + hub_requirements
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
@@ -96,7 +94,6 @@ def main():
         for course in all_courses:
             writer.writerow(course)
     
-    # Write hub courses only CSV
     with open('cfa_hub_courses.csv', 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['code', 'name'] + hub_requirements
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
