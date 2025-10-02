@@ -167,7 +167,7 @@ export default function HelperCourseSearcher({
   const [apiHealthy, setApiHealthy] = useState(false);
 
   const [selectedDepartment, setSelectedDepartment] = useState<string>("all");
-  const [selectedHubRequirements, setSelectedHubRequirements] = useState
+  const [selectedHubRequirements, setSelectedHubRequirements] = useState<
     Set<string>
   >(new Set());
   const [showFilters, setShowFilters] = useState(false);
@@ -176,7 +176,7 @@ export default function HelperCourseSearcher({
   );
   const [batchLoading, setBatchLoading] = useState(false);
 
-  const [localBookmarkStates, setLocalBookmarkStates] = useState
+  const [localBookmarkStates, setLocalBookmarkStates] = useState<
     Map<string, boolean>
   >(new Map());
 
@@ -231,7 +231,7 @@ export default function HelperCourseSearcher({
       filtered = filtered.filter((course) => {
         const normalizedCourseId = normalizeString(course.courseId);
         const normalizedCourseName = normalizeString(course.courseName);
-        
+
         return (
           normalizedCourseId.includes(normalizedSearch) ||
           normalizedCourseName.includes(normalizedSearch)
