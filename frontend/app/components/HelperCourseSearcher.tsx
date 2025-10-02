@@ -150,6 +150,11 @@ const fetchMultipleHubRequirements = async (
   return results;
 };
 
+// Helper function to normalize strings by removing spaces
+const normalizeString = (str: string): string => {
+  return str.toLowerCase().replace(/\s+/g, "");
+};
+
 export default function HelperCourseSearcher({
   onBookmark,
   bookmarkedCourses,
@@ -162,7 +167,7 @@ export default function HelperCourseSearcher({
   const [apiHealthy, setApiHealthy] = useState(false);
 
   const [selectedDepartment, setSelectedDepartment] = useState<string>("all");
-  const [selectedHubRequirements, setSelectedHubRequirements] = useState<
+  const [selectedHubRequirements, setSelectedHubRequirements] = useState
     Set<string>
   >(new Set());
   const [showFilters, setShowFilters] = useState(false);
@@ -171,7 +176,7 @@ export default function HelperCourseSearcher({
   );
   const [batchLoading, setBatchLoading] = useState(false);
 
-  const [localBookmarkStates, setLocalBookmarkStates] = useState<
+  const [localBookmarkStates, setLocalBookmarkStates] = useState
     Map<string, boolean>
   >(new Map());
 
@@ -222,12 +227,16 @@ export default function HelperCourseSearcher({
     }
 
     if (searchValue.trim()) {
-      const searchLower = searchValue.toLowerCase();
-      filtered = filtered.filter(
-        (course) =>
-          course.courseId.toLowerCase().includes(searchLower) ||
-          course.courseName.toLowerCase().includes(searchLower)
-      );
+      const normalizedSearch = normalizeString(searchValue);
+      filtered = filtered.filter((course) => {
+        const normalizedCourseId = normalizeString(course.courseId);
+        const normalizedCourseName = normalizeString(course.courseName);
+        
+        return (
+          normalizedCourseId.includes(normalizedSearch) ||
+          normalizedCourseName.includes(normalizedSearch)
+        );
+      });
     }
 
     return filtered.slice(0, searchValue.trim() ? 25 : 15);
@@ -443,7 +452,7 @@ export default function HelperCourseSearcher({
       <div className="relative">
         <input
           type="text"
-          placeholder="Search by course code (e.g., CAS CS 131) or course name..."
+          placeholder="Search by course code (e.g., CAS CS 131 or CASCS131) or course name..."
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           className="w-full px-4 py-3 pr-10 rounded-lg focus:ring-2 focus:ring-primary-500 bg-background text-foreground placeholder-default-400 transition-colors"

@@ -84,6 +84,10 @@ const fetchHubRequirements = async (courseCode: string): Promise<string[]> => {
   }
 };
 
+const normalizeString = (str: string): string => {
+  return str.toLowerCase().replace(/\s+/g, "");
+};
+
 export default function CourseSearch({
   handleAddCourse,
   isEnrolled,
@@ -139,11 +143,18 @@ export default function CourseSearch({
     if (!searchValue.trim()) {
       setFilteredCourses(allCourses.slice(0, 50));
     } else {
-      const filtered = allCourses.filter(
-        (course) =>
-          course.courseId.toLowerCase().includes(searchValue.toLowerCase()) ||
-          course.courseName.toLowerCase().includes(searchValue.toLowerCase())
-      );
+      const normalizedSearch = normalizeString(searchValue);
+
+      const filtered = allCourses.filter((course) => {
+        const normalizedCourseId = normalizeString(course.courseId);
+        const normalizedCourseName = normalizeString(course.courseName);
+
+        return (
+          normalizedCourseId.includes(normalizedSearch) ||
+          normalizedCourseName.includes(normalizedSearch)
+        );
+      });
+
       setFilteredCourses(filtered.slice(0, 100));
     }
   }, [searchValue, allCourses]);
@@ -238,7 +249,7 @@ export default function CourseSearch({
       <div className="relative">
         <input
           type="text"
-          placeholder="Search by course code (e.g., CAS CS 131) or course name..."
+          placeholder="Search by course code (e.g., CAS CS 131 or CASCS131) or course name..."
           value={searchValue}
           onChange={(e) => setSearchValue(e.target.value)}
           className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary-500 bg-background text-foreground placeholder-default-400"
