@@ -85,7 +85,7 @@ const fetchHubRequirements = async (courseCode: string): Promise<string[]> => {
 };
 
 const normalizeString = (str: string): string => {
-  return str.toLowerCase().replace(/\s+/g, "");
+  return str.toLowerCase().replace(/[\s-]/g, "");
 };
 
 export default function CourseSearch({
@@ -126,6 +126,12 @@ export default function CourseSearch({
 
       try {
         const coursesData = await fetchAllCourses();
+        console.log(`Loaded ${coursesData.length} courses`);
+
+        console.log(
+          "Sample course IDs:",
+          coursesData.slice(0, 5).map((c) => c.courseId)
+        );
         setAllCourses(coursesData);
         setFilteredCourses(coursesData.slice(0, 50));
       } catch (error: any) {
@@ -144,10 +150,30 @@ export default function CourseSearch({
       setFilteredCourses(allCourses.slice(0, 50));
     } else {
       const normalizedSearch = normalizeString(searchValue);
+      console.log(
+        "Searching for:",
+        searchValue,
+        "Normalized:",
+        normalizedSearch
+      );
 
       const filtered = allCourses.filter((course) => {
         const normalizedCourseId = normalizeString(course.courseId);
         const normalizedCourseName = normalizeString(course.courseName);
+
+        if (
+          normalizedCourseId.includes("cs") &&
+          normalizedSearch.includes("cs")
+        ) {
+          console.log(
+            "Checking:",
+            course.courseId,
+            "->",
+            normalizedCourseId,
+            "Match:",
+            normalizedCourseId.includes(normalizedSearch)
+          );
+        }
 
         return (
           normalizedCourseId.includes(normalizedSearch) ||
@@ -155,6 +181,7 @@ export default function CourseSearch({
         );
       });
 
+      console.log(`Found ${filtered.length} matching courses`);
       setFilteredCourses(filtered.slice(0, 100));
     }
   }, [searchValue, allCourses]);

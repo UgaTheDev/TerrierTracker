@@ -150,7 +150,6 @@ const fetchMultipleHubRequirements = async (
   return results;
 };
 
-// Helper function to normalize strings by removing spaces
 const normalizeString = (str: string): string => {
   return str.toLowerCase().replace(/\s+/g, "");
 };
