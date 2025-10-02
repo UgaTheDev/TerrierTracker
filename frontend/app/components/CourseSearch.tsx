@@ -99,6 +99,20 @@ export default function CourseSearch({
   const [isLoadingCourses, setIsLoadingCourses] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [apiHealthy, setApiHealthy] = useState(false);
+  const [selectedSchool, setSelectedSchool] = useState<string>("all");
+
+  // Extract schools from course codes
+  const schools = React.useMemo(() => {
+    const schoolSet = new Set<string>();
+    allCourses.forEach((course) => {
+      const parts = course.courseId.split(" ");
+      if (parts.length >= 1) {
+        const school = parts[0].substring(0, 3);
+        schoolSet.add(school);
+      }
+    });
+    return Array.from(schoolSet).sort();
+  }, [allCourses]);
 
   useEffect(() => {
     const checkApiHealth = async () => {
@@ -126,12 +140,6 @@ export default function CourseSearch({
 
       try {
         const coursesData = await fetchAllCourses();
-        console.log(`Loaded ${coursesData.length} courses`);
-
-        console.log(
-          "Sample course IDs:",
-          coursesData.slice(0, 5).map((c) => c.courseId)
-        );
         setAllCourses(coursesData);
         setFilteredCourses(coursesData.slice(0, 50));
       } catch (error: any) {
@@ -146,45 +154,32 @@ export default function CourseSearch({
   }, [apiHealthy]);
 
   useEffect(() => {
-    if (!searchValue.trim()) {
-      setFilteredCourses(allCourses.slice(0, 50));
-    } else {
-      const normalizedSearch = normalizeString(searchValue);
-      console.log(
-        "Searching for:",
-        searchValue,
-        "Normalized:",
-        normalizedSearch
-      );
+    let filtered = allCourses;
 
-      const filtered = allCourses.filter((course) => {
+    // Filter by school
+    if (selectedSchool !== "all") {
+      filtered = filtered.filter((course) => {
+        const school = course.courseId.substring(0, 3);
+        return school === selectedSchool;
+      });
+    }
+
+    // Filter by search
+    if (searchValue.trim()) {
+      const normalizedSearch = normalizeString(searchValue);
+      filtered = filtered.filter((course) => {
         const normalizedCourseId = normalizeString(course.courseId);
         const normalizedCourseName = normalizeString(course.courseName);
-
-        if (
-          normalizedCourseId.includes("cs") &&
-          normalizedSearch.includes("cs")
-        ) {
-          console.log(
-            "Checking:",
-            course.courseId,
-            "->",
-            normalizedCourseId,
-            "Match:",
-            normalizedCourseId.includes(normalizedSearch)
-          );
-        }
 
         return (
           normalizedCourseId.includes(normalizedSearch) ||
           normalizedCourseName.includes(normalizedSearch)
         );
       });
-
-      console.log(`Found ${filtered.length} matching courses`);
-      setFilteredCourses(filtered.slice(0, 100));
     }
-  }, [searchValue, allCourses]);
+
+    setFilteredCourses(filtered.slice(0, searchValue.trim() ? 100 : 50));
+  }, [searchValue, allCourses, selectedSchool]);
 
   const handleCourseSelect = async (course: CourseData) => {
     setSelectedCourse(course);
@@ -273,16 +268,36 @@ export default function CourseSearch({
 
   return (
     <div className="space-y-6">
-      <div className="relative">
-        <input
-          type="text"
-          placeholder="Search by course code (e.g., CAS CS 131 or CASCS131) or course name..."
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary-500 bg-background text-foreground placeholder-default-400"
-        />
-        <div className="absolute right-3 top-3 text-default-400">
-          <Search className="w-5 h-5" />
+      <div className="flex gap-3">
+        <select
+          value={selectedSchool}
+          onChange={(e) => setSelectedSchool(e.target.value)}
+          className="px-4 py-2 rounded-lg bg-background text-foreground border border-default-300 focus:ring-2 focus:ring-primary-500"
+        >
+          <option value="all">All Schools ({allCourses.length})</option>
+          {schools.map((school) => {
+            const count = allCourses.filter(
+              (c) => c.courseId.substring(0, 3) === school
+            ).length;
+            return (
+              <option key={school} value={school}>
+                {school} ({count})
+              </option>
+            );
+          })}
+        </select>
+
+        <div className="relative flex-1">
+          <input
+            type="text"
+            placeholder="Search by course code (e.g., CAS CS 131 or CASCS131) or course name..."
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            className="w-full px-4 py-3 rounded-lg focus:ring-2 focus:ring-primary-500 bg-background text-foreground placeholder-default-400"
+          />
+          <div className="absolute right-3 top-3 text-default-400">
+            <Search className="w-5 h-5" />
+          </div>
         </div>
       </div>
 

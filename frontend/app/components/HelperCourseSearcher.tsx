@@ -151,7 +151,7 @@ const fetchMultipleHubRequirements = async (
 };
 
 const normalizeString = (str: string): string => {
-  return str.toLowerCase().replace(/\s+/g, "");
+  return str.toLowerCase().replace(/[\s-]/g, "");
 };
 
 export default function HelperCourseSearcher({
@@ -165,6 +165,7 @@ export default function HelperCourseSearcher({
   const [error, setError] = useState<string | null>(null);
   const [apiHealthy, setApiHealthy] = useState(false);
 
+  const [selectedSchool, setSelectedSchool] = useState<string>("all");
   const [selectedDepartment, setSelectedDepartment] = useState<string>("all");
   const [selectedHubRequirements, setSelectedHubRequirements] = useState<
     Set<string>
@@ -179,16 +180,33 @@ export default function HelperCourseSearcher({
     Map<string, boolean>
   >(new Map());
 
+  const schools = useMemo(() => {
+    const schoolSet = new Set<string>();
+    allCourses.forEach((course) => {
+      const school = course.courseId.substring(0, 3);
+      if (school) schoolSet.add(school);
+    });
+    return Array.from(schoolSet).sort();
+  }, [allCourses]);
+
   const departments = useMemo(() => {
-    const deptSet = new Set<string>();
+    const deptMap = new Map<string, string>();
     allCourses.forEach((course) => {
       const parts = course.courseId.split(" ");
       if (parts.length >= 2) {
-        deptSet.add(parts[1]);
+        const school = parts[0].substring(0, 3);
+        const dept = parts[1];
+        const key = `${school} ${dept}`;
+        deptMap.set(key, key);
       }
     });
-    return Array.from(deptSet).sort();
+    return Array.from(deptMap.values()).sort();
   }, [allCourses]);
+
+  const filteredDepartments = useMemo(() => {
+    if (selectedSchool === "all") return departments;
+    return departments.filter((dept) => dept.startsWith(selectedSchool));
+  }, [departments, selectedSchool]);
 
   const allHubRequirements = useMemo(() => {
     const hubSet = new Set<string>();
@@ -207,10 +225,22 @@ export default function HelperCourseSearcher({
 
     let filtered = allCourses;
 
+    if (selectedSchool !== "all") {
+      filtered = filtered.filter((course) => {
+        const school = course.courseId.substring(0, 3);
+        return school === selectedSchool;
+      });
+    }
+
     if (selectedDepartment !== "all") {
       filtered = filtered.filter((course) => {
         const parts = course.courseId.split(" ");
-        return parts.length >= 2 && parts[1] === selectedDepartment;
+        if (parts.length >= 2) {
+          const school = parts[0].substring(0, 3);
+          const dept = parts[1];
+          return `${school} ${dept}` === selectedDepartment;
+        }
+        return false;
       });
     }
 
@@ -239,7 +269,13 @@ export default function HelperCourseSearcher({
     }
 
     return filtered.slice(0, searchValue.trim() ? 25 : 15);
-  }, [allCourses, searchValue, selectedDepartment, selectedHubRequirements]);
+  }, [
+    allCourses,
+    searchValue,
+    selectedSchool,
+    selectedDepartment,
+    selectedHubRequirements,
+  ]);
 
   const toggleHubRequirement = (hubReq: string) => {
     setSelectedHubRequirements((prev) => {
@@ -254,6 +290,7 @@ export default function HelperCourseSearcher({
   };
 
   const clearAllFilters = () => {
+    setSelectedSchool("all");
     setSelectedDepartment("all");
     setSelectedHubRequirements(new Set());
     setSearchValue("");
@@ -262,15 +299,11 @@ export default function HelperCourseSearcher({
   useEffect(() => {
     const initializeData = async () => {
       try {
-        console.log("Starting API health check...");
         await apiRequest("/api/health", { method: "GET" });
-        console.log("API health check passed");
         setApiHealthy(true);
 
-        console.log("Loading courses...");
         setTimeout(async () => {
           const coursesData = await fetchAllCourses();
-          console.log(`Loaded ${coursesData.length} courses`);
           setAllCourses(coursesData);
         }, 100);
       } catch (error: any) {
@@ -278,13 +311,18 @@ export default function HelperCourseSearcher({
         setError(error.message);
         setApiHealthy(false);
       } finally {
-        console.log("Finished loading");
         setIsLoadingCourses(false);
       }
     };
 
     initializeData();
   }, []);
+
+  useEffect(() => {
+    if (selectedSchool !== "all") {
+      setSelectedDepartment("all");
+    }
+  }, [selectedSchool]);
 
   const loadHubRequirements = async (courseId: string) => {
     if (loadingRequirements.has(courseId) || batchLoading) return;
@@ -325,9 +363,6 @@ export default function HelperCourseSearcher({
 
     if (coursesNeedingRequirements.length === 0) return;
 
-    console.log(
-      `Batch loading requirements for ${coursesNeedingRequirements.length} courses`
-    );
     setBatchLoading(true);
 
     try {
@@ -348,7 +383,6 @@ export default function HelperCourseSearcher({
           return course;
         })
       );
-      console.log("Batch loading complete");
     } catch (error) {
       console.error("Failed to batch load requirements:", error);
     } finally {
@@ -361,27 +395,18 @@ export default function HelperCourseSearcher({
       localBookmarkStates.get(courseData.courseId) ??
       isBookmarked(courseData.courseId);
 
-    console.log(
-      "Bookmark button clicked for:",
-      courseData.courseId,
-      "Currently bookmarked:",
-      currentlyBookmarked
-    );
-
     const newBookmarkState = !currentlyBookmarked;
     setLocalBookmarkStates((prev) =>
       new Map(prev).set(courseData.courseId, newBookmarkState)
     );
 
     if (!currentlyBookmarked && courseData.hubRequirements.length === 0) {
-      console.log("Loading hub requirements before bookmarking...");
       await loadHubRequirements(courseData.courseId);
 
       const updatedCourse = allCourses.find(
         (c) => c.courseId === courseData.courseId
       );
       if (updatedCourse) {
-        console.log("Bookmarking with updated data:", updatedCourse);
         onBookmark(courseData.courseId, {
           courseId: updatedCourse.courseId,
           courseName: updatedCourse.courseName,
@@ -389,7 +414,6 @@ export default function HelperCourseSearcher({
           credits: 4,
         });
       } else {
-        console.log("Bookmarking with original data:", courseData);
         onBookmark(courseData.courseId, {
           courseId: courseData.courseId,
           courseName: courseData.courseName,
@@ -398,7 +422,6 @@ export default function HelperCourseSearcher({
         });
       }
     } else {
-      console.log("Bookmarking:", courseData);
       onBookmark(courseData.courseId, {
         courseId: courseData.courseId,
         courseName: courseData.courseName,
@@ -415,9 +438,6 @@ export default function HelperCourseSearcher({
         <div>
           <p className="font-medium">API Connection Error</p>
           <p className="text-sm">{error}</p>
-          <p className="text-xs mt-1">
-            Make sure your Flask server is running: python app.py
-          </p>
         </div>
       </div>
     );
@@ -508,7 +528,39 @@ export default function HelperCourseSearcher({
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <Select
+                  label="School"
+                  placeholder="Filter by school"
+                  selectedKeys={
+                    selectedSchool === "all"
+                      ? new Set([])
+                      : new Set([selectedSchool])
+                  }
+                  onSelectionChange={(keys) => {
+                    const selected = Array.from(keys)[0] as string;
+                    setSelectedSchool(selected || "all");
+                  }}
+                  size="sm"
+                >
+                  {[
+                    {
+                      key: "all",
+                      label: `All Schools (${allCourses.length})`,
+                    },
+                    ...schools.map((school) => {
+                      const count = allCourses.filter(
+                        (c) => c.courseId.substring(0, 3) === school
+                      ).length;
+                      return { key: school, label: `${school} (${count})` };
+                    }),
+                  ].map((item) => (
+                    <SelectItem key={item.key}>{item.label}</SelectItem>
+                  ))}
+                </Select>
+              </div>
+
               <div>
                 <Select
                   label="Department"
@@ -523,16 +575,22 @@ export default function HelperCourseSearcher({
                     setSelectedDepartment(selected || "all");
                   }}
                   size="sm"
+                  isDisabled={filteredDepartments.length === 0}
                 >
                   {[
                     {
                       key: "all",
-                      label: `All Departments (${allCourses.length})`,
+                      label: `All Departments`,
                     },
-                    ...departments.map((dept) => {
+                    ...filteredDepartments.map((dept) => {
                       const count = allCourses.filter((course) => {
                         const parts = course.courseId.split(" ");
-                        return parts.length >= 2 && parts[1] === dept;
+                        if (parts.length >= 2) {
+                          const school = parts[0].substring(0, 3);
+                          const courseDept = parts[1];
+                          return `${school} ${courseDept}` === dept;
+                        }
+                        return false;
                       }).length;
                       return { key: dept, label: `${dept} (${count})` };
                     }),
@@ -605,14 +663,17 @@ export default function HelperCourseSearcher({
             <Divider />
             <div className="text-xs text-default-500">
               <strong>Active Filters:</strong>{" "}
+              {selectedSchool !== "all" && `School: ${selectedSchool}`}
+              {selectedSchool !== "all" && selectedDepartment !== "all" && ", "}
               {selectedDepartment !== "all" &&
                 `Department: ${selectedDepartment}`}
-              {selectedDepartment !== "all" &&
+              {(selectedSchool !== "all" || selectedDepartment !== "all") &&
                 selectedHubRequirements.size > 0 &&
                 ", "}
               {selectedHubRequirements.size > 0 &&
                 `Hub Requirements: ${Array.from(selectedHubRequirements).join(", ")}`}
-              {selectedDepartment === "all" &&
+              {selectedSchool === "all" &&
+                selectedDepartment === "all" &&
                 selectedHubRequirements.size === 0 &&
                 searchValue === "" &&
                 "None"}
@@ -699,6 +760,7 @@ export default function HelperCourseSearcher({
 
       {filteredCourses.length === 0 &&
         (searchValue ||
+          selectedSchool !== "all" ||
           selectedDepartment !== "all" ||
           selectedHubRequirements.size > 0) && (
           <div className="text-center py-8 text-default-500">

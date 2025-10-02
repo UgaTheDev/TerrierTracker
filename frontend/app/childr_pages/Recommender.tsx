@@ -97,9 +97,9 @@ export default function CourseRecommender({
   bookmarkedCourses,
   isBookmarked,
 }: CourseRecommenderProps) {
+  const [selectedSchool, setSelectedSchool] = useState<string>("");
   const [selectedDepartment, setSelectedDepartment] = useState<string>("");
   const [allCourses, setAllCourses] = useState<any[]>([]);
-  const [departmentCourses, setDepartmentCourses] = useState<any[]>([]);
   const [recommendations, setRecommendations] = useState<
     CourseRecommendation[]
   >([]);
@@ -108,16 +108,33 @@ export default function CourseRecommender({
   const [error, setError] = useState<string | null>(null);
   const [searchValue, setSearchValue] = useState("");
 
+  const schools = useMemo(() => {
+    const schoolSet = new Set<string>();
+    allCourses.forEach((course) => {
+      const school = course.courseId.substring(0, 3);
+      if (school) schoolSet.add(school);
+    });
+    return Array.from(schoolSet).sort();
+  }, [allCourses]);
+
   const departments = useMemo(() => {
-    const deptSet = new Set<string>();
+    const deptMap = new Map<string, string>();
     allCourses.forEach((course) => {
       const parts = course.courseId.split(" ");
       if (parts.length >= 2) {
-        deptSet.add(parts[1]);
+        const school = parts[0].substring(0, 3);
+        const dept = parts[1];
+        const key = `${school} ${dept}`;
+        deptMap.set(key, key);
       }
     });
-    return Array.from(deptSet).sort();
+    return Array.from(deptMap.values()).sort();
   }, [allCourses]);
+
+  const filteredDepartments = useMemo(() => {
+    if (!selectedSchool) return departments;
+    return departments.filter((dept) => dept.startsWith(selectedSchool));
+  }, [departments, selectedSchool]);
 
   useEffect(() => {
     const loadAllCourses = async () => {
@@ -142,6 +159,13 @@ export default function CourseRecommender({
     loadAllCourses();
   }, []);
 
+  useEffect(() => {
+    if (selectedSchool) {
+      setSelectedDepartment("");
+      setRecommendations([]);
+    }
+  }, [selectedSchool]);
+
   const unfulfilledRequirements = useMemo(() => {
     return hubRequirements.filter((req) => req.current < req.required);
   }, [hubRequirements]);
@@ -151,12 +175,15 @@ export default function CourseRecommender({
   const progressPercentage = (fulfilledCount / hubRequirements.length) * 100;
 
   const fetchDepartmentCourses = (deptCode: string) => {
-    const deptCourses = allCourses.filter((course) => {
+    return allCourses.filter((course) => {
       const parts = course.courseId.split(" ");
-      return parts.length >= 2 && parts[1] === deptCode;
+      if (parts.length >= 2) {
+        const school = parts[0].substring(0, 3);
+        const dept = parts[1];
+        return `${school} ${dept}` === deptCode;
+      }
+      return false;
     });
-
-    return deptCourses;
   };
 
   const fetchHubRequirements = async (
@@ -247,14 +274,9 @@ export default function CourseRecommender({
     setRecommendations([]);
 
     try {
-      console.log(`Filtering courses for department: ${deptCode}`);
       const courses = fetchDepartmentCourses(deptCode);
-      setDepartmentCourses(courses);
-
-      console.log(`Analyzing ${courses.length} courses for recommendations...`);
       const recs = await analyzeAndRecommend(courses);
       setRecommendations(recs);
-      console.log(`Found ${recs.length} recommendations`);
     } catch (error: any) {
       console.error("Error generating recommendations:", error);
       setError(error.message);
@@ -264,7 +286,6 @@ export default function CourseRecommender({
   };
 
   const handleBookmarkClick = async (course: CourseRecommendation) => {
-    console.log("Bookmarking course:", course.courseId);
     onBookmark(course.courseId, {
       courseId: course.courseId,
       courseName: course.courseName,
@@ -303,8 +324,8 @@ export default function CourseRecommender({
         </h1>
         <p className="text-default-600">
           Get personalized course recommendations based on your unfulfilled hub
-          requirements. Select a department to see courses that will help you
-          complete your degree.
+          requirements. Select a school and department to see courses that will
+          help you complete your degree.
         </p>
       </div>
 
@@ -385,24 +406,57 @@ export default function CourseRecommender({
         <Card className="p-6">
           <div className="flex items-center gap-2 mb-4">
             <BookOpen className="w-5 h-5 text-primary" />
-            <h2 className="text-xl font-semibold">Select Department</h2>
+            <h2 className="text-xl font-semibold">
+              Select School & Department
+            </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Select
+              label="School"
+              placeholder="Choose a school"
+              selectedKeys={
+                selectedSchool ? new Set([selectedSchool]) : new Set()
+              }
+              onSelectionChange={(keys) => {
+                const selected = Array.from(keys)[0] as string;
+                setSelectedSchool(selected || "");
+              }}
+              isDisabled={isLoadingCourses}
+            >
+              {schools.map((school) => {
+                const count = allCourses.filter(
+                  (c) => c.courseId.substring(0, 3) === school
+                ).length;
+                return (
+                  <SelectItem key={school}>
+                    {school} ({count})
+                  </SelectItem>
+                );
+              })}
+            </Select>
+
             <Select
               label="Department"
-              placeholder="Choose a department to get recommendations"
-              selectedKeys={selectedDepartment ? [selectedDepartment] : []}
+              placeholder="Choose a department"
+              selectedKeys={
+                selectedDepartment ? new Set([selectedDepartment]) : new Set()
+              }
               onSelectionChange={(keys) => {
                 const selected = Array.from(keys)[0] as string;
                 if (selected) handleDepartmentSelect(selected);
               }}
-              isDisabled={isLoadingCourses}
+              isDisabled={isLoadingCourses || !selectedSchool}
             >
-              {departments.map((dept) => {
+              {filteredDepartments.map((dept) => {
                 const count = allCourses.filter((course) => {
                   const parts = course.courseId.split(" ");
-                  return parts.length >= 2 && parts[1] === dept;
+                  if (parts.length >= 2) {
+                    const school = parts[0].substring(0, 3);
+                    const courseDept = parts[1];
+                    return `${school} ${courseDept}` === dept;
+                  }
+                  return false;
                 }).length;
                 return (
                   <SelectItem key={dept}>
@@ -592,7 +646,7 @@ export default function CourseRecommender({
           </Card>
         )}
 
-      {!selectedDepartment && !isLoading && (
+      {!selectedSchool && !isLoading && (
         <Card className="p-8 text-center">
           <div className="text-default-400 mb-4">
             <Target className="w-12 h-12 mx-auto mb-2" />
@@ -601,8 +655,8 @@ export default function CourseRecommender({
             Ready to find your next courses?
           </h3>
           <p className="text-default-500 text-sm">
-            Select a department above to get personalized course recommendations
-            based on your unfulfilled hub requirements.
+            Select a school and department above to get personalized course
+            recommendations based on your unfulfilled hub requirements.
           </p>
         </Card>
       )}

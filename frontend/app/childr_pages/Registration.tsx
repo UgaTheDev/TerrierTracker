@@ -142,7 +142,7 @@ export default function Registration({
                 <div className="text-sm text-white/70">Active Students</div>
               </div>
               <div>
-                <div className="text-2xl font-bold">7500+</div>
+                <div className="text-2xl font-bold">5000</div>
                 <div className="text-sm text-white/70">Courses</div>
               </div>
               <div>

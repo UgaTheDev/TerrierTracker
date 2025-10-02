@@ -258,9 +258,11 @@ export default function Home() {
       if (response.ok && result.success) {
         console.log("PDF processing successful!");
 
+        const startingId = Math.max(...enrolledCourses.map((c) => c.id), 0) + 1;
+
         const newCourses: Course[] = result.courses.map(
           (apiCourse: any, index: number) => ({
-            id: Math.max(...enrolledCourses.map((c) => c.id), 0) + index + 1,
+            id: startingId + index,
             courseId: apiCourse.course_code,
             course: apiCourse.course_code,
             credits: parseInt(apiCourse.credits) || 4,
@@ -272,8 +274,20 @@ export default function Home() {
 
         if (currentUser) {
           for (const course of newCourses) {
-            await handleAddCourse(course);
+            try {
+              await fetch(
+                `${API_BASE_URL}/user/${currentUser.id}/courses/enrolled`,
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ course_code: course.courseId }),
+                }
+              );
+            } catch (error) {
+              console.error(`Failed to add course ${course.courseId}:`, error);
+            }
           }
+          setEnrolledCourses((prev) => [...prev, ...newCourses]);
         }
       } else {
         console.error("PDF processing failed:", result.error);

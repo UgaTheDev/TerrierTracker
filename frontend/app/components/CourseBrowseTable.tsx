@@ -192,6 +192,7 @@ export default function CourseBrowseTable({
     new Set()
   );
   const [batchLoading, setBatchLoading] = useState(false);
+  const [selectedSchool, setSelectedSchool] = useState<string>("all");
   const [selectedDepartment, setSelectedDepartment] = useState<string>("all");
   const [selectedHubRequirements, setSelectedHubRequirements] = useState<
     Set<string>
@@ -202,16 +203,33 @@ export default function CourseBrowseTable({
     Map<string, boolean>
   >(new Map());
 
+  const schools = useMemo(() => {
+    const schoolSet = new Set<string>();
+    apiCourses.forEach((course) => {
+      const school = course.courseId.substring(0, 3);
+      if (school) schoolSet.add(school);
+    });
+    return Array.from(schoolSet).sort();
+  }, [apiCourses]);
+
   const departments = useMemo(() => {
-    const deptSet = new Set<string>();
+    const deptMap = new Map<string, string>();
     apiCourses.forEach((course) => {
       const parts = course.courseId.split(" ");
       if (parts.length >= 2) {
-        deptSet.add(parts[1]);
+        const school = parts[0].substring(0, 3);
+        const dept = parts[1];
+        const key = `${school} ${dept}`;
+        deptMap.set(key, key);
       }
     });
-    return Array.from(deptSet).sort();
+    return Array.from(deptMap.values()).sort();
   }, [apiCourses]);
+
+  const filteredDepartments = useMemo(() => {
+    if (selectedSchool === "all") return departments;
+    return departments.filter((dept) => dept.startsWith(selectedSchool));
+  }, [departments, selectedSchool]);
 
   const allHubRequirements = useMemo(() => {
     const hubSet = new Set<string>();
@@ -228,10 +246,22 @@ export default function CourseBrowseTable({
   const filteredCourses = useMemo(() => {
     let filtered = apiCourses;
 
+    if (selectedSchool !== "all") {
+      filtered = filtered.filter((course) => {
+        const school = course.courseId.substring(0, 3);
+        return school === selectedSchool;
+      });
+    }
+
     if (selectedDepartment !== "all") {
       filtered = filtered.filter((course) => {
         const parts = course.courseId.split(" ");
-        return parts.length >= 2 && parts[1] === selectedDepartment;
+        if (parts.length >= 2) {
+          const school = parts[0].substring(0, 3);
+          const dept = parts[1];
+          return `${school} ${dept}` === selectedDepartment;
+        }
+        return false;
       });
     }
 
@@ -245,7 +275,7 @@ export default function CourseBrowseTable({
     }
 
     return filtered;
-  }, [apiCourses, selectedDepartment, selectedHubRequirements]);
+  }, [apiCourses, selectedSchool, selectedDepartment, selectedHubRequirements]);
 
   const toggleHubRequirement = (hubReq: string) => {
     setSelectedHubRequirements((prev) => {
@@ -260,6 +290,7 @@ export default function CourseBrowseTable({
   };
 
   const clearAllFilters = () => {
+    setSelectedSchool("all");
     setSelectedDepartment("all");
     setSelectedHubRequirements(new Set());
   };
@@ -288,6 +319,12 @@ export default function CourseBrowseTable({
 
     initializeData();
   }, []);
+
+  useEffect(() => {
+    if (selectedSchool !== "all") {
+      setSelectedDepartment("all");
+    }
+  }, [selectedSchool]);
 
   const loadHubRequirements = async (courseId: string) => {
     if (loadingRequirements.has(courseId) || batchLoading) return;
@@ -385,19 +422,11 @@ export default function CourseBrowseTable({
       localBookmarkStates.get(courseData.courseId) ??
       isBookmarked(courseData.courseId);
 
-    console.log(
-      "Bookmark button clicked for:",
-      courseData.courseId,
-      "Currently bookmarked:",
-      currentlyBookmarked
-    );
-
     const newBookmarkState = !currentlyBookmarked;
     setLocalBookmarkStates((prev) =>
       new Map(prev).set(courseData.courseId, newBookmarkState)
     );
     if (!currentlyBookmarked && courseData.hubRequirements.length === 0) {
-      console.log("Loading hub requirements before bookmarking...");
       await loadHubRequirements(courseData.courseId);
 
       const updatedCourse = apiCourses.find(
@@ -405,16 +434,13 @@ export default function CourseBrowseTable({
       );
       if (updatedCourse) {
         const bookmarkedCourse = convertToBookmarkedCourse(updatedCourse);
-        console.log("Bookmarking with updated data:", bookmarkedCourse);
         handleBookmark(bookmarkedCourse);
       } else {
         const bookmarkedCourse = convertToBookmarkedCourse(courseData);
-        console.log("Bookmarking with original data:", bookmarkedCourse);
         handleBookmark(bookmarkedCourse);
       }
     } else {
       const bookmarkedCourse = convertToBookmarkedCourse(courseData);
-      console.log("Bookmarking:", bookmarkedCourse);
       handleBookmark(bookmarkedCourse);
     }
   };
@@ -628,29 +654,69 @@ export default function CourseBrowseTable({
               </Button>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <Select
-                  label="Department"
-                  placeholder="Filter by department"
+                  label="School"
+                  placeholder="Filter by school"
                   selectedKeys={
-                    selectedDepartment === "all" ? [] : [selectedDepartment]
+                    selectedSchool === "all"
+                      ? new Set([])
+                      : new Set([selectedSchool])
                   }
                   onSelectionChange={(keys) => {
                     const selected = Array.from(keys)[0] as string;
-                    setSelectedDepartment(selected || "all");
+                    setSelectedSchool(selected || "all");
                   }}
                   size="sm"
                 >
                   {[
                     {
                       key: "all",
-                      label: `All Departments (${apiCourses.length})`,
+                      label: `All Schools (${apiCourses.length})`,
                     },
-                    ...departments.map((dept) => {
+                    ...schools.map((school) => {
+                      const count = apiCourses.filter(
+                        (c) => c.courseId.substring(0, 3) === school
+                      ).length;
+                      return { key: school, label: `${school} (${count})` };
+                    }),
+                  ].map((item) => (
+                    <SelectItem key={item.key}>{item.label}</SelectItem>
+                  ))}
+                </Select>
+              </div>
+
+              <div>
+                <Select
+                  label="Department"
+                  placeholder="Filter by department"
+                  selectedKeys={
+                    selectedDepartment === "all"
+                      ? new Set([])
+                      : new Set([selectedDepartment])
+                  }
+                  onSelectionChange={(keys) => {
+                    const selected = Array.from(keys)[0] as string;
+                    setSelectedDepartment(selected || "all");
+                  }}
+                  size="sm"
+                  isDisabled={filteredDepartments.length === 0}
+                >
+                  {[
+                    {
+                      key: "all",
+                      label: `All Departments`,
+                    },
+                    ...filteredDepartments.map((dept) => {
                       const count = apiCourses.filter((course) => {
                         const parts = course.courseId.split(" ");
-                        return parts.length >= 2 && parts[1] === dept;
+                        if (parts.length >= 2) {
+                          const school = parts[0].substring(0, 3);
+                          const courseDept = parts[1];
+                          return `${school} ${courseDept}` === dept;
+                        }
+                        return false;
                       }).length;
                       return { key: dept, label: `${dept} (${count})` };
                     }),
@@ -722,14 +788,17 @@ export default function CourseBrowseTable({
             <Divider />
             <div className="text-xs text-default-500">
               <strong>Active Filters:</strong>{" "}
+              {selectedSchool !== "all" && `School: ${selectedSchool}`}
+              {selectedSchool !== "all" && selectedDepartment !== "all" && ", "}
               {selectedDepartment !== "all" &&
                 `Department: ${selectedDepartment}`}
-              {selectedDepartment !== "all" &&
+              {(selectedSchool !== "all" || selectedDepartment !== "all") &&
                 selectedHubRequirements.size > 0 &&
                 ", "}
               {selectedHubRequirements.size > 0 &&
                 `Hub Requirements: ${Array.from(selectedHubRequirements).join(", ")}`}
-              {selectedDepartment === "all" &&
+              {selectedSchool === "all" &&
+                selectedDepartment === "all" &&
                 selectedHubRequirements.size === 0 &&
                 "None"}
             </div>

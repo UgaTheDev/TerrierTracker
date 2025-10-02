@@ -95,20 +95,14 @@ export default function CategoryProgress({
 
       if (!categoryMap.has(category)) {
         categoryMap.set(category, {
-          fulfilled: 0,
-          total: 0,
           totalRequired: 0,
-          totalCurrent: 0,
+          totalFulfilled: 0,
         });
       }
       const data = categoryMap.get(category);
-      data.total += 1;
-      data.totalRequired += req.required;
-      data.totalCurrent += req.current;
 
-      if (req.current >= req.required) {
-        data.fulfilled += 1;
-      }
+      data.totalRequired += req.required;
+      data.totalFulfilled += Math.min(req.current, req.required);
     });
 
     const colorMap: Record<
@@ -116,29 +110,30 @@ export default function CategoryProgress({
       { color: CategoryData["color"]; customStyle?: string }
     > = {
       "Philosophical, Aesthetic, and Historical Interpretation": {
-        color: "danger",
+        color: "danger" as const,
       },
       "Scientific and Social Inquiry": {
-        color: "secondary",
+        color: "secondary" as const,
       },
       "Quantitative Reasoning": {
-        color: "success",
+        color: "success" as const,
       },
       "Diversity, Civic Engagement, and Global Citizenship": {
-        color: "default",
+        color: "default" as const,
       },
       Communication: {
-        color: "warning",
+        color: "warning" as const,
       },
       "Intellectual Toolkit": {
-        color: "primary",
+        color: "primary" as const,
       },
     };
 
     return Array.from(categoryMap.entries()).map(([category, data]) => {
-      const percentage = Math.round(
-        (data.totalCurrent / data.totalRequired) * 100
-      );
+      const percentage =
+        data.totalRequired > 0
+          ? Math.round((data.totalFulfilled / data.totalRequired) * 100)
+          : 0;
       const colorInfo = colorMap[category] || { color: "default" as const };
       return {
         label: category,
