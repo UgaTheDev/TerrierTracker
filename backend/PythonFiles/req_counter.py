@@ -5,7 +5,7 @@ TARGET_COLUMNS = [
     "Historical Consciousness"
 ]
 
-def filter_courses(input_csv='bu_hub_courses.csv', output_csv='filtered_courses.csv'):
+def filter_courses(input_csv='cas_hub_courses.csv', output_csv='filtered_courses.csv'):
     filtered_courses = []    
     with open(input_csv, mode='r', encoding='utf-8') as infile:
         reader = csv.DictReader(infile)

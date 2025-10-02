@@ -1,0 +1,295 @@
+code,name,Philosophical Inquiry and Life's Meanings,Aesthetic Exploration,Historical Consciousness,Scientific Inquiry I,Social Inquiry I,Scientific Inquiry II,Social Inquiry II,Quantitative Reasoning I,Quantitative Reasoning II,The Individual in Community,Global Citizenship and Intercultural Literacy,Ethical Reasoning,First-Year Writing Seminar,"Writing, Research, and Inquiry",Writing-Intensive Course,Oral and/or Signed Communication,Digital/Multimedia Expression,Critical Thinking,Research and Information Literacy,Teamwork/Collaboration,Creativity/Innovation
+SAR HP 150,First-Year Sargent Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 151,Introduction to Health Professions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+SAR HP 220,Occupation and Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 250,Introduction to Critical Inquiry in Behavior and Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+SAR HP 252,Health and Disability Across the Lifespan,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+SAR HP 306,Foundations of Health Promotion,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1
+SAR HP 321,Health Conditions Across the Life-course,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 353,Organization and Delivery of Health Care in the U.S.,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+SAR HP 405,Practicum and Seminar in Behavior and Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 412,Psychopathology and Rehabilitation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 454,"Social Determinants of Health - Sex, Sexual Orientation, and Gender",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 495,Senior Thesis for Distinction,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 497,IND STUDY,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 500,Helping Skills: Fundamentals of Health Communications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 531,Clinical Medicine I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 532,Clinical Medicine II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 561,Evidence Based Practice I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 565,Biomechanics of Human Movement,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+SAR HP 650,Health Care Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 720,Educational Theory and Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 737,Instrumentation for Analysis of Motion,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 770,Health Care Management - PT,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 771,Foundations of Motor Control,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 804,Practicum: Teaching in the Health Professions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 201,Introduction to Nutrition,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+SAR HS 210,Introduction to Critical Inquiry,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 221,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+SAR HS 222,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+SAR HS 230,Food Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 241,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0
+SAR HS 242,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0
+SAR HS 251,Human Nutrition Science,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0
+SAR HS 281,Nutrition Throughout the Life Cycle,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 300,Epidemiology 1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 310,Management of Food and Nutrition Services,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 323,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SAR HS 324,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SAR HS 325,Introduction to Global Health,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0
+SAR HS 331,Physiology of Sex and Human Reproduction,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 332,"Analyzing Bias and Discrimination in Medicine, Health, & Science",0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 333,Queering Health,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 335,RESEARCH EXP,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1
+SAR HS 341,Physiology Across the Lifespan,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 342,Exercise Physiology,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SAR HS 343,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1
+SAR HS 345,Global Environmental Public Health,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0
+SAR HS 346,Global Health Nutrition,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 348,Global Mental Health,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+SAR HS 349,"Cultural Humility, Racial Justice, and Health",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 362,Muscle Physiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 369,Gross Human Anatomy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 370,Neuroanatomy and Neurophysiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 371,Pulmonary Pathophysiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1
+SAR HS 375,Cardiovascular Pathophysiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 384,Medical Nutrition Therapy 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 385,Medical Nutrition Therapy 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 395,"Food, Supplements, and Consumer Health",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 397,Nutrition and Chronic Disease,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 400,Gender and Healthcare,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0
+SAR HS 405,Health Science Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 410,Field Experience: Human Physiology,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 412,Field Experience: Human Physiology II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 415,Undergraduate Nutrition Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 422,Ethics in Health Care,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+SAR HS 425,Healthcare Policy and Practice in Ireland,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+SAR HS 426,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+SAR HS 429,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+SAR HS 430,Global Maternal & Child Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 431,Topics in Global Environmental Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 432,Urban Design and Global Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 433,Global Health in Humanitarian Emergencies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 434,Global Health Policy and Governance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 436,Critical Approaches to Mental Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 438,Pathophysiology in Marginalized Individuals,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 439,Global Health Communication and Advocacy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 440,Qualitative Research Strategies in Global Health,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SAR HS 441,Neglected Tropical Diseases,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 442,Healthcare Interventions in Low and Lower-Middle Income Countries,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0
+SAR HS 443,Literature and Global Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 444,Child Health Programs in Low Resource Settings,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0
+SAR HS 446,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0
+SAR HS 449,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0
+SAR HS 450,Non-Infectious Diseases,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 452,Advanced Exercise Physiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 462,Public Health Policy and Advocacy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 463,Beyond Germs and Genes,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0
+SAR HS 467,Research Methods in Nutrition,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 469,Seminar: Advanced Regional Anatomy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 470,Topics in Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 480,Comparative Healthcare Systems,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1
+SAR HS 486,Applied Nutrition Care,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 489,Lifecourse Approach to Community Nutrition,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 495,Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 497,Independent Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 500,Food Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 510,Management of Food and Nutrition Services,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 525,The Physiology of Aging and the Quest for Longevity,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 534,PHYSIO OF SEX,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 538,Pathophysiology in Marginalized Individuals,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 540,Nutrition for Sport and Performance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 541,Physiology Across the Lifespan,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 542,Exercise Physiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 549,Mechanisms of Disruption in Brain Disorders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 550,Neural Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 551,Human Nutrition Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 561,Nutrition Throughout the Life Cycle,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 572,Pulmonary Pathophysiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 575,Cardiovascular Pathophysiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 576,Clinical Measurements in Cardiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 581,Gross Human Anatomy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 582,Neuroanatomy and Neurophysiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 584,Medical Nutrition Therapy 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 585,Medical Nutrition Therapy 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 586,Applied Nutritional Care,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 588,Applied Nutrition Counseling,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 592,Muscle Physiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 600,The Science of Adulthood,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 652,Advanced Exercise Physiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 703,Supervised Practice in Nutrition,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 704,Essentials of Professional Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 705,Foundations IPP,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 710,Graduate Field Experience: Human Physiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 712,Eating Disorders: Prevention and Treatment,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 720,Lifecourse Approach to Community Nutrition,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 742,Nutrition and Disease Prevention: A life course approach,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 745,Seminar: Advanced Regional Anatomy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 750,The Physiologist's Toolbox,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 755,Readings in Neuroscience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 776,Nutritional Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 779,Advanced Clinical Nutrition,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 783,Metabolic Regulation in Clinical Nutrition,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 785,Research in Clinical Nutrition,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 788,Theory and Practice of Clinical Counseling,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 791,Directed Study and Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 793,Critical Literature Review,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 811,Graduate Nutrition Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 901,Directed Study and Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 905,Dissertation Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 500,Integrative Seminar 1 and LIFW,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 501,Integrative Seminar 2 and LIFW,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 502,Integrative Seminar 3 and LIFW,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 506,Therapeutic Use of Self,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 513,Analysis and Adaptation of Occupation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 520,Evidence-Based Practice 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 524,Introduction to the OT Process,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 526,Functional Movement: Analysis and Assessment,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 529,Occupation Across the Life Course,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 530,Occupation Based Practice with Groups,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 538,Assistive Technology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 556,Neuroscience for Occupational Therapy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 562,Learning and Behavior Change,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 563,Context and Occupational Performance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 564,Skills for Occupation Based Practice 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 565,Skills for Occupation Based Practice 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 568,Occupation-Based Practice for Individuals,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 570,Special Topics in Occupational Therapy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 586,Professional Service Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 589,Orientation to Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 590,Fieldwork Seminar/Field Experience Fee,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 593,Level 2 Fieldwork 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 594,Level II Fieldwork II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 610,Health Promotion and Wellness,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 617,Contemporary Trends in Occupational Therapy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 618,Directed Study in Evidence Based Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 620,Evidence-Based OT Practice 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 622,Evidence-Based OT Practice 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 713,"Developmental Disabilities I: Evaluation, Assessment, Families and Systems",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 714,"Developmental Disabilities II: Values, Policy and Change",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 736,Independent Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 900,Scholarly Project I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 901,Scholarly Project II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 910,Social Policy and Disability,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 911,Practicum in Social Policy and Disability,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 915,Evaluating Clinical Theory and Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 916,Practicum in Theory Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 920,Outcomes Measurement and Monitoring I: Program Evaluation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 921,Outcomes Measurement and Monitoring II: Individual Client Monitoring,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 925,Capstone,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 930,Doctoral Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 943,Professional Development Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 944,Needs Assessment and Program Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 946,Preparation for Doctoral Experiential Component,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 947,Mentored Studies in Doctoral Experiential Component,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 948,Mentored Doctoral Experiential Dissemination,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 949,Doctoral Experience Component,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR OT 990,OTD Independent Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 341,Preclinical Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 490,IND STUDY PT,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 511,Cardiovascular and Pulmonary System 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 512,Cardiovascular and Pulmonary System 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 521,Musculoskeletal System I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 522,Musculoskeletal System II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 550,Scientific Basis of Human Movement,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 551,Neuroscience for Physical Therapy Students,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 555,Integrated Clinical Experience 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 565,Integrated Clinical Experience 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 566,Evidence Based Practice 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 610,Health Promotion and Wellness,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 623,Musculoskeletal System III,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 634,Diagnostic Procedures for Rehabilitation Professionals,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 652,Neurological System I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 653,Neurological System II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 662,Evidence Based Practice II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 663,Directed Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 682,Academic Practicum 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 690,Independent Study in Physical Therapy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 691,Clinical Education Seminar 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 692,Clinical Education Seminar 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 720,Educational Theory & Practice - PT,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 757,Pediatrics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 760,Special Topics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 773,Comprehensive Clinical Reasoning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 782,Academic Practicum II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 791,Clinical Education Experience 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 792,Clinical Education Experience 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 793,Clinical Education Experience 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 794,Clinical Education Seminar 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 901,Neurologic Physical Therapy Residency,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 902,Fellowship in Orthopedic Manual Physical Therapy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR PT 903,Fellowship in Orthopedic Manual Physical Therapy 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR RS 650,Foundations of Rehabilitation Sciences,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR RS 750,Research Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR RS 790,Teaching Skills,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR RS 870,Emerging Topics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR RS 890,Doctoral Seminar in Rehabilitation Sciences,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR RS 910,RS PhD Directed Reading,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR RS 911,RS PhD Directed Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR RS 920,RS PhD Comprehensive Examination,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR RS 930,RS PhD Dissertation Proposal Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR RS 940,RS PhD Dissertation Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 110,"Introduction to Speech, Language, and Hearing Sciences",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0
+SAR SH 220,Anatomy and Physiology of the Speech Mechanism,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 221,Phonetics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 230,Language Acquisition,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 240,Introduction to Audiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 245,Hearing Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 325,Speech Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 335,Neurobiology of Language,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1
+SAR SH 340,Aural Habilitation and Rehabilitation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 350,Clinical Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 355,Introduction to Language Disorders across the Lifespan,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 356,Introduction to Speech Sound Disorders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 415,Senior Seminar: Internship,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+SAR SH 497,Directed Study in Speech Pathology and Audiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 605,Speech Sound Disorders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 620,Neuroimaging for Speech and Hearing Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 647,Introduction to Clinical Process,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 648,Clinical Remediation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 650,Healthcare Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 680,Neural Control of Speech,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 691,Introduction to Augmentative and Alternative Communication,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 700,Research Methods in Speech-Language Pathology and Audiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 701,Counseling in Speech-Language Pathology: An Introductory Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 702,Public School,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 704,Clinical Reasoning: Inter-Professional Education (IPE),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 705,Clinical Reasoning: Case Studies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 706,Clinical Reasoning: Advanced Case Studies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 709,Language Sample Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 715,Professional Issues,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 716,Head and Neck Cancer,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 720,Craniofacial Disorders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 721,Motor Speech Disorders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 725,Bilingual Considerations in Language Assessment and Intervention,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 727,Autism,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 728,Pediatric Feeding and Swallowing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 729,Language and Literacy Disorders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 732,Stuttering and Related Disorders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 733,Voice and Resonance Disorders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 734,Acquired Cognitive Disorders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 735,Language Disorders in Early Childhood,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 736,Aphasia,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 737,Evaluation and Diagnosis in Speech Pathology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 738,Dysphagia,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 739,Advanced Dysphagia,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 740,Introduction to Clinical Practicum: Speech and Language,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 741,Clinical Practicum: Speech and Language,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 742,Clinical Practicum: Speech and Language,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 743,Clinical Practicum: Speech and Language,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 744,Clinical Practicum: Diagnostics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 748,Hearing Practicum 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 752,Hearing Practicum 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 756,Cognition and Neural Bases,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 757,Aging and Dementia,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 759,IND STUDY,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 760,MS THESIS RES,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 761,Research Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 770,Advanced Augmentative and Alternative Communication,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 790,Comprehensive Examination,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 809,"Advanced Topics in Speech, Language and Hearing Sciences",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 810,Doctoral Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 901,INDEP STUDY,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 906,INTERN TEACH,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 942,Thesis Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR SH 982,DISSERT RES,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

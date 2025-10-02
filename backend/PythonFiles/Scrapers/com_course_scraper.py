@@ -34,9 +34,9 @@ def scrape_page(page_num):
         response = requests.get(url, timeout=10)
         response.raise_for_status()
         soup = BeautifulSoup(response.text, 'html.parser')
-        
         courses = []
-        course_entries = soup.select('ul.course-feed li:has(div.cf-hub-ind)')
+        
+        course_entries = soup.select('ul.course-feed li')
         
         for course in course_entries:
             course_data = {
@@ -64,7 +64,8 @@ def scrape_page(page_num):
                     elif req in hub_requirements:
                         course_data[req] = 1
             
-            courses.append(course_data)
+            if course_data['code']:
+                courses.append(course_data)
         
         return courses
     except Exception as e:
@@ -80,17 +81,32 @@ def main():
         for i, future in enumerate(futures, 1):
             result = future.result()
             all_courses.extend(result)
-            print(f"Processed page {i}/{PAGES} - found {len(result)} Hub courses")
+            hub_count = sum(1 for course in result if any(course[req] == 1 for req in hub_requirements))
+            print(f"Processed page {i}/{PAGES} - found {len(result)} total courses ({hub_count} with Hub requirements)")
             time.sleep(0.5)
     
-    with open('com_hub_courses.csv', 'w', newline='', encoding='utf-8') as csvfile:
+    # Separate hub and non-hub courses
+    hub_courses = [course for course in all_courses if any(course[req] == 1 for req in hub_requirements)]
+    
+    # Write all courses CSV
+    with open('com_all_courses.csv', 'w', newline='', encoding='utf-8') as csvfile:
         fieldnames = ['code', 'name'] + hub_requirements
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
         writer.writeheader()
         for course in all_courses:
             writer.writerow(course)
     
-    print(f"Scraping complete. Saved {len(all_courses)} Hub courses to com_hub_courses.csv")
+    # Write hub courses only CSV
+    with open('com_hub_courses.csv', 'w', newline='', encoding='utf-8') as csvfile:
+        fieldnames = ['code', 'name'] + hub_requirements
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+        writer.writeheader()
+        for course in hub_courses:
+            writer.writerow(course)
+    
+    print(f"\nScraping complete.")
+    print(f"Saved {len(all_courses)} total courses to com_all_courses.csv")
+    print(f"Saved {len(hub_courses)} Hub courses to com_hub_courses.csv")
 
 if __name__ == "__main__":
     main()

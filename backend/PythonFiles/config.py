@@ -1,8 +1,9 @@
 from pathlib import Path
 from typing import List
 
-cas_csv_path = Path("bu_hub_courses.csv")
+cas_csv_path = Path("cas_hub_courses.csv")
 khc_csv_path = Path("khc_hub_courses.csv")
+
 
 HUB_REQUIREMENTS: List[str] = [
     "Philosophical Inquiry and Life's Meanings",

@@ -208,14 +208,21 @@ class CourseDataManager:
 
 if __name__ == "__main__":
     csv_files = [
-        Path('CSVFiles/bu_all_courses.csv'),
-        Path('CSVFiles/khc_hub_courses.csv')
+        Path('CSVFiles/cas_all_courses.csv'),
+        Path('CSVFiles/khc_hub_courses.csv'),
+        Path('CSVFiles/cds_all_courses.csv'),
+        Path('CSVFiles/cfa_all_courses.csv'),
+        Path('CSVFiles/com_all_courses.csv'),
+        Path('CSVFiles/questrom_all_courses.csv'),
+        Path('CSVFiles/sar_all_courses.csv'),
+        Path('CSVFiles/sha_all_courses.csv'),
+        Path('CSVFiles/wheelock_all_courses.csv')
     ]
     
     existing_files = [f for f in csv_files if f.exists()]
     
     if not existing_files:
-        existing_files = [Path('CSVFiles/bu_hub_courses.csv')]
+        existing_files = [Path('CSVFiles/cas_hub_courses.csv')]
     
     manager = CourseDataManager(existing_files)
     

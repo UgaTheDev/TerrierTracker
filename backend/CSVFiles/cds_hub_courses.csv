@@ -1,0 +1,23 @@
+code,name,Philosophical Inquiry and Life's Meanings,Aesthetic Exploration,Historical Consciousness,Scientific Inquiry I,Social Inquiry I,Scientific Inquiry II,Social Inquiry II,Quantitative Reasoning I,Quantitative Reasoning II,The Individual in Community,Global Citizenship and Intercultural Literacy,Ethical Reasoning,First-Year Writing Seminar,"Writing, Research, and Inquiry",Writing-Intensive Course,Oral and/or Signed Communication,Digital/Multimedia Expression,Critical Thinking,Research and Information Literacy,Teamwork/Collaboration,Creativity/Innovation
+CDS DS 100,Data Speak Louder Than Words,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0
+CDS DS 110,Introduction to Data Science with Python,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0
+CDS DS 120,Foundations of Data Science,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+CDS DS 121,Foundations of Data Science 2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,1,0,0,0
+CDS DS 122,Foundations of Data Science 3,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+CDS DS 210,Programming for Data Science,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1
+CDS DS 280,Spark! UX/UI Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+CDS DS 290,Spark! Civic Tech Research Design Workshop,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+CDS DS 291,Spark! Exploring DEI in Tech,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+CDS DS 292,Spark! Civic Tech Toolkit Workshop,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+CDS DS 310,Data Mechanics,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+CDS DS 320,Algorithms for Data Science,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+CDS DS 340,Introduction to Machine Learning and AI,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,1,0,0,0
+CDS DS 380,"Data, Society, and AI Ethics",0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0
+CDS DS 482,"Responsible AI, Law, Ethics & Society",0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,1,0
+CDS DS 519,Spark! Software Engineering X-Lab Practicum,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0
+CDS DS 522,Stochastic Methods for Algorithms,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1
+CDS DS 539,Spark! Data Science X-Lab Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,0
+CDS DS 549,Spark! Machine Learning X-Lab Practicum,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0
+CDS DS 563,Algorithmic Techniques for Taming Big Data,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1
+CDS DS 587,Data Science in Human Contexts,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0
+CDS DS 594,Spark! Data Visualization X-Lab Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,0,0

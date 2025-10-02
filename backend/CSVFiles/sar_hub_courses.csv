@@ -1,0 +1,42 @@
+code,name,Philosophical Inquiry and Life's Meanings,Aesthetic Exploration,Historical Consciousness,Scientific Inquiry I,Social Inquiry I,Scientific Inquiry II,Social Inquiry II,Quantitative Reasoning I,Quantitative Reasoning II,The Individual in Community,Global Citizenship and Intercultural Literacy,Ethical Reasoning,First-Year Writing Seminar,"Writing, Research, and Inquiry",Writing-Intensive Course,Oral and/or Signed Communication,Digital/Multimedia Expression,Critical Thinking,Research and Information Literacy,Teamwork/Collaboration,Creativity/Innovation
+SAR HP 151,Introduction to Health Professions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+SAR HP 250,Introduction to Critical Inquiry in Behavior and Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+SAR HP 252,Health and Disability Across the Lifespan,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+SAR HP 306,Foundations of Health Promotion,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,1
+SAR HP 353,Organization and Delivery of Health Care in the U.S.,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+SAR HP 454,"Social Determinants of Health - Sex, Sexual Orientation, and Gender",0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HP 565,Biomechanics of Human Movement,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+SAR HS 201,Introduction to Nutrition,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+SAR HS 221,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+SAR HS 222,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+SAR HS 241,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0
+SAR HS 242,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0
+SAR HS 251,Human Nutrition Science,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0
+SAR HS 300,Epidemiology 1,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 323,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SAR HS 324,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SAR HS 325,Introduction to Global Health,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0
+SAR HS 332,"Analyzing Bias and Discrimination in Medicine, Health, & Science",0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 333,Queering Health,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 335,RESEARCH EXP,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1
+SAR HS 342,Exercise Physiology,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SAR HS 343,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1
+SAR HS 345,Global Environmental Public Health,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0
+SAR HS 348,Global Mental Health,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+SAR HS 371,Pulmonary Pathophysiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1
+SAR HS 400,Gender and Healthcare,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0
+SAR HS 410,Field Experience: Human Physiology,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+SAR HS 422,Ethics in Health Care,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+SAR HS 425,Healthcare Policy and Practice in Ireland,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+SAR HS 426,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+SAR HS 429,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+SAR HS 440,Qualitative Research Strategies in Global Health,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+SAR HS 442,Healthcare Interventions in Low and Lower-Middle Income Countries,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0
+SAR HS 444,Child Health Programs in Low Resource Settings,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0
+SAR HS 446,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0
+SAR HS 449,Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0
+SAR HS 463,Beyond Germs and Genes,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,1,0
+SAR HS 480,Comparative Healthcare Systems,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1
+SAR SH 110,"Introduction to Speech, Language, and Hearing Sciences",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0
+SAR SH 335,Neurobiology of Language,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1
+SAR SH 415,Senior Seminar: Internship,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0

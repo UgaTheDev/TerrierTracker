@@ -1,0 +1,441 @@
+code,name,Philosophical Inquiry and Life's Meanings,Aesthetic Exploration,Historical Consciousness,Scientific Inquiry I,Social Inquiry I,Scientific Inquiry II,Social Inquiry II,Quantitative Reasoning I,Quantitative Reasoning II,The Individual in Community,Global Citizenship and Intercultural Literacy,Ethical Reasoning,First-Year Writing Seminar,"Writing, Research, and Inquiry",Writing-Intensive Course,Oral and/or Signed Communication,Digital/Multimedia Expression,Critical Thinking,Research and Information Literacy,Teamwork/Collaboration,Creativity/Innovation
+QST AC 221,Financial Accounting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 222,Managerial Accounting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 347,Intermediate Accounting 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 348,Intermediate Accounting 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 414,Financial Statement Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 420,Introduction to Financial Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 430,Accounting Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 431,Sustainability Reporting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 469,Principles of Income Taxation I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 498,Directed Study: Accounting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 565,Auditing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 710,Financial Reporting and Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 711,Financial Reporting and Control,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 814,Financial Statement Analysis & Investor Decisions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 820,Financial Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 830,Managerial Accounting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 847,Intermediate Accounting 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 848,Intermediate Accounting 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 860,Accounting Risk Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 865,Auditing Issues & Problems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 869,Principles of Income Taxation 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 895,Action Learning Directed Study in Accounting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 898,Directed Study: Accounting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 899,Directed Study: Accounting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 901,Introduction to Accounting Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 909,Contemporary Accounting Topics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 918,Financial Accounting Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 919,Managerial and Cost Accounting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 990,Current Topics Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 998,Directed Study: Accounting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST AC 999,Directed Study: Accounting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 221,Introduction to Data and Business Analytics,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 222,Modeling Business Decisions and Market Outcomes with Spreadsheets and Statistical Programming,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 223,Business Modeling with Spreadsheets,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 305,Business Decision-Making with Data,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 510,Neural Networks and AI: From Foundations to Generative Models,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 572,Business Experiments and Causal Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 576,Machine Learning for Business Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 600,Introduction to Programming with Python,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 602,Fundamentals of Data Analysis and Statistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 775,Business Analytics Toolbox,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 780,Introduction to Data Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 810,Supervised Machine Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 815,Competing with Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 820,Unsupervised and Unstructured Machine Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 830,Business Experimentation and Causal Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 840,Data Ethics: Analytics in Social Context,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 843,Big Data Analytics for Business,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 860,Marketing Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 865,Neural Networks in Business: From Foundations to Generative AI,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 870,Financial Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 875,Operations and Supply Chain Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 878,Machine Learning and Data Infrastructure in Health Care,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 880,People Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 881,Analytics for Customer Strategies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 882,Deploying Analytics Pipelines,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 885,Advanced Analytics 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 888,Capstone Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 890,Analytics Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BA 891,Analytics Practicum 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BE 101,Introductory Microeconomics for Business and Strategy,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+QST BE 102,Introduction to Macroeconomics for Business,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BE 325,Strategy in the Health and Life Science Sector,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BE 350,The Psychology of Decision Making: Implications for Business and Public Policy,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+QST BE 720,"Organizations, Markets, and Society",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BE 721,Economics and Management Decisions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BE 834,Macroeconomics in the Global Environment,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST BE 845,Improving Your Decisions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST DS 906,Fundamentals of Research and the Philosophies of Science (previously MK912),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST DS 911,Seminar in Macro Organizational Theory,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST DS 913,Experimental Design and Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST DS 919,Machine Learning Method for Social Science Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST DS 921,Behavioral Science Writing Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST DS 925,Methods for Causal Inference in Strategy Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST DS 929,Analytical Modeling for Business Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST DS 999,Doctoral Dissertation Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 090,Ascend Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 110,Explore Your Career,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 210,Build Your Career Toolkit,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 215,Explore Your Career and Build Your Toolkit,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 310,Implement Your Career Plan,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 610,Communications in Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 611,Careers in Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 710,Teaming,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 723,Career Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 729,Storytelling with Data,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 730,Leadership Communication,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 735,Team Coaching,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 740,Leadership Communication,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 750,Leadership Through Collaboration,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 872,Entrepreneur's Communication Playbook,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST ES 898,Directed Study in Executive Skills,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 223,Introduction to Corporate Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 323,Introduction to Corporate Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 342,"Money, Financial Markets, and Economic Activity",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 427,International Financial Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 429,"Futures, Options, and Financial Risk Management",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 433,ESG Investing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 445,Investment Analysis and Portfolio Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 449,Corporate Financial Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 450,Private Equity: Leveraged Buyouts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 454,Investment Banking,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 455,Financing New Ventures,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 456,Fixed Income Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 458,Equities and Securities Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 459,Programming for Investments,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 460,Equity Analysis for Strategic Decision Making,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 462,Business Valuation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 469,Real Estate Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 498,Directed Study: Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 711,Finance 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 712,Finance 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 713,Finance 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 722,Financial Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 723,Introduction to Corporate Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 740,Statistics for Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 747,Data Analytics in Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 820,Corporate Financial Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 822,Fixed Income Markets,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 823,Investments,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 829,"Futures, Options and Financial Risk Management",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 833,ESG Equity Investing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 850,Private Equity: Leveraged Buyouts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 854,Entrepreneurial Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 870,Analysis and Management of Financial Risk,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 875,Advanced Valuation Methods (Valuation Boot Camp),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 895,Action Learning Directed Study in Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 898,Directed Study: Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 899,Directed Study: Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 918,Doctoral Seminar in Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 920,Advanced Capital Markets,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 998,Directed Study: Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST FE 999,Directed Study: Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 703,Health Sector Issues and Opportunities,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 710,"Health Service Delivery: Strategies, Solutions and Execution",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 717,"Drugs, Devices, and Diagnostics: New Challenges, Strategies, and Execution",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 801,Bench-to-Bedside: Translating Biomedical Innovation from the Laboratory to the Marketplace,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 817,Advances in Digital Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 820,"Strategy, Economics, and Policy in the Health Sector",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 833,Health Sector Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 840,Health Sector Consulting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 848,Driving Health Sector Innovation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 895,Action Learning Directed Study in Health Sector Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 898,Directed Study: Health Care Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 899,Directed Study: Health Care Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 998,Directed Study: Health Care Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST HM 999,Directed Study: Health Care Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IM 345,Global Business Environment,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IM 430,Managing in a Global Environment,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IM 445,Multinational Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IM 475,Global Management Experience,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+QST IM 498,Directed Study: International Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IM 843,Leading Global Teams Immersion,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IM 851,The Management of Luxury Business,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IM 858,Global Field Seminar: Pursuing Sustainability in Developing Economies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IM 860,Social Impact Field Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IM 885,International Management Field Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 223,Information Systems and Emerging Technologies in Business,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 428,Managing Information Security,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 467,Agile Development Methodologies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 469,Designing Information Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 474,Platform Strategy and Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 498,Directed Study: Management Information Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 565,Managing Data Resources,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 579,Financial Business Modeling with Spreadsheets,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 717,Systems Architecture in Management and Applications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 737,Decision Making with Data,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 795,Blockchains and their Applications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 811,Responsible AI for Business Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 813,Generative AI: Implementation and Impact for Business,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 823,Analytics for Managers,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 827,Platform Strategy and Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 828,Managing Information Security,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 833,Introduction to Data Analytics in Python,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 834,Introduction to Python for Data Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 843,Big Data Analytics for Business,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 853,Business Insights through Text,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 854,Digital Strategy for Business Leaders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 858,Agile Project Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 860,Analytics Consulting: Data-Driven Business Solutions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 863,Integration of Generative AI in Business Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 879,Business Modeling with Spreadsheets,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 883,Deploying Generative AI in the Enterprise,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 889,Data Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 890,Creating Successful Digital Products & Experiences,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 895,Action Learning Directed Study in Information Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 898,Directed Study: Info Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 899,Directed Study: Info Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 911,Generative AI & Causal Inference with Text,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 912,Platform Strategy & Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 919,Research Seminar 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 990,Current Topics Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 998,Directed Study: Info Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST IS 999,Directed Study: Info Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST LA 245,"Business Law, Contracts, and Regulation",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST LA 343,Discrimination and the Law: Implications for Business,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST LA 346,"Business, Justice, and Responsibility",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST LA 355,Employment Law and Public Policy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST LA 360,Real Estate Law,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST LA 365,Securities Regulation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST LA 450,Law and Risk Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST LA 498,Law Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 600,Mathematics and Statistics Review,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 601,Mathematical Finance Launch,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 602,Program Refresher,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 610,Mathematical Finance Career Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 650,Industry Internship,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 702,Fundamentals of Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 703,Programming for Mathematical Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 728,Fixed Income Securities,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 730,Dynamic Portfolio Theory,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 731,Corporate Risk Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 740,Economics of FinTech,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 770,Advanced Derivatives,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 772,Credit Risk,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 790,STOCH CALCULUS,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 793,Statistics for Mathematical Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 796,Computational Methods of Mathematical Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 810,Financial Tech Programming,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 815,Advanced Machine Learning Applications for Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 821,Algorithmic and High-Frequency Trading,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 825,Portfolio Construction,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 840,Data Analysis and Financial Econometrics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 850,"Deep Learning, Statistical Learning",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 921,Topics in Dynamic Asset Pricing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 998,Directed Study: Mathematical Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MF 999,Directed Study: Mathematical Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MG 730,Ethical Leadership in the Global Economy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MG 735,Crisis Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 223,Marketing: Concepts to Consumers,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 323,Marketing Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 345,Consumer Insights,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 435,Introduction to the Music Business and Music Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 447,Marketing Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 465,Omni-channel Retailing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 467,Global Marketing Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 469,Advertising in the Digital Age,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 470,Pricing Strategy and Tactics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 475,Luxury Brands,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 478,Customer Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 486,Digital Marketing Strategy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 487,Branding,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 498,Directed Study: Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 542,Digital Marketing Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 723,Marketing Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 724,Marketing Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 820,Consultative Selling,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 835,ECommerce Strategy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 842,Machine Learning for Business Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 845,Social Media Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 852,Data Driven Marketing Decisions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 854,Brand Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 856,Consumer Insights,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 864,Pricing Strategy and Tactics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 867,Purpose-Led Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 870,Luxury Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 876,Digital Marketing Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 878,Customer Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 895,Action Learning Directed Study in Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 898,Directed Study: Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 899,Directed Study: Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 914,Seminar in Consumer Behavior,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 915,Consumer Behavior 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 927,Marketing Management and the Customer-Focused Firm,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 929,Marketing Management and the Customer-Focused Firm 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 990,Current Topics Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 998,Directed Study: Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MK 999,Directed Study: Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 221,The Dynamics of Leading Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+QST MO 356,Leadership and Management of Social Enterprises,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+QST MO 441,Human Resources: People Strategies to Drive Career Performance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 448,Negotiations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 460,The Leadership Challenge,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,0
+QST MO 498,Directed Study: Management & Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 520,People Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 712,Leading Organizations and People,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 713,Leading Organizations and People,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 825,Future of Work,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 830,Leading Mission Driven Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 838,People Strategies to Drive Performance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 842,Power and Politics in Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 844,Managing Organizational Change,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 847,Managing High Performance Teams and Project Groups,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 848,Leadership Challenge,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 853,Negotiations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 856,Mediation and Conflict Resolution,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 858,Necessary Conversations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 860,People Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 895,Action Learning Directed Study in Management and Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 898,Directed Study: Management & Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 899,Directed Study: Management & Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 917,The Craft of Theorizing Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 919,Seminar in Macro-Organizational Behavior,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 923,Field Studies Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 990,Current Topics Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 998,Directed Study: Management & Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MO 999,Directed Study: Management & Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 650,Career Foundations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 660,Career Skill Building,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 715,Customers and Markets,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 716,Financial Decision Making,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 717,Business Context and Strategy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 718,Competitive Business Simulation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 742,Financial Reporting and Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 743,Quantitative Methods for Management Decisions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 744,"People, Teams, and Organizations",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 747,Agile Project Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 749,Making a Business Case,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 751,Digital Transformation and Growth,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 753,Negotiation and Conflict Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 754,Corporate Financial Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 756,Leadership and Change Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 757,Innovation and Entrepreneurship,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 759,Consultative Selling,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 770,Data Visualization,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 771,Product Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 772,Product Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 773,Customer Data Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 774,Digital Marketing Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 775,Business Impact Modeling,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 776,Data Management for Managers,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 777,AI for Business Challenges,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 779,Business Experimentation with AI,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 784,Insights and Analytics Client Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 785,Innovation Tournament Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MS 786,Customer Experience Client Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MX 700,Online MBA Launch,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MX 710,Creating Value for Business and Society,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MX 720,Managing Performance with Data,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MX 730,Leading with Integrity,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MX 740,Managing Risk,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MX 750,Leveraging Global Opportunities,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST MX 760,Fostering an Innovative Mindset,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 223,Creating Value with Operations & Supply Chain Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 323,Operations and Supply Chain Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 351,Supply Chain Risk and Sustainability,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+QST OM 353,Project Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 365,Improving Quality: Six Sigma Certification,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 440,Supply Chain Strategy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 441,Supply Chain Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 467,Global Sourcing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 498,Directed Study in Operations and Technology Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 725,Creating Value Through Operations and Technology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 726,Creating Value Through Operations and Technology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 839,Strategic Lean for Business Excellence,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 840,Improving Organizational Performance with Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 851,Environmentally Sustainable Supply Chains,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 855,Project Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 880,Product Design and Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 895,Action Learning Directed Study in Operations and Technology Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 898,Directed Study: Operations and Technology Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 899,Directed Study: Operations and Technology Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 921,App Probability Models,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 922,Theory of Technology and Operations Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 926,Supply Chain Modeling,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 928,Research Seminar: Economics and Operations Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 990,Current Topics Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 998,Directed Study: Operations and Technology Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST OM 999,Directed Study: Operations and Technology Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST PL 498,"Directed Study in Markets, Public Policy, and Law",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST PL 710,Introduction to Business Law,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST PL 833,Business Law and Discrimination,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST PL 835,Managing Your Workforce,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST PL 855,Energy Sector Market Dynamics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST PL 861,Emerging Issues in Business and Law,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST PL 895,Action Learning Directed Study in Public Policy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST PL 898,"Directed Study: Markets, Public Policy, and Law",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST PL 899,"Directed Study: Markets, Public Policy, and Law",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST PL 998,"Directed Study: Markets, Public Policy, and Law",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST PL 999,"Directed Study: Markets, Public Policy, and Law",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST QM 323,Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST QM 498,Directed Study: Quantitative Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST QM 716,Business Analytics: Data Analysis and Risk,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST QM 717,Data Analysis for Managerial Decision-Making,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST QM 877,Intro to Python Bootcamp,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST QM 878,Deep Learning with Python Bootcamp,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST QM 895,Action Learning Directed Study in Quantitative Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST QM 898,Directed Study: Quantitative Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST QM 899,Directed Study: Quantitative Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST QM 998,Directed Study: Quantitative Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST QM 999,Directed Study: Quantitative Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 250,Ideas to Impact,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1
+QST SI 340,Family Business Management,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0
+QST SI 344,Entrepreneurship: Solving Problems in a Dynamic World,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 348,The Fundamentals of Selling: The Tactics and Strategies for a Career in Sales,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 360,Strategy Lab,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 422,"Strategy, Innovation, and Global Competition",0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1
+QST SI 430,Cleantech Venture Consulting Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 432,Corporate Strategy: Formulation and Implementation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 435,Entertainment Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 438,Talent Representation and Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 445,Managing a Growing Enterprise,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 451,Organizing for Design and Innovation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 453,Strategies in Environmental Sustainability,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+QST SI 464,Intellectual Property Strategies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 469,Real Estate Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 471,International Entrepreneurship,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 480,The Business of Technology Innovation,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 482,Strategy for Technology-Based Firms,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 498,Directed Study in Strategy and Innovation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 630,Cleantech Venture Consulting Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 750,"Competition, Innovation, and Strategy",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 751,"Competition, Innovation, and Strategy",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 814,Intellectual Property Strategies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 828,Managing the Global Enterprise,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 830,Corporate Strategies for Growth,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 835,"Real Estate Development, Finance, and Management",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 836,Decarbonization of the Global Economy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 839,Design Thinking and Innovation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 845,Technology Strategy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 849,Corporate Sustainability Strategy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 852,Starting New Ventures,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 855,Entrepreneurship,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 858,Innovation Eco-Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 859,Strategy Implementation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 860,Managing Corporate Innovation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 868,International Consulting Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 871,Strategies for Bringing Technology to Market,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 895,Action Learning Directed Study in Strategy and Innovation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 898,Directed Study: Strategy and Innovation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 899,Directed Study: Strategy and Innovation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 917,Research Seminar in Technology Strategy and Innovation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 920,Organizations in Strategy and Economics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 990,Current Topics Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 998,Directed Study: Strategy and Innovation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SI 999,Directed Study: Strategy and Innovation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SM 101,Introduction to Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SM 131,"Business, Markets, and Society",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0
+QST SM 132,Measuring Financial Value,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SM 275,Critical and Analytic Thinking for Business,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,0
+QST SM 303,Cross-Functional Core,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,1,1
+QST SM 395,Management Internship,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SR 801,"Social Impact: Business, Society, and the Natural Environment",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SR 831,Sustainability Reporting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SR 841,Fundamentals of Nonprofit Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SR 895,Action Learning Directed Study in Social Responsibility,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SR 898,DS: Social Responsibility,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SR 899,DS: Social Responsibility,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SR 998,DS: Social Responsibility,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+QST SR 999,DS: Social Responsibility,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

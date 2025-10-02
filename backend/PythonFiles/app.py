@@ -49,7 +49,7 @@ SCRIPT_DIR = Path(__file__).parent.absolute()
 logger.info(f"Script directory: {SCRIPT_DIR}")
 
 CSV_DIR = SCRIPT_DIR.parent / 'CSVFiles'
-BU_ALL_COURSES_PATH = CSV_DIR / 'bu_all_courses.csv'
+BU_ALL_COURSES_PATH = CSV_DIR / 'cas_all_courses.csv'
 KHC_HUB_COURSES_PATH = CSV_DIR / 'khc_hub_courses.csv'
 
 logger.info(f"Looking for BU all courses CSV at: {BU_ALL_COURSES_PATH.absolute()}")
@@ -238,7 +238,7 @@ def root():
     return jsonify({
         "message": "BU Course API is running!",
         "version": "1.0.0",
-        "data_sources": ["bu_all_courses.csv", "khc_hub_courses.csv"],
+        "data_sources": ["cas_all_courses.csv", "khc_hub_courses.csv", "cds_all_courses.csv", "cfa_all_courses.csv", "com_all_courses.csv", "questrom_all_courses.csv", "sar_all_courses.csv", "sha_all_courses.csv", "wheelock_all_courses.csv"],
         "endpoints": {
             "health": "/api/health (GET)",
             "register": "/api/register (POST)",
@@ -344,7 +344,7 @@ def get_all_courses():
         return jsonify({
             "courses": all_courses,
             "total_courses": len(all_courses),
-            "data_sources": ["bu_all_courses.csv", "khc_hub_courses.csv"]
+            "data_sources": ["cas_all_courses.csv", "khc_hub_courses.csv", "cds_all_courses.csv", "cfa_all_courses.csv", "com_all_courses.csv", "questrom_all_courses.csv", "sar_all_courses.csv", "sha_all_courses.csv", "wheelock_all_courses.csv"]
         })
     
     except Exception as e:

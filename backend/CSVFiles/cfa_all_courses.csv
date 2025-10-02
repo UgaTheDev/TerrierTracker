@@ -1,0 +1,821 @@
+code,name,Philosophical Inquiry and Life's Meanings,Aesthetic Exploration,Historical Consciousness,Scientific Inquiry I,Social Inquiry I,Scientific Inquiry II,Social Inquiry II,Quantitative Reasoning I,Quantitative Reasoning II,The Individual in Community,Global Citizenship and Intercultural Literacy,Ethical Reasoning,First-Year Writing Seminar,"Writing, Research, and Inquiry",Writing-Intensive Course,Oral and/or Signed Communication,Digital/Multimedia Expression,Critical Thinking,Research and Information Literacy,Teamwork/Collaboration,Creativity/Innovation
+CFA AR 121,Foundation Sculpture,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1
+CFA AR 123,"Foundation Design: Introductory Principles, Practices",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+CFA AR 131,Drawing 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA AR 132,Drawing One: Drawing as Visual Language,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+CFA AR 141,Foundation Painting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 192,Introduction to Drawing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 193,Visual Arts Drawing,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA AR 194,Mixed Media Drawing and Collage,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA AR 221,Materials and Methods in Sculpture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA AR 223,Installation Art: Subject-Object Relationship in the Contemporary Landscape,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 224,New Genres in Sculpture,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0
+CFA AR 225,Sophomore Graphic Design Fall,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+CFA AR 226,Sophomore Graphic Design 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 236,Human Anatomy for the Artist,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 238,Drawing Concepts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 239,Figure Drawing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 241,Painting 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 242,Painting 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA AR 243,Photography 1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1
+CFA AR 250,Introduction to Printmaking,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA AR 251,Introduction to Printmaking,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 260,Special Topics in Visual Art,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 270,Bookmaking Techniques,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 309,Drawing Trees,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 321,Sculpture Studio,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 322,Sculpture Studios,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 327,Sculpture Techniques 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 329,Contemporary Issues Semester 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA AR 331,Contemporary Issues: Interpretation,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+CFA AR 332,Senior Painting Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+CFA AR 339,Sculpture Thesis Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 341,Junior Painting Studio,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA AR 342,Painting Studio,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 345,Senior Painting Studio,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 346,Senior Painting Studios,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 369,"Art, Community, and Social Engagement",0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,1
+CFA AR 381,Junior Graphic Design 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0
+CFA AR 382,Junior Graphic Design 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 385,Typography 1: Rules of Typography,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 386,"Sophomore Type Spring: Hierarchy, Composition",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 389,Graphic Design Elective,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 401,Directed Study Sculpture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 402,Directed Study Ceramics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 403,Directed Study Printmaking,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 404,Directed Study Graphic Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 406,Directed Study Painting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 410,Directed Study Visual Arts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 412,Architectural Design 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1
+CFA AR 425,The Artist and the Book,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1
+CFA AR 428,Architecture Site Design 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1
+CFA AR 432,Advanced Drawing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 447,Printmaking 1: Etching & Monotype,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA AR 450,The Art of the Multiple,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+CFA AR 451,Printmaking: Advanced Projects,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 452,Printmaking 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 455,Elementary Methods of Art Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 456,Elementary Pre-Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 460,Secondary Methods of Art Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 461,Directed Study Art Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 462,Secondary Pre-Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 469,Color,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 470,Ceramics 1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1
+CFA AR 471,Ceramics 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 480,Senior Capstone,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 483,Senior Graphic Design: Collaboration,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 484,Senior Graphic Design Studio,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1
+CFA AR 487,Junior Typography,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 497,Junior Type: Motion + Interactivity,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 500,Directed Study: Drawing Elective,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 502,Branding,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 505,Certificate Typography,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 508,The Experimental Photograph,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0
+CFA AR 509,Drawing Trees,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 510,Photo Lab,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 512,Architectural Design 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,1
+CFA AR 515,Digital Photo,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1
+CFA AR 517,Digital Printmaking: Ink & Pixel,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+CFA AR 518,Silkscreen Print,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 521,Site Specific Art,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 523,Graphic Design Studio Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 527,Drawing into Animation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 528,Architectural Site Design 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 531,Advanced Projects in Photography,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 532,Word And Image,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 533,The Photograph as Story,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 535,Special Topics: Visual Arts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 540,Relief Printmaking,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 545,Performative Text and Design,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1
+CFA AR 547,Principles of Painting Techniques 1 credit Fall term,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 548,Principles of Painting Techniques 2 credits Spring term,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 551,Processes and Structures I (2 credits; fall semester),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 552,Processes and Structures II (2 credits; spring semester),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 553,Art Education Seminar: Curriculum and Instruction I (4 credits; Fall semester),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 554,Art Education Seminar: Curriculum and Instruction 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+CFA AR 555,Practicum I (4 credits; Fall semester),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 556,Practicum II (4 cr. Spring semester),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 557,Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 558,Contemporary Issues in Art Education (4 credits; fall semester),0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+CFA AR 560,Applied Studio,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 565,"Art, Access, and Inclusion (4 credits; spring semester)",0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+CFA AR 569,"Art, Community, and Social Engagement",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 571,Exhibition Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 572,Internship,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 576,Motion Graphics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 577,Editorial Publication,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 580,History of Graphic Design,0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0
+CFA AR 581,Web Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 582,Web Design 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 586,Child Development through Arts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+CFA AR 587,Information Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 589,Interactive Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 590,Elementary and Secondary Methods in Art Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 591,Curriculum Design and Pre-Practicum Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 592,Pre-Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 593,Design Lab,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 594,Graphic Design Theory,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 595,Visual Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 596,CFA AR 596 Graphic Design Theory II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 597,Experience Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 600,Contemporary Issues in Art Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 601,Graduate Typography,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 602,Graduate Typography 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 605,Introduction to Research Methods in Art Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 610,The Inclusive Art Classroom (4 credits),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 620,Curriculum Planning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 621,Site-spec. Art,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 625,Artist and the Book,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 630,Child Growth and Development in Art Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 636,Anatomy and Figure Drawing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 638,Drawing Concepts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 639,Figure Drawing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 647,Etching/Monotype,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 648,Lithography 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 655,Elementary Methods of Art Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 656,Elementary Pre-Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 660,Secondary Methods of Art Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 662,Secondary Pre-Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 669,Graduate Color,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 670,Advocacy & Policy in Arts Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 675,Spark: Graduate Graphic Design Track,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 680,Art Education Leadership through A Social Justice Lens,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 690,History of Art Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 710,Comics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 747,Advanced Printmaking,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 748,Advanced Printmaking,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 756,Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 765,Practicum 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 766,Practicum 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 770,Ceramics 1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1
+CFA AR 781,Post-Bac Graphic Design 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 782,Post-Bac Graphic Design 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 806,Directed Studio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 807,PMP Directed Studio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 808,PMP Directed Studio 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 809,PMP Directed Studio 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 810,Visual Narrative Concept Studio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 811,Visual Narrative Concept Studio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 812,Visual Narrative Concept Studio 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 813,Visual Narrative Thesis Studio,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 814,Visual Narrative Topics Seminar 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 815,Visual Narrative Topics Seminar 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 816,Visual Narrative Professional Development Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 817,Visual Narrative Thesis Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 821,Graduate Sculpture 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 822,Graduate Sculpture 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 823,Graduate Sculpture 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 824,Graduate Sculpture 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 834,Print Media & Photo Special Topics Seminar 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 835,Print Media & Photo Special Topics Seminars 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 836,Print Media & Photo Special Topics Seminars 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 837,Print Media & Photo Thesis Seminar 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 838,Professional Practice in Print Media and Photography 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 841,Graduate Painting 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 842,Graduate Painting 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 843,Seminar and Discussion 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 844,Seminar and Discussion 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 845,Painting Seminar and Discussion 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 846,Painting Seminar and Discussion 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 847,Graduate Painting 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 848,Graduate Painting 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 855,Special Topics: Visual Art,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 856,PMP Critique 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 857,PMP Critique 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 858,PMP Critique 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 859,PMP Critique 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 881,Graduate Graphic Design 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 882,Graduate Graphic Design 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 883,Graduate Graphic Design 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 884,Graduate Graphic Design 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 890,Masters Research Project: Becoming a Practitioner-Researcher,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 892,Masters Research Project: Arts-Based Research and Practices,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 961,Directed Study in Art Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 962,Directed Study in Art Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 982,Directed Study: Sculpture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 983,Directed Study: Graphic Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA AR 984,Directed Study: Graphic Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA DA 190,"Dances Styles of the African Diaspora (Jazz, Tap, Hip Hop, Afro-Fusion)",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA DA 290,Dance and Somatic Inquiry: Contemporary and Improvisation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA DA 390,Intermediate Technique Traditional Forms (Ballet & Historic Modern),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA DA 400,Performance and Repertory,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA FA 100,"Doing, Making & Knowing: The CFA Experience",1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA FA 350,Arts By The Numbers,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+CFA FA 510,Art Leaders Forum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA FA 520,Career Development in the Arts,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0
+CFA FA 550,Arts Internship,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0
+CFA ME 203,Introduction to Music Teaching and Learning,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 306,Elementary General Music Methods,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0
+CFA ME 307,Secondary General Music Methods,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+CFA ME 330,Music Education Lab Instrumental 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 331,Music Education Lab Choral (Elementary/Middle School),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 344,Technology for Musicians,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+CFA ME 382,Intro to Access and Equity in Music Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 383,JZ HS&PRF TECH1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 411,Practicum 1 K-5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 412,Practicum 2 5-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 413,Practicum 3 8-12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 430,Music Education Lab Instrumental 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 431,Music Education Lab Choral (High School),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 460,Special Topics in Music Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 499,Independent Study: Undergraduates,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 506,Elementary General Music Methods,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0
+CFA ME 507,Secondary General Music Methods,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+CFA ME 513,Instrumental Lab Ensemble Non-Licensure,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 530,Music Education Lab Instrumental 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 531,Music Education Lab Choral (Elementary/Middle School),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 544,Technology for Musicians,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+CFA ME 582,Intro to Access and Equity in Music Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 583,JZ HS&PRF TECH1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 608,Supporting Students With Dis-Abilities,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 611,Practicum 1 K-5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 612,Practicum 2 5-8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 613,Practicum 3 8-12,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 630,MUSED LAB INS2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 631,Music Education Lab Choral (High School),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 701,History and Philosophy in Music Education: Perspectives and Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 702,Psychology and Sociology in Music Education: Perspectives and Applications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 711,Introduction to Music Education Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 730,MUSED LAB INS3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 740,Introduction to Music Education Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 741,History and Philosophy in Music Education: Perspectives and Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 742,Psychology and Sociology in Music Education: Perspectives and Applications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 750,Theoretical and Cultural Applications in the Music Classroom,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 753,Introduction to Early Childhood Music Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 759,Curriculum in Music Education: Vision and Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 799,Curriculum Organization in Music Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 841,Quantitative Research Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 842,Qualitative Research Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 850,"Music Education, Justice, and Equity",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 859,"Problems, Theories, and Literature: Making a Contribution to the Field",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 899,Independent Project/Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ME 921,Research and Directed Study in Music Education,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 105,Music Appreciation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 106,Music and Culture,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 211,History & Literature of Music 1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+CFA MH 212,History & Literature of Music 2,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 401,Graduate Music History Review,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 404,Approaches to Sacred Music East and West,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0,0
+CFA MH 408,Bob Dylan: Music and Words,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+CFA MH 409,Music of Black Americans,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 412,"Popular, Forgotten, and Misunderstood: Popular music of the 1950s",0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0
+CFA MH 420,Western Composers and Bali,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA MH 433,Popular Music and Culture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 436,Musical Culture,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0
+CFA MH 499,Directed Study: Undergraduates,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 561,World Music Ensemble,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 609,"African-American Spirituals and Their Influence on Contemporary Art, Music, Literature and Dance",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 610,Writing about Music,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 611,Music in Contemporary Life,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 612,Popular Music,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 613,"Special Topics: Music, Media, Technology",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 614,"Special Topics: Music, Dance, and the Body",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 620,Topics in Musical Style,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 623,History and Literature of Opera,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 629,Early Music Studies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 630,Special Topics: Music in Europe,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 631,Individual Composers,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 632,Special Topics: Music: Medieval and Renaissance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 633,Special Topics: Music: Baroque,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 634,Special Topics: Music in the Classical Period,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 635,Special Topics: Music: Romantic Period,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 636,Special Topics: Music: 20th Century,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 637,Special Topics: Music: Post-1945,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 651,Special Topics: Music in Asia,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 659,Special Topics: Music in Africa,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 660,Special Topics: Music in Latin America and the Caribbean,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 662,Special Topics: Black Music,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 670,Special Topics: US Music,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 690,"Music, Gender, and Sexuality",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 720,Pro-Sem in Mus eth,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 735,American Music,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 771,Special Topics in Ethnomusicology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 799,Master's Thesis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 820,Prosem  Musicology and Ethnomusicology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 827,Seminar: Special Topics in Musicology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 854,Music and Culture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 871,Special Topics in Ethnomusicology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 890,"Music, Gender, and Sexuality",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 899,Independent Project/Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MH 921,Research and Directed Study in Musicology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 501,Applied Piano (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 502,Applied Piano (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 503,Applied Harpsichord (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 504,Applied Harpsichord (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 505,Applied Organ (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 506,Applied Organ (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 507,Applied Voice (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 508,Applied Voice (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 509,Applied Violin (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 510,Applied Violin (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 511,Applied Viola (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 512,Applied Viola (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 513,Applied Cello (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 514,Applied Cello (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 515,Applied Double Bass (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 516,Applied Double Bass (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 517,Applied Flute (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 518,Applied Flute (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 519,Applied Oboe (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 520,Applied Oboe (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 521,Applied Clarinet (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 522,Applied Clarinet (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 523,Applied Bassoon (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 524,Applied Bassoon (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 525,Applied Saxophone (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 526,Applied Saxophone (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 527,Applied Trumpet (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 528,Applied Trumpet (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 529,Applied Horn (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 530,Applied Horn (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 531,Applied Trombone (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 532,Applied Trombone (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 533,Applied Euphonium (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 534,Applied Euphonium (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 535,Applied Tuba (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 536,Applied Tuba (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 537,Applied Percussion (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 538,Applied Percussion (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 539,Applied Harp (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 540,Applied Harp (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 543,Applied Lute (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 544,Applied Lute (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 545,Applied Baroque Flute (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 546,Applied Baroque Flute (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 547,Applied Baroque Violin (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 548,Applied Baroque Violin (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 549,Applied Viola da Gamba (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 550,Applied Viola da Gamba (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 551,Individual Vocal Coaching (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 552,Individual Vocal Coaching (Half-hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 553,Applied Collaborative Piano (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 554,Applied Collaborative Piano (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 555,Applied Recorder (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 556,Applied Recorder (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 557,Applied Baroque Oboe (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 558,Applied Baroque Oboe (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 561,Applied Bass Trombone (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 562,Applied Bass Trombone (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 563,Applied Sackbut (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 564,Applied Sackbut (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 591,Applied Baroque Cello (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 592,Applied Baroque Cello (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 597,Applied Baroque Trumpet (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA ML 598,Applied Baroque Trumpet (Half-Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 111,Group Piano Level 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 112,Group Piano Level 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 113,Group Piano Level 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 115,Non-major Private Music Instruction: Piano (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 116,Non-major Private Music Instruction: Piano (Half-hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 130,Class Voice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 131,Phonetics for Singing 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 132,Phonetics for Singing 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 135,Non-major Private Music Instruction: Voice (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 136,Non-major Private Music Instruction: Voice (Half-hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 145,Non-major Private Music Instruction: Strings (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 146,Non-major Private Music Instruction: Strings (Half-hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 155,Non-major Private Music Instruction: Woodwinds (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 156,Non-major Private Music Instruction: Woodwinds (Half-hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 165,Non-major Private Music Instruction: Brass (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 166,Non-major Private Music Instruction: Brass (Half-hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 175,Non-major Private Music Instruction: Percussion (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 176,Non-major Private Music Instruction: Percussion (Half-hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 180,Group Guitar 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 181,Group Guitar 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 182,Group Guitar 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 185,Non-major Private Music Instruction: Other Instruments (Hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 186,Non-major Private Music Instruction: Other Instruments (Half-hour),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 231,English Diction,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 232,Italian Diction,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 233,French Diction,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 234,German Diction,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 331,Song Literature 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 332,Song Literature 2,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0
+CFA MP 333,Song Literature 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 381,Introduction to the Organ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 382,Harpsichord for Keyboard Majors,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 390,Intro to Conducting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 391,Conducting 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 403,New Music Ensemble,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 404,New Music Ensemble,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA MP 408,Chamber Music 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 409,Chamber Music 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA MP 411,Piano Literature 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA MP 412,Piano Literature 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA MP 413,Piano Literature 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 414,Piano Literature 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 415,Piano Pedagogy and Practicum 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 416,Piano Pedagogy and Practicum 2,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0
+CFA MP 425,Digital and Multimedia Expression for Musicians,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+CFA MP 440,Orchestral Techniques: String,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 441,String Literature 1: Solo,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 442,String Literature 2: Solo,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 443,String Literature 3: Chamber,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 444,String Literature 4: Chamber,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 445,String Pedagogy and Practicum 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 446,String Pedagogy and Practicum 2,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1
+CFA MP 449,"Harp Pedagogy, Literature, and Ensembles",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 450,Orchestral Techniques: Woodwinds,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 460,Orchestral Techniques: Brass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 465,"Woodwind, Brass, and Percussion Pedagogy and Practicum",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 470,Orchestral Techniques: Percussion,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 499,Independent Study: Undergraduates,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 500,Large Instrumental Ensemble: Symphony/Chamber Orchestra,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 502,Large Instrumental Ensembles: Wind Ensemble,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 520,Complexity in Rhythm,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 532,Vocal Coaching and Performance Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 534,Oratorio Literature and Repertoire,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 540,Graduate Diction 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 551,Building your Professional Presence,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 553,Saxophone Ensemble,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 563,Trombone Choir,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 581,Continuo 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 582,Continuo 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 583,BU Baroque Orchestra,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 585,Baroque String Techniques,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 599,Alexander Technique,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 600,Boston University Symphony Orchestra and Chamber Orchestra,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 602,Boston University Wind Ensembles,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 603,Boston University Symphonic Chorus,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 604,Chamber Choir,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 606,Opera Theatre,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 607,New Music Ensemble,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 608,Chamber Music,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 609,Baroque Chamber Music,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA MP 610,Ensemble for Pianists,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 611,Piano Literature 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 612,Piano Literature 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 613,Piano Literature 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 615,Piano Pedagogy 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 616,Piano Pedagogy 2,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0
+CFA MP 621,Accompaniment Skills,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 622,Duo Sonata Repertoire for Strings and Piano,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 635,"Opera Performance Workshop, for Singers and Conductors",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 636,Opera Performance Workshop for Singers and Conductors,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 640,Orchestral Techniques: Strings,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 641,String Literature 1: Solo,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 642,String Literature 2: Solo,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 643,String Literature 3: Chamber,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 644,String Literature 4: Chamber,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 645,String Pedagogy and Practicum 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 646,String Pedagogy and Practicum 2,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1
+CFA MP 649,"Harp Pedagogy, Literature, and Ensembles",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 650,Orchestral Techniques: Woodwinds,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 651,Symphonic Literature 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 652,Symphonic Literature 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 660,Orchestral Techniques: Brass,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 663,Trombone Literature,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 670,Orchestral Techniques: Percussion,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 671,Percussion Ensemble,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 680,Score Reading,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 681,Introduction to the Organ,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 682,Harpsichord for Keyboard Majors,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 685,Organ Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 705,Writing for the DMA Recital Track,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 720,Accompaniment Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 721,Vocal Coaching Techniques,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 723,Opera Arias for Pianists 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 731,Selected Topics in Song Literature,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 735,Vocal Pedagogy 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 781,Special Topics in Performance Practice 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 782,Special Topics in Performance Practice 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 891,Choral Repertoire of the Renaissance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 892,Choral Repertoire of the Baroque,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 893,Choral Repertoire of the Late Classical and Romantic Periods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 894,Choral Repertoire of Twentieth Century and Contemporary Composers,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 899,Independent Project/Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MP 929,"Research, Directed Study, and Performance in Conducting",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 101,Music Theory 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 102,Music Theory 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 105,Elements of Music Theory,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA MT 106,Elements of Music Theory 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 111,Aural Skills 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 112,Aural Skills 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 121,Basic Composition 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 122,Basic Composition 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 201,Music Theory 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 202,Music Theory 4,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA MT 211,Aural Skills 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 212,Aural Skills 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 221,Composition 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 222,Composition 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 301,Music Theory 5,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 302,Music Theory 6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 311,Aural Skills 5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 321,Composition 5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 322,Composition 6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 341,Modal Counterpoint 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 342,Tonal Counterpoint 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 401,Graduate Theory Review,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 411,Music Theories of the World,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1
+CFA MT 421,Senior Composition 7,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 422,Senior Composition 8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 431,Orchestration 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 432,Orchestration 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 435,Composing with Electronic Sounds and Computers 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+CFA MT 436,Composing with Electronic Sounds and Computers 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 441,Acoustical and Psychoacoustical Basis of Music,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+CFA MT 472,Music Perception and Cognition,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0
+CFA MT 499,Independent Study: Undergraduates,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 520,Composers' Forum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 601,Analytical Techniques 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 602,Analytical Techniques 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 621,Graduate Composition,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 631,Orchestration 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 632,Orchestration 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 635,Composing with Electronic Sounds and Computers 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+CFA MT 636,Composing with Electronic Sounds and Computers 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 641,Modal Counterpoint,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 642,Tonal Counterpoint,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 645,Contemporary Techniques 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 665,Schenkerian Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 681,Music of Our Time: Composers and Repertoire,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 701,Doctoral Proseminar-Skills,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 702,Doctoral Proseminar-Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 711,Music Theories of the World,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 751,Special Topics in Theory and Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 761,Advanced Tonal Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 762,Advanced Contemporary Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MT 772,Music Perception and Cognition,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0
+CFA MT 899,Independent Project/Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 090,CHAMBER MUSIC,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 091,Marching Band,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 092,Concert Band,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 093,Pep Band,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 094,Jazz Ensemble,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 095,Jazz Combo,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 096,Jazz Workshop,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 097,All Campus Orchestra,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 098,University Choruses,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 099,Symphonic Chorus,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 185,Marching Band,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 186,Pep Band,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 190,All-Campus Chamber Music,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 191,Marching Band,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 192,Concert Band,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 193,Pep Band,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 194,Jazz Ensemble,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 195,Jazz Combo,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 196,Jazz Workshop,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 197,All-Campus Orchestra,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 198,University Choruses,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 199,Symphonic Chorus,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 535,Special Topics: Music,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 795,Master's Thesis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 855,Special Topics in Music,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 888,Continuing Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 995,DMA Dissertation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 996,DMA Dissertation Continuation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA MU 999,RT Continuing Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 099,Matinee,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 101,Introduction to the Study of Theatre and Performance,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+CFA TH 104,Dramatic Literature 1: Beginnings of Theatre to the Early 19th Century,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0
+CFA TH 111,Voice and Speech 1: Experiencing Voice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+CFA TH 114,Voice & Speech 2: Exploring Voice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 120,Acting & Performance 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 121,Acting 1: Personal Approach to Acting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA TH 124,Acting 2: Intro to Scene Study,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 131,Movement 1: Expressive Human Instrument,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 134,Movement 2: The Expressive Human Instrumentalist,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA TH 136,Theatre Collaboration 1: Equitable and Inclusive Theatre Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA TH 139,20th Century Dance History,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 142,Somatic Practice 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 146,Artists in Community 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 157,Introduction to Design 1: Storytelling and Collaboration for Live Performance,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+CFA TH 158,Introduction to Design 2: 2D & 3D Design Fundamentals,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0
+CFA TH 165,DP&M Community Forum 1: Discovering Theatre through History,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+CFA TH 166,DP&M Community Forum 2: Contemporary Theatre Makers,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+CFA TH 171,Language & Craft of Theatre 1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 172,Language & Craft of Theatre 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA TH 173,2D Drafting and Visual Communication 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 174,2D Drafting & Visual Communication 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 205,Dramatic Literature 2: 1850 to 1950,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0
+CFA TH 206,Dramatic Literature 3: 1950 to the Millennium,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0
+CFA TH 210,Musical Theatre Performance Skills 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 211,Voice and Speech 3: Introduction to IPA,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 213,"Voice and Speech 4: Accents, Dialects, and Sociolects",0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 220,Acting and Performance 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 221,Acting 3: Advanced Scene Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 225,Acting 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 227,Dramatic Writing 1: Autobiography,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 228,Dramatic Writing 2: Adaptation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+CFA TH 231,Movement 3: Awareness of Self into Physical Transformation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 234,Movement 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 235,Theater Collaboration 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 237,Somatic Practice 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 239,Aesthetic and Philosophy of Dance,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 240,Beginning Directing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA TH 242,Somatic Practice 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 245,Artist Community 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 246,Artist Community 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 249,Introduction to Theater Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 257,Scenography 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1
+CFA TH 258,Scenography 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 273,Graphic Rendering 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 274,Graphic Rendering 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 279,Costume Production 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 285,Lighting Crafts 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 286,Lighting Craft 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 291,Audio Fundamentals,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 292,Costume Production 2,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 294,Stage Management 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 299,Stage Management 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA TH 303,Playwriting 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1
+CFA TH 305,Theatrical Welding 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 306,Theatrical Welding 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 307,History of Period Styles 1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 308,History of Period Style 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 310,Music Theatre Skills 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 311,Voice & Speech 5: Heightened Text,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 318,Automated Lighting Technology,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 319,Automated Lighting Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 325,Acting 5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 327,Theatre Ensemble 3: Acting/Directing Lab,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 331,Movement 5: 360 Physical Storytelling,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+CFA TH 333,Figure Drawing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 335,Production Audio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 336,Production Audio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 337,Somatic Practice 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 339,Production,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 341,Directing Colloquium: The Director's Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 348,Scene Painting 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 349,Theatre in Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 350,Scene Painting 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 351,Technical Production 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 352,Technical Production 2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 353,AutoCAD 1: 2D Theatrical Drafting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 354,AutoCAD 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 357,Costume Production 5: Historic Tailoring,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 358,Costume Production 6: Ladies' Tailoring,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 363,Scene Design 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 368,Scene Design 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 375,Costume Design 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 377,Rendering for Costume Design 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 378,Rendering for Costume Design 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 383,Lighting Design 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 385,Photography 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 388,Sound Design 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 391,Vectorworks 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 392,Vectorworks  2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 394,Lighting Design 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 396,Costume Design 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 399,Stage Management 3: Types & Styles,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+CFA TH 403,Advanced Playwriting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 405,Classical Theatre Through a Contemporary Lens,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0
+CFA TH 406,Contemporary Theatre,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0
+CFA TH 411,Voice & Speech 4: Thesis Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 412,Voice & Speech 4: Thesis Application,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 419,Music Theatre Performance Lab,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 421,Acting 4: Thesis Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 422,Acting 4: Professional Lifetime Skills,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1
+CFA TH 425,Acting: Shakespeare,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 427,Theatre Ensemble 4: Thesis Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA TH 428,Senior Thesis: Theatre Arts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 429,Understanding the Camera,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+CFA TH 430,Professional Theatre Initiative Lab,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 431,Movement 4: Thesis Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 432,Movement 4: Commedia dell'Arte,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 437,Alexander Technique 4: The Actor's Consciousness,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 438,Alexander Technique 4: Thesis Application,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 442,Undergraduate Directing Colloquium 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 447,Rehearsal & Performance 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 448,Rehearsal & Performance 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 450,Senior Thesis: Acting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+CFA TH 451,D&P Senior Thesis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 452,D&P Senior Thesis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 455,History of Period Styles 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 456,History of Period Styles 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 458,History of Dress 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+CFA TH 459,Social Change Through Theatre of the Oppressed,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1
+CFA TH 460,History of Period Styles 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 463,Scene Design 5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 464,Scene Design 6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 469,Technical Production 5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 470,Technical Production 6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 475,Costume Design 5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 476,Costume Design 6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 479,Costume Production 7: Advanced Draping - 19th Century,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 483,Lighting Design 5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 484,Lighting Design 6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 492,Stage Management 4,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 493,Production Management 1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0
+CFA TH 496,Production Management 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 497,Production,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 498,Production,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 503E,BU IN LA: WRTNG,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 509,Choreography and Design: Experiments in Light and Movement,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 513,Scenic Production Artist,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 517,History of Period Styles 1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 518,History of Period Styles 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 519,AutoCAD 1: 2D Theatrical Drafting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 526,AutoCAD 2: 3D Theatrical Drafting & CNC Layout,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 529,Costume Production Studio 3: Modern Tailoring 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 530,Costume Production Studio 4: Modern Tailoring 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 533,Costume Production Studio 5: Historical Tailoring,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 534,Costume Production Studio 6: Ladies' Tailoring,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 535,Special Topics: Theatre,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 536,Figure Drawing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 539,Production,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 541,Graduate Internship: Directing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 542,Graduate Internship,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 545,Directed Study: Performance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 549,Theatre in Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 551,Technical Production Studio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 552,Technical Production Studio 2,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 553,Colloquium,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 554,Colloquium,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 557,Theatrical Welding 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 558,Theatrical Welding 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 559,Scene Design Studio Lab,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 560,Scene Design Studio Lab,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 561,Scenic Automation for Theatre,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 563,Drawing for Designers 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 565,Painting Master Class,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 567,Scene Painting 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 569,Internship Reflection,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 570,INTERN REF D&P,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 571,Media Design 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 572,Media Design 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 574,Media Production 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 575,Fabric Dyeing 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 576,Fabric Dyeing 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 577,Millinery 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 578,Millinery 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 579,Production Audio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 580,Production Audio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 581,Audio System Design 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 582,Audio System Design 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 583,Scene Painting 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 584,Opera Design: History & Process,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 585,Vectorworks 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 586,Color Interaction,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 587,Vectorworks 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 588,Automated Lighting Technology,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 589,Automated Lighting Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 590,Theatre Management,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 591,"Graduate Internship: Design, Production & Management",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 592,D&P Internship,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 595,"Directed Study: Design, Production & Management",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 599,Matinee,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 607,Collaboration Forum 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 608,Collaboration Forum 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 609,Directing Studio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 610,Directing Studio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 611,Technical Production Studio 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 612,Technical Production Studio 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 613,Scene Painting Studio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 614,Scene Painting Studio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 617,History of Period Styles 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 618,History of Period Styles 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 619,Scene Painting 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 620,Scene Painting 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 623,Directed Study: Scene Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 624,Directed Study: Scene Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 625,Classical Theatre through a Contemporary Lens,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 626,Contemporary Theatre,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0
+CFA TH 629,Sound Design Studio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 630,Sound Design Studio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 635,Scene Design Studio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 636,Scene Design Studio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 637,Costume Design Studio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 638,Costume Design Studio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 639,Lighting Design Studio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 640,Lighting Design Studio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 643,Costume Production Studio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 644,Costume Production Studio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 649,Costume Production Studio 7: Advanced Draping - 19th Century,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 650,Costume Production Studio 8,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 657,History of Dress 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 658,History of Dress 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 659,Social Change Through Theatre of the Oppressed,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1
+CFA TH 691,Sound Design Studio 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 692,Sound Design Studio 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 695,Production Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 699,Production Management Studio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 701,Graduate Salon,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 707,Scenography Studio 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 708,Scenography Studio 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 709,Directing Studio 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 710,Directing Studio 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 712,Technical Production Studio 5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 713,Scene Painting Studio 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 714,Scene Painting Studio 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 735,Scene Design Studio 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 736,Scene Design Studio 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 737,Costume Design Studio 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 738,Costume Design Studio 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 739,Lighting Design Studio 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 740,Lighting Design Studio 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 745,Directing Colloquium,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 793,Production Management Studio 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 794,Production Management Studio 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 807,Scenography Studio 3,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 808,Scenography Studio 4,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 840,Graduate Directing Colloquium,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 863,Scene Design Studio 5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 864,Scene Design Studio 6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 875,Costume Design Studio 5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 876,Costume Design Studio 6,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 897,Production,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 898,Production,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+CFA TH 950,Graduate MFA Thesis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
