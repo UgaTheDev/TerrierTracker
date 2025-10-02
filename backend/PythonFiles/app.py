@@ -48,12 +48,23 @@ logger = logging.getLogger(__name__)
 SCRIPT_DIR = Path(__file__).parent.absolute()
 logger.info(f"Script directory: {SCRIPT_DIR}")
 
+# Define all CSV paths
 CSV_DIR = SCRIPT_DIR.parent / 'CSVFiles'
-BU_ALL_COURSES_PATH = CSV_DIR / 'cas_all_courses.csv'
-KHC_HUB_COURSES_PATH = CSV_DIR / 'khc_hub_courses.csv'
+CSV_FILES = {
+    'cas': CSV_DIR / 'cas_all_courses.csv',
+    'khc': CSV_DIR / 'khc_hub_courses.csv',
+    'cds': CSV_DIR / 'cds_all_courses.csv',
+    'cfa': CSV_DIR / 'cfa_all_courses.csv',
+    'com': CSV_DIR / 'com_all_courses.csv',
+    'questrom': CSV_DIR / 'questrom_all_courses.csv',
+    'sar': CSV_DIR / 'sar_all_courses.csv',
+    'sha': CSV_DIR / 'sha_all_courses.csv',
+    'wheelock': CSV_DIR / 'wheelock_all_courses.csv',
+}
 
-logger.info(f"Looking for BU all courses CSV at: {BU_ALL_COURSES_PATH.absolute()}")
-logger.info(f"Looking for KHC hub courses CSV at: {KHC_HUB_COURSES_PATH.absolute()}")
+# Log all paths
+for name, path in CSV_FILES.items():
+    logger.info(f"Looking for {name} CSV at: {path.absolute()}")
 
 def get_db_connection():
     try:
@@ -78,24 +89,20 @@ def get_db_connection():
         return None
 
 
+# Initialize course manager
 course_manager = None
 try:
     csv_files = []
     
-    if BU_ALL_COURSES_PATH.exists():
-        csv_files.append(BU_ALL_COURSES_PATH)
-        logger.info(f"Found BU all courses CSV: {BU_ALL_COURSES_PATH}")
-    else:
-        logger.warning(f"BU all courses CSV not found at: {BU_ALL_COURSES_PATH.absolute()}")
-    
-    if KHC_HUB_COURSES_PATH.exists():
-        csv_files.append(KHC_HUB_COURSES_PATH)
-        logger.info(f"Found KHC hub courses CSV: {KHC_HUB_COURSES_PATH}")
-    else:
-        logger.warning(f"KHC hub courses CSV not found at: {KHC_HUB_COURSES_PATH.absolute()}")
+    for name, path in CSV_FILES.items():
+        if path.exists():
+            csv_files.append(path)
+            logger.info(f"Found {name} CSV: {path}")
+        else:
+            logger.warning(f"{name} CSV not found at: {path.absolute()}")
     
     if not csv_files:
-        raise FileNotFoundError(f"No CSV files found. Checked: {BU_ALL_COURSES_PATH}, {KHC_HUB_COURSES_PATH}")
+        raise FileNotFoundError(f"No CSV files found in {CSV_DIR}")
     
     course_manager = CourseDataManager(csv_files)
     logger.info(f"CourseDataManager initialized successfully with {len(csv_files)} CSV files")
@@ -238,7 +245,7 @@ def root():
     return jsonify({
         "message": "BU Course API is running!",
         "version": "1.0.0",
-        "data_sources": ["cas_all_courses.csv", "khc_hub_courses.csv", "cds_all_courses.csv", "cfa_all_courses.csv", "com_all_courses.csv", "questrom_all_courses.csv", "sar_all_courses.csv", "sha_all_courses.csv", "wheelock_all_courses.csv"],
+        "data_sources": list(CSV_FILES.keys()),
         "endpoints": {
             "health": "/api/health (GET)",
             "register": "/api/register (POST)",
@@ -268,14 +275,11 @@ def health_check():
         db_status = f"error: {str(e)}"
     
     data_sources_status = {
-        "bu_all_courses": {
-            "path": str(BU_ALL_COURSES_PATH),
-            "exists": BU_ALL_COURSES_PATH.exists()
-        },
-        "khc_hub_courses": {
-            "path": str(KHC_HUB_COURSES_PATH),
-            "exists": KHC_HUB_COURSES_PATH.exists()
+        name: {
+            "path": str(path),
+            "exists": path.exists()
         }
+        for name, path in CSV_FILES.items()
     }
     
     return jsonify({
@@ -286,6 +290,7 @@ def health_check():
         "script_directory": str(SCRIPT_DIR),
         "csv_directory": str(CSV_DIR),
         "data_sources": data_sources_status,
+        "total_csv_files_loaded": len([name for name, path in CSV_FILES.items() if path.exists()]),
         "environment": {
             "db_host": os.getenv('DB_HOST', 'localhost'),
             "db_name": os.getenv('DB_NAME', 'not set'),
@@ -344,7 +349,7 @@ def get_all_courses():
         return jsonify({
             "courses": all_courses,
             "total_courses": len(all_courses),
-            "data_sources": ["cas_all_courses.csv", "khc_hub_courses.csv", "cds_all_courses.csv", "cfa_all_courses.csv", "com_all_courses.csv", "questrom_all_courses.csv", "sar_all_courses.csv", "sha_all_courses.csv", "wheelock_all_courses.csv"]
+            "data_sources": list(CSV_FILES.keys())
         })
     
     except Exception as e:
