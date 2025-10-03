@@ -10,10 +10,11 @@ import psycopg2
 import bcrypt
 from dotenv import load_dotenv
 from urllib.parse import urlparse
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_requests
 
 from course_data_manager import CourseDataManager
 load_dotenv()
-
 
 database_url = os.getenv('DATABASE_URL')
 if database_url:
@@ -26,6 +27,8 @@ if database_url:
     os.environ['DB_PASSWORD'] = parsed_url.password or ''
 
 app = Flask(__name__)
+
+GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
 
 @app.after_request
 def after_request(response):
@@ -128,6 +131,79 @@ except Exception as e:
         logger.error(f"Error listing directories: {debug_e}")
     
     course_manager = None
+
+@app.route('/api/auth/google', methods=['POST'])
+def google_auth():
+    """Authenticate user with Google OAuth token"""
+    try:
+        data = request.json
+        token = data.get('credential')
+        
+        if not token:
+            return jsonify({"error": "No credential provided"}), 400
+        
+        # Verify the Google token
+        idinfo = id_token.verify_oauth2_token(
+            token, 
+            google_requests.Request(), 
+            GOOGLE_CLIENT_ID
+        )
+        
+        # Get user info from token
+        email = idinfo.get('email')
+        google_id = idinfo.get('sub')
+        first_name = idinfo.get('given_name', '')
+        last_name = idinfo.get('family_name', '')
+        
+        if not email:
+            return jsonify({"error": "Email not found in token"}), 400
+        
+        # Check if user exists
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+        
+        cur = conn.cursor()
+        
+        try:
+            # Look for existing user by email
+            cur.execute('SELECT user_id, email FROM userinfo WHERE email = %s', (email,))
+            user = cur.fetchone()
+            
+            if user:
+                # User exists, log them in
+                user_id = user[0]
+                logger.info(f"Google user logged in: {email} (ID: {user_id})")
+            else:
+                # Create new user
+                cur.execute(
+                    'INSERT INTO userinfo (email, password, first_name, last_name) VALUES (%s, %s, %s, %s) RETURNING user_id',
+                    (email, '', first_name, last_name)  # Empty password for OAuth users
+                )
+                user_id = cur.fetchone()[0]
+                conn.commit()
+                logger.info(f"New Google user created: {email} (ID: {user_id})")
+            
+            return jsonify({
+                'message': 'Login successful',
+                'user': {
+                    'id': user_id,
+                    'email': email
+                },
+                'success': True
+            }), 200
+            
+        finally:
+            cur.close()
+            conn.close()
+        
+    except ValueError as e:
+        logger.error(f"Invalid Google token: {e}")
+        return jsonify({'error': 'Invalid token', 'success': False}), 401
+    except Exception as e:
+        logger.error(f"Google auth error: {e}")
+        logger.error(f"Full traceback: {traceback.format_exc()}")
+        return jsonify({'error': 'Authentication failed', 'success': False}), 500
 
 @app.route('/api/register', methods=['POST'])
 def register():
@@ -246,6 +322,7 @@ def root():
             "health": "/api/health (GET)",
             "register": "/api/register (POST)",
             "login": "/api/login (POST)",
+            "google_auth": "/api/auth/google (POST)",
             "search_course": "/api/search-course (POST)",
             "multiple_courses": "/api/multiple-courses (POST)",
             "bulk_hub_requirements": "/api/bulk-hub-requirements (POST)",
@@ -295,6 +372,7 @@ def health_check():
         }
     })
 
+# [Rest of your existing endpoints remain exactly the same - search_course, bulk_hub_requirements, all_courses, etc.]
 @app.route('/api/search-course', methods=['POST'])
 def search_course():
     if not course_manager:
@@ -663,7 +741,7 @@ def remove_bookmarked_course(user_id):
     finally:
         cur.close()
         conn.close()
-        
+
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({"error": "Endpoint not found"}), 404

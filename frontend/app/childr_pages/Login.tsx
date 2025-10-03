@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GraduationCap, BookOpen, TrendingUp } from "lucide-react";
 import LoginForm from "../components/LoginForm";
 
@@ -8,32 +8,89 @@ interface LoginProps {
   onGoToRegister: () => void;
 }
 
+interface GoogleCredentialResponse {
+  credential: string;
+  select_by: string;
+}
+
+declare global {
+  interface Window {
+    google: any;
+  }
+}
+
+const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
+
 export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.google) {
+      window.google.accounts.id.initialize({
+        client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
+        callback: handleGoogleLogin,
+      });
+
+      window.google.accounts.id.renderButton(
+        document.getElementById("googleSignInButton"),
+        {
+          theme: "outline",
+          size: "large",
+          width: 300,
+          text: "signin_with",
+        }
+      );
+    }
+  }, []);
+
+  const handleGoogleLogin = async (response: GoogleCredentialResponse) => {
+    setIsLoading(true);
+    setError(null);
+
+    try {
+      const res = await fetch(`${API_BASE_URL}/auth/google`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ credential: response.credential }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        console.log("Google login successful:", data.user);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        onLoginSuccess(data.user);
+      } else {
+        setError(data.error || "Google sign-in failed");
+      }
+    } catch (err: any) {
+      console.error("Google sign-in error:", err);
+      setError("An error occurred during Google sign-in");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleLogin = async (email: string, password: string) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const response = await fetch(
-        "https://terriertracker-production.up.railway.app/api/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ email, password }),
-        }
-      );
+      const response = await fetch(`${API_BASE_URL}/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
       const data = await response.json();
 
       if (response.ok && data.success) {
         console.log("Login successful for:", data.user);
         localStorage.setItem("user", JSON.stringify(data.user));
-        onLoginSuccess(data.user); // Pass user data to callback
+        onLoginSuccess(data.user);
       } else {
         throw new Error(data.error || "Login failed");
       }
@@ -143,10 +200,34 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
           </div>
 
           <div className="bg-content2 py-8 px-6 shadow-medium rounded-3xl">
+            {error && (
+              <div className="mb-4 p-3 bg-danger-50 text-danger rounded-lg">
+                {error}
+              </div>
+            )}
+
+            <div className="mb-6">
+              <div
+                id="googleSignInButton"
+                className="flex justify-center"
+              ></div>
+            </div>
+
+            <div className="relative mb-6">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-default-300"></div>
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-content2 text-default-500">
+                  Or continue with email
+                </span>
+              </div>
+            </div>
+
             <LoginForm
               onLogin={handleLogin}
               isLoading={isLoading}
-              error={error}
+              error={null}
               onGoToRegister={onGoToRegister}
             />
           </div>
