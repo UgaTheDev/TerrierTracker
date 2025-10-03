@@ -101,7 +101,6 @@ export default function CourseSearch({
   const [apiHealthy, setApiHealthy] = useState(false);
   const [selectedSchool, setSelectedSchool] = useState<string>("all");
 
-  // Extract schools from course codes
   const schools = React.useMemo(() => {
     const schoolSet = new Set<string>();
     allCourses.forEach((course) => {
@@ -156,7 +155,6 @@ export default function CourseSearch({
   useEffect(() => {
     let filtered = allCourses;
 
-    // Filter by school
     if (selectedSchool !== "all") {
       filtered = filtered.filter((course) => {
         const school = course.courseId.substring(0, 3);
@@ -164,7 +162,6 @@ export default function CourseSearch({
       });
     }
 
-    // Filter by search
     if (searchValue.trim()) {
       const normalizedSearch = normalizeString(searchValue);
       filtered = filtered.filter((course) => {

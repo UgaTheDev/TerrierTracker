@@ -131,9 +131,7 @@ const fetchMultipleHubRequirements = async (
   courseCodes: string[]
 ): Promise<Map<string, string[]>> => {
   const results = new Map<string, string[]>();
-
-  // Process in larger chunks with NO delays
-  const chunkSize = 300;
+  const chunkSize = 500;
   const chunks: string[][] = [];
 
   for (let i = 0; i < courseCodes.length; i += chunkSize) {
@@ -144,7 +142,6 @@ const fetchMultipleHubRequirements = async (
     `Processing ${courseCodes.length} courses in ${chunks.length} parallel chunks`
   );
 
-  // Process ALL chunks in parallel - no sequential processing
   const allChunkPromises = chunks.map(async (chunk) => {
     try {
       const data = await apiRequest("/bulk-hub-requirements", {
@@ -159,10 +156,7 @@ const fetchMultipleHubRequirements = async (
     }
   });
 
-  // Wait for ALL requests to complete simultaneously
   const allResults = await Promise.all(allChunkPromises);
-
-  // Merge results
   allResults.forEach((chunkResults) => {
     Object.entries(chunkResults).forEach(([courseCode, requirements]) => {
       results.set(courseCode, requirements as string[]);
@@ -239,7 +233,6 @@ export default function CourseBrowseTable({
     return Array.from(hubSet).sort();
   }, [apiCourses]);
 
-  // Pre-calculate filter stats for instant rendering
   const filterStats = useMemo(() => {
     return {
       totalCourses: apiCourses.length,
@@ -334,10 +327,9 @@ export default function CourseBrowseTable({
         console.log(`Loaded ${coursesData.length} courses`);
         setApiCourses(coursesData);
 
-        // Preload hub requirements for first 100 courses
         console.log("Preloading hub requirements for initial courses...");
         const initialCourseCodes = coursesData
-          .slice(0, 100)
+          .slice(0, 500)
           .map((c) => c.courseId);
         const initialRequirements =
           await fetchMultipleHubRequirements(initialCourseCodes);
