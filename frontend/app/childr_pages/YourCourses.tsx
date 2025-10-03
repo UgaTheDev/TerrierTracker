@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { Button } from "@heroui/react";
 import CourseTable from "../components/CourseTable";
-import { Trash2 } from "lucide-react";
+import { Trash2, Plus } from "lucide-react";
+import type { CustomCourseArray } from "../components/AddCustomCourseModal";
 
 type Course = {
   id: number;
@@ -16,18 +18,24 @@ type Course = {
 
 interface YourCoursesProps {
   enrolledCourses: Course[];
+  customCourses: CustomCourseArray[];
   onAddCourse: (course: Course) => void;
   onNavigate: (page: string) => void;
   onDeleteCourse: (courseId: string) => void;
+  onDeleteCustomCourse: (courseId: string) => void;
   onUpdateCourse: (course: Course) => void;
+  onOpenCustomCourseModal: () => void;
 }
 
 export default function YourCourses({
   enrolledCourses,
+  customCourses,
   onAddCourse,
   onNavigate,
   onDeleteCourse,
+  onDeleteCustomCourse,
   onUpdateCourse,
+  onOpenCustomCourseModal,
 }: YourCoursesProps) {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
@@ -35,31 +43,136 @@ export default function YourCourses({
     enrolledCourses.forEach((course) => {
       onDeleteCourse(course.courseId);
     });
+    customCourses.forEach((course) => {
+      onDeleteCustomCourse(course[0]);
+    });
     setShowConfirmDialog(false);
   };
+
+  const totalCourses = enrolledCourses.length + customCourses.length;
 
   return (
     <>
       <div className="flex flex-col gap-6 p-6 md:p-10 ml-[5%]">
-        {enrolledCourses.length > 0 && (
-          <div className="flex justify-end">
-            <button
-              onClick={() => setShowConfirmDialog(true)}
-              className="px-4 py-2 bg-danger text-white rounded-lg hover:bg-danger/90 transition-colors inline-flex items-center gap-2 font-medium"
+        <div className="flex justify-between items-center">
+          <h1 className="text-3xl font-bold">Your Courses</h1>
+          <div className="flex gap-3">
+            <Button
+              color="primary"
+              startContent={<Plus size={18} />}
+              onPress={onOpenCustomCourseModal}
             >
-              <Trash2 size={18} />
-              Delete All Courses
-            </button>
+              Add Custom Course
+            </Button>
+            {totalCourses > 0 && (
+              <button
+                onClick={() => setShowConfirmDialog(true)}
+                className="px-4 py-2 bg-danger text-white rounded-lg hover:bg-danger/90 transition-colors inline-flex items-center gap-2 font-medium"
+              >
+                <Trash2 size={18} />
+                Delete All Courses
+              </button>
+            )}
+          </div>
+        </div>
+
+        {customCourses.length > 0 && (
+          <div className="space-y-3">
+            <h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
+              Custom Courses
+              <span className="text-sm text-default-500 font-normal">
+                ({customCourses.length})
+              </span>
+            </h2>
+            <div className="grid gap-3">
+              {customCourses.map((course) => (
+                <div
+                  key={`custom-${course[0]}`}
+                  className="border-l-4 border-blue-500 bg-content1 rounded-lg p-4 shadow-small"
+                >
+                  <div className="flex justify-between items-start">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-2">
+                        <h4 className="font-semibold text-foreground font-mono">
+                          {course[0]}
+                        </h4>
+                        <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
+                          Custom Course
+                        </span>
+                      </div>
+                      <p className="text-sm text-default-700 mb-2">
+                        {course[1]}
+                      </p>
+                      <p className="text-xs text-default-500 mb-2">
+                        {course[3]} credits
+                      </p>
+                      {course[2] && (
+                        <div className="flex flex-wrap gap-1">
+                          {course[2].split(", ").map((hub, idx) => (
+                            <span
+                              key={idx}
+                              className="text-xs bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 px-2 py-1 rounded"
+                            >
+                              {hub}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <Button
+                      color="danger"
+                      variant="flat"
+                      size="sm"
+                      startContent={<Trash2 size={14} />}
+                      onPress={() => onDeleteCustomCourse(course[0])}
+                    >
+                      Delete
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
-        <CourseTable
-          enrolledCourses={enrolledCourses}
-          onAddCourse={onAddCourse}
-          onNavigate={onNavigate}
-          onDeleteCourse={onDeleteCourse}
-          onUpdateCourse={onUpdateCourse}
-        />
+        {enrolledCourses.length > 0 && (
+          <div className="space-y-3">
+            <h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
+              Enrolled Courses
+              <span className="text-sm text-default-500 font-normal">
+                ({enrolledCourses.length})
+              </span>
+            </h2>
+            <CourseTable
+              enrolledCourses={enrolledCourses}
+              onAddCourse={onAddCourse}
+              onNavigate={onNavigate}
+              onDeleteCourse={onDeleteCourse}
+              onUpdateCourse={onUpdateCourse}
+            />
+          </div>
+        )}
+
+        {totalCourses === 0 && (
+          <div className="text-center py-16">
+            <p className="text-default-500 mb-4">
+              You haven't added any courses yet.
+            </p>
+            <div className="flex gap-3 justify-center">
+              <Button color="primary" onPress={() => onNavigate("add-courses")}>
+                Browse Courses
+              </Button>
+              <Button
+                color="secondary"
+                variant="flat"
+                startContent={<Plus size={18} />}
+                onPress={onOpenCustomCourseModal}
+              >
+                Add Custom Course
+              </Button>
+            </div>
+          </div>
+        )}
       </div>
 
       {showConfirmDialog && (
@@ -69,8 +182,9 @@ export default function YourCourses({
               Delete All Courses?
             </h3>
             <p className="text-default-600 mb-6">
-              Are you sure you want to delete all {enrolledCourses.length}{" "}
-              courses? This action cannot be undone.
+              Are you sure you want to delete all {totalCourses} courses (
+              {enrolledCourses.length} enrolled, {customCourses.length} custom)?
+              This action cannot be undone.
             </p>
             <div className="flex gap-3 justify-end">
               <button

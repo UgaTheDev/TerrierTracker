@@ -12,6 +12,9 @@ import YourBookmarks from "./childr_pages/YourBookmarks";
 import Login from "./childr_pages/Login";
 import Registration from "./childr_pages/Registration";
 import CourseRecommender from "./childr_pages/Recommender";
+import AddCustomCourseModal, {
+  type CustomCourseArray,
+} from "./components/AddCustomCourseModal";
 
 const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
 
@@ -58,6 +61,8 @@ export default function Home() {
   const [bookmarkedCourses, setBookmarkedCourses] = useState<
     BookmarkedCourse[]
   >([]);
+  const [customCourses, setCustomCourses] = useState<CustomCourseArray[]>([]);
+  const [isCustomCourseModalOpen, setIsCustomCourseModalOpen] = useState(false);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfProcessing, setPdfProcessing] = useState(false);
   const [pdfError, setPdfError] = useState<string | null>(null);
@@ -138,6 +143,16 @@ export default function Home() {
         );
         setEnrolledCourses(enrolledCoursesData);
       }
+
+      try {
+        const customResponse = await fetch(
+          `${API_BASE_URL}/user/${userId}/courses/custom`
+        );
+        const customData = await customResponse.json();
+        setCustomCourses(customData.custom_courses || []);
+      } catch (error) {
+        console.error("Failed to load custom courses:", error);
+      }
     } catch (error) {
       console.error("Failed to load user data:", error);
     }
@@ -181,6 +196,23 @@ export default function Home() {
       }
     });
 
+    customCourses.forEach((course) => {
+      const hubsString = course[2];
+      if (hubsString && hubsString.trim()) {
+        const hubs = hubsString
+          .split(",")
+          .map((h) => h.trim())
+          .filter((h) => h);
+        hubs.forEach((hub) => {
+          hubCounts[hub] = (hubCounts[hub] || 0) + 1;
+          if (hub === "Scientific Inquiry II" || hub === "Social Inquiry II") {
+            const orRequirement = "Scientific Inquiry II or Social Inquiry II";
+            hubCounts[orRequirement] = (hubCounts[orRequirement] || 0) + 1;
+          }
+        });
+      }
+    });
+
     return Object.entries(hubRequirementDefinitions).map(
       ([name, required]) => ({
         name,
@@ -214,6 +246,7 @@ export default function Home() {
     setCurrentPage("dashboard");
     setEnrolledCourses([]);
     setBookmarkedCourses([]);
+    setCustomCourses([]);
 
     localStorage.removeItem("user");
   };
@@ -319,6 +352,44 @@ export default function Home() {
       setEnrolledCourses((prev) => [...prev, courseToAdd]);
     } catch (error) {
       console.error("Failed to add course:", error);
+    }
+  };
+
+  const handleAddCustomCourse = async (course: CustomCourseArray) => {
+    if (!currentUser) return;
+
+    try {
+      await fetch(`${API_BASE_URL}/user/${currentUser.id}/courses/custom`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          courseId: course[0],
+          courseName: course[1],
+          hubRequirements: course[2].split(", ").filter((h) => h.trim()),
+          credits: course[3],
+        }),
+      });
+
+      setCustomCourses((prev) => [...prev, course]);
+    } catch (error) {
+      console.error("Failed to add custom course:", error);
+    }
+  };
+
+  const handleDeleteCustomCourse = async (courseId: string) => {
+    if (!currentUser) return;
+
+    try {
+      await fetch(
+        `${API_BASE_URL}/user/${currentUser.id}/courses/custom/${courseId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      setCustomCourses((prev) => prev.filter((c) => c[0] !== courseId));
+    } catch (error) {
+      console.error("Failed to delete custom course:", error);
     }
   };
 
@@ -487,10 +558,13 @@ export default function Home() {
         return (
           <YourCourses
             enrolledCourses={enrolledCourses}
+            customCourses={customCourses}
             onAddCourse={handleAddCourse}
             onNavigate={handleNavigate}
             onDeleteCourse={handleDeleteCourse}
+            onDeleteCustomCourse={handleDeleteCustomCourse}
             onUpdateCourse={handleUpdateCourse}
+            onOpenCustomCourseModal={() => setIsCustomCourseModalOpen(true)}
           />
         );
       case "add-courses":
@@ -574,6 +648,12 @@ export default function Home() {
         onLogout={handleLogout}
       />
       <main className="flex-1 overflow-auto">{renderContent()}</main>
+
+      <AddCustomCourseModal
+        isOpen={isCustomCourseModalOpen}
+        onClose={() => setIsCustomCourseModalOpen(false)}
+        onAdd={handleAddCustomCourse}
+      />
     </div>
   );
 }

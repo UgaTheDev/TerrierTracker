@@ -737,6 +737,114 @@ def remove_bookmarked_course(user_id):
         cur.close()
         conn.close()
 
+@app.route('/api/user/<int:user_id>/courses/custom', methods=['GET'])
+def get_custom_courses(user_id):
+    """Get user's custom courses"""
+    try:
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        cur.execute(
+            'SELECT custom_courses FROM courseinfo WHERE user_id = %s',
+            (user_id,)
+        )
+        result = cur.fetchone()
+        
+        if result and result[0]:
+            return jsonify({
+                'custom_courses': result[0],
+                'success': True
+            })
+        else:
+            return jsonify({
+                'custom_courses': [],
+                'success': True
+            })
+    except Exception as e:
+        logger.error(f"Error fetching custom courses: {e}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
+@app.route('/api/user/<int:user_id>/courses/custom', methods=['POST'])
+def add_custom_course(user_id):
+    """Add a custom course as [code, name, hubs, credits]"""
+    try:
+        data = request.json
+        custom_course = [
+            data.get('courseId'),
+            data.get('courseName'),
+            ', '.join(data.get('hubRequirements', [])),
+            data.get('credits', 4)
+        ]
+        
+        if not custom_course[0] or not custom_course[1]:
+            return jsonify({"error": "courseId and courseName are required"}), 400
+            
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        
+        cur.execute('SELECT custom_courses FROM courseinfo WHERE user_id = %s', (user_id,))
+        result = cur.fetchone()
+        
+        if result:
+            cur.execute('''
+                UPDATE courseinfo 
+                SET custom_courses = custom_courses || %s::jsonb
+                WHERE user_id = %s
+            ''', (json.dumps([custom_course]), user_id))
+        else:
+           
+            cur.execute('''
+                INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses, custom_courses)
+                VALUES (%s, ARRAY[]::TEXT[], ARRAY[]::TEXT[], %s::jsonb)
+            ''', (user_id, json.dumps([custom_course])))
+        
+        conn.commit()
+        logger.info(f"Custom course added for user {user_id}: {custom_course[0]}")
+        return jsonify({'success': True, 'message': 'Custom course added', 'course': custom_course})
+    except Exception as e:
+        logger.error(f"Error adding custom course: {e}")
+        logger.error(f"Full traceback: {traceback.format_exc()}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
+@app.route('/api/user/<int:user_id>/courses/custom/<course_id>', methods=['DELETE'])
+def delete_custom_course(user_id, course_id):
+    try:
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+            
+        cur = conn.cursor()
+        cur.execute('''
+            UPDATE courseinfo 
+            SET custom_courses = (
+                SELECT jsonb_agg(elem)
+                FROM jsonb_array_elements(custom_courses) elem
+                WHERE elem->>0 != %s
+            )
+            WHERE user_id = %s
+        ''', (course_id, user_id))
+        
+        conn.commit()
+        logger.info(f"Custom course deleted for user {user_id}: {course_id}")
+        return jsonify({'success': True, 'message': 'Custom course deleted'})
+    except Exception as e:
+        logger.error(f"Error deleting custom course: {e}")
+        return jsonify({'error': str(e)}), 500
+    finally:
+        cur.close()
+        conn.close()
+
 @app.errorhandler(404)
 def not_found(error):
     return jsonify({"error": "Endpoint not found"}), 404

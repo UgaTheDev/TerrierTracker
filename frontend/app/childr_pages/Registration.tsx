@@ -248,10 +248,7 @@ export default function Registration({
             )}
 
             <div className="mb-6">
-              {/* Hidden Google button */}
               <div ref={googleButtonRef} style={{ display: "none" }}></div>
-
-              {/* Custom styled button */}
               <button
                 onClick={triggerGoogleSignUp}
                 disabled={isLoading}
