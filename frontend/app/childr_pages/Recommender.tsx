@@ -265,6 +265,34 @@ export default function CourseRecommender({
     });
   };
 
+  const handleSchoolSelect = async (schoolCode: string) => {
+    if (!schoolCode || isLoadingCourses) return;
+
+    setSelectedSchool(schoolCode);
+    setSelectedDepartment(""); // Reset department
+    setIsLoading(true);
+    setError(null);
+    setRecommendations([]);
+
+    try {
+      console.log(`Filtering courses for school: ${schoolCode}`);
+      const courses = allCourses.filter((course) => {
+        const school = course.courseId.substring(0, 3);
+        return school === schoolCode;
+      });
+
+      console.log(`Analyzing ${courses.length} courses for recommendations...`);
+      const recs = await analyzeAndRecommend(courses);
+      setRecommendations(recs);
+      console.log(`Found ${recs.length} recommendations`);
+    } catch (error: any) {
+      console.error("Error generating recommendations:", error);
+      setError(error.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleDepartmentSelect = async (deptCode: string) => {
     if (!deptCode || isLoadingCourses) return;
 
@@ -274,9 +302,13 @@ export default function CourseRecommender({
     setRecommendations([]);
 
     try {
+      console.log(`Filtering courses for department: ${deptCode}`);
       const courses = fetchDepartmentCourses(deptCode);
+
+      console.log(`Analyzing ${courses.length} courses for recommendations...`);
       const recs = await analyzeAndRecommend(courses);
       setRecommendations(recs);
+      console.log(`Found ${recs.length} recommendations`);
     } catch (error: any) {
       console.error("Error generating recommendations:", error);
       setError(error.message);
@@ -421,6 +453,7 @@ export default function CourseRecommender({
               onSelectionChange={(keys) => {
                 const selected = Array.from(keys)[0] as string;
                 setSelectedSchool(selected || "");
+                setSelectedDepartment(""); // Reset department when school changes
               }}
               isDisabled={isLoadingCourses}
             >
@@ -437,14 +470,14 @@ export default function CourseRecommender({
             </Select>
 
             <Select
-              label="Department"
-              placeholder="Choose a department"
+              label="Department (Optional)"
+              placeholder="All departments"
               selectedKeys={
                 selectedDepartment ? new Set([selectedDepartment]) : new Set()
               }
               onSelectionChange={(keys) => {
                 const selected = Array.from(keys)[0] as string;
-                if (selected) handleDepartmentSelect(selected);
+                setSelectedDepartment(selected || "");
               }}
               isDisabled={isLoadingCourses || !selectedSchool}
             >
@@ -465,6 +498,24 @@ export default function CourseRecommender({
                 );
               })}
             </Select>
+
+            <div className="flex items-end">
+              <Button
+                color="primary"
+                onPress={() => {
+                  if (selectedDepartment) {
+                    handleDepartmentSelect(selectedDepartment);
+                  } else if (selectedSchool) {
+                    handleSchoolSelect(selectedSchool);
+                  }
+                }}
+                isDisabled={!selectedSchool || isLoading}
+                isLoading={isLoading}
+                className="w-full"
+              >
+                Get Recommendations
+              </Button>
+            </div>
 
             {recommendations.length > 0 && (
               <Input
@@ -655,8 +706,9 @@ export default function CourseRecommender({
             Ready to find your next courses?
           </h3>
           <p className="text-default-500 text-sm">
-            Select a school and department above to get personalized course
-            recommendations based on your unfulfilled hub requirements.
+            Select a school above to get personalized course recommendations.
+            You can optionally narrow down by department, or leave it blank to
+            see all courses in the school.
           </p>
         </Card>
       )}

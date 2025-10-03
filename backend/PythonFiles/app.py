@@ -248,6 +248,7 @@ def root():
             "login": "/api/login (POST)",
             "search_course": "/api/search-course (POST)",
             "multiple_courses": "/api/multiple-courses (POST)",
+            "bulk_hub_requirements": "/api/bulk-hub-requirements (POST)",
             "all_courses": "/api/all-courses (GET)",
             "process_pdf": "/api/process-pdf (POST)",
             "user_courses": "/api/user/<user_id>/courses (GET)",
@@ -330,6 +331,43 @@ def search_course():
     
     except Exception as e:
         logger.error(f"Error in search_course: {e}")
+        return jsonify({"error": str(e)}), 500
+
+@app.route('/api/bulk-hub-requirements', methods=['POST'])
+def bulk_hub_requirements():
+    """Fetch hub requirements for multiple courses in one request"""
+    if not course_manager:
+        return jsonify({"error": "Course manager not initialized"}), 500
+    
+    try:
+        data = request.json
+        if not data:
+            return jsonify({"error": "No JSON data provided"}), 400
+        
+        course_codes = data.get('course_codes', [])
+        if not course_codes:
+            return jsonify({"error": "course_codes array is required"}), 400
+        
+        logger.info(f"Bulk fetching hub requirements for {len(course_codes)} courses")
+        
+        results = {}
+        for course_code in course_codes:
+            try:
+                hub_requirements = course_manager.get_hub_requirements_for_course(course_code)
+                results[course_code] = hub_requirements
+            except Exception as e:
+                logger.error(f"Error fetching requirements for {course_code}: {e}")
+                results[course_code] = []
+        
+        logger.info(f"Successfully fetched requirements for {len(results)} courses")
+        return jsonify({
+            "success": True,
+            "results": results,
+            "total_courses": len(results)
+        })
+    
+    except Exception as e:
+        logger.error(f"Error in bulk_hub_requirements: {e}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/all-courses', methods=['GET'])

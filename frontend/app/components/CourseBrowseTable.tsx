@@ -127,54 +127,49 @@ const fetchAllCourses = async (): Promise<CourseData[]> => {
   }
 };
 
-const fetchHubRequirements = async (courseCode: string): Promise<string[]> => {
-  try {
-    const data = await apiRequest("/search-course", {
-      method: "POST",
-      body: JSON.stringify({
-        course_identifier: courseCode,
-      }),
-    });
-
-    return data.hub_requirements || [];
-  } catch (error) {
-    console.error(`Error fetching hub requirements for ${courseCode}:`, error);
-    return [];
-  }
-};
-
 const fetchMultipleHubRequirements = async (
   courseCodes: string[]
 ): Promise<Map<string, string[]>> => {
   const results = new Map<string, string[]>();
 
-  const batchSize = 50;
-  const batches: string[][] = [];
+  // Process in larger chunks with NO delays
+  const chunkSize = 300;
+  const chunks: string[][] = [];
 
-  for (let i = 0; i < courseCodes.length; i += batchSize) {
-    batches.push(courseCodes.slice(i, i + batchSize));
+  for (let i = 0; i < courseCodes.length; i += chunkSize) {
+    chunks.push(courseCodes.slice(i, i + chunkSize));
   }
 
-  for (const batch of batches) {
-    const batchPromises = batch.map(async (courseCode) => {
-      try {
-        const requirements = await fetchHubRequirements(courseCode);
-        return { courseCode, requirements };
-      } catch (error) {
-        console.error(`Failed to load requirements for ${courseCode}:`, error);
-        return { courseCode, requirements: [] };
-      }
-    });
+  console.log(
+    `Processing ${courseCodes.length} courses in ${chunks.length} parallel chunks`
+  );
 
-    const batchResults = await Promise.all(batchPromises);
-    batchResults.forEach(({ courseCode, requirements }) => {
-      results.set(courseCode, requirements);
-    });
-    if (batches.indexOf(batch) < batches.length - 1) {
-      await new Promise((resolve) => setTimeout(resolve, 100));
+  // Process ALL chunks in parallel - no sequential processing
+  const allChunkPromises = chunks.map(async (chunk) => {
+    try {
+      const data = await apiRequest("/bulk-hub-requirements", {
+        method: "POST",
+        body: JSON.stringify({ course_codes: chunk }),
+      });
+
+      return data.results || {};
+    } catch (error) {
+      console.error(`Failed to load chunk:`, error);
+      return {};
     }
-  }
+  });
 
+  // Wait for ALL requests to complete simultaneously
+  const allResults = await Promise.all(allChunkPromises);
+
+  // Merge results
+  allResults.forEach((chunkResults) => {
+    Object.entries(chunkResults).forEach(([courseCode, requirements]) => {
+      results.set(courseCode, requirements as string[]);
+    });
+  });
+
+  console.log(`Loaded ${results.size} course requirements`);
   return results;
 };
 
@@ -198,6 +193,7 @@ export default function CourseBrowseTable({
     Set<string>
   >(new Set());
   const [showFilters, setShowFilters] = useState(false);
+  const [filterStatsLoading, setFilterStatsLoading] = useState(false);
 
   const [localBookmarkStates, setLocalBookmarkStates] = useState<
     Map<string, boolean>
@@ -242,6 +238,36 @@ export default function CourseBrowseTable({
     });
     return Array.from(hubSet).sort();
   }, [apiCourses]);
+
+  // Pre-calculate filter stats for instant rendering
+  const filterStats = useMemo(() => {
+    return {
+      totalCourses: apiCourses.length,
+      schoolCounts: schools.map((school) => ({
+        school,
+        count: apiCourses.filter((c) => c.courseId.substring(0, 3) === school)
+          .length,
+      })),
+      departmentCounts: filteredDepartments.map((dept) => ({
+        dept,
+        count: apiCourses.filter((course) => {
+          const parts = course.courseId.split(" ");
+          if (parts.length >= 2) {
+            const school = parts[0].substring(0, 3);
+            const courseDept = parts[1];
+            return `${school} ${courseDept}` === dept;
+          }
+          return false;
+        }).length,
+      })),
+      hubCounts: allHubRequirements.map((hubReq) => ({
+        hubReq,
+        count: apiCourses.filter((course) =>
+          course.hubRequirements.includes(hubReq)
+        ).length,
+      })),
+    };
+  }, [apiCourses, schools, filteredDepartments, allHubRequirements]);
 
   const filteredCourses = useMemo(() => {
     let filtered = apiCourses;
@@ -307,6 +333,29 @@ export default function CourseBrowseTable({
         const coursesData = await fetchAllCourses();
         console.log(`Loaded ${coursesData.length} courses`);
         setApiCourses(coursesData);
+
+        // Preload hub requirements for first 100 courses
+        console.log("Preloading hub requirements for initial courses...");
+        const initialCourseCodes = coursesData
+          .slice(0, 100)
+          .map((c) => c.courseId);
+        const initialRequirements =
+          await fetchMultipleHubRequirements(initialCourseCodes);
+
+        setApiCourses((prev) =>
+          prev.map((course) => {
+            const hubRequirements = initialRequirements.get(course.courseId);
+            if (hubRequirements !== undefined) {
+              const requirementsText =
+                hubRequirements.length > 0
+                  ? hubRequirements.join(", ")
+                  : "No hub requirements";
+              return { ...course, hubRequirements, requirementsText };
+            }
+            return course;
+          })
+        );
+        console.log("Initial hub requirements loaded");
       } catch (error: any) {
         console.error("Failed to initialize course data:", error);
         setError(error.message);
@@ -332,7 +381,8 @@ export default function CourseBrowseTable({
     setLoadingRequirements((prev) => new Set(prev).add(courseId));
 
     try {
-      const hubRequirements = await fetchHubRequirements(courseId);
+      const requirementsMap = await fetchMultipleHubRequirements([courseId]);
+      const hubRequirements = requirementsMap.get(courseId) || [];
       const requirementsText =
         hubRequirements.length > 0
           ? hubRequirements.join(", ")
@@ -613,7 +663,14 @@ export default function CourseBrowseTable({
             variant="flat"
             size="sm"
             startContent={<Filter size={16} />}
-            onPress={() => setShowFilters(!showFilters)}
+            onPress={() => {
+              setFilterStatsLoading(true);
+              setTimeout(() => {
+                setShowFilters(!showFilters);
+                setFilterStatsLoading(false);
+              }, 0);
+            }}
+            isLoading={filterStatsLoading}
           >
             {showFilters ? "Hide Filters" : "Show Filters"}
           </Button>
@@ -673,14 +730,12 @@ export default function CourseBrowseTable({
                   {[
                     {
                       key: "all",
-                      label: `All Schools (${apiCourses.length})`,
+                      label: `All Schools (${filterStats.totalCourses})`,
                     },
-                    ...schools.map((school) => {
-                      const count = apiCourses.filter(
-                        (c) => c.courseId.substring(0, 3) === school
-                      ).length;
-                      return { key: school, label: `${school} (${count})` };
-                    }),
+                    ...filterStats.schoolCounts.map(({ school, count }) => ({
+                      key: school,
+                      label: `${school} (${count})`,
+                    })),
                   ].map((item) => (
                     <SelectItem key={item.key}>{item.label}</SelectItem>
                   ))}
@@ -704,22 +759,11 @@ export default function CourseBrowseTable({
                   isDisabled={filteredDepartments.length === 0}
                 >
                   {[
-                    {
-                      key: "all",
-                      label: `All Departments`,
-                    },
-                    ...filteredDepartments.map((dept) => {
-                      const count = apiCourses.filter((course) => {
-                        const parts = course.courseId.split(" ");
-                        if (parts.length >= 2) {
-                          const school = parts[0].substring(0, 3);
-                          const courseDept = parts[1];
-                          return `${school} ${courseDept}` === dept;
-                        }
-                        return false;
-                      }).length;
-                      return { key: dept, label: `${dept} (${count})` };
-                    }),
+                    { key: "all", label: "All Departments" },
+                    ...filterStats.departmentCounts.map(({ dept, count }) => ({
+                      key: dept,
+                      label: `${dept} (${count})`,
+                    })),
                   ].map((item) => (
                     <SelectItem key={item.key}>{item.label}</SelectItem>
                   ))}
@@ -741,29 +785,23 @@ export default function CourseBrowseTable({
                       Load hub requirements to see available filters
                     </p>
                   ) : (
-                    allHubRequirements.map((hubReq) => {
-                      const coursesWithHub = apiCourses.filter((course) =>
-                        course.hubRequirements.includes(hubReq)
-                      ).length;
-
-                      return (
-                        <div key={hubReq} className="flex items-center">
-                          <Checkbox
-                            size="sm"
-                            isSelected={selectedHubRequirements.has(hubReq)}
-                            onValueChange={() => toggleHubRequirement(hubReq)}
-                            className="flex-1"
-                          >
-                            <div className="flex items-center justify-between w-full">
-                              <span className="text-xs">{hubReq}</span>
-                              <span className="text-xs text-default-400 ml-2">
-                                ({coursesWithHub})
-                              </span>
-                            </div>
-                          </Checkbox>
-                        </div>
-                      );
-                    })
+                    filterStats.hubCounts.map(({ hubReq, count }) => (
+                      <div key={hubReq} className="flex items-center">
+                        <Checkbox
+                          size="sm"
+                          isSelected={selectedHubRequirements.has(hubReq)}
+                          onValueChange={() => toggleHubRequirement(hubReq)}
+                          className="flex-1"
+                        >
+                          <div className="flex items-center justify-between w-full">
+                            <span className="text-xs">{hubReq}</span>
+                            <span className="text-xs text-default-400 ml-2">
+                              ({count})
+                            </span>
+                          </div>
+                        </Checkbox>
+                      </div>
+                    ))
                   )}
                 </div>
                 {selectedHubRequirements.size > 0 && (
