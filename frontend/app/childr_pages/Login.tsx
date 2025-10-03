@@ -26,6 +26,7 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log("Google Client ID:", process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID);
     if (typeof window !== "undefined" && window.google) {
       window.google.accounts.id.initialize({
         client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,

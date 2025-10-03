@@ -134,22 +134,28 @@ except Exception as e:
 
 @app.route('/api/auth/google', methods=['POST'])
 def google_auth():
-    """Authenticate user with Google OAuth token"""
     try:
         data = request.json
         token = data.get('credential')
         
+        logger.info(f"Received Google token (first 20 chars): {token[:20] if token else 'None'}")
+        logger.info(f"Using GOOGLE_CLIENT_ID: {GOOGLE_CLIENT_ID}")
+        
         if not token:
             return jsonify({"error": "No credential provided"}), 400
         
-        # Verify the Google token
+        if not GOOGLE_CLIENT_ID:
+            logger.error("GOOGLE_CLIENT_ID not set in environment!")
+            return jsonify({"error": "Server configuration error"}), 500
+        
         idinfo = id_token.verify_oauth2_token(
             token, 
             google_requests.Request(), 
             GOOGLE_CLIENT_ID
         )
         
-        # Get user info from token
+        logger.info(f"Token verified successfully for email: {idinfo.get('email')}")
+        
         email = idinfo.get('email')
         google_id = idinfo.get('sub')
         first_name = idinfo.get('given_name', '')
@@ -158,7 +164,6 @@ def google_auth():
         if not email:
             return jsonify({"error": "Email not found in token"}), 400
         
-        # Check if user exists
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
@@ -166,19 +171,16 @@ def google_auth():
         cur = conn.cursor()
         
         try:
-            # Look for existing user by email
             cur.execute('SELECT user_id, email FROM userinfo WHERE email = %s', (email,))
             user = cur.fetchone()
             
             if user:
-                # User exists, log them in
                 user_id = user[0]
                 logger.info(f"Google user logged in: {email} (ID: {user_id})")
             else:
-                # Create new user
                 cur.execute(
                     'INSERT INTO userinfo (email, password, first_name, last_name) VALUES (%s, %s, %s, %s) RETURNING user_id',
-                    (email, '', first_name, last_name)  # Empty password for OAuth users
+                    (email, '', first_name, last_name)
                 )
                 user_id = cur.fetchone()[0]
                 conn.commit()
@@ -372,7 +374,6 @@ def health_check():
         }
     })
 
-# [Rest of your existing endpoints remain exactly the same - search_course, bulk_hub_requirements, all_courses, etc.]
 @app.route('/api/search-course', methods=['POST'])
 def search_course():
     if not course_manager:
@@ -413,7 +414,6 @@ def search_course():
 
 @app.route('/api/bulk-hub-requirements', methods=['POST'])
 def bulk_hub_requirements():
-    """Fetch hub requirements for multiple courses in one request"""
     if not course_manager:
         return jsonify({"error": "Course manager not initialized"}), 500
     
@@ -588,7 +588,6 @@ def process_pdf():
 
 @app.route('/api/user/<int:user_id>/courses', methods=['GET'])
 def get_user_courses(user_id):
-    """Get user's enrolled and bookmarked courses"""
     try:
         conn = get_db_connection()
         if not conn:
@@ -621,7 +620,6 @@ def get_user_courses(user_id):
 
 @app.route('/api/user/<int:user_id>/courses/enrolled', methods=['POST'])
 def add_enrolled_course(user_id):
-    """Add a course to enrolled_courses"""
     try:
         data = request.json
         course_code = data.get('course_code')
@@ -655,7 +653,6 @@ def add_enrolled_course(user_id):
 
 @app.route('/api/user/<int:user_id>/courses/enrolled', methods=['DELETE'])
 def remove_enrolled_course(user_id):
-    """Remove a course from enrolled_courses"""
     try:
         data = request.json
         course_code = data.get('course_code')
@@ -683,7 +680,6 @@ def remove_enrolled_course(user_id):
 
 @app.route('/api/user/<int:user_id>/courses/bookmarked', methods=['POST'])
 def add_bookmarked_course(user_id):
-    """Add a course to bookmarked_courses"""
     try:
         data = request.json
         course_code = data.get('course_code')
@@ -716,7 +712,6 @@ def add_bookmarked_course(user_id):
 
 @app.route('/api/user/<int:user_id>/courses/bookmarked', methods=['DELETE'])
 def remove_bookmarked_course(user_id):
-    """Remove a course from bookmarked_courses"""
     try:
         data = request.json
         course_code = data.get('course_code')
