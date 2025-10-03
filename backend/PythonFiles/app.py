@@ -48,7 +48,7 @@ logger = logging.getLogger(__name__)
 SCRIPT_DIR = Path(__file__).parent.absolute()
 logger.info(f"Script directory: {SCRIPT_DIR}")
 
-CSV_DIR = SCRIPT_DIR.parent / 'CSVFiles'
+CSV_DIR = SCRIPT_DIR / 'CSVFiles'
 CSV_FILES = {
     'cas': CSV_DIR / 'cas_all_courses.csv',
     'khc': CSV_DIR / 'khc_hub_courses.csv',
