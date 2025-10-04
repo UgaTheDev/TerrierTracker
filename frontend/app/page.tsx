@@ -529,6 +529,22 @@ export default function Home() {
   const renderContent = () => {
     switch (currentPage) {
       case "dashboard":
+        console.log("Hub Requirements Data:", hubRequirements);
+        console.log("Total Progress:", {
+          total_required: hubRequirements.reduce(
+            (sum, req) => sum + req.required,
+            0
+          ),
+          total_current: hubRequirements.reduce(
+            (sum, req) => sum + req.current,
+            0
+          ),
+          percentage: (
+            (hubRequirements.reduce((sum, req) => sum + req.current, 0) /
+              hubRequirements.reduce((sum, req) => sum + req.required, 0)) *
+            100
+          ).toFixed(0),
+        });
         return (
           <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10 px-6">
             <div className="inline-block max-w-xl text-center justify-center">

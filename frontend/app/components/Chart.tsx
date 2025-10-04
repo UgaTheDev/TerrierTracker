@@ -13,11 +13,18 @@ interface ChartProps {
 
 export default function Chart({ percentage, hubRequirements }: ChartProps) {
   const calculateOverallPercentage = () => {
-    const fulfilledCount = hubRequirements.filter(
-      (req) => req.current >= req.required
-    ).length;
-    const totalCount = hubRequirements.length;
-    return Math.round((fulfilledCount / totalCount) * 100);
+    const totalRequired = hubRequirements.reduce(
+      (sum, req) => sum + req.required,
+      0
+    );
+    const totalCurrent = hubRequirements.reduce(
+      (sum, req) => sum + Math.min(req.current, req.required),
+      0
+    );
+
+    if (totalRequired === 0) return 0;
+
+    return Math.round((totalCurrent / totalRequired) * 100);
   };
 
   const displayPercentage =
