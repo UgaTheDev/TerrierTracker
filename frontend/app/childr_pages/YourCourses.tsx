@@ -4,6 +4,8 @@ import CourseTable from "../components/CourseTable";
 import { Trash2, Plus } from "lucide-react";
 import type { CustomCourseArray } from "../components/AddCustomCourseModal";
 
+export type EditedCourseArray = [string, string, string, number];
+
 type Course = {
   id: number;
   courseId: string;
@@ -19,22 +21,26 @@ type Course = {
 interface YourCoursesProps {
   enrolledCourses: Course[];
   customCourses: CustomCourseArray[];
+  editedCourses: EditedCourseArray[];
   onAddCourse: (course: Course) => void;
   onNavigate: (page: string) => void;
   onDeleteCourse: (courseId: string) => void;
   onDeleteCustomCourse: (courseId: string) => void;
   onUpdateCourse: (course: Course) => void;
+  onRevertEdit: (courseId: string) => void;
   onOpenCustomCourseModal: () => void;
 }
 
 export default function YourCourses({
   enrolledCourses,
   customCourses,
+  editedCourses,
   onAddCourse,
   onNavigate,
   onDeleteCourse,
   onDeleteCustomCourse,
   onUpdateCourse,
+  onRevertEdit,
   onOpenCustomCourseModal,
 }: YourCoursesProps) {
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
@@ -76,84 +82,7 @@ export default function YourCourses({
           </div>
         </div>
 
-        {customCourses.length > 0 && (
-          <div className="space-y-3">
-            <h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
-              Custom Courses
-              <span className="text-sm text-default-500 font-normal">
-                ({customCourses.length})
-              </span>
-            </h2>
-            <div className="grid gap-3">
-              {customCourses.map((course) => (
-                <div
-                  key={`custom-${course[0]}`}
-                  className="border-l-4 border-blue-500 bg-content1 rounded-lg p-4 shadow-small"
-                >
-                  <div className="flex justify-between items-start">
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <h4 className="font-semibold text-foreground font-mono">
-                          {course[0]}
-                        </h4>
-                        <span className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-2 py-1 rounded">
-                          Custom Course
-                        </span>
-                      </div>
-                      <p className="text-sm text-default-700 mb-2">
-                        {course[1]}
-                      </p>
-                      <p className="text-xs text-default-500 mb-2">
-                        {course[3]} credits
-                      </p>
-                      {course[2] && (
-                        <div className="flex flex-wrap gap-1">
-                          {course[2].split(", ").map((hub, idx) => (
-                            <span
-                              key={idx}
-                              className="text-xs bg-primary-50 dark:bg-primary-900/20 text-primary-700 dark:text-primary-300 px-2 py-1 rounded"
-                            >
-                              {hub}
-                            </span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                    <Button
-                      color="danger"
-                      variant="flat"
-                      size="sm"
-                      startContent={<Trash2 size={14} />}
-                      onPress={() => onDeleteCustomCourse(course[0])}
-                    >
-                      Delete
-                    </Button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {enrolledCourses.length > 0 && (
-          <div className="space-y-3">
-            <h2 className="text-xl font-semibold text-foreground flex items-center gap-2">
-              Enrolled Courses
-              <span className="text-sm text-default-500 font-normal">
-                ({enrolledCourses.length})
-              </span>
-            </h2>
-            <CourseTable
-              enrolledCourses={enrolledCourses}
-              onAddCourse={onAddCourse}
-              onNavigate={onNavigate}
-              onDeleteCourse={onDeleteCourse}
-              onUpdateCourse={onUpdateCourse}
-            />
-          </div>
-        )}
-
-        {totalCourses === 0 && (
+        {totalCourses === 0 ? (
           <div className="text-center py-16">
             <p className="text-default-500 mb-4">
               You haven't added any courses yet.
@@ -172,6 +101,18 @@ export default function YourCourses({
               </Button>
             </div>
           </div>
+        ) : (
+          <CourseTable
+            enrolledCourses={enrolledCourses}
+            customCourses={customCourses}
+            editedCourses={editedCourses}
+            onAddCourse={onAddCourse}
+            onNavigate={onNavigate}
+            onDeleteCourse={onDeleteCourse}
+            onDeleteCustomCourse={onDeleteCustomCourse}
+            onUpdateCourse={onUpdateCourse}
+            onRevertEdit={onRevertEdit}
+          />
         )}
       </div>
 

@@ -269,7 +269,7 @@ export default function CourseRecommender({
     if (!schoolCode || isLoadingCourses) return;
 
     setSelectedSchool(schoolCode);
-    setSelectedDepartment(""); // Reset department
+    setSelectedDepartment("");
     setIsLoading(true);
     setError(null);
     setRecommendations([]);
@@ -453,7 +453,7 @@ export default function CourseRecommender({
               onSelectionChange={(keys) => {
                 const selected = Array.from(keys)[0] as string;
                 setSelectedSchool(selected || "");
-                setSelectedDepartment(""); // Reset department when school changes
+                setSelectedDepartment("");
               }}
               isDisabled={isLoadingCourses}
             >

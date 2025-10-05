@@ -18,6 +18,8 @@ import {
   Input,
 } from "@heroui/react";
 import { Plus } from "lucide-react";
+export type EditedCourseArray = [string, string, string, number];
+export type CustomCourseArray = [string, string, string, number];
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -140,18 +142,26 @@ type SortDescriptor = {
 
 interface CourseTableProps {
   enrolledCourses: Course[];
+  customCourses?: CustomCourseArray[];
+  editedCourses?: EditedCourseArray[];
   onAddCourse: (course: Course) => void;
   onNavigate: (page: string) => void;
   onDeleteCourse?: (courseId: string) => void;
+  onDeleteCustomCourse?: (courseId: string) => void;
   onUpdateCourse?: (course: Course) => void;
+  onRevertEdit?: (courseId: string) => void;
 }
 
 export default function CourseTable({
   enrolledCourses,
+  customCourses = [],
+  editedCourses = [],
   onAddCourse,
   onNavigate,
   onDeleteCourse,
+  onDeleteCustomCourse,
   onUpdateCourse,
+  onRevertEdit,
 }: CourseTableProps) {
   const [deleteModalOpen, setDeleteModalOpen] = React.useState(false);
   const [editModalOpen, setEditModalOpen] = React.useState(false);

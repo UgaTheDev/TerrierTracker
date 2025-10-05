@@ -15,6 +15,7 @@ import CourseRecommender from "./childr_pages/Recommender";
 import AddCustomCourseModal, {
   type CustomCourseArray,
 } from "./components/AddCustomCourseModal";
+export type EditedCourseArray = [string, string, string, number];
 
 const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
 
@@ -62,6 +63,7 @@ export default function Home() {
     BookmarkedCourse[]
   >([]);
   const [customCourses, setCustomCourses] = useState<CustomCourseArray[]>([]);
+  const [editedCourses, setEditedCourses] = useState<EditedCourseArray[]>([]);
   const [isCustomCourseModalOpen, setIsCustomCourseModalOpen] = useState(false);
   const [pdfFile, setPdfFile] = useState<File | null>(null);
   const [pdfProcessing, setPdfProcessing] = useState(false);
@@ -152,6 +154,15 @@ export default function Home() {
         setCustomCourses(customData.custom_courses || []);
       } catch (error) {
         console.error("Failed to load custom courses:", error);
+      }
+      try {
+        const editedResponse = await fetch(
+          `${API_BASE_URL}/user/${userId}/courses/edited`
+        );
+        const editedData = await editedResponse.json();
+        setEditedCourses(editedData.edited_courses || []);
+      } catch (error) {
+        console.error("Failed to load edited courses:", error);
       }
     } catch (error) {
       console.error("Failed to load user data:", error);
@@ -247,6 +258,7 @@ export default function Home() {
     setEnrolledCourses([]);
     setBookmarkedCourses([]);
     setCustomCourses([]);
+    setEditedCourses([]);
 
     localStorage.removeItem("user");
   };
@@ -393,283 +405,342 @@ export default function Home() {
     }
   };
 
-  const handleRemoveCourse = async (courseId: number) => {
-    const course = enrolledCourses.find((c) => c.id === courseId);
-    if (!course || !currentUser) return;
-
-    try {
-      await fetch(`${API_BASE_URL}/user/${currentUser.id}/courses/enrolled`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ course_code: course.courseId }),
-      });
-
-      setEnrolledCourses((prev) => prev.filter((c) => c.id !== courseId));
-    } catch (error) {
-      console.error("Failed to remove course:", error);
-    }
-  };
-
-  const handleDeleteCourse = async (courseId: string) => {
+  const handleSaveEditedCourse = async (course: EditedCourseArray) => {
     if (!currentUser) return;
 
     try {
-      await fetch(`${API_BASE_URL}/user/${currentUser.id}/courses/enrolled`, {
-        method: "DELETE",
+      await fetch(`${API_BASE_URL}/user/${currentUser.id}/courses/edited`, {
+        method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ course_code: courseId }),
+        body: JSON.stringify({
+          courseId: course[0],
+          courseName: course[1],
+          hubRequirements: course[2].split(", ").filter((h) => h.trim()),
+          credits: course[3],
+        }),
       });
+
+      setEditedCourses((prev) => {
+        const filtered = prev.filter((c) => c[0] !== course[0]);
+        return [...filtered, course];
+      });
+    } catch (error) {
+      console.error("Failed to save edited course:", error);
+    }
+  };
+
+  const handleRevertEditedCourse = async (courseId: string) => {
+    if (!currentUser) return;
+
+    try {
+      await fetch(
+        `${API_BASE_URL}/user/${currentUser.id}/courses/edited/${courseId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      setEditedCourses((prev) => prev.filter((c) => c[0] !== courseId));
+    } catch (error) {
+      console.error("Failed to revert edited course:", error);
+    }
+
+    const handleRemoveCourse = async (courseId: number) => {
+      const course = enrolledCourses.find((c) => c.id === courseId);
+      if (!course || !currentUser) return;
+
+      try {
+        await fetch(`${API_BASE_URL}/user/${currentUser.id}/courses/enrolled`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ course_code: course.courseId }),
+        });
+
+        setEnrolledCourses((prev) => prev.filter((c) => c.id !== courseId));
+      } catch (error) {
+        console.error("Failed to remove course:", error);
+      }
+    };
+
+    const handleDeleteCourse = async (courseId: string) => {
+      if (!currentUser) return;
+
+      try {
+        await fetch(`${API_BASE_URL}/user/${currentUser.id}/courses/enrolled`, {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ course_code: courseId }),
+        });
+
+        setEnrolledCourses((prev) =>
+          prev.filter((course) => course.courseId !== courseId)
+        );
+      } catch (error) {
+        console.error("Failed to delete course:", error);
+      }
+    };
+
+    const handleUpdateCourse = async (updatedCourse: Course) => {
+      if (!currentUser) return;
+
+      const editedCourse: EditedCourseArray = [
+        updatedCourse.courseId,
+        updatedCourse.course,
+        updatedCourse.hubRequirements?.join(", ") || "",
+        updatedCourse.credits,
+      ];
+
+      await handleSaveEditedCourse(editedCourse);
 
       setEnrolledCourses((prev) =>
-        prev.filter((course) => course.courseId !== courseId)
+        prev.map((course) =>
+          course.id === updatedCourse.id ? updatedCourse : course
+        )
       );
-    } catch (error) {
-      console.error("Failed to delete course:", error);
-    }
-  };
+    };
 
-  const handleUpdateCourse = async (updatedCourse: Course) => {
-    if (!currentUser) return;
-    setEnrolledCourses((prev) =>
-      prev.map((course) =>
-        course.id === updatedCourse.id ? updatedCourse : course
-      )
-    );
-  };
+    const isBookmarked = (courseId: string): boolean => {
+      return bookmarkedCourses.some((course) => course.id === courseId);
+    };
 
-  const isBookmarked = (courseId: string): boolean => {
-    return bookmarkedCourses.some((course) => course.id === courseId);
-  };
+    const handleBookmark = async (bookmarkedCourse: BookmarkedCourse) => {
+      if (!currentUser) {
+        console.error("No user logged in");
+        return;
+      }
 
-  const handleBookmark = async (bookmarkedCourse: BookmarkedCourse) => {
-    if (!currentUser) {
-      console.error("No user logged in");
-      return;
-    }
+      const isCurrentlyBookmarked = bookmarkedCourses.some(
+        (course) => course.id === bookmarkedCourse.id
+      );
 
-    const isCurrentlyBookmarked = bookmarkedCourses.some(
-      (course) => course.id === bookmarkedCourse.id
-    );
+      try {
+        if (isCurrentlyBookmarked) {
+          await fetch(
+            `${API_BASE_URL}/user/${currentUser.id}/courses/bookmarked`,
+            {
+              method: "DELETE",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ course_code: bookmarkedCourse.code }),
+            }
+          );
 
-    try {
-      if (isCurrentlyBookmarked) {
+          setBookmarkedCourses((prev) =>
+            prev.filter((course) => course.id !== bookmarkedCourse.id)
+          );
+        } else {
+          await fetch(
+            `${API_BASE_URL}/user/${currentUser.id}/courses/bookmarked`,
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ course_code: bookmarkedCourse.code }),
+            }
+          );
+
+          setBookmarkedCourses((prev) => [...prev, bookmarkedCourse]);
+        }
+      } catch (error) {
+        console.error("Failed to update bookmark:", error);
+      }
+    };
+
+    const handleBookmarkCourse = async (course: Course) => {
+      const bookmarkedCourse: BookmarkedCourse = {
+        id: course.courseId,
+        code: course.courseId,
+        name: course.course,
+        credits: course.credits || 4,
+        hubRequirements: course.hubRequirements || [],
+        school: course.courseId?.split(" ")[0] || "CAS",
+      };
+
+      await handleBookmark(bookmarkedCourse);
+    };
+
+    const handleHubHelperBookmark = async (
+      courseId: string,
+      courseData: any
+    ) => {
+      const bookmarkedCourse: BookmarkedCourse = {
+        id: courseId,
+        code: courseData.courseId || courseId,
+        name: courseData.course || courseData.courseName || courseData.name,
+        credits: courseData.credits || 4,
+        hubRequirements: courseData.hubRequirements || [],
+        school: (courseData.courseId || courseId).split(" ")[0] || "CAS",
+      };
+
+      await handleBookmark(bookmarkedCourse);
+    };
+
+    const handleRemoveBookmark = async (courseId: string) => {
+      if (!currentUser) return;
+
+      try {
         await fetch(
           `${API_BASE_URL}/user/${currentUser.id}/courses/bookmarked`,
           {
             method: "DELETE",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ course_code: bookmarkedCourse.code }),
+            body: JSON.stringify({ course_code: courseId }),
           }
         );
 
         setBookmarkedCourses((prev) =>
-          prev.filter((course) => course.id !== bookmarkedCourse.id)
+          prev.filter((course) => course.id !== courseId)
         );
-      } else {
-        await fetch(
-          `${API_BASE_URL}/user/${currentUser.id}/courses/bookmarked`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ course_code: bookmarkedCourse.code }),
-          }
-        );
-
-        setBookmarkedCourses((prev) => [...prev, bookmarkedCourse]);
+      } catch (error) {
+        console.error("Failed to remove bookmark:", error);
       }
-    } catch (error) {
-      console.error("Failed to update bookmark:", error);
-    }
-  };
-
-  const handleBookmarkCourse = async (course: Course) => {
-    const bookmarkedCourse: BookmarkedCourse = {
-      id: course.courseId,
-      code: course.courseId,
-      name: course.course,
-      credits: course.credits || 4,
-      hubRequirements: course.hubRequirements || [],
-      school: course.courseId?.split(" ")[0] || "CAS",
     };
 
-    await handleBookmark(bookmarkedCourse);
-  };
-
-  const handleHubHelperBookmark = async (courseId: string, courseData: any) => {
-    const bookmarkedCourse: BookmarkedCourse = {
-      id: courseId,
-      code: courseData.courseId || courseId,
-      name: courseData.course || courseData.courseName || courseData.name,
-      credits: courseData.credits || 4,
-      hubRequirements: courseData.hubRequirements || [],
-      school: (courseData.courseId || courseId).split(" ")[0] || "CAS",
+    const renderContent = () => {
+      switch (currentPage) {
+        case "dashboard":
+          console.log("Hub Requirements Data:", hubRequirements);
+          console.log("Total Progress:", {
+            total_required: hubRequirements.reduce(
+              (sum, req) => sum + req.required,
+              0
+            ),
+            total_current: hubRequirements.reduce(
+              (sum, req) => sum + req.current,
+              0
+            ),
+            percentage: (
+              (hubRequirements.reduce((sum, req) => sum + req.current, 0) /
+                hubRequirements.reduce((sum, req) => sum + req.required, 0)) *
+              100
+            ).toFixed(0),
+          });
+          return (
+            <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10 px-6">
+              <div className="inline-block max-w-xl text-center justify-center">
+                <span className={title({ color: "red" })}>Terrier&nbsp;</span>
+                <br />
+                <span className={title()}>Tracker.</span>
+                <div className={subtitle({ class: "mt-4" })}>
+                  Track all courses and hub requirements with a single click.
+                </div>
+              </div>
+              <div className="w-full max-w-7xl">
+                <div className="flex justify-center">
+                  <Chart hubRequirements={hubRequirements} />
+                </div>
+              </div>
+              <div className="flex gap-6 w-full max-w-7xl">
+                <div className="w-[30%] flex-shrink-0">
+                  <CategoryProgress hubRequirements={hubRequirements} />
+                </div>
+                <div className="w-[70%]">
+                  <ReqTable hubRequirements={hubRequirements} />
+                </div>
+              </div>
+            </section>
+          );
+        case "your-courses":
+          return (
+            <YourCourses
+              enrolledCourses={enrolledCourses}
+              customCourses={customCourses}
+              editedCourses={editedCourses}
+              onAddCourse={handleAddCourse}
+              onNavigate={handleNavigate}
+              onDeleteCourse={handleDeleteCourse}
+              onDeleteCustomCourse={handleDeleteCustomCourse}
+              onUpdateCourse={handleUpdateCourse}
+              onRevertEdit={handleRevertEditedCourse}
+              onOpenCustomCourseModal={() => setIsCustomCourseModalOpen(true)}
+            />
+          );
+        case "add-courses":
+          return (
+            <AddCourses
+              enrolledCourses={enrolledCourses}
+              bookmarkedCourses={bookmarkedCourses}
+              onAddCourse={handleAddCourse}
+              onBookmarkCourse={handleBookmarkCourse}
+              onNavigate={handleNavigate}
+              isBookmarked={isBookmarked}
+              handleBookmark={handleBookmark}
+              pdfFile={pdfFile}
+              pdfProcessing={pdfProcessing}
+              handlePdfUpload={handlePdfUpload}
+              pdfError={pdfError}
+            />
+          );
+        case "hub-helper":
+          return (
+            <HubHelper
+              onBookmark={handleHubHelperBookmark}
+              bookmarkedCourses={bookmarkedCourses}
+              isBookmarked={isBookmarked}
+            />
+          );
+        case "recommender":
+          return (
+            <CourseRecommender
+              hubRequirements={hubRequirements}
+              onBookmark={handleHubHelperBookmark}
+              bookmarkedCourses={bookmarkedCourses}
+              isBookmarked={isBookmarked}
+            />
+          );
+        case "bookmarks":
+          return (
+            <YourBookmarks
+              bookmarkedCourses={bookmarkedCourses}
+              hubRequirements={hubRequirements}
+              onRemoveBookmark={handleRemoveBookmark}
+              onNavigate={handleNavigate}
+            />
+          );
+        default:
+          return <div>Page not found</div>;
+      }
     };
 
-    await handleBookmark(bookmarkedCourse);
-  };
-
-  const handleRemoveBookmark = async (courseId: string) => {
-    if (!currentUser) return;
-
-    try {
-      await fetch(`${API_BASE_URL}/user/${currentUser.id}/courses/bookmarked`, {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ course_code: courseId }),
-      });
-
-      setBookmarkedCourses((prev) =>
-        prev.filter((course) => course.id !== courseId)
-      );
-    } catch (error) {
-      console.error("Failed to remove bookmark:", error);
-    }
-  };
-
-  const renderContent = () => {
-    switch (currentPage) {
-      case "dashboard":
-        console.log("Hub Requirements Data:", hubRequirements);
-        console.log("Total Progress:", {
-          total_required: hubRequirements.reduce(
-            (sum, req) => sum + req.required,
-            0
-          ),
-          total_current: hubRequirements.reduce(
-            (sum, req) => sum + req.current,
-            0
-          ),
-          percentage: (
-            (hubRequirements.reduce((sum, req) => sum + req.current, 0) /
-              hubRequirements.reduce((sum, req) => sum + req.required, 0)) *
-            100
-          ).toFixed(0),
-        });
-        return (
-          <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10 px-6">
-            <div className="inline-block max-w-xl text-center justify-center">
-              <span className={title({ color: "red" })}>Terrier&nbsp;</span>
-              <br />
-              <span className={title()}>Tracker.</span>
-              <div className={subtitle({ class: "mt-4" })}>
-                Track all courses and hub requirements with a single click.
-              </div>
-            </div>
-            <div className="w-full max-w-7xl">
-              <div className="flex justify-center">
-                <Chart hubRequirements={hubRequirements} />
-              </div>
-            </div>
-            <div className="flex gap-6 w-full max-w-7xl">
-              <div className="w-[30%] flex-shrink-0">
-                <CategoryProgress hubRequirements={hubRequirements} />
-              </div>
-              <div className="w-[70%]">
-                <ReqTable hubRequirements={hubRequirements} />
-              </div>
-            </div>
-          </section>
-        );
-      case "your-courses":
-        return (
-          <YourCourses
-            enrolledCourses={enrolledCourses}
-            customCourses={customCourses}
-            onAddCourse={handleAddCourse}
-            onNavigate={handleNavigate}
-            onDeleteCourse={handleDeleteCourse}
-            onDeleteCustomCourse={handleDeleteCustomCourse}
-            onUpdateCourse={handleUpdateCourse}
-            onOpenCustomCourseModal={() => setIsCustomCourseModalOpen(true)}
-          />
-        );
-      case "add-courses":
-        return (
-          <AddCourses
-            enrolledCourses={enrolledCourses}
-            bookmarkedCourses={bookmarkedCourses}
-            onAddCourse={handleAddCourse}
-            onBookmarkCourse={handleBookmarkCourse}
-            onNavigate={handleNavigate}
-            isBookmarked={isBookmarked}
-            handleBookmark={handleBookmark}
-            pdfFile={pdfFile}
-            pdfProcessing={pdfProcessing}
-            handlePdfUpload={handlePdfUpload}
-            pdfError={pdfError}
-          />
-        );
-      case "hub-helper":
-        return (
-          <HubHelper
-            onBookmark={handleHubHelperBookmark}
-            bookmarkedCourses={bookmarkedCourses}
-            isBookmarked={isBookmarked}
-          />
-        );
-      case "recommender":
-        return (
-          <CourseRecommender
-            hubRequirements={hubRequirements}
-            onBookmark={handleHubHelperBookmark}
-            bookmarkedCourses={bookmarkedCourses}
-            isBookmarked={isBookmarked}
-          />
-        );
-      case "bookmarks":
-        return (
-          <YourBookmarks
-            bookmarkedCourses={bookmarkedCourses}
-            hubRequirements={hubRequirements}
-            onRemoveBookmark={handleRemoveBookmark}
-            onNavigate={handleNavigate}
-          />
-        );
-      default:
-        return <div>Page not found</div>;
-    }
-  };
-
-  if (isLoading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <div className="text-lg">Loading...</div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    if (authPage === "register") {
+    if (isLoading) {
       return (
-        <Registration
-          onRegistrationSuccess={handleRegistrationSuccess}
-          onBackToLogin={() => setAuthPage("login")}
+        <div className="flex items-center justify-center h-screen">
+          <div className="text-lg">Loading...</div>
+        </div>
+      );
+    }
+
+    if (!isAuthenticated) {
+      if (authPage === "register") {
+        return (
+          <Registration
+            onRegistrationSuccess={handleRegistrationSuccess}
+            onBackToLogin={() => setAuthPage("login")}
+          />
+        );
+      }
+
+      return (
+        <Login
+          onLoginSuccess={handleLoginSuccess}
+          onGoToRegister={() => setAuthPage("register")}
         />
       );
     }
 
     return (
-      <Login
-        onLoginSuccess={handleLoginSuccess}
-        onGoToRegister={() => setAuthPage("register")}
-      />
+      <div className="flex h-screen">
+        <Sidebar
+          onNavigate={handleNavigate}
+          currentPage={currentPage}
+          onLogout={handleLogout}
+        />
+        <main className="flex-1 overflow-auto">{renderContent()}</main>
+
+        <AddCustomCourseModal
+          isOpen={isCustomCourseModalOpen}
+          onClose={() => setIsCustomCourseModalOpen(false)}
+          onAdd={handleAddCustomCourse}
+        />
+      </div>
     );
-  }
-
-  return (
-    <div className="flex h-screen">
-      <Sidebar
-        onNavigate={handleNavigate}
-        currentPage={currentPage}
-        onLogout={handleLogout}
-      />
-      <main className="flex-1 overflow-auto">{renderContent()}</main>
-
-      <AddCustomCourseModal
-        isOpen={isCustomCourseModalOpen}
-        onClose={() => setIsCustomCourseModalOpen(false)}
-        onAdd={handleAddCustomCourse}
-      />
-    </div>
-  );
+  };
 }
