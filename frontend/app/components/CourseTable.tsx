@@ -18,12 +18,13 @@ import {
   Input,
 } from "@heroui/react";
 import { Plus } from "lucide-react";
-export type EditedCourseArray = [string, string, string, number];
-export type CustomCourseArray = [string, string, string, number];
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
 };
+
+export type EditedCourseArray = [string, string, string, number];
+export type CustomCourseArray = [string, string, string, number];
 
 export const columns = [
   { name: "ID", uid: "id", sortable: true },
@@ -181,14 +182,50 @@ export default function CourseTable({
     direction: "descending",
   });
 
-  const handleDelete = (course: Course) => {
+  // Merge and apply edits to all courses
+  const allCourses = React.useMemo(() => {
+    // Apply edits to enrolled courses
+    const enrolledWithEdits = enrolledCourses.map((course) => {
+      const edit = editedCourses.find((e) => e[0] === course.courseId);
+      if (edit) {
+        return {
+          ...course,
+          credits: edit[3],
+          requirements: edit[2],
+          hubRequirements: edit[2].split(", ").filter((h) => h.trim()),
+          isEdited: true,
+        };
+      }
+      return { ...course, isEdited: false };
+    });
+
+    // Convert custom courses to Course type
+    const customAsEnrolled = customCourses.map((custom, index) => ({
+      id: enrolledCourses.length + index + 1000,
+      courseId: custom[0],
+      course: custom[1],
+      credits: custom[3],
+      requirements: custom[2],
+      hubRequirements: custom[2].split(", ").filter((h) => h.trim()),
+      isCustom: true,
+      isEdited: false,
+    }));
+
+    return [...enrolledWithEdits, ...customAsEnrolled];
+  }, [enrolledCourses, customCourses, editedCourses]);
+
+  const handleDelete = (course: Course & { isCustom?: boolean }) => {
     setCourseToDelete(course);
     setDeleteModalOpen(true);
   };
 
   const confirmDelete = () => {
-    if (courseToDelete && onDeleteCourse) {
-      onDeleteCourse(courseToDelete.courseId);
+    if (courseToDelete) {
+      if ((courseToDelete as any).isCustom && onDeleteCustomCourse) {
+        onDeleteCustomCourse(courseToDelete.courseId);
+      } else if (onDeleteCourse) {
+        onDeleteCourse(courseToDelete.courseId);
+      }
       setDeleteModalOpen(false);
       setCourseToDelete(null);
     }
@@ -224,9 +261,9 @@ export default function CourseTable({
   };
 
   const sortedCourses = React.useMemo(() => {
-    if (!sortDescriptor.column) return enrolledCourses;
+    if (!sortDescriptor.column) return allCourses;
 
-    return [...enrolledCourses].sort((a, b) => {
+    return [...allCourses].sort((a, b) => {
       let aValue: string | number;
       let bValue: string | number;
 
@@ -249,15 +286,30 @@ export default function CourseTable({
         ? -comparison
         : comparison;
     });
-  }, [enrolledCourses, sortDescriptor]);
+  }, [allCourses, sortDescriptor]);
 
   const renderCell = React.useCallback(
-    (course: Course, columnKey: React.Key) => {
+    (
+      course: Course & { isCustom?: boolean; isEdited?: boolean },
+      columnKey: React.Key
+    ) => {
       switch (columnKey) {
         case "id":
           return (
             <div className="flex flex-col">
-              <p className="text-bold text-sm font-mono">{course.courseId}</p>
+              <div className="flex items-center gap-2">
+                <p className="text-bold text-sm font-mono">{course.courseId}</p>
+                {course.isCustom && (
+                  <span className="text-[10px] bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 px-1.5 py-0.5 rounded">
+                    Custom
+                  </span>
+                )}
+                {course.isEdited && (
+                  <span className="text-[10px] bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-200 px-1.5 py-0.5 rounded">
+                    Edited
+                  </span>
+                )}
+              </div>
               {course.semester && (
                 <p className="text-xs text-default-400">{course.semester}</p>
               )}
@@ -286,7 +338,20 @@ export default function CourseTable({
         case "actions":
           return (
             <div className="relative flex items-center gap-2">
-              {onUpdateCourse && (
+              {course.isEdited && onRevertEdit && (
+                <Tooltip content="Revert to Original">
+                  <Button
+                    size="sm"
+                    variant="light"
+                    color="warning"
+                    onClick={() => onRevertEdit(course.courseId)}
+                    className="min-w-unit-16 h-7 text-xs"
+                  >
+                    Revert
+                  </Button>
+                </Tooltip>
+              )}
+              {!course.isCustom && onUpdateCourse && (
                 <Tooltip content="Edit Course">
                   <span
                     className="text-lg text-default-400 cursor-pointer active:opacity-50"
@@ -296,7 +361,8 @@ export default function CourseTable({
                   </span>
                 </Tooltip>
               )}
-              {onDeleteCourse && (
+              {((course.isCustom && onDeleteCustomCourse) ||
+                (!course.isCustom && onDeleteCourse)) && (
                 <Tooltip color="danger" content="Remove Course">
                   <span
                     className="text-lg text-danger cursor-pointer active:opacity-50"
@@ -312,10 +378,10 @@ export default function CourseTable({
           return course[columnKey as keyof Course];
       }
     },
-    [onUpdateCourse, onDeleteCourse]
+    [onUpdateCourse, onDeleteCourse, onDeleteCustomCourse, onRevertEdit]
   );
 
-  const totalCredits = enrolledCourses.reduce(
+  const totalCredits = allCourses.reduce(
     (sum, course) => sum + course.credits,
     0
   );
@@ -347,7 +413,7 @@ export default function CourseTable({
         </div>
       </div>
 
-      {enrolledCourses.length === 0 ? (
+      {allCourses.length === 0 ? (
         <Card className="p-8">
           <div className="text-center">
             <p className="text-lg text-default-500 mb-4">
