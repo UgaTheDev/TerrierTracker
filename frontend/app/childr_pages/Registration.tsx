@@ -200,8 +200,8 @@ export default function Registration({
           <div className="mt-12 p-6 bg-white/10 rounded-3xl backdrop-blur-sm">
             <div className="grid grid-cols-3 gap-4 text-center">
               <div>
-                <div className="text-2xl font-bold">2.8K+</div>
-                <div className="text-sm text-white/70">Active Students</div>
+                <div className="text-2xl font-bold">26</div>
+                <div className="text-sm text-white/70">Hub Requirements</div>
               </div>
               <div>
                 <div className="text-2xl font-bold">5000</div>

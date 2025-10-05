@@ -177,10 +177,11 @@ export default function Login({ onLoginSuccess, onGoToRegister }: LoginProps) {
 
           <div className="mt-12 p-6 bg-white/10 rounded-3xl backdrop-blur-sm">
             <blockquote className="text-lg italic mb-2">
-              "Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Veritatis, earum."
+              "Learning, Virtue, Piety"
             </blockquote>
-            <cite className="text-white/70 text-sm">— Lorem, ipsum.</cite>
+            <cite className="text-white/70 text-sm">
+              — Boston University, 1869{" "}
+            </cite>
           </div>
         </div>
       </div>
