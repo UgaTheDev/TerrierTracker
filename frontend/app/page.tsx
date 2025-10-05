@@ -211,7 +211,7 @@ export default function Home() {
       const hubsString = course[2];
       if (hubsString && hubsString.trim()) {
         const hubs = hubsString
-          .split(",")
+          .split(" | ")
           .map((h) => h.trim())
           .filter((h) => h);
         hubs.forEach((hub) => {
@@ -377,7 +377,7 @@ export default function Home() {
         body: JSON.stringify({
           courseId: course[0],
           courseName: course[1],
-          hubRequirements: course[2].split(", ").filter((h) => h.trim()),
+          hubRequirements: course[2].split(" | ").filter((h) => h.trim()), // Changed
           credits: course[3],
         }),
       });
@@ -415,7 +415,7 @@ export default function Home() {
         body: JSON.stringify({
           courseId: course[0],
           courseName: course[1],
-          hubRequirements: course[2].split(", ").filter((h) => h.trim()),
+          hubRequirements: course[2].split(" | ").filter((h) => h.trim()), // Changed
           credits: course[3],
         }),
       });
@@ -487,7 +487,7 @@ export default function Home() {
     const editedCourse: EditedCourseArray = [
       updatedCourse.courseId,
       updatedCourse.course,
-      updatedCourse.hubRequirements?.join(", ") || "",
+      updatedCourse.hubRequirements?.join(" | ") || "",
       updatedCourse.credits,
     ];
 

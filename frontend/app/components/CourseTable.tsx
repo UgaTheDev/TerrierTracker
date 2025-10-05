@@ -190,7 +190,7 @@ export default function CourseTable({
           ...course,
           credits: edit[3],
           requirements: edit[2],
-          hubRequirements: edit[2].split(", ").filter((h) => h.trim()),
+          hubRequirements: edit[2].split(" | ").filter((h) => h.trim()),
           isEdited: true,
         };
       }
@@ -203,7 +203,7 @@ export default function CourseTable({
       course: custom[1],
       credits: custom[3],
       requirements: custom[2],
-      hubRequirements: custom[2].split(", ").filter((h) => h.trim()),
+      hubRequirements: custom[2].split(" | ").filter((h) => h.trim()),
       isCustom: true,
       isEdited: false,
     }));

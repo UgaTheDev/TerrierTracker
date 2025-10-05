@@ -59,7 +59,7 @@ export default function AddCustomCourseModal({
       return;
     }
 
-    const hubsString = Array.from(selectedHubs).join(", ");
+    const hubsString = Array.from(selectedHubs).join(" | ");
     const customCourse: CustomCourseArray = [
       courseId,
       courseName,

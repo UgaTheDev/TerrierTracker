@@ -740,7 +740,7 @@ def remove_bookmarked_course(user_id):
 
 @app.route('/api/user/<int:user_id>/courses/custom', methods=['GET'])
 def get_custom_courses(user_id):
-    """Get user's custom courses"""
+    
     try:
         conn = get_db_connection()
         if not conn:
@@ -772,14 +772,13 @@ def get_custom_courses(user_id):
 
 @app.route('/api/user/<int:user_id>/courses/custom', methods=['POST'])
 def add_custom_course(user_id):
-    """Add a custom course as [code, name, hubs, credits]"""
     try:
         data = request.json
         
         custom_course = [
             data.get('courseId'),
             data.get('courseName'),
-            ', '.join(data.get('hubRequirements', [])), 
+            ' | '.join(data.get('hubRequirements', [])), 
             data.get('credits', 4)
         ]
         
@@ -862,7 +861,7 @@ def delete_custom_course(user_id, course_id):
 
 @app.route('/api/user/<int:user_id>/courses/edited', methods=['GET'])
 def get_edited_courses(user_id):
-    """Get user's edited course overrides"""
+    
     try:
         conn = get_db_connection()
         if not conn:
@@ -894,14 +893,13 @@ def get_edited_courses(user_id):
 
 @app.route('/api/user/<int:user_id>/courses/edited', methods=['POST'])
 def save_edited_course(user_id):
-    """Save user's edits to a course [code, name, hubs, credits]"""
     try:
         data = request.json
         
         edited_course = [
             data.get('courseId'),
             data.get('courseName'),
-            ', '.join(data.get('hubRequirements', [])),
+            ' | '.join(data.get('hubRequirements', [])),
             data.get('credits', 4)
         ]
         
@@ -957,7 +955,6 @@ def save_edited_course(user_id):
 
 @app.route('/api/user/<int:user_id>/courses/edited/<course_id>', methods=['DELETE'])
 def delete_edited_course(user_id, course_id):
-    """Remove user's edits for a course (revert to original)"""
     try:
         conn = get_db_connection()
         if not conn:
