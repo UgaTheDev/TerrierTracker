@@ -1,0 +1,281 @@
+code,name,Philosophical Inquiry and Life's Meanings,Aesthetic Exploration,Historical Consciousness,Scientific Inquiry I,Social Inquiry I,Scientific Inquiry II,Social Inquiry II,Quantitative Reasoning I,Quantitative Reasoning II,The Individual in Community,Global Citizenship and Intercultural Literacy,Ethical Reasoning,First-Year Writing Seminar,"Writing, Research, and Inquiry",Writing-Intensive Course,Oral and/or Signed Communication,Digital/Multimedia Expression,Critical Thinking,Research and Information Literacy,Teamwork/Collaboration,Creativity/Innovation
+ENG BE 209,Principles of Molecular Cell Biology and Biotechnology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 400,Undergraduate Special Topics in Biomedical Engineering,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+ENG BE 403,Biomedical Signals and Controls,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 404,Modern Control in Biomedical Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 420,Introduction to Solid Biomechanics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 424,Thermodynamics and Statistical Mechanics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 425,Introduction to Biomedical Materials Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 428,Device Diagnostics and Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 435,Transport Phenomena in Living Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 436,Fundamentals of Fluid Mechanics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 437,Nanometer Scale Processes in Living Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 451,Directed Study in Biomedical Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 452,Undergraduate Research in BME,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 465,Biomedical Engineering Senior Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 466,Biomedical Engineering Senior Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,0,0
+ENG BE 468,Clinical Applications of Biomedical Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 471,Quantitative Neuroscience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 478,Engineering Design for Refugee Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 493,Biomedical Measurements & Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 500,Special Topics in Biomedical Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 504,Polymers and Soft Materials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 505,Molecular Bioengineering 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 511,Biomedical Instrumentation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 515,Introduction to Medical Imaging,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 518,Modern Optical Microscopy for Biomedical Imaging,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 521,Continuum Mechanics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 525,"Engineering Tissue Injury, Repair and Foreign Body Responses",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 526,Fundamentals of Biomaterials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 527,Principles and Applications of Tissue Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 533,Biorheology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 549,Structure and Function of the Extracellular Matrix,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 555,Introduction to Biomedical Optics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 556,Optical Spectroscopic Imaging,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 557,Programming Fundamentals for Biomedical Engineering Data Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 559,Foundations of Biomedical Data Science and Machine Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 560,Biomolecular Architecture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 562,Computational Biology: Machine Learning Fundamentals,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 567,Nonlinear Systems in Biomedical Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 571,Introduction to Neuroengineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 572,Neurotechnology Devices,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 601,Linear Algebra,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 604,Statistics and Numerical Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 605,Molecular Bioengineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 606,Quantitative Physiology for Engineers,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 694,Biomedical and Clinical Needs Finding,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 695,Advanced Biomedical Design and Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 696,Advanced Deployment of Biomedical Innovations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 700,Advanced Topics in Biomedical Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 701,Writing a Persuasive Engineering Research Proposal,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 704,Cancer Biology and Oncology for Engineers,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 707,Quantitative Studies of Excitable Cells,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 709,From Cells to Tissue: Engineering Structure and Function,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 726,Fundamentals of Biomaterials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 727,Principles and Applications of Tissue Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 745,Nanomedicine- Principles and Applications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 755,Molecular Systems and Synthetic Biology Laboratory,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 771,Introduction to Neuroengineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 772,Neurotechnology Devices,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 790,Biomedical Engineering Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 791,PhD Biomedical Engineering Laboratory Rotation System,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 792,Critical Literature Review,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 801,Teaching Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 802,Teaching Practicum 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 810,PhD Internship in Biomedical Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 811,Part-Time PhD Internship in Biomedical Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 900,PhD Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 951,Independent Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 952,Mentored Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 954,MS Thesis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG BE 991,PhD Dissertation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 311,Introduction to Logic Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 327,Introduction to Software Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 330,Applied Algorithms for Engineers,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 400,Undergraduate Special Topics in Electrical & Computer Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 401,Signals and Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 402,Control Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 410,Introduction to Electronics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 412,Analog Electronics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 413,Computer Organization,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 414,Introduction to Machine Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 415,Software Radios,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 417,Electric Energy Systems: Adapting to Renewable Resources,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 418,Introduction to Reinforcement Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 440,Introduction to Operating Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 441,Introduction to Computer Networking,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 444,Smart and Connected Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 447,Software Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 451,Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 455,Electromagnetic Systems 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 456,Electromagnetic Systems 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 463,Senior Design Project 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,0
+ENG EC 464,Senior Design Project 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0
+ENG EC 467,Senior Thesis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0
+ENG EC 471,Physics of Semiconductor Devices,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 500,Special Topics in Electrical and Computer Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 501,Dynamic System Theory,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 503,Introduction to Learning from Data,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 504,Advanced Data Structures,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 505,Stochastic Processes,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 508,Wireless Communication,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 512,Enterprise Client-Server Software Systems Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 513,Computer Architecture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 516,Digital Signal Processing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 517,Introduction to Information Theory,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 518,Robot Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 519,Speech Processing by Humans and Machines,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 520,Digital Image Processing and Communication,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 521,Cybersecurity,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 522,Computational Optical Imaging,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 523,Deep Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 524,Optimization Theory and Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 525,Optimization for Machine Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 526,Parallel Programming for High Performance Computing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 527,High Performance Programming with Multicore and GPUs,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 528,Cloud Computing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 530,Software Engineering Principles,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 531,Full-Stack Software at Scale,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 533,Advanced Discrete Mathematics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 534,Discrete Stochastic Models,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 535,Introduction to Embedded Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 541,Computer Communication Networks,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 543,"Sustainable Power Systems: Planning, Operation and Markets",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 544,Networking the Physical World,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 545,Cyber-Physical Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 551,Advanced Digital Design with Verilog and FPGA,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 552,Computational Synthetic Biology for Engineers,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 555,Introduction to Biomedical Optics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 556,Optical Spectroscopic Imaging,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 560,Introduction to Photonics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 562,Fourier Optics in Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 565,Introduction to Electromagnetics and Photonics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 568,Optical Fibers and WaveGuides,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 570,Lasers and Applications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 571,Digital VLSI Circuit Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 572,Computational Methods in Materials Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 573,Solar Energy Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 574,Physics of Semiconductor Materials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 575,Semiconductor Devices,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 577,Electronic Optical and Magnetic Properties of Materials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 578,Fabrication Technology for Integrated Circuits,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 579,Nano/microelectronic Device Technology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 580,Analog VLSI Circuit Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 583,Power Electronics for Energy systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 585,Quantum Engineering & Technology (QET),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 591,Photonics Lab I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 601,Product Design in Electrical and Computer Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 602,Design by Software,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 605,Computer Engineering Fundamentals,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 674,Optimization Theory 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 700,Advanced Topics in Electrical and Computer Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 701,Optimal and Robust Control,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 702,Recursive Estimation and Optimal Filtering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 707,Radar Remote Sensing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 710,Dynamic Programming and Reinforcement Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 713,Advanced Computer Systems & Architecture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 716,Advanced Digital Signal Processing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 717,Image Reconstruction and Restoration,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 719,Statistical Learning Theory,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 720,Digital Video Processing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 721,Advances in Cyber and IoT Security,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 724,Advanced Optimization Theory and Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 725,Queueing Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 730,Information-Theoretical Design of Algorithms,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 732,Combinatorial Optimization and Graph Algorithms,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 733,Discrete Event and Hybrid Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 734,Hybrid Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 754,Computer-Aided Verification and Synthesis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 762,Quantum Optics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 763,Nonlinear and Ultrafast Optics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 765,Biomedical Optics and Biophotonics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 770,Guided-wave Optoelectronics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 774,Semiconductor Quantum Structures and Photonic Devices,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 777,Nanostructure Optics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 782,RF/Analog IC Design - Advanced Applications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 801,Teaching Practicum 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 802,Teaching Practicum 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 810,PhD Internship in Electrical and Computer Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 890,PhD Seminar 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 891,PhD Seminar 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 892,Seminar: Electro-Physics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 900,PhD Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 951,Independent Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 952,Directed Group Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 953,MS Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 954,MS Thesis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EC 991,PhD Dissertation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 100,Freshman Advising Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 103,Computational Linear Algebra,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 121,Introduction to Programming,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 122,Programming for Engineers,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+ENG EK 125,Introduction to Programming for Engineers,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1
+ENG EK 131,Introduction to Engineering: Hands On,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 210,Introduction to Engineering Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+ENG EK 225,Introduction to Energy Conversion and Environmental Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 301,Engineering Mechanics 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1
+ENG EK 307,Electric Circuits,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 335,Introduction to Environmental Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 341,Advanced MATLAB Applications Programming,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 381,"Probability, Statistics, and Data Science for Engineers",0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+ENG EK 408,Introduction to Clean energy Generation and Storage Technologies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 424,Thermodynamics and Statistical Mechanics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 481,Introduction to Nanotechnology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 500,Probability with Statistical Applications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 501,Mathematical Methods I: Linear Algebra and Complex Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 505,Introduction to Robotics and Autonomous Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 690,Career Lab: Job & Internship Search for Master's Students,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 691,Lean and Agile New Product Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 731,Bench-to-Bedside: Translating Biomedical Innovation from the Laboratory to the Marketplace,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG EK 800,Ethics and the Responsible Conduct of Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 302,Engineering Mechanics 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 303,Fluid Mechanics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 304,Energy and Thermodynamics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 305,Mechanics of Materials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 306,Introduction to Materials Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 310,Instrumentation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0
+ENG ME 345,Automation and Manufacturing Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 357,Introduction to CAD and Machine Components,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 358,Manufacturing Processes,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 360,Electromechanical Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 400,Undergraduate Special Topics in Mechanical Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 403,Atmospheric Flight Mechanics and Control,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 404,Dynamics and Control of Mechanical Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 406,Dynamics of Space Vehicles,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 408,Aircraft Performance and Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 411,Operations Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 415,Product Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 416,Introduction to Robotics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 419,Heat Transfer,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 420,Supply Chain Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 421,Aerodynamics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 425,Compressible Flow and Propulsion,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 441,Mechanical Vibration,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 452,Directed Study in Mechanical Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 457,Engineering Projects in Mechanical Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 460,Senior Design 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 461,Senior Design 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,0,0
+ENG ME 500,Special Topics in Mechanical Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 501,Dynamic System Theory,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 502,"Invention: Technology Creation, Protection, and Commercialization",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 503,Kinetic Processes in Materials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 504,Polymers and Soft Materials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 505,Thermodynamics and Statistical Mechanics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 506,Engineering Device Applications: From Physics to Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 507,Process Modeling and Control,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 508,Computational Methods in Materials Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 510,Production Systems Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 514,Simulation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 515,Vibration of Complex Mechanical Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 516,Statistical Mechanical Concepts in Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 517,Product Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 518,Product Quality,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 519,Theory of Heat Transfer,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 520,Acoustics 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 521,Continuum Mechanics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 524,Skeletal Tissue Mechanics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 525,Technology Ventures,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 526,Simulation of Physical Processes,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 527,Transport Phenomena in Materials Processing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 528,Biological Physics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 533,Energy Conversion,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 535,Green Manufacturing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 537,Product Realization,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 538,Introduction to Finite Element Methods and Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 541,Classical and Non-Equilibrium Thermodynamics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 542,Advanced Fluid Mechanics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 543,"Sustainable Power Systems: Planning, Operation and Markets",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 544,Networking the Physical World,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 545,Electrochemistry of Fuel Cells and Batteries,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 546,Introduction to Micro/Nanofluidics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 547,Introduction to Computational Fluid Dynamics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 549,Structures and Function of the Extracellular Matrix,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 555,MEMS: Fabrication and Materials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 557,Additive Manufacturing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 559,Manufacturing Processes for Design and Production,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 560,Precision Machine Design and Instrumentation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 566,Advanced Engineering Mathematics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 568,Soft Robotic Technologies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 570,Robot Motion Planning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 571,Medical Robotics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+ENG ME 576,Nanomanufacturing and Hierarchical Materials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
