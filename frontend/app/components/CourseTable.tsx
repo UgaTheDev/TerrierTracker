@@ -391,19 +391,23 @@ export default function CourseTable({
 
   return (
     <div className="space-y-6">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Your Courses</h1>
-          <p className="text-default-500 mt-1">Manage your enrolled courses</p>
+          <h1 className="text-xl md:text-2xl font-bold text-foreground">
+            Your Courses
+          </h1>
+          <p className="text-default-500 mt-1 text-sm">
+            Manage your enrolled courses
+          </p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto">
           <Button
             size="sm"
             color="primary"
             variant="flat"
             startContent={<Plus size={16} />}
             onClick={() => onNavigate("add-courses")}
-            className="h-8 px-3 text-sm"
+            className="h-8 px-3 text-sm w-full sm:w-auto"
           >
             Add Courses
           </Button>
@@ -433,41 +437,43 @@ export default function CourseTable({
           </div>
         </Card>
       ) : (
-        <Card className="p-6">
-          <div className="h-96 overflow-auto">
-            <Table aria-label="Your courses table" className="h-full">
-              <TableHeader columns={columns}>
-                {(column) => (
-                  <TableColumn
-                    key={column.uid}
-                    align={column.uid === "actions" ? "center" : "start"}
-                    allowsSorting={false}
-                  >
-                    <div className="flex items-center gap-1">
-                      {column.sortable ? (
-                        <button
-                          onClick={() => handleSort(column.uid)}
-                          className="hover:text-primary cursor-pointer"
-                        >
-                          {column.name}
-                        </button>
-                      ) : (
-                        column.name
+        <Card className="p-4 md:p-6">
+          <div className="overflow-x-auto">
+            <div className="h-96 min-w-[600px]">
+              <Table aria-label="Your courses table" className="h-full">
+                <TableHeader columns={columns}>
+                  {(column) => (
+                    <TableColumn
+                      key={column.uid}
+                      align={column.uid === "actions" ? "center" : "start"}
+                      allowsSorting={false}
+                    >
+                      <div className="flex items-center gap-1">
+                        {column.sortable ? (
+                          <button
+                            onClick={() => handleSort(column.uid)}
+                            className="hover:text-primary cursor-pointer"
+                          >
+                            {column.name}
+                          </button>
+                        ) : (
+                          column.name
+                        )}
+                      </div>
+                    </TableColumn>
+                  )}
+                </TableHeader>
+                <TableBody items={sortedCourses}>
+                  {(item) => (
+                    <TableRow key={item.id}>
+                      {(columnKey) => (
+                        <TableCell>{renderCell(item, columnKey)}</TableCell>
                       )}
-                    </div>
-                  </TableColumn>
-                )}
-              </TableHeader>
-              <TableBody items={sortedCourses}>
-                {(item) => (
-                  <TableRow key={item.id}>
-                    {(columnKey) => (
-                      <TableCell>{renderCell(item, columnKey)}</TableCell>
-                    )}
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
+            </div>
           </div>
         </Card>
       )}

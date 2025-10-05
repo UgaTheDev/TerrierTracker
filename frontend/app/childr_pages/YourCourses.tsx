@@ -59,21 +59,22 @@ export default function YourCourses({
 
   return (
     <>
-      <div className="flex flex-col gap-6 p-6 md:p-10 ml-[5%]">
-        <div className="flex justify-between items-center">
-          <h1 className="text-3xl font-bold">Your Courses</h1>
-          <div className="flex gap-3">
+      <div className="flex flex-col gap-6 p-4 md:p-6 lg:p-10 lg:ml-[5%]">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+          <h1 className="text-2xl md:text-3xl font-bold">Your Courses</h1>
+          <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <Button
               color="primary"
               startContent={<Plus size={18} />}
               onPress={onOpenCustomCourseModal}
+              className="w-full sm:w-auto"
             >
               Add Custom Course
             </Button>
             {totalCourses > 0 && (
               <button
                 onClick={() => setShowConfirmDialog(true)}
-                className="px-4 py-2 bg-danger text-white rounded-lg hover:bg-danger/90 transition-colors inline-flex items-center gap-2 font-medium"
+                className="w-full sm:w-auto px-4 py-2 bg-danger text-white rounded-lg hover:bg-danger/90 transition-colors inline-flex items-center justify-center gap-2 font-medium"
               >
                 <Trash2 size={18} />
                 Delete All Courses

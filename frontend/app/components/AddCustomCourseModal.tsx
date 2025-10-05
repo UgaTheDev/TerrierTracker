@@ -95,6 +95,7 @@ export default function AddCustomCourseModal({
       onClose={handleClose}
       size="2xl"
       scrollBehavior="inside"
+      className="mx-4"
     >
       <ModalContent>
         <ModalHeader className="flex flex-col gap-1">
