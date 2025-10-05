@@ -53,7 +53,7 @@ export default function YourBookmarks({
   onNavigate,
 }: YourBookmarksProps) {
   const [selectedCourses, setSelectedCourses] = useState<string[]>([]);
-  const [showVisualization, setShowVisualization] = useState(false);
+  const [showVisualization, setShowVisualization] = useState(true);
 
   const isSelected = (courseId: string) => selectedCourses.includes(courseId);
 
@@ -236,8 +236,10 @@ export default function YourBookmarks({
         </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
+      <div
+        className={`grid gap-6 ${showVisualization ? "lg:grid-cols-3" : "lg:grid-cols-1"}`}
+      >
+        <div className={showVisualization ? "lg:col-span-2" : "lg:col-span-1"}>
           <Card className="p-6">
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold">Bookmarked Courses</h2>

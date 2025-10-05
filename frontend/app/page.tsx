@@ -15,6 +15,7 @@ import CourseRecommender from "./childr_pages/Recommender";
 import AddCustomCourseModal, {
   type CustomCourseArray,
 } from "./components/AddCustomCourseModal";
+
 export type EditedCourseArray = [string, string, string, number];
 
 const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
@@ -95,17 +96,47 @@ export default function Home() {
       const response = await fetch(`${API_BASE_URL}/user/${userId}/courses`);
       const data = await response.json();
 
-      const bookmarkedCoursesData: BookmarkedCourse[] = (
-        data.bookmarked_courses || []
-      ).map((code: string) => ({
-        id: code,
-        code: code,
-        name: code,
-        credits: 4,
-        hubRequirements: [],
-        school: code.split(" ")[0] || "Unknown",
-      }));
-      setBookmarkedCourses(bookmarkedCoursesData);
+      // Fetch bookmarked course details with hub requirements
+      const bookmarkedCourseCodes = data.bookmarked_courses || [];
+      if (bookmarkedCourseCodes.length > 0) {
+        const bookmarkedCoursesData = await Promise.all(
+          bookmarkedCourseCodes.map(async (code: string) => {
+            try {
+              const courseResponse = await fetch(
+                `${API_BASE_URL}/search-course`,
+                {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({ course_identifier: code }),
+                }
+              );
+              const courseData = await courseResponse.json();
+
+              return {
+                id: code,
+                code: code,
+                name: code,
+                credits: 4,
+                hubRequirements: courseData.hub_requirements || [],
+                school: code.split(" ")[0] || "Unknown",
+              };
+            } catch (error) {
+              console.error(`Failed to load details for ${code}:`, error);
+              return {
+                id: code,
+                code: code,
+                name: code,
+                credits: 4,
+                hubRequirements: [],
+                school: code.split(" ")[0] || "Unknown",
+              };
+            }
+          })
+        );
+        setBookmarkedCourses(bookmarkedCoursesData);
+      } else {
+        setBookmarkedCourses([]);
+      }
 
       const enrolledCourseCodes = data.enrolled_courses || [];
       if (enrolledCourseCodes.length > 0) {
@@ -155,6 +186,7 @@ export default function Home() {
       } catch (error) {
         console.error("Failed to load custom courses:", error);
       }
+
       try {
         const editedResponse = await fetch(
           `${API_BASE_URL}/user/${userId}/courses/edited`
@@ -367,7 +399,9 @@ export default function Home() {
     }
   };
 
-  const handleAddCustomCourse = async (course: CustomCourseArray) => {
+  const handleAddCustomCourse = async (
+    course: CustomCourseArray
+  ): Promise<void> => {
     if (!currentUser) return;
 
     try {
@@ -377,12 +411,14 @@ export default function Home() {
         body: JSON.stringify({
           courseId: course[0],
           courseName: course[1],
-          hubRequirements: course[2].split(" | ").filter((h) => h.trim()), // Changed
+          hubRequirements: course[2]
+            .split(" | ")
+            .filter((h: string) => h.trim()),
           credits: course[3],
         }),
       });
 
-      setCustomCourses((prev) => [...prev, course]);
+      setCustomCourses((prev: CustomCourseArray[]) => [...prev, course]);
     } catch (error) {
       console.error("Failed to add custom course:", error);
     }
@@ -405,7 +441,9 @@ export default function Home() {
     }
   };
 
-  const handleSaveEditedCourse = async (course: EditedCourseArray) => {
+  const handleSaveEditedCourse = async (
+    course: EditedCourseArray
+  ): Promise<void> => {
     if (!currentUser) return;
 
     try {
@@ -415,13 +453,17 @@ export default function Home() {
         body: JSON.stringify({
           courseId: course[0],
           courseName: course[1],
-          hubRequirements: course[2].split(" | ").filter((h) => h.trim()), // Changed
+          hubRequirements: course[2]
+            .split(" | ")
+            .filter((h: string) => h.trim()),
           credits: course[3],
         }),
       });
 
-      setEditedCourses((prev) => {
-        const filtered = prev.filter((c) => c[0] !== course[0]);
+      setEditedCourses((prev: EditedCourseArray[]) => {
+        const filtered = prev.filter(
+          (c: EditedCourseArray) => c[0] !== course[0]
+        );
         return [...filtered, course];
       });
     } catch (error) {
@@ -609,7 +651,7 @@ export default function Home() {
           ).toFixed(0),
         });
         return (
-          <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10 px-6">
+          <section className="flex flex-col items-center justify-center gap-4 py-8 md:py-10 px-4 md:px-6">
             <div className="inline-block max-w-xl text-center justify-center">
               <span className={title({ color: "red" })}>Terrier&nbsp;</span>
               <br />
@@ -623,11 +665,11 @@ export default function Home() {
                 <Chart hubRequirements={hubRequirements} />
               </div>
             </div>
-            <div className="flex gap-6 w-full max-w-7xl">
-              <div className="w-[30%] flex-shrink-0">
+            <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl">
+              <div className="w-full lg:w-[30%]">
                 <CategoryProgress hubRequirements={hubRequirements} />
               </div>
-              <div className="w-[70%]">
+              <div className="w-full lg:w-[70%]">
                 <ReqTable hubRequirements={hubRequirements} />
               </div>
             </div>
@@ -722,13 +764,15 @@ export default function Home() {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex flex-col lg:flex-row h-screen">
       <Sidebar
         onNavigate={handleNavigate}
         currentPage={currentPage}
         onLogout={handleLogout}
       />
-      <main className="flex-1 overflow-auto">{renderContent()}</main>
+      <main className="flex-1 overflow-auto pt-16 lg:pt-0">
+        {renderContent()}
+      </main>
 
       <AddCustomCourseModal
         isOpen={isCustomCourseModalOpen}
