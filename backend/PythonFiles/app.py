@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 from urllib.parse import urlparse
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
+import json
 
 from course_data_manager import CourseDataManager
 load_dotenv()
@@ -774,10 +775,12 @@ def add_custom_course(user_id):
     """Add a custom course as [code, name, hubs, credits]"""
     try:
         data = request.json
+        
+        # Format: [code, name, hubs_comma_separated, credits]
         custom_course = [
             data.get('courseId'),
             data.get('courseName'),
-            ', '.join(data.get('hubRequirements', [])),
+            ', '.join(data.get('hubRequirements', [])),  # Join hubs with comma
             data.get('credits', 4)
         ]
         
@@ -790,32 +793,50 @@ def add_custom_course(user_id):
             
         cur = conn.cursor()
         
-        cur.execute('SELECT custom_courses FROM courseinfo WHERE user_id = %s', (user_id,))
-        result = cur.fetchone()
-        
-        if result:
-            cur.execute('''
-                UPDATE courseinfo 
-                SET custom_courses = custom_courses || %s::jsonb
-                WHERE user_id = %s
-            ''', (json.dumps([custom_course]), user_id))
-        else:
-           
-            cur.execute('''
-                INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses, custom_courses)
-                VALUES (%s, ARRAY[]::TEXT[], ARRAY[]::TEXT[], %s::jsonb)
-            ''', (user_id, json.dumps([custom_course])))
-        
-        conn.commit()
-        logger.info(f"Custom course added for user {user_id}: {custom_course[0]}")
-        return jsonify({'success': True, 'message': 'Custom course added', 'course': custom_course})
+        try:
+            # Check if user record exists
+            cur.execute('SELECT custom_courses FROM courseinfo WHERE user_id = %s', (user_id,))
+            result = cur.fetchone()
+            
+            if result:
+                # Get existing courses
+                existing_courses = result[0] if result[0] else []
+                # Append new course
+                existing_courses.append(custom_course)
+                
+                # Update with full array
+                cur.execute('''
+                    UPDATE courseinfo 
+                    SET custom_courses = %s::jsonb
+                    WHERE user_id = %s
+                ''', (json.dumps(existing_courses), user_id))
+            else:
+                # Create new record
+                cur.execute('''
+                    INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses, custom_courses)
+                    VALUES (%s, ARRAY[]::TEXT[], ARRAY[]::TEXT[], %s::jsonb)
+                ''', (user_id, json.dumps([custom_course])))
+            
+            conn.commit()
+            logger.info(f"Custom course added for user {user_id}: {custom_course[0]}")
+            return jsonify({'success': True, 'message': 'Custom course added', 'course': custom_course})
+            
+        except Exception as e:
+            conn.rollback()
+            logger.error(f"Database error adding custom course: {e}")
+            logger.error(f"Full traceback: {traceback.format_exc()}")
+            raise
+            
+        finally:
+            cur.close()
+            
     except Exception as e:
         logger.error(f"Error adding custom course: {e}")
         logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({'error': str(e)}), 500
     finally:
-        cur.close()
-        conn.close()
+        if conn:
+            conn.close()
 
 @app.route('/api/user/<int:user_id>/courses/custom/<course_id>', methods=['DELETE'])
 def delete_custom_course(user_id, course_id):
