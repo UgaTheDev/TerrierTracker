@@ -182,9 +182,7 @@ export default function CourseTable({
     direction: "descending",
   });
 
-  // Merge and apply edits to all courses
   const allCourses = React.useMemo(() => {
-    // Apply edits to enrolled courses
     const enrolledWithEdits = enrolledCourses.map((course) => {
       const edit = editedCourses.find((e) => e[0] === course.courseId);
       if (edit) {
@@ -199,7 +197,6 @@ export default function CourseTable({
       return { ...course, isEdited: false };
     });
 
-    // Convert custom courses to Course type
     const customAsEnrolled = customCourses.map((custom, index) => ({
       id: enrolledCourses.length + index + 1000,
       courseId: custom[0],
