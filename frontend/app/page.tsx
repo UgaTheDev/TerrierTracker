@@ -95,8 +95,6 @@ export default function Home() {
     try {
       const response = await fetch(`${API_BASE_URL}/user/${userId}/courses`);
       const data = await response.json();
-
-      // Fetch bookmarked course details with hub requirements
       const bookmarkedCourseCodes = data.bookmarked_courses || [];
       if (bookmarkedCourseCodes.length > 0) {
         const bookmarkedCoursesData = await Promise.all(

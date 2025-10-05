@@ -29,6 +29,7 @@ type HubRequirement = {
   name: string;
   required: number;
   current: number;
+  phantom?: number;
 };
 
 interface YourBookmarksProps {
@@ -98,12 +99,14 @@ export default function YourBookmarks({
     setSelectedCourses([]);
   };
 
-  const handleCourseSelect = (courseId: string, isSelected: boolean) => {
-    if (isSelected) {
-      setSelectedCourses((prev) => [...prev, courseId]);
-    } else {
-      setSelectedCourses((prev) => prev.filter((id) => id !== courseId));
-    }
+  const handleCourseSelect = (courseId: string) => {
+    setSelectedCourses((prev) => {
+      if (prev.includes(courseId)) {
+        return prev.filter((id) => id !== courseId);
+      } else {
+        return [...prev, courseId];
+      }
+    });
   };
 
   const handleSelectAll = () => {
@@ -128,9 +131,7 @@ export default function YourBookmarks({
           <Checkbox
             key={`checkbox-${course.id}`}
             isSelected={isSelected(course.id)}
-            onValueChange={(selected) =>
-              handleCourseSelect(course.id, selected)
-            }
+            onValueChange={() => handleCourseSelect(course.id)}
             color="primary"
           />
         );
@@ -138,7 +139,6 @@ export default function YourBookmarks({
         return (
           <div className="flex flex-col">
             <p className="text-bold text-sm font-mono">{course.code}</p>
-            <p className="text-bold text-sm">{course.name}</p>
           </div>
         );
       case "credits":
@@ -338,15 +338,15 @@ export default function YourBookmarks({
                 {updatedHubRequirements.map((req, index) => {
                   const progressValue = getProgressValue(
                     req.current,
-                    req.phantom,
+                    req.phantom || 0,
                     req.required
                   );
                   const progressColor = getProgressColor(
                     req.current,
-                    req.phantom,
+                    req.phantom || 0,
                     req.required
                   );
-                  const total = req.current + req.phantom;
+                  const total = req.current + (req.phantom || 0);
 
                   return (
                     <div key={`hub-req-${index}`} className="space-y-2">
@@ -370,7 +370,7 @@ export default function YourBookmarks({
                         size="sm"
                         className="w-full"
                       />
-                      {req.phantom > 0 && (
+                      {req.phantom! > 0 && (
                         <p className="text-xs text-warning">
                           +{req.phantom} from selected bookmarks
                         </p>
@@ -389,7 +389,8 @@ export default function YourBookmarks({
                     <p className="text-sm font-medium text-success">
                       {
                         updatedHubRequirements.filter(
-                          (req) => req.current + req.phantom >= req.required
+                          (req) =>
+                            req.current + (req.phantom || 0) >= req.required
                         ).length
                       }{" "}
                       / {updatedHubRequirements.length}

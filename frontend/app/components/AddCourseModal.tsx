@@ -43,7 +43,8 @@ export default function AddCourseModal({
           {courseToAdd?.requirements && (
             <div className="mt-2">
               <p className="text-sm text-default-600">
-                <strong>Prerequisites:</strong> {courseToAdd.requirements}
+                <strong>Fulfils Requirements:</strong>{" "}
+                {courseToAdd.requirements}
               </p>
             </div>
           )}
