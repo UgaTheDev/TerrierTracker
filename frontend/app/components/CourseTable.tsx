@@ -236,7 +236,15 @@ export default function CourseTable({
 
   const saveEdit = () => {
     if (courseToEdit && onUpdateCourse) {
-      onUpdateCourse(editForm);
+      const updatedCourse = {
+        ...editForm,
+        hubRequirements: editForm.requirements
+          .split(",")
+          .map((req) => req.trim())
+          .filter((req) => req.length > 0),
+      };
+
+      onUpdateCourse(updatedCourse);
       setEditModalOpen(false);
       setCourseToEdit(null);
     }
