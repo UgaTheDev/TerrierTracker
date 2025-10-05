@@ -238,10 +238,8 @@ export default function CourseTable({
     if (courseToEdit && onUpdateCourse) {
       const updatedCourse = {
         ...editForm,
-        hubRequirements: editForm.requirements
-          .split(",")
-          .map((req) => req.trim())
-          .filter((req) => req.length > 0),
+        hubRequirements: courseToEdit.hubRequirements,
+        requirements: courseToEdit.requirements,
       };
 
       onUpdateCourse(updatedCourse);
@@ -527,14 +525,16 @@ export default function CourseTable({
               }
               placeholder="4"
             />
-            <Input
-              label="Requirements"
-              value={editForm.requirements}
-              onChange={(e) =>
-                setEditForm({ ...editForm, requirements: e.target.value })
-              }
-              placeholder="Prerequisites or requirements"
-            />
+            <div>
+              <p className="text-sm mb-2">Hub Requirements</p>
+              <p className="text-xs text-default-500 bg-default-100 p-2 rounded">
+                {editForm.hubRequirements?.join(", ") || "None"}
+              </p>
+              <p className="text-xs text-default-400 mt-1">
+                Note: Hub requirements cannot be edited. Only credits and course
+                details can be changed.
+              </p>
+            </div>
             {editForm.semester !== undefined && (
               <Input
                 label="Semester"
