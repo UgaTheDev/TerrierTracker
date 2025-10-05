@@ -665,7 +665,7 @@ export default function Home() {
                 <Chart hubRequirements={hubRequirements} />
               </div>
             </div>
-            <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl">
+            <div className="flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-6 w-full max-w-7xl">
               <div className="w-full lg:w-[30%]">
                 <CategoryProgress hubRequirements={hubRequirements} />
               </div>
