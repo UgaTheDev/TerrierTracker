@@ -216,7 +216,8 @@ if __name__ == "__main__":
         Path('CSVFiles/questrom_all_courses.csv'),
         Path('CSVFiles/sar_all_courses.csv'),
         Path('CSVFiles/sha_all_courses.csv'),
-        Path('CSVFiles/wheelock_all_courses.csv')
+        Path('CSVFiles/wheelock_all_courses.csv'),
+        Path('CSVFiles/eng_all_courses.csv')
     ]
     
     existing_files = [f for f in csv_files if f.exists()]
