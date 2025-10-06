@@ -514,7 +514,7 @@ export default function HelperCourseSearcher({
         {showFilters && (
           <div className="space-y-4 p-4 bg-default-50 dark:bg-default-100/20 rounded-lg">
             <div className="flex items-center justify-between">
-              <h3 className="text-sm font-semibold text-default-700">
+              <h3 className="text-sm font-semibold text-default-700 dark:text-default-300">
                 Filters
               </h3>
               <Button
@@ -533,11 +533,7 @@ export default function HelperCourseSearcher({
                 <Select
                   label="School"
                   placeholder="Filter by school"
-                  selectedKeys={
-                    selectedSchool === "all"
-                      ? new Set([])
-                      : new Set([selectedSchool])
-                  }
+                  selectedKeys={new Set([selectedSchool])}
                   onSelectionChange={(keys) => {
                     const selected = Array.from(keys)[0] as string;
                     setSelectedSchool(selected || "all");
@@ -565,11 +561,7 @@ export default function HelperCourseSearcher({
                 <Select
                   label="Department"
                   placeholder="Filter by department"
-                  selectedKeys={
-                    selectedDepartment === "all"
-                      ? new Set([])
-                      : new Set([selectedDepartment])
-                  }
+                  selectedKeys={new Set([selectedDepartment])}
                   onSelectionChange={(keys) => {
                     const selected = Array.from(keys)[0] as string;
                     setSelectedDepartment(selected || "all");
@@ -601,7 +593,7 @@ export default function HelperCourseSearcher({
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-default-700 mb-2">
+                <label className="block text-sm font-medium text-default-700 dark:text-default-300 mb-2">
                   Hub Requirements
                   {selectedHubRequirements.size > 0 && (
                     <span className="ml-2 text-xs text-primary">
@@ -695,10 +687,12 @@ export default function HelperCourseSearcher({
             >
               <div className="flex justify-between items-start">
                 <div className="flex-1">
-                  <h4 className="font-semibold text-foreground">
+                  <h4 className="font-semibold text-foreground dark:text-white">
                     {course.courseId}
                   </h4>
-                  <p className="text-default-700 mt-1">{course.courseName}</p>
+                  <p className="text-default-700 dark:text-white mt-1">
+                    {course.courseName}
+                  </p>
 
                   <div className="mt-2">
                     {course.hubRequirements.length > 0 ? (
@@ -717,7 +711,7 @@ export default function HelperCourseSearcher({
                       </div>
                     ) : (
                       <button
-                        className="text-xs text-primary hover:text-primary-600 underline"
+                        className="text-xs text-primary hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 underline"
                         onClick={(e) => {
                           e.stopPropagation();
                           loadHubRequirements(course.courseId);
@@ -739,8 +733,8 @@ export default function HelperCourseSearcher({
                   onClick={() => handleBookmarkClick(course)}
                   className={`ml-4 p-2 rounded-full transition-colors ${
                     currentlyBookmarked
-                      ? "text-yellow-600 bg-yellow-50 hover:bg-yellow-100"
-                      : "text-gray-400 hover:text-yellow-600 hover:bg-yellow-50"
+                      ? "text-yellow-600 bg-yellow-50 hover:bg-yellow-100 dark:text-yellow-500 dark:bg-yellow-500/20 dark:hover:bg-yellow-500/30"
+                      : "text-gray-400 hover:text-yellow-600 hover:bg-yellow-50 dark:text-gray-500 dark:hover:text-yellow-500 dark:hover:bg-yellow-500/20"
                   }`}
                   title={
                     currentlyBookmarked ? "Remove bookmark" : "Bookmark course"
