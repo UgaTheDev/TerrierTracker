@@ -745,41 +745,42 @@ export default function Home() {
   }
 
   if (!isAuthenticated) {
-  if (authPage === "register") {
+    if (authPage === "register") {
+      return (
+        <Registration
+          onRegistrationSuccess={handleRegistrationSuccess}
+          onBackToLogin={() => setAuthPage("login")}
+        />
+      );
+    }
+
     return (
-      <Registration
-        onRegistrationSuccess={handleRegistrationSuccess}
-        onBackToLogin={() => setAuthPage("login")}
+      <Login
+        onLoginSuccess={handleLoginSuccess}
+        onGoToRegister={() => setAuthPage("register")}
       />
     );
   }
 
   return (
-    <Login
-      onLoginSuccess={handleLoginSuccess}
-      onGoToRegister={() => setAuthPage("register")}
-    />
+    <>
+      <NavBar onNavigate={handleNavigate} />
+      <div className="flex flex-col lg:flex-row h-screen">
+        <Sidebar
+          onNavigate={handleNavigate}
+          currentPage={currentPage}
+          onLogout={handleLogout}
+        />
+        <main className="flex-1 overflow-auto pt-16 lg:pt-0">
+          {renderContent()}
+        </main>
+
+        <AddCustomCourseModal
+          isOpen={isCustomCourseModalOpen}
+          onClose={() => setIsCustomCourseModalOpen(false)}
+          onAdd={handleAddCustomCourse}
+        />
+      </div>
+    </>
   );
 }
-
-return (
-  <>
-    <NavBar onNavigate={handleNavigate} />
-    <div className="flex flex-col lg:flex-row h-screen">
-      <Sidebar
-        onNavigate={handleNavigate}
-        currentPage={currentPage}
-        onLogout={handleLogout}
-      />
-      <main className="flex-1 overflow-auto pt-16 lg:pt-0">
-        {renderContent()}
-      </main>
-
-      <AddCustomCourseModal
-        isOpen={isCustomCourseModalOpen}
-        onClose={() => setIsCustomCourseModalOpen(false)}
-        onAdd={handleAddCustomCourse}
-      />
-    </div>
-  </>
-);
