@@ -446,55 +446,61 @@ export default function CourseRecommender({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <Select
               label="School"
-              placeholder="Choose a school"
-              selectedKeys={selectedSchool ? [selectedSchool] : []}
+              placeholder="Filter by school"
+              selectedKeys={new Set([selectedSchool])}
               onSelectionChange={(keys) => {
                 const selected = Array.from(keys)[0] as string;
-                setSelectedSchool(selected || "");
-                setSelectedDepartment("");
+                setSelectedSchool(selected || "all");
               }}
-              isDisabled={isLoadingCourses}
-              disallowEmptySelection={false}
+              size="sm"
             >
-              {schools.map((school) => {
-                const count = allCourses.filter(
-                  (c) => c.courseId.substring(0, 3) === school
-                ).length;
-                return (
-                  <SelectItem key={school}>
-                    {school} ({count})
-                  </SelectItem>
-                );
-              })}
+              {[
+                {
+                  key: "all",
+                  label: `All Schools (${allCourses.length})`,
+                },
+                ...schools.map((school) => {
+                  const count = allCourses.filter(
+                    (c) => c.courseId.substring(0, 3) === school
+                  ).length;
+                  return { key: school, label: `${school} (${count})` };
+                }),
+              ].map((item) => (
+                <SelectItem key={item.key}>{item.label}</SelectItem>
+              ))}
             </Select>
 
             <Select
-              label="Department (Optional)"
-              placeholder="All departments"
-              selectedKeys={selectedDepartment ? [selectedDepartment] : []}
+              label="Department"
+              placeholder="Filter by department"
+              selectedKeys={new Set([selectedDepartment])}
               onSelectionChange={(keys) => {
                 const selected = Array.from(keys)[0] as string;
-                setSelectedDepartment(selected || "");
+                setSelectedDepartment(selected || "all");
               }}
-              isDisabled={isLoadingCourses || !selectedSchool}
-              disallowEmptySelection={false}
+              size="sm"
+              isDisabled={filteredDepartments.length === 0}
             >
-              {filteredDepartments.map((dept) => {
-                const count = allCourses.filter((course) => {
-                  const parts = course.courseId.split(" ");
-                  if (parts.length >= 2) {
-                    const school = parts[0].substring(0, 3);
-                    const courseDept = parts[1];
-                    return `${school} ${courseDept}` === dept;
-                  }
-                  return false;
-                }).length;
-                return (
-                  <SelectItem key={dept}>
-                    {dept} ({count})
-                  </SelectItem>
-                );
-              })}
+              {[
+                {
+                  key: "all",
+                  label: `All Departments`,
+                },
+                ...filteredDepartments.map((dept) => {
+                  const count = allCourses.filter((course) => {
+                    const parts = course.courseId.split(" ");
+                    if (parts.length >= 2) {
+                      const school = parts[0].substring(0, 3);
+                      const courseDept = parts[1];
+                      return `${school} ${courseDept}` === dept;
+                    }
+                    return false;
+                  }).length;
+                  return { key: dept, label: `${dept} (${count})` };
+                }),
+              ].map((item) => (
+                <SelectItem key={item.key}>{item.label}</SelectItem>
+              ))}
             </Select>
 
             <div className="flex items-end">
