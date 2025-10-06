@@ -51,7 +51,7 @@ export default function HubHelper({
         <ModalContent>
           <ModalHeader>Important Notice</ModalHeader>
           <ModalBody>
-            <p>Please load course's hub requirements before bookmarking.</p>
+            <p>Please load a course's hub requirements before bookmarking.</p>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onPress={handleCloseNotice}>

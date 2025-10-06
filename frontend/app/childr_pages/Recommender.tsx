@@ -447,15 +447,14 @@ export default function CourseRecommender({
             <Select
               label="School"
               placeholder="Choose a school"
-              selectedKeys={
-                selectedSchool ? new Set([selectedSchool]) : new Set()
-              }
+              selectedKeys={selectedSchool ? [selectedSchool] : []}
               onSelectionChange={(keys) => {
                 const selected = Array.from(keys)[0] as string;
                 setSelectedSchool(selected || "");
                 setSelectedDepartment("");
               }}
               isDisabled={isLoadingCourses}
+              disallowEmptySelection={false}
             >
               {schools.map((school) => {
                 const count = allCourses.filter(
@@ -472,14 +471,13 @@ export default function CourseRecommender({
             <Select
               label="Department (Optional)"
               placeholder="All departments"
-              selectedKeys={
-                selectedDepartment ? new Set([selectedDepartment]) : new Set()
-              }
+              selectedKeys={selectedDepartment ? [selectedDepartment] : []}
               onSelectionChange={(keys) => {
                 const selected = Array.from(keys)[0] as string;
                 setSelectedDepartment(selected || "");
               }}
               isDisabled={isLoadingCourses || !selectedSchool}
+              disallowEmptySelection={false}
             >
               {filteredDepartments.map((dept) => {
                 const count = allCourses.filter((course) => {
