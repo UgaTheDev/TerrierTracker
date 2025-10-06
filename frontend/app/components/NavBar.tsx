@@ -25,8 +25,8 @@ interface NavBarProps {
 
 export const NavBar = ({ onNavigate }: NavBarProps) => {
   const handleDashboardClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     if (onNavigate) {
-      e.preventDefault();
       onNavigate("dashboard");
     }
   };
@@ -53,12 +53,11 @@ export const NavBar = ({ onNavigate }: NavBarProps) => {
   );
 
   return (
-    <HeroUINavbar maxWidth="xl" position="sticky">
+    <HeroUINavbar maxWidth="xl" position="sticky" className="z-50">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink
+          <button
             className="flex justify-start items-center gap-1 cursor-pointer hover:opacity-80 transition-opacity"
-            href="/"
             onClick={handleDashboardClick}
           >
             <Image
@@ -67,9 +66,10 @@ export const NavBar = ({ onNavigate }: NavBarProps) => {
               className="rounded-none"
             />
             <p className="font-bold text-inherit"> TerrierTracker</p>
-          </NextLink>
+          </button>
         </NavbarBrand>
       </NavbarContent>
+
       <NavbarContent
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
@@ -81,6 +81,7 @@ export const NavBar = ({ onNavigate }: NavBarProps) => {
           <ThemeSwitch />
         </NavbarItem>
       </NavbarContent>
+
       <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
         <Link isExternal aria-label="Github" href={siteConfig.links.github}>
           <GithubIcon className="text-default-500" />

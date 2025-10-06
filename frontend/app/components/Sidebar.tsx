@@ -106,7 +106,7 @@ export default function Sidebar({
     <>
       <button
         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 bg-content1 rounded-lg shadow-lg"
+        className="lg:hidden fixed top-4 left-4 z-40 p-2 bg-content1 rounded-lg shadow-lg"
       >
         {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
@@ -122,7 +122,7 @@ export default function Sidebar({
         className={`
           h-screen rounded-none border-r border-default-200 bg-background/60 backdrop-blur-lg p-4 transition-all duration-300 ease-in-out flex flex-col
           ${isCollapsed ? "w-16" : "w-72"}
-          fixed lg:static inset-y-0 left-0 z-40
+          fixed lg:static inset-y-0 left-0 z-35
           transform lg:transform-none
           ${isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"}
         `}

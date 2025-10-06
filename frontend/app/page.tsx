@@ -15,6 +15,7 @@ import CourseRecommender from "./childr_pages/Recommender";
 import AddCustomCourseModal, {
   type CustomCourseArray,
 } from "./components/AddCustomCourseModal";
+import { NavBar } from "./components/NavBar";
 
 export type EditedCourseArray = [string, string, string, number];
 
@@ -744,24 +745,26 @@ export default function Home() {
   }
 
   if (!isAuthenticated) {
-    if (authPage === "register") {
-      return (
-        <Registration
-          onRegistrationSuccess={handleRegistrationSuccess}
-          onBackToLogin={() => setAuthPage("login")}
-        />
-      );
-    }
-
+  if (authPage === "register") {
     return (
-      <Login
-        onLoginSuccess={handleLoginSuccess}
-        onGoToRegister={() => setAuthPage("register")}
+      <Registration
+        onRegistrationSuccess={handleRegistrationSuccess}
+        onBackToLogin={() => setAuthPage("login")}
       />
     );
   }
 
   return (
+    <Login
+      onLoginSuccess={handleLoginSuccess}
+      onGoToRegister={() => setAuthPage("register")}
+    />
+  );
+}
+
+return (
+  <>
+    <NavBar onNavigate={handleNavigate} />
     <div className="flex flex-col lg:flex-row h-screen">
       <Sidebar
         onNavigate={handleNavigate}
@@ -778,5 +781,5 @@ export default function Home() {
         onAdd={handleAddCustomCourse}
       />
     </div>
-  );
-}
+  </>
+);

@@ -6,7 +6,6 @@ import Script from "next/script";
 import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
-import { NavBar } from "./components/NavBar";
 
 export const metadata: Metadata = {
   title: {
@@ -25,7 +24,6 @@ export const viewport: Viewport = {
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
 };
-
 export default function RootLayout({
   children,
 }: {
@@ -47,8 +45,7 @@ export default function RootLayout({
       >
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
-            <NavBar />
-            <main className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
+            <main className="container mx-auto max-w-7xl flex-grow">
               {children}
             </main>
             <footer className="w-full flex items-center justify-center py-3">
