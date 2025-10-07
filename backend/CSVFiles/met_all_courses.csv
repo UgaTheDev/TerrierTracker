@@ -1,0 +1,593 @@
+code,name,Philosophical Inquiry and Life's Meanings,Aesthetic Exploration,Historical Consciousness,Scientific Inquiry I,Social Inquiry I,Scientific Inquiry II,Social Inquiry II,Quantitative Reasoning I,Quantitative Reasoning II,The Individual in Community,Global Citizenship and Intercultural Literacy,Ethical Reasoning,First-Year Writing Seminar,"Writing, Research, and Inquiry",Writing-Intensive Course,Oral and/or Signed Communication,Digital/Multimedia Expression,Critical Thinking,Research and Information Literacy,Teamwork/Collaboration,Creativity/Innovation
+MET AD 508,AD Internship 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 509,AD Internship 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 510,Mathematics and Statistics in Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 528,Blockchain Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 561,Financial Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 571,Business Analytics Foundations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 575,Digital Brand Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 576,Social Media Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 577,AI Enabled Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 580,"Environmental, Social, and Governance (ESG) Investments",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 581,Energy Transition: Markets and Regulation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 587,Interdisciplinary Methods for Quantitative Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 599,Python and SQL for Business Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 601,Digital Platforms and Quantitative Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 605,Operations Management: Business Process Fundamentals,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 610,Enterprise Risk Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 612,COO-Public Emergency Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 613,Enterprise Risk Planning and Compliance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 614,Disaster Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 616,Enterprise Risk Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 617,Business Continuity Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 618,Technology Risk Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 619,Applied Neuromarketing Research and Ethics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 630,Financial and Managerial Accounting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 632,Financial Concepts,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET AD 642,Project Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 643,Project Communications and Leadership,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 644,Project Risk and Cost Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 645,International and Advanced Project Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 646,Portfolio and Program Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 647,Project Governance and Contract Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 648,Ecommerce,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 649,Agile Project Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 654,Marketing Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 655,"International Business, Economics, and Cultures",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 660,"Databases, Security, and Web Design",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 661,"Marketing, Database, and Enterprise/Customer Relation Management",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 667,"Innovation, Global Competitiveness, and National Economic Development",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 675,Technology and Innovation in Construction Projects,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 678,Financial Regulation and Ethics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 680,Global Supply Chains,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 682,Risk Assessment and Security Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 685,Quantitative Methods for Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 688,Cloud Analytics for Business,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 690,Supply Chain Logistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 699,Data Mining for Business Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 709,Case Studies in Current Corporate Financial Topics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 712,Financial Markets and Institutions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 713,Derivative Securities and Markets,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 714,Mergers and Acquisitions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 715,Quantitative and Qualitative Decision-Making,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 717,Investment Analysis and Portfolio Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 718,Overview of Mutual Funds Industry,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 719,Fixed Income Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 725,Negotiations and Organizational Conflict Resolution,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 731,Corporate Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 737,Innovative Marketing Techniques,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 740,Planning and Operating New Ventures,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 741,The Innovation Process: Developing New Products and Services,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 744,Venture Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 746,Business Law and Regulation for Entrepreneurs,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 760,International Trade and Logistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 763,Multinational Finance and Trade,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 764,"Multinational Tactics, Strategy, and Positioning",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 782,Project Value Strategies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 795,Directed Research I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 796,Directed Research 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 799,Deep Learning for Business Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 800,Master's Thesis 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 801,Master's Thesis 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 804,Capstone Project for Supply Chain Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 805,Capstone Project in Enterprise Risk Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 807,"Principles and Best Practices in Project, Program, and Portfolio Management",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 808,Capstone Project in Financial Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 856,Market and Economic Research and Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AD 899,Capstone Project in Applied Business Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AH 111,Survey of Western Art I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AH 112,Survey of Western Art II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AH 215,Basic Photography,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AH 216,Basic Digital Photography,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1
+MET AH 315,History of Photography,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AH 572,Modern to Contemporary Art,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AN 101,Introduction to Cultural Anthropology,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0
+MET AN 102,"Human Biology, Behavior, and Evolution",0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET AR 525,International Arts Practice and Policy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 530,Managing Performing Arts Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 535,Managing Visual Arts Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 550,Raising Funds and Grant Writing for Nonprofit Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 640,Technology in Arts and Cultural Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 650,Public Art Project Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 660,Curating in Multidisciplinary Contexts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 670,Creative Startups: The Entrepreneurial Process,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 690,The Art World,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 700,Leadership in the Arts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 711,Capital Campaigns,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 720,Marketing and Audience Development for the Arts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 721,Advanced Arts Marketing Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 723,Individual Fundraising,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 725,Educational Programming in Cultural Institutions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 730,Political and Public Advocacy for the Arts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 735,Arts and the Community,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 750,Financial Management for Nonprofits,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 751,Commercial Production: The Broadway Model,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 752,Strategies for Performing Arts Businesses,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 753,Current Trends in the Performing Arts Industry,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 754,Global Performing Arts Presenting and Producing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 755,Arts and Cultural Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 778,Legal Issues in Arts Administration,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 795,Arts and Cultural Management Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 796,Advanced Management and Consulting for Arts and Cultural Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 800,Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AR 810,Master's Thesis 1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,1,0
+MET AR 811,Master's Thesis 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AS 101,The Solar System,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET AS 102,The Astronomical Universe,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET AT 505,Actuarial and Financial Data Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 511,Economics and Management Decisions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 521,Financial Mathematics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 531,Fundamentals of Actuarial Mathematics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 541,Introduction to Individual Insurance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 542,Introduction to Group Insurance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 543,Introduction to Property and Casualty Insurance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 544,Introduction to Pension Mathematics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 545,Introduction to Risk Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 722,Finance for Actuaries,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 743,Regression and Time Series,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 761,Mathematics for Investment and Portfolio Theory,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 762,Mathematical Finance for Actuarial Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 771,Advanced Long-Term Actuarial Mathematics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 781,Advanced Short-Term Actuarial Mathematics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 799,Capstone in Actuarial Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 981,Internship in Actuarial Science 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 982,Internship in Actuarial Science 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 990,Seminar in Actuarial Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 991,Directed Studies 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AT 992,Directed Studies 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET BB 421,Biochemistry 1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0
+MET BB 422,Biochemistry 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1
+MET BI 105,Introductory Biology for Health Sciences,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0
+MET BI 107,"Biology 1: Evolution, Ecology, and Behavior",0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0
+MET BI 108,"Biology II: Cells, Genetics, Development, and Physiology",0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0
+MET BI 110,"Introduction to Neuroscience, Drugs, and Mental Disorders",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0
+MET BI 203,Cell Biology (CM),0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET BI 206,Genetics (CM),0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET BI 210,Human Anatomy,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1
+MET BI 211,Human Physiology,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,1,0
+MET BI 303,Ecology (EBE),0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0
+MET BI 315,Systems Physiology (PER/NEURO),0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,1,0
+MET BI 366,"Neuroscience of Human Cognition: Imagination, Language, and Consciousness",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0
+MET BI 407,Animal Behavior (EBE),1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0
+MET BI 491,Research in Biology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET BI 492,Research in Biology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 101,General Chemistry 1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 102,General Chemistry 2,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 171,Principles of General Chemistry,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 172,Principles of Organic and Biochemistry,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 203,Organic Chemistry 1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 204,Organic Chemistry 2,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 351,Physical Chemistry I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 352,Physical Chemistry II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 373,Principles of Biochemistry,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 421,Biochemistry I,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0
+MET CH 422,Biochemistry 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1
+MET CJ 101,Principles of Criminal Justice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 209,Crime and Delinquency,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 251,Police and Society,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 271,Corrections,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 300,Applied Social Science Theory,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0
+MET CJ 305,Violence in the Family,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 344,Drugs and Society,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 351,Criminal Law,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 352,"Courts, Society, and Criminal Procedure",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 420,Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 510,Special Topics in Criminal Justice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 511,Rehabilitation and Re-Integration,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 512,Sexual Violence,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 520,Violence and Trauma,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 531,Youth Crime Problems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 570,Criminology and Crime Policy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 571,Criminal Justice Administration and Ethics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 590,Research and Evaluation Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 591,Applied Analytical Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 599,Capstone in Applied Social Science,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0
+MET CJ 610,Cybercrime,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 612,Crime and Intelligence Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 620,Cyberterrorism and Cyber Defense,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 632,White-Collar Crime,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 640,Performance Management Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 650,Terrorism,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 656,Forensic Criminal Investigation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 660,Gender and Justice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 705,Threat Assessment,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 710,Applied Digital Forensic Investigation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 711,Planning and Implementation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 720,Trauma and Crisis Intervention,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 725,Forensic Behavior Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 750,Policing in a Democratic Society,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 801,Special Project in Criminal Justice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 810,Master's Thesis I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 811,Master's Thesis II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CJ 840,Applied Crime Analysis Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 702,Advertising and Society,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 704,Contemporary Mass Communication,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 707,Writing for Media Professionals,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 708,Principles and Practices of Advertising,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 710,Special Topics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 711,Consumer Insight and Account Planning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 714,Video in the Digital Age,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 716,Digital Communication,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 717,Fundamentals of Creative Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 718,Creating Video Campaigns,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 719,Interactive Marketing Communications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 721,Advertising Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 726,Strategic Brand Solutions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 727,Portfolio Development for Advertising,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 736,New & Traditional Media Strategies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 737,Social Networks in Strategic Communication Planning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 739,Principles of Search Engine Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 744,Design and New Media,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CM 810,Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 101,Computers and Their Applications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 200,Introduction to Computer Information Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 201,Introduction to Programming,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 231,Programming with C++,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 232,Programming with Java,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 248,Discrete Mathematics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 300,Introduction to Software Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 341,Data Structures with C++,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 342,Data Structures with Java,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1
+MET CS 382,Information Systems for Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 401,Introduction to Web Application Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 422,Advanced Programming Concepts,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1
+MET CS 425,Introduction to Business Data Communications and Networks,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 432,Introduction to IT Project Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+MET CS 469,Introduction to Database Design and Implementation for Business,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 472,Computer Architecture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 473,Introduction to Software Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0
+MET CS 495,Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 506,Internship in Computer Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 520,Information Structures with Java,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 521,Information Structures with Python,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1
+MET CS 526,Data Structures and Algorithms,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 535,Computer Networks,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 544,Foundations of Analytics and Data Visualization,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 546,Introduction to Probability and Statistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 550,Computational Mathematics for Machine Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 555,Foundations of Machine Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 561,Financial Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 566,Analysis of Algorithms,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 570,Biomedical Sciences and Health IT,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 575,Operating Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 579,Database Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 580,Health Informatics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 581,Health Information Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 582,Entrepreneurship in Health IT and Biotech,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 584,Ethical and Legal Issues in Healthcare Informatics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 593,Special Topic: Entrepreneurship in Health IT and Biotech,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 599,Biometrics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 601,Web Application Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 602,Server-Side Web Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 621,Data Structures and Algorithms,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 622,Advanced Programming Techniques,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1
+MET CS 625,Business Data Communication and Networks,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 632,Information Technology Project and Product Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+MET CS 633,"Software Quality, Testing, and Security Management",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 634,Agile Software Development with Intelligent Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 635,Network Media Technologies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 662,Computer Language Theory,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 664,Artificial Intelligence,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 665,Software Design and Patterns,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 669,Database Design and Implementation for Business,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 673,Software Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0
+MET CS 674,Database Security,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 677,Data Science with Python,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 682,Information Systems Analysis and Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 683,Mobile Application Development with Android,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 684,Enterprise Cybersecurity Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 685,Network Design and Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 688,Web Mining and Graph Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 689,Designing and Implementing a Data Warehouse,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 690,Network and Cloud Security,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 693,Digital Forensics and Investigations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 694,Mobile Forensics and Security,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 695,Cybersecurity,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 697,Special Topics in Computer Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 699,Data Mining,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 701,Rich Internet Application Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 763,Secure Software Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 766,Deep Reinforcement Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 767,Advanced Machine Learning and Neural Networks,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 775,Advanced Networking,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 777,Big Data Analytics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 779,Advanced Database Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 781,Advanced Health Informatics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 782,IT Strategy and Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 783,Enterprise Architecture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 787,AI and Cybersecurity,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 788,Generative AI,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 789,Cryptography,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 790,Computer Vision in AI,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 793,Special Topics in Computer Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 795,Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 799,Advanced Cryptography,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 810,Master's Thesis in Computer Science 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CS 811,Master's Thesis in Computer Science 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EC 101,Introductory Microeconomic Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EC 102,Introductory Macroeconomic Analysis,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+MET EC 201,Intermediate Microeconomic Analysis,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET EC 202,Intermediate Macroeconomic Analysis,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET EC 203,Empirical Economics I,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EC 341,Monetary and Banking Institutions,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET EC 391,International Economics I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 104,English Composition,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 125,Readings in Modern Literature,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 127,Readings in American Literature,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 141,Literary Types: Fiction,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+MET EN 175,Literature and the Art of Film,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+MET EN 201,Intermediate Composition,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0
+MET EN 202,Introduction to Creative Writing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 304,Poetry Writing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 305,Advanced Writing of Fiction,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 322,Survey of British Literature I,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 323,Survey of British Literature II,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 355,Modern Drama,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 363,Shakespeare I,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 364,Shakespeare II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 546,The Modern American Novel,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 552,English Drama from 1590 to 1642,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HC 550,US Healthcare System,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HC 559,Health Communication Principles and Strategies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HC 560,Research Methods for Health Communication,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HC 561,Writing for Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HC 651,Epidemiology for Health Communication,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HC 652,Biology of Disease,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HC 655,Healthcare Marketing Strategies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HC 656,Healthcare Public Relations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HC 657,Digital Marketing for Healthcare,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HC 658,Media Relations for Healthcare,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HC 762,Visual Communication in the Digital Health Age,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HC 763,Social Media Strategies and Tactics for Healthcare,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HI 101,The History of Western Civilization I,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HI 102,The History of Western Civilization II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HI 215,Special Topics in History,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HI 252,US History 1775-1865: America from Revolution to Civil War,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HI 253,US History 1877-1945: Making Modern America,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0
+MET HI 262,The Vietnam War,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0
+MET HI 286,Science and Medicine Go to War,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0
+MET HI 300,The American Immigrant Experience,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0
+MET HI 307,Great Trials in American Political History,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0
+MET HI 312,The History of the U.S. Supreme Court,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0
+MET HI 349,The History of International Relations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HI 373,History of Boston,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HI 395,Film and History,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HI 476,Special Topics: The American Presidency,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HI 501,Special Topics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HS 201,Introduction to Nutrition,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+MET HU 400,Great Works of the Modern Era,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET IS 303,Moral Issues in Sports,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0
+MET IS 308,"Exploring Philosophy through Film: Knowledge, Ethics, and Personal Identity",1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+MET IS 311,"Disease Outbreaks, Epidemics, and Pandemics in Popular Culture",0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET IS 312,Food Stuff: A Taste of Biology,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET IS 325,"Explorations in the Essay: History, Theory, Practice",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1
+MET IS 327,"The Meaning of America: People, Identity, and Conflict that Built a Nation",0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+MET IS 333,Manipulating Life: The Ethics and Science of Biotechnology,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+MET IS 345,Rethinking the Classics: Contemporary Takes on the Canon,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0
+MET IS 350,"Nature and the Divine in Myth, Literature, and Art",0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0
+MET IS 360,"Literature, Film, and the American Dream",0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+MET IS 362,Mathematics that Matter in the Twenty-first Century,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET IS 367,"Jobs, Wages, and the Global Economy",0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0
+MET IS 370,"China, the Emerging Superpower: A Model for Development'",0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+MET IS 380,"Landscape, Climate, and Humans",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+MET IS 385,Interior and Exterior Landscapes: Indigenous Peoples of North America,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0
+MET IS 400,Great Ideas,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET IS 401,Communication Skills I,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0
+MET IS 402,Communication Skills II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET IS 403,Natural Science in Contemporary Society,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+MET IS 419,American Traditional Music,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0
+MET IS 420,"The Moral Self: Psychological, Religious, and Spiritual Perspectives",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET IS 421,The Art of Rhetoric in Life and Work,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET IS 450,Botany without Borders,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET IS 460,Romanticism and Its Off-Shoots: Countering the Enlightenment in Philosophical Literature and the,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET IS 480,Physics of Motion: Something in the Way it Moves,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET IS 491,Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 250,Introduction to Linguistics,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0
+MET LX 501,Phonetics & Phonology: Introduction to Sound Systems,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET LX 503,Phonological Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 510,Special Topics in Linguistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 511,Morphology: Introduction to the Structures and Shapes of Words,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 517,"""Having"" and ""Being"" across Languages",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 521,Syntax: Introduction to Sentential Structure,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 522,Intermediate Syntax: Modeling Syntactic Knowledge,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 528,Questions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 531,Semantics & Pragmatics: Introduction to Linguistic Meaning,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0
+MET LX 532,Intermediate Semantics: The Grammatical Construction of Meaning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 542,"Language, Race, and Gender",0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+MET LX 546,Language Variation and Change,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+MET LX 549,Bilingualism,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0
+MET LX 560,Historical and Comparative Linguistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 565,Variation in Dialects of English,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 570,Romance Linguistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 575,History of French,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+MET LX 583,Sounds of Spanish,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 584,The Structure of Spanish,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 590,Topics in Linguistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 591,Linguistic Field Methods,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0
+MET LX 594,Introduction to Programming for Computational Linguistics,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0
+MET LX 596,Computational Linguistics,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0
+MET MA 113,Elementary Statistics,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MA 120,Applied Mathematics for Social and Management Sciences,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MA 123,Calculus I,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MA 124,Calculus II,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MA 213,Basic Statistics and Probability,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MA 214,Applied Statistics,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MA 581,Probability,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MA 582,Mathematical Statistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MA 603,SAS with Statistical Applications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 202,Personal Financial Planning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 315,Operations Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 401,Introduction to Management,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1
+MET MG 405,Principles of Marketing,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1
+MET MG 410,"Entrepreneurial Management: Starting, Innovating, and Managing Small-, Medium-, and Large-Sized Vent",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 411,Marketing Communications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 415,Project Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+MET MG 431,International Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 435,Advertising,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 448,"Electronic Commerce, Systems, and Web Design",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 472,Financial Concepts,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MG 473,Quantitative and Qualitative Decision Making,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 474,Principles of Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 492,DIRECTED STUDY,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 493,DIRECTED STUDY,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 495,DIRECTED STUDY,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 503,Business in a Changing Society,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 515,Negotiations and Organizational Conflict Resolution,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 520,International Business Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 521,Organizational Behavior and Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 522,Consumer Behavior,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 523,Marketing Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 530,Business Strategy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 541,The Innovation Process: Developing New Products and Services,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+MET MG 545,American Institutions and Culture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 550,International Business Law and Regulation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET MG 606,Internship,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 441,Anthropology of Food,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0
+MET ML 565,Food Marketing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 610,Special Topics in Gastronomy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 611,Archaeology of Food in Ancient Times,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 612,Pots and Pans: Material Culture of Food,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 613,Debating Diet,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 614,Philosophy of Food,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 615,Reading and Writing the Food Memoir,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 619,The Science of Food and Cooking,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 620,Food and Literature,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 622,History of Food,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 623,Food and Museums,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 625,Wild and Foraged Foods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 626,"Food Waste: Scope, Scale, & Signals for Sustainable Change",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 629,Culture and Cuisine of the African Diaspora,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 630,Cookbooks and History,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 631,Culture and Cuisine: France,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 632,History of Wine,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 634,Culture and Cuisine of China,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 636,Culture and Cuisine: Italy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 638,Culture and Cuisine: New England,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 641,Anthropology of Food,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0
+MET ML 642,Food Ethnography,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 649,Fundamentals of Wine,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 650,The Foundation of Beer and Spirits,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 651,Fundamentals of Wine,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 652,Comprehensive Survey of Wine: Europe,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 653,Comprehensive Survey of Wine: The World,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 654,Current Topics in Wine Studies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 655,Launching a Food Business,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 657,Advanced Wine Tasting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 658,Introduction to Winemaking,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 671,Food and Visual Culture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 672,Food and Art,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 673,Survey of Food and Film,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 681,Food Writing for the Media,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 692,Evaluating and Developing Markets for Culinary Tourism,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 698,Cook Like a Pro: Mastering Culinary Essentials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 699,Bake Like a Pro,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 700,Professional Program in the Culinary Arts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 701,Introduction to Gastronomy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 702,Special Topics in Food & Wine,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 703,Professional Program in the Pastry Arts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 704,Special Topics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 705,Artisan Cheeses of the World,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 706,Food and Gender,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 707,Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 708,Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 709,Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 711,The Many Meanings of Meat,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 713,Agricultural History,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 714,Urban Agriculture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 715,Food and the Senses,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 716,Sociology of Taste,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 719,"Food Values: Local to Global Food Policy, Practice, and Performance",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 720,Food Policy and Food Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 721,US Food Policy and Culture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 722,Studies in Food Activism,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 723,Sustainable Food Systems,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 724,"Culture, Food, and Politics of American Latinos",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 730,Pastry Arts Level 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 731,Culinary Arts Level 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 801,Master's Thesis 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET ML 803,Master's Thesis 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PH 101,Basic Problems of Philosophy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PH 110,Great Philosophers,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PH 150,Introduction to Ethics,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+MET PH 155,Politics and Philosophy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PH 160,Reasoning and Argumentation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PH 248,Existentialism,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+MET PS 101,General Psychology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 222,Creativity,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 234,Psychology of Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 241,Developmental Psychology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 251,Psychology of Personality,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 253,Psychology of Dreams,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 261,Social Psychology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 273,Introduction to Clinical Psychology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 275,Principles of Counseling and Motivational Interviewing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 295,Psychology and Film: Images of Madness,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 300,Applied Social Science Theory,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0
+MET PS 302,Women and Health in the Twenty-First Century,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 320,Play and Art Therapy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 323,Experimental Psychology: Learning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 324,Experimental Psychology: Developmental,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 325,Experimental Psychology: Personality,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 326,Experimental Psychology: Social,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 330,Leadership in the Workplace,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 333,DRUGS & BEHAVR,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 335,How the Brain Works: An Introduction to Neuropsychology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 340,Business and Organizational Psychology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 350,Depression and Disorders of Mood,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 366,The Psychological Unconscious,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 371,"Mental Health, Diagnosis, and Wellbeing",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 401,Psychological Perspectives on Self and Identity,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 404,Senior Seminar in Psychology and Culture,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 472,Psychology of Women,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 510,Special Topics in Psychology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 512,Sexual Violence,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 515,"Introduction to Forensic Psychology: Methods, Practice, and Theory",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 520,Violence and Trauma,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 592,Positive Psychology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET PS 599,Capstone in Applied Social Science,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0
+MET PY 105,Elementary Physics,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET PY 106,Elementary Physics,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET PY 211,General Physics,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0
+MET PY 212,General Physics II,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0
+MET SO 100,Principles of Sociology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET SO 201,Sociological Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET SO 203,Sociological Theories,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET SO 300,Applied Social Science Theory,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0
+MET SO 302,Women and Health in the Twenty-First Century,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET SO 310,Business and the Social Environment,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET SO 311,Religion and Society,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET SO 335,"Technology, Environment, and Society",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET SO 501,Special Topics in Sociology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET SO 511,Understanding Moral Panics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 300,Applied Social Science Theory,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0
+MET UA 301,Introduction to Urban Affairs,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 403,Boston Urban Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 409,Urban Affairs Senior Project,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 501,Undergraduate Directed Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 503,Housing and Community Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 505,Urban Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 508,Real Estate Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 510,Selected Topics in Urban Affairs,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 515,"History, Theory and Planning Practice",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 521,"Environmental Law, Policy, and Justice",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 526,Multi-modal Transportation Planning and Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 527,Feeding the City: Urban Food,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 549,Planning Sustainable and Climate Adapted Urban Futures,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 551,Policy Responses to Urban Issues,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 579,Urban Economics and Public Finance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 589,Research and Evaluation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 591,Applied Analytical Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 592,Land Use and Planning Law,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 598,Foundations of GIS and Spatial Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 604,Urban Political Decision-Making: Citizen Participation in the Planning Process,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 613,Urban Design and Development,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 617,Actionable Sustainability,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 619,Urban Transportation Policy and Planning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 642,Geospatial Intelligence,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 664,Planning and the Development Process,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 756,Capstone 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 757,Capstone 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 801,Graduate Directed Study in Urban Affairs and Planning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 802,Graduate Directed Study in Urban Affairs and Planning,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 804,Supervised Fieldwork,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET UA 808,Supervised Fieldwork 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

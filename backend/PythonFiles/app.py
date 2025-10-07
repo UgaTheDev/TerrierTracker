@@ -65,7 +65,9 @@ CSV_FILES = {
     'sha': CSV_DIR / 'sha_all_courses.csv',
     'wheelock': CSV_DIR / 'wheelock_all_courses.csv',
     'eng': CSV_DIR / 'eng_all_courses.csv',
-    'cgs': CSV_DIR / 'cgs_all_courses.csv'
+    'cgs': CSV_DIR / 'cgs_all_courses.csv',
+    'met': CSV_DIR / 'met_all_courses.csv',
+    'sph': CSV_DIR / 'sph_all_courses.csv'
 }
 
 for name, path in CSV_FILES.items():

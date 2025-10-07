@@ -1,0 +1,259 @@
+code,name,Philosophical Inquiry and Life's Meanings,Aesthetic Exploration,Historical Consciousness,Scientific Inquiry I,Social Inquiry I,Scientific Inquiry II,Social Inquiry II,Quantitative Reasoning I,Quantitative Reasoning II,The Individual in Community,Global Citizenship and Intercultural Literacy,Ethical Reasoning,First-Year Writing Seminar,"Writing, Research, and Inquiry",Writing-Intensive Course,Oral and/or Signed Communication,Digital/Multimedia Expression,Critical Thinking,Research and Information Literacy,Teamwork/Collaboration,Creativity/Innovation
+SPH BS 401S,Survey in Biostatistical Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 704,Introduction to Biostatistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 722,Design and Conduct of Clinical Trials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 723,Introduction to Statistical Applications in SAS,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 728,"Public Health Surveillance, a Methods Based Approach",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 730,Introduction to Statistical Applications in R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 751,Essentials of Quantitative Data Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 755,Theory of Linear Models in Biostatistics,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0
+SPH BS 800,Accelerated Statistical Training,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 803,Statistical Programming for Biostatisticians,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 805,Intermediate Programming in SAS for Applied Linear Models,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 806,Statistical Learning with Applications in R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 807,Applied Causial Inference in Health Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 810,Meta-Analysis for Public Health & Medical Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 818,Basic Survival Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 819,Logistic Regression,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 825,Advanced Methods in Infectious Disease Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 828,Advanced Survival Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 831,Statistical Methods and Applications for Genomics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 835,Applied Biostatistical Methods for Public Health Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 845,Data Science and Statistical Modeling in R,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 849,Bayesian Modeling for Biomedical Research & Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 851,Applied Statistics in Clinical Trials 1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 852,Biostatistical Methods for Observational Studies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 853,Generalized Linear Models with Applications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 854,Bayesian Methods in Clinical Trials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 856,Adaptive Designs for Clinical Trials,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 857,Analysis of Correlated Data,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 858,Statistical Genetics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 859,Applied Genetic Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 860,Statistical Genetics 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 861,Applied Statistics in Clinical Trials 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 862,Race and Racism in Biostatistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 880,Biostatistics Capstone: Design and Analysis of Investigations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 901,Directed Studies in Biostatistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 902,Directed Research in Biostatistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 910,Practical Training,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH BS 980,Continuing Study in Biostatistics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 705,Toxicology for Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 707,Physiology for Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 710,Physiological Mechanisms of Health and Disease,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 713,Essentials of Genetic Technologies and the Future of Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 720,Climate Change and Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 722,Climate Change and Health Equity,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 727,Incorporating Health to Design Healthy and Sustainable Climate Solutions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 730,Methods in Environmental Health Sciences,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 731,Environmental Health and Justice: Essential Strategies for Effective Action,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 735,The Environmental Determinants of Infectious Diseases,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 745,Wastewater and Health/Sustainable Sanitation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 750,Water Quality and Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 757,Environmental Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 768,Toxicology for Environmental Health and Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 795,Urban Biogeoscience and Environmental Health: From Research to Policy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 797,Urban Biogeoscience and Environmental Health Applied Research Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 799,Urban Biogeoscience and Environmental Health Colloquium,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 804,Field Methods in Exposure Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 805,"Environmental Health Science, Policy and Law",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 811,Intro GIS for Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 851,Advanced GIS for Public Health and Climate Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 866,Risk Assessment Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 872,Environmental Data and Exposure Modeling,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 961,Directed Studies in Environmental Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 962,Directed Research in Environmental Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EH 980,Continuing Study in Environmental Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 714,Introduction to Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 722,Data Collection Methods for Epidemiologic Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 730,Epidemiology of Vaccine Preventable Diseases,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 740S,Introduction to the Epidemiology of Aging,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 748,Drug Epidemiology (formerly EP830),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 749,Applications to Introductory Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 752,Cancer Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 755,Infectious Disease Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 758,Nutritional Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 759,Reproductive Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 764,The Epidemiology of HIV/AIDS in the Developed and Developing World,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 770,Concepts and Methods in Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 775,Social Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 784,The Epidemiology of Tuberculosis in the Developed and Developing World,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 790,Mental Health Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 797,Concepts in the Measurement of Psychosocial Constructs,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 800,Microbes and Methods: Selected Topics in Outbreak Investigation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 813,Intermediate Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 816,A Guided Epidemiologic Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 850,Applications of Intermediate Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 854,Advanced Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 855,Advanced Epidemiology Seminar: Issues in Study Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 857,Design and Conduct of Cohort Studies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 858,Design and Conduct of Case-Control Studies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 859,"Advanced Methods in Reproductive, Perinatal, and Pediatric Epidemiology",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 860,Novel Analytical Methods for Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 861,Quantitative Bias Analysis Methods for Epidemiologic Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 862,Simulated Problems for Learning Epidemiology (SimPLE),0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 911,Directed Studies in Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 912,Directed Research in Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH EP 980,Continuing Study,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 701,Global Health Storytelling,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1
+SPH GH 722,Supply Chain Management for Improved Health System Performance,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 743,Implementing Health Programs in Developing Countries: Making Programs Work,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 744S,Program Design for Global Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 745,Monitoring and Evaluation of Global Health Programs,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 750,"Gender, Sexuality, Power, and Inequality in Global Health",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 755,Managing Disasters and Complex Humanitarian Emergencies,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 760,Foundations in Global Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 762,Essentials of Economics and Finance for Global Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 765,Global Mental Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 766,Sexual and Reproductive Health in Disaster Settings,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 770,"Poverty, Health, and Development",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 773,Financial Management for Health Programs,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 795,"Global AIDS Epidemic: Social & Economic Determinants, Impact, & Responses",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 801,How to License a New Vaccine,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 805,Controversies in Global Control and Eradication of Infectious Diseases,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 806,Using Digital Technologies to Improve Health Outcomes,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 811,Applied Research Methods in Global Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 815,Methods for Impact Evaluation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 854,From Data to Dashboards: Building Excel Skills to Support Health Program Decisions,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 881,Global Reproductive and Perinatal Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 887,Planning and Managing MCH Programs in Developing Countries,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 888,Seminar on Global Health Policy Issues,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 941,Directed Studies in Global Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH GH 942,Directed Research in Global Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH LW 740,Health and Human Rights,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH LW 830,Health Insurance and the Affordable Care Act,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH LW 840,"Health Law, Bioethics, and Human Rights",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH LW 850,Public Health Law,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH LW 854,"Mental Health Law, Policy & Ethics",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH LW 951,"Directed Studies in Health Law, Bioethics, & Human Rights",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH LW 952,"Directed Research in Health Law, Bioethics & Human Rights",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 705,Sexual Health: From Science to Policy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 725,"Women, Children and Adolescents: A Public Health Approach",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 750,"Disability Justice Through the Life Course: Programs, Policies, and Turning Advocacy to Action",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 759,Perinatal and Child Health Epidemiology,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 763,Maternal and Child Health Policy Making,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 775,Social Justice & the Health of Populations: Racism & Other systems of Oppression in the U.S.,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 783,Substance Use among Minoritized and Marginalized Populations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 785,Reproductive Health Advocacy: From Rights to Justice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 786,Immigrant and Refugee Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 795,The Health of Adolescents and Emerging Adults,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 800,Preventing Mental Health Concerns: A Life Course Perspective,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 802,Implementing Community Health Initiatives: A Field-Based Course in Leadership and Consultation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 815,Sexual and Reproductive Health Advocacy: Practice in Global and Local Context,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 820,Managing Public Health Programs and Projects,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 840,"Gender, Intersectionality and Health Policy",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 931,Directed Studies in Maternal and Child Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH MC 932,Directed Research in Maternal and Child Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH OM 700,Online MPH Launch,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH OM 701,"Data, Determinants, and Decision-Making for Health Equity",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH OM 702,"Policy, Programs and Public Health Communication",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH OM 703,Applied Methods in Population Health Science,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH OM 704,"Public Health Policy, Advocacy, and Community Organizing",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH OM 705,Applied Public Health Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH OM 706,Integrative Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 510,Essentials of Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 517,Quantitative Methods for Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 700,Foundations of Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 712,Public Health Response to Emergencies in the United States,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 717,Quantitative Methods for Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 718,Leadership and Management for Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 719,"Health Systems, Law, and Policy",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 720,"Individual, Community, and Population Health",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 728,"Religion, Ethics, and Public Health",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 737,Geographic Information Systems (GIS) for Public Health Decision Making,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 740,Pharmaceuticals in Public Health: An Introductory Course,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 746,Career P.R.E.P.,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 750S,Essentials of Population Health Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 757,Chronic Disease Prevention and Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 760S,Accelerated Training in Statistical Computing,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 780,Chronic Disease: A Public Health Perspective,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 781,Topics in BST,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 782,Topics in CHS,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 783,Topics in EH,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 784,Topics in EP,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 785,Topics in GH,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 786,Topics in HLPM,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 791,Topics in BST,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 792,Topics in CHS,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 793,Topics in EH,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 794,Topics in EP,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 795,Topics in GH,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 796,Topics in HLPM,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 802,"Environmental Justice: Social movement, Science and Policy",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 803,Community-Based Participatory Research: Theory and Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 825,Analysis of Emerging Infections Using the One Health Approach,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 842,Research Theory and Design,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 843,Quantitative Methods for Health and Social Policy Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 844,Introduction to Qualitative Analysis for Public Health and Health Services Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 845,Integrated Learning Experience for MPH,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 851,Needs Assessment,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 853,Strategic Planning and Communications,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 854,Program and Policy Evaluation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 856,Law & Ethics for Public Health Leaders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 857,Health Economics and Financial Management for Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 859,Cases in Public Health Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 867,Evidence-Based Policy and Budgeting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 870,Research Skills Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 871,Communication Skills for Public Health Leaders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 872,Mentorship and Coaching in Public Health Leadership,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 873,Data-Driven Decision-Making for Public Health Leaders,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 874,Public Health Practice within Political Contexts,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 880,Research Dissemination Seminar,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 885,Grant Writing for Doctoral Students,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 886,Grant Writing for Doctoral Students II,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 890,Mentored Research Experience,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 976,MPH Health Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 978,Public Health Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 986,Doctorate of Public Health Practicum,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 990,Continuing Study in DrPH Program,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PH 995S,Summer Research for Curricular Practical Training,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 714,Healthcare Management as a Profession,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 733,Health Program Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 734,Principles and Practices in Non-Profit Health Care Accounting,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 735,Health Care Finance: How Policy-makers and Managers Can Use Money as a Tool to Improve Health Care,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 736,Human Resource Management in Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 740,Comparative Health Systems and Policy in Industrialized and BRIC Countries,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 755,Health Care Delivery Systems: Issues and Innovations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 758,Introduction to Mental Health Services,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 760,"Health Law, Policy and Policymaking",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 785,Mental Health Advocacy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 795,"Alcohol, Tobacco and Other Drug Policy and Politics",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 802,"Pharmaceutical Management, Policy and Practice in the 21st Century: A Case Study Approach",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 804,"Digital Disruption In Health: The Effects Of Health Information Technologies On Polices, Delivery,",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 807,Introduction to Cost Effectiveness Analysis,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 820,Introduction to Quality Measurement and Evaluation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 822,Advanced Quantitative Methods for Health and Social Policy Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 827,Strategic Management of Healthcare Organizations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 828,Advanced Qualitative Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 832,Operations Management in Health Care,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 833,Health Economics,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 834,Planning and Regulating to Fix Health Care,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 835,Lean Management in Healthcare,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 839,Implementation Science: Linking Research to Practice,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 840,Analysis of Current Health Policy Issues,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 842,Health Economics for Health and Social Policy Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 844,Health Policy and Policy-making for Public Health Researchers,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 846,Advanced Quantitative Policy and Program Implementation and Evaluation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 851,Organizing and Advocacy for Health Policy Change,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 864,Contemporary Structures of Health Services,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 866,Theory in the Analysis of Health Services,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 874,Causal Inference for Health Services and Policy Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 931,Directed Studies in HPM,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 932,Directed Research in HPM,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH PM 980,Continuing Study in Health Services and Policy Research,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 730,Stress as a Public Health Problem,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 733,Mass Communication and Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 745,"Homelessness: Stories, Solutions, and Advocacy",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 747,Gun Violence and Community Health Equity,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 753,Preventing Sexual and Intimate Partner Violence: A Public Health Perspective,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 760,Health of LGBTQ Populations,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 780,Mental Health and Public Health: A Social and Behavioral Sciences Perspective,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 785,"Alcohol, Tobacco and Other Drug Use: People, Populations and Policies",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 806,Designing Strategic Interventions and Communications to Advance Public Health,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 818,Qualitative Research Methods,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 820,Assessment and Planning for Health Promotion,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 821,Intervention Strategies for Health Promotion,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 822,Quantitative Methods for Program Evaluation,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 832,"Trauma, Trauma-Informed Care, Recovery & Resilience",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 860,Strategies for Public Health Advocacy,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 921,Directed Studies in Social & Behavioral Sciences,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+SPH SB 922,Directed Research in Social & Behavioral Sciences,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0

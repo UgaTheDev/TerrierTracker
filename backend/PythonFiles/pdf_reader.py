@@ -171,6 +171,10 @@ def find_course_requirements(courses):
                 csv_path = "../CSVFiles/eng_all_courses.csv"
             elif school == "CGS":
                 csv_path = "../CSVFiles/cgs_all_courses.csv"
+            elif school == "MET":
+                csv_path = "../CSVFiles/met_all_courses.csv"
+            elif school == "SPH":
+                csv_path = "../CSVFiles/sph_all_courses.csv"
             
             if csv_path and Path(csv_path).exists():
                 manager = CourseDataManager(Path(csv_path))

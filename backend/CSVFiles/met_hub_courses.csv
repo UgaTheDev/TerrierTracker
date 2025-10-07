@@ -1,0 +1,116 @@
+code,name,Philosophical Inquiry and Life's Meanings,Aesthetic Exploration,Historical Consciousness,Scientific Inquiry I,Social Inquiry I,Scientific Inquiry II,Social Inquiry II,Quantitative Reasoning I,Quantitative Reasoning II,The Individual in Community,Global Citizenship and Intercultural Literacy,Ethical Reasoning,First-Year Writing Seminar,"Writing, Research, and Inquiry",Writing-Intensive Course,Oral and/or Signed Communication,Digital/Multimedia Expression,Critical Thinking,Research and Information Literacy,Teamwork/Collaboration,Creativity/Innovation
+MET AD 632,Financial Concepts,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET AH 216,Basic Digital Photography,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1
+MET AH 315,History of Photography,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET AN 101,Introduction to Cultural Anthropology,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0
+MET AN 102,"Human Biology, Behavior, and Evolution",0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET AR 810,Master's Thesis 1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,1,0,1,0
+MET AS 101,The Solar System,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET AS 102,The Astronomical Universe,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET BB 421,Biochemistry 1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0
+MET BB 422,Biochemistry 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1
+MET BI 105,Introductory Biology for Health Sciences,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0
+MET BI 107,"Biology 1: Evolution, Ecology, and Behavior",0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,1,0,0
+MET BI 108,"Biology II: Cells, Genetics, Development, and Physiology",0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0
+MET BI 110,"Introduction to Neuroscience, Drugs, and Mental Disorders",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0
+MET BI 203,Cell Biology (CM),0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET BI 206,Genetics (CM),0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET BI 210,Human Anatomy,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1
+MET BI 211,Human Physiology,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,1,0
+MET BI 303,Ecology (EBE),0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0
+MET BI 315,Systems Physiology (PER/NEURO),0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1,0,1,0
+MET BI 366,"Neuroscience of Human Cognition: Imagination, Language, and Consciousness",0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0
+MET BI 407,Animal Behavior (EBE),1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0
+MET CH 101,General Chemistry 1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 102,General Chemistry 2,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 171,Principles of General Chemistry,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 172,Principles of Organic and Biochemistry,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 203,Organic Chemistry 1,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 204,Organic Chemistry 2,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET CH 421,Biochemistry I,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0
+MET CH 422,Biochemistry 2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1
+MET CJ 300,Applied Social Science Theory,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0
+MET CJ 599,Capstone in Applied Social Science,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0
+MET CS 342,Data Structures with Java,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1
+MET CS 422,Advanced Programming Concepts,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1
+MET CS 432,Introduction to IT Project Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+MET CS 473,Introduction to Software Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0
+MET CS 521,Information Structures with Python,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1
+MET CS 622,Advanced Programming Techniques,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,1
+MET CS 632,Information Technology Project and Product Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+MET CS 673,Software Engineering,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0
+MET EC 102,Introductory Macroeconomic Analysis,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+MET EC 201,Intermediate Microeconomic Analysis,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET EC 202,Intermediate Macroeconomic Analysis,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET EC 203,Empirical Economics I,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EC 341,Monetary and Banking Institutions,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET EN 141,Literary Types: Fiction,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+MET EN 175,Literature and the Art of Film,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0
+MET EN 201,Intermediate Composition,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0
+MET EN 322,Survey of British Literature I,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 323,Survey of British Literature II,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET EN 363,Shakespeare I,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET HI 253,US History 1877-1945: Making Modern America,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0
+MET HI 262,The Vietnam War,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0
+MET HI 286,Science and Medicine Go to War,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0
+MET HI 300,The American Immigrant Experience,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0
+MET HI 307,Great Trials in American Political History,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0
+MET HI 312,The History of the U.S. Supreme Court,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,1,0,0
+MET HS 201,Introduction to Nutrition,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0
+MET HU 400,Great Works of the Modern Era,0,1,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET IS 303,Moral Issues in Sports,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0
+MET IS 308,"Exploring Philosophy through Film: Knowledge, Ethics, and Personal Identity",1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+MET IS 311,"Disease Outbreaks, Epidemics, and Pandemics in Popular Culture",0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET IS 312,Food Stuff: A Taste of Biology,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET IS 325,"Explorations in the Essay: History, Theory, Practice",0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1
+MET IS 327,"The Meaning of America: People, Identity, and Conflict that Built a Nation",0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0
+MET IS 333,Manipulating Life: The Ethics and Science of Biotechnology,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0
+MET IS 345,Rethinking the Classics: Contemporary Takes on the Canon,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0
+MET IS 350,"Nature and the Divine in Myth, Literature, and Art",0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,0,0
+MET IS 360,"Literature, Film, and the American Dream",0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0
+MET IS 362,Mathematics that Matter in the Twenty-first Century,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET IS 367,"Jobs, Wages, and the Global Economy",0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0
+MET IS 370,"China, the Emerging Superpower: A Model for Development'",0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+MET IS 380,"Landscape, Climate, and Humans",0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+MET IS 385,Interior and Exterior Landscapes: Indigenous Peoples of North America,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0
+MET IS 400,Great Ideas,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET IS 401,Communication Skills I,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0
+MET IS 403,Natural Science in Contemporary Society,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+MET IS 419,American Traditional Music,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0
+MET IS 421,The Art of Rhetoric in Life and Work,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET IS 450,Botany without Borders,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET IS 460,Romanticism and Its Off-Shoots: Countering the Enlightenment in Philosophical Literature and the,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET IS 480,Physics of Motion: Something in the Way it Moves,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+MET LX 250,Introduction to Linguistics,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0
+MET LX 501,Phonetics & Phonology: Introduction to Sound Systems,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET LX 531,Semantics & Pragmatics: Introduction to Linguistic Meaning,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,1,0
+MET LX 542,"Language, Race, and Gender",0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+MET LX 546,Language Variation and Change,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+MET LX 549,Bilingualism,0,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,1,0,0,0
+MET LX 575,History of French,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0
+MET LX 591,Linguistic Field Methods,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,1,0
+MET LX 594,Introduction to Programming for Computational Linguistics,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0
+MET LX 596,Computational Linguistics,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0
+MET MA 113,Elementary Statistics,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MA 120,Applied Mathematics for Social and Management Sciences,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MA 123,Calculus I,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MA 124,Calculus II,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MA 213,Basic Statistics and Probability,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MA 214,Applied Statistics,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MG 401,Introduction to Management,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1
+MET MG 405,Principles of Marketing,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1
+MET MG 415,Project Management,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0
+MET MG 472,Financial Concepts,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET MG 541,The Innovation Process: Developing New Products and Services,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1
+MET ML 441,Anthropology of Food,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0
+MET ML 641,Anthropology of Food,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0,0,0,1,0,0
+MET PH 150,Introduction to Ethics,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+MET PH 248,Existentialism,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0
+MET PS 300,Applied Social Science Theory,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0
+MET PS 599,Capstone in Applied Social Science,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0
+MET PY 105,Elementary Physics,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0
+MET PY 106,Elementary Physics,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0
+MET PY 211,General Physics,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,1,0
+MET PY 212,General Physics II,0,0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0
+MET SO 300,Applied Social Science Theory,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0
+MET UA 300,Applied Social Science Theory,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0
