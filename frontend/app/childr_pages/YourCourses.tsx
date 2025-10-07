@@ -61,7 +61,6 @@ export default function YourCourses({
     <>
       <div className="flex flex-col gap-6 p-4 md:p-6 lg:p-10 lg:ml-[5%]">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-          <h1 className="text-2xl md:text-3xl font-bold">Your Courses</h1>
           <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
             <Button
               color="primary"
