@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, Response
 from flask_cors import CORS
 from pathlib import Path
 import logging
@@ -13,6 +13,7 @@ from urllib.parse import urlparse
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 import json
+from datetime import datetime
 
 from course_data_manager import CourseDataManager
 load_dotenv()
@@ -43,7 +44,7 @@ def after_request(response):
         response.headers['Access-Control-Allow-Origin'] = origin
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
         response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        response.headers['Access-Control-Max-Age'] = '3600'
+        response.headers['Access-Control-Allow-Age'] = '3600'
     return response
 
 logging.basicConfig(level=logging.INFO)
@@ -133,6 +134,16 @@ except Exception as e:
         logger.error(f"Error listing directories: {debug_e}")
     
     course_manager = None
+
+@app.route('/sitemap.xml', methods=['GET'])
+def sitemap():
+    logger.info("Sitemap request received - returning 404 to let Next.js handle it")
+    return '', 404
+
+@app.route('/robots.txt', methods=['GET'])
+def robots():
+    logger.info("Robots.txt request received - returning 404 to let Next.js handle it")
+    return '', 404
 
 @app.route('/api/auth/google', methods=['POST'])
 def google_auth():
