@@ -268,7 +268,7 @@ export default function HelperCourseSearcher({
       });
     }
 
-    return filtered.slice(0, searchValue.trim() ? 25 : 15);
+    return filtered;
   }, [
     allCourses,
     searchValue,
@@ -276,6 +276,10 @@ export default function HelperCourseSearcher({
     selectedDepartment,
     selectedHubRequirements,
   ]);
+
+  const displayedCourses = useMemo(() => {
+    return filteredCourses.slice(0, searchValue.trim() ? 50 : 25);
+  }, [filteredCourses, searchValue]);
 
   const toggleHubRequirement = (hubReq: string) => {
     setSelectedHubRequirements((prev) => {
@@ -494,7 +498,8 @@ export default function HelperCourseSearcher({
 
           <div className="flex items-center gap-2">
             <span className="text-sm text-default-500">
-              Showing {filteredCourses.length} courses
+              Showing {displayedCourses.length} of {filteredCourses.length}{" "}
+              courses
             </span>
             <Button
               size="sm"
@@ -675,7 +680,7 @@ export default function HelperCourseSearcher({
       </div>
 
       <div className="space-y-3 max-h-96 overflow-y-auto">
-        {filteredCourses.map((course) => {
+        {displayedCourses.map((course) => {
           const currentlyBookmarked =
             localBookmarkStates.get(course.courseId) ??
             isBookmarked(course.courseId);
@@ -752,7 +757,7 @@ export default function HelperCourseSearcher({
         })}
       </div>
 
-      {filteredCourses.length === 0 &&
+      {displayedCourses.length === 0 &&
         (searchValue ||
           selectedSchool !== "all" ||
           selectedDepartment !== "all" ||
