@@ -204,11 +204,11 @@ export default function Registration({
                 <div className="text-sm text-white/70">Hub Requirements</div>
               </div>
               <div>
-                <div className="text-2xl font-bold">5000</div>
+                <div className="text-2xl font-bold">6000</div>
                 <div className="text-sm text-white/70">Courses</div>
               </div>
               <div>
-                <div className="text-2xl font-bold">10</div>
+                <div className="text-2xl font-bold">12</div>
                 <div className="text-sm text-white/70">Colleges</div>
               </div>
             </div>
