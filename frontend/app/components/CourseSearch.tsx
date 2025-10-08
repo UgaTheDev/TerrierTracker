@@ -116,7 +116,7 @@ export default function CourseSearch({
   useEffect(() => {
     const checkApiHealth = async () => {
       try {
-        await apiRequest("/health", { method: "GET" });
+        await apiRequest("/api/health", { method: "GET" });
         setApiHealthy(true);
       } catch (error) {
         console.error("API health check failed:", error);
