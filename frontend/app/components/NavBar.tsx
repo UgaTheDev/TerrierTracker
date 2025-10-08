@@ -12,6 +12,7 @@ import { Kbd } from "@heroui/kbd";
 import { Link } from "@heroui/link";
 import { Input } from "@heroui/input";
 import { link as linkStyles } from "@heroui/theme";
+import OnlineUsersIndicator from "./OnlineUsersIndicator";
 import NextLink from "next/link";
 import clsx from "clsx";
 import { Image } from "@heroui/react";
@@ -20,7 +21,8 @@ import { ThemeSwitch } from "./ThemeSwitcher";
 import { GithubIcon, SearchIcon } from "@/app/components/icons";
 
 interface NavBarProps {
-  onNavigate?: (page: string) => void;
+  onNavigate: (page: string) => void;
+  userId?: number | null;
 }
 
 export const NavBar = ({ onNavigate }: NavBarProps) => {
@@ -89,6 +91,7 @@ export const NavBar = ({ onNavigate }: NavBarProps) => {
         <ThemeSwitch />
         <NavbarMenuToggle />
       </NavbarContent>
+      <OnlineUsersIndicator />
     </HeroUINavbar>
   );
 };

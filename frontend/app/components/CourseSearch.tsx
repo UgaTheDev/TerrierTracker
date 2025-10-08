@@ -51,7 +51,7 @@ const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
 
 const fetchAllCourses = async (): Promise<CourseData[]> => {
   try {
-    const data = await apiRequest("/all-courses", { method: "GET" });
+    const data = await apiRequest("/api/all-courses", { method: "GET" });
 
     const coursesArray = Object.entries(data.courses || {}).map(
       ([code, name]) => ({
@@ -70,7 +70,7 @@ const fetchAllCourses = async (): Promise<CourseData[]> => {
 
 const fetchHubRequirements = async (courseCode: string): Promise<string[]> => {
   try {
-    const data = await apiRequest("/search-course", {
+    const data = await apiRequest("/api/search-course", {
       method: "POST",
       body: JSON.stringify({
         course_identifier: courseCode,
@@ -116,7 +116,7 @@ export default function CourseSearch({
   useEffect(() => {
     const checkApiHealth = async () => {
       try {
-        await apiRequest("/health", { method: "GET" });
+        await apiRequest("/api/health", { method: "GET" });
         setApiHealthy(true);
       } catch (error) {
         console.error("API health check failed:", error);

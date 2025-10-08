@@ -764,7 +764,7 @@ export default function Home() {
 
   return (
     <>
-      <NavBar onNavigate={handleNavigate} />
+      <NavBar onNavigate={handleNavigate} userId={currentUser?.id || null} />
       <div className="flex flex-col lg:flex-row h-screen">
         <Sidebar
           onNavigate={handleNavigate}

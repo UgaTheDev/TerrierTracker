@@ -13,9 +13,8 @@ from urllib.parse import urlparse
 from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 import json
-from datetime import datetime
+from datetime import datetime, timedelta
 
-from course_data_manager import CourseDataManager
 load_dotenv()
 
 database_url = os.getenv('DATABASE_URL')
@@ -53,26 +52,6 @@ logger = logging.getLogger(__name__)
 SCRIPT_DIR = Path(__file__).parent.absolute()
 logger.info(f"Script directory: {SCRIPT_DIR}")
 
-CSV_DIR = SCRIPT_DIR.parent / 'CSVFiles'
-CSV_FILES = {
-    'cas': CSV_DIR / 'cas_all_courses.csv',
-    'khc': CSV_DIR / 'khc_hub_courses.csv',
-    'cds': CSV_DIR / 'cds_all_courses.csv',
-    'cfa': CSV_DIR / 'cfa_all_courses.csv',
-    'com': CSV_DIR / 'com_all_courses.csv',
-    'questrom': CSV_DIR / 'questrom_all_courses.csv',
-    'sar': CSV_DIR / 'sar_all_courses.csv',
-    'sha': CSV_DIR / 'sha_all_courses.csv',
-    'wheelock': CSV_DIR / 'wheelock_all_courses.csv',
-    'eng': CSV_DIR / 'eng_all_courses.csv',
-    'cgs': CSV_DIR / 'cgs_all_courses.csv',
-    'met': CSV_DIR / 'met_all_courses.csv',
-    'sph': CSV_DIR / 'sph_all_courses.csv'
-}
-
-for name, path in CSV_FILES.items():
-    logger.info(f"Looking for {name} CSV at: {path.absolute()}")
-
 def get_db_connection():
     try:
         host = os.getenv('DB_HOST')
@@ -94,49 +73,6 @@ def get_db_connection():
     except Exception as e:
         logger.error(f"Database connection failed: {e}")
         return None
-
-course_manager = None
-try:
-    csv_files = []
-    
-    for name, path in CSV_FILES.items():
-        if path.exists():
-            csv_files.append(path)
-            logger.info(f"Found {name} CSV: {path}")
-        else:
-            logger.warning(f"{name} CSV not found at: {path.absolute()}")
-    
-    if not csv_files:
-        raise FileNotFoundError(f"No CSV files found in {CSV_DIR}")
-    
-    course_manager = CourseDataManager(csv_files)
-    logger.info(f"CourseDataManager initialized successfully with {len(csv_files)} CSV files")
-    
-except Exception as e:
-    logger.error(f"Failed to initialize CourseDataManager: {e}")
-    logger.error(f"Full traceback: {traceback.format_exc()}")
-    
-    logger.info("Current file structure:")
-    logger.info(f"Script is in: {SCRIPT_DIR}")
-    logger.info(f"Parent directory: {SCRIPT_DIR.parent}")
-    logger.info(f"CSV directory: {CSV_DIR}")
-    logger.info(f"CSV directory exists: {CSV_DIR.exists()}")
-    
-    try:
-        logger.info("Contents of parent directory:")
-        for item in SCRIPT_DIR.parent.iterdir():
-            logger.info(f"  {item.name} ({'dir' if item.is_dir() else 'file'})")
-        
-        if CSV_DIR.exists():
-            logger.info("Contents of CSV Files directory:")
-            for item in CSV_DIR.iterdir():
-                logger.info(f"  {item.name}")
-        else:
-            logger.info("CSV Files directory does not exist")
-    except Exception as debug_e:
-        logger.error(f"Error listing directories: {debug_e}")
-    
-    course_manager = None
 
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
@@ -222,6 +158,29 @@ def google_auth():
         logger.error(f"Google auth error: {e}")
         logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({'error': 'Authentication failed', 'success': False}), 500
+
+active_users = {}
+ACTIVITY_TIMEOUT = timedelta(minutes=5)
+
+def cleanup_inactive_users():
+    """Remove users who haven't been active recently"""
+    now = datetime.now()
+    inactive_users = [
+        user_id for user_id, last_active in active_users.items()
+        if now - last_active > ACTIVITY_TIMEOUT
+    ]
+    for user_id in inactive_users:
+        del active_users[user_id]
+
+def update_user_activity(user_id):
+    """Update the last activity timestamp for a user"""
+    active_users[user_id] = datetime.now()
+    cleanup_inactive_users()
+
+def get_online_users_count():
+    """Get the count of currently active users"""
+    cleanup_inactive_users()
+    return len(active_users)
 
 @app.route('/api/register', methods=['POST'])
 def register():
@@ -334,8 +293,8 @@ def login():
 def root():
     return jsonify({
         "message": "BU Course API is running!",
-        "version": "1.0.0",
-        "data_sources": list(CSV_FILES.keys()),
+        "version": "2.0.0",
+        "data_source": "PostgreSQL",
         "endpoints": {
             "health": "/api/health (GET)",
             "register": "/api/register (POST)",
@@ -357,32 +316,31 @@ def root():
 @app.route('/api/health', methods=['GET'])
 def health_check():
     db_status = "connected"
+    course_count = 0
+    hub_count = 0
+    
     try:
         conn = get_db_connection()
         if conn:
+            cur = conn.cursor()
+            cur.execute('SELECT COUNT(*) FROM courses')
+            course_count = cur.fetchone()[0]
+            cur.execute('SELECT COUNT(*) FROM hub_requirements')
+            hub_count = cur.fetchone()[0]
+            cur.close()
             conn.close()
         else:
             db_status = "disconnected"
     except Exception as e:
         db_status = f"error: {str(e)}"
     
-    data_sources_status = {
-        name: {
-            "path": str(path),
-            "exists": path.exists()
-        }
-        for name, path in CSV_FILES.items()
-    }
-    
     return jsonify({
         "status": "healthy", 
         "service": "BU Course API",
         "database_status": db_status,
-        "course_manager_status": "ready" if course_manager else "not initialized",
-        "script_directory": str(SCRIPT_DIR),
-        "csv_directory": str(CSV_DIR),
-        "data_sources": data_sources_status,
-        "total_csv_files_loaded": len([name for name, path in CSV_FILES.items() if path.exists()]),
+        "data_source": "PostgreSQL",
+        "total_courses": course_count,
+        "total_hub_requirements": hub_count,
         "environment": {
             "db_host": os.getenv('DB_HOST', 'localhost'),
             "db_name": os.getenv('DB_NAME', 'not set'),
@@ -392,9 +350,6 @@ def health_check():
 
 @app.route('/api/search-course', methods=['POST'])
 def search_course():
-    if not course_manager:
-        return jsonify({"error": "Course manager not initialized"}), 500
-    
     try:
         data = request.json
         if not data:
@@ -405,34 +360,65 @@ def search_course():
             return jsonify({"error": "course_identifier is required"}), 400
         
         logger.info(f"Searching for course: {course_identifier}")
-        course_code = course_manager.find_course_code(course_identifier)
         
-        if not course_code:
-            logger.info(f"Course not found: {course_identifier}")
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+        
+        cur = conn.cursor()
+        
+        try:
+            # Search for the course (handle both "CAS CS 111" and "CASCS111" formats)
+            normalized_input = course_identifier.replace(' ', '').upper()
+            
+            cur.execute('''
+                SELECT c.id, c.code, c.name
+                FROM courses c
+                WHERE REPLACE(c.code, ' ', '') ILIKE %s
+                LIMIT 1
+            ''', (f'%{normalized_input}%',))
+            
+            course = cur.fetchone()
+            
+            if not course:
+                logger.info(f"Course not found: {course_identifier}")
+                return jsonify({
+                    "found": False,
+                    "course_code": None,
+                    "hub_requirements": []
+                })
+            
+            course_id, course_code, course_name = course
+            
+            # Get hub requirements
+            cur.execute('''
+                SELECT hr.name
+                FROM hub_requirements hr
+                JOIN course_hub_requirements chr ON hr.id = chr.hub_requirement_id
+                WHERE chr.course_id = %s
+                ORDER BY hr.display_order
+            ''', (course_id,))
+            
+            hub_requirements = [row[0] for row in cur.fetchall()]
+            logger.info(f"Found course {course_code} with {len(hub_requirements)} hub requirements")
+            
             return jsonify({
-                "found": False,
-                "course_code": None,
-                "hub_requirements": []
+                "found": True,
+                "course_code": course_code,
+                "hub_requirements": hub_requirements
             })
-        
-        hub_requirements = course_manager.get_hub_requirements_for_course(course_code)
-        logger.info(f"Found course {course_code} with {len(hub_requirements)} hub requirements")
-        
-        return jsonify({
-            "found": True,
-            "course_code": course_code,
-            "hub_requirements": hub_requirements
-        })
+            
+        finally:
+            cur.close()
+            conn.close()
     
     except Exception as e:
         logger.error(f"Error in search_course: {e}")
+        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/bulk-hub-requirements', methods=['POST'])
 def bulk_hub_requirements():
-    if not course_manager:
-        return jsonify({"error": "Course manager not initialized"}), 500
-    
     try:
         data = request.json
         if not data:
@@ -444,51 +430,89 @@ def bulk_hub_requirements():
         
         logger.info(f"Bulk fetching hub requirements for {len(course_codes)} courses")
         
-        results = {}
-        for course_code in course_codes:
-            try:
-                hub_requirements = course_manager.get_hub_requirements_for_course(course_code)
-                results[course_code] = hub_requirements
-            except Exception as e:
-                logger.error(f"Error fetching requirements for {course_code}: {e}")
-                results[course_code] = []
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
         
-        logger.info(f"Successfully fetched requirements for {len(results)} courses")
-        return jsonify({
-            "success": True,
-            "results": results,
-            "total_courses": len(results)
-        })
+        cur = conn.cursor()
+        
+        try:
+            # Single efficient query instead of multiple CSV scans
+            cur.execute('''
+                SELECT c.code, hr.name
+                FROM courses c
+                JOIN course_hub_requirements chr ON c.id = chr.course_id
+                JOIN hub_requirements hr ON chr.hub_requirement_id = hr.id
+                WHERE c.code = ANY(%s)
+                ORDER BY c.code, hr.display_order
+            ''', (course_codes,))
+            
+            # Group results by course code
+            results = {}
+            for code, hub_name in cur.fetchall():
+                if code not in results:
+                    results[code] = []
+                results[code].append(hub_name)
+            
+            # Include courses with no requirements
+            for code in course_codes:
+                if code not in results:
+                    results[code] = []
+            
+            logger.info(f"Successfully fetched requirements for {len(results)} courses")
+            return jsonify({
+                "success": True,
+                "results": results,
+                "total_courses": len(results)
+            })
+            
+        finally:
+            cur.close()
+            conn.close()
     
     except Exception as e:
         logger.error(f"Error in bulk_hub_requirements: {e}")
+        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/all-courses', methods=['GET'])
 def get_all_courses():
-    if not course_manager:
-        return jsonify({"error": "Course manager not initialized"}), 500
-    
     try:
-        logger.info("Fetching all courses")
-        all_courses = course_manager.get_all_courses()
-        logger.info(f"Retrieved {len(all_courses)} courses")
+        logger.info("Fetching all courses from database")
         
-        return jsonify({
-            "courses": all_courses,
-            "total_courses": len(all_courses),
-            "data_sources": list(CSV_FILES.keys())
-        })
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+        
+        cur = conn.cursor()
+        
+        try:
+            cur.execute('''
+                SELECT code, name 
+                FROM courses 
+                ORDER BY code
+            ''')
+            
+            # Format as dictionary like the old CSV version
+            all_courses = {row[0]: row[1] for row in cur.fetchall()}
+            logger.info(f"Retrieved {len(all_courses)} courses from database")
+            
+            return jsonify({
+                "courses": all_courses,
+                "total_courses": len(all_courses)
+            })
+            
+        finally:
+            cur.close()
+            conn.close()
     
     except Exception as e:
         logger.error(f"Error in get_all_courses: {e}")
+        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/multiple-courses', methods=['POST'])
 def multiple_courses():
-    if not course_manager:
-        return jsonify({"error": "Course manager not initialized"}), 500
-    
     try:
         data = request.json
         if not data:
@@ -499,25 +523,61 @@ def multiple_courses():
             return jsonify({"error": "courses array is required"}), 400
         
         logger.info(f"Processing multiple courses: {courses}")
-        results, hub_req_set = course_manager.print_multiple_hub_requirements(courses)
         
-        return jsonify({
-            "results": results,
-            "unique_hubs": list(hub_req_set),
-            "total_unique_hubs": len(hub_req_set)
-        })
+        conn = get_db_connection()
+        if not conn:
+            return jsonify({"error": "Database connection failed"}), 500
+        
+        cur = conn.cursor()
+        
+        try:
+            # Get hub requirements for all courses
+            cur.execute('''
+                SELECT c.code, hr.name
+                FROM courses c
+                JOIN course_hub_requirements chr ON c.id = chr.course_id
+                JOIN hub_requirements hr ON chr.hub_requirement_id = hr.id
+                WHERE c.code = ANY(%s)
+                ORDER BY c.code, hr.display_order
+            ''', (courses,))
+            
+            # Group results by course code
+            results = []
+            hub_req_set = set()
+            
+            course_hubs = {}
+            for code, hub_name in cur.fetchall():
+                if code not in course_hubs:
+                    course_hubs[code] = []
+                course_hubs[code].append(hub_name)
+                hub_req_set.add(hub_name)
+            
+            # Format results
+            for course_code in courses:
+                hubs = course_hubs.get(course_code, [])
+                results.append({
+                    "course_code": course_code,
+                    "hub_requirements": hubs
+                })
+            
+            return jsonify({
+                "results": results,
+                "unique_hubs": list(hub_req_set),
+                "total_unique_hubs": len(hub_req_set)
+            })
+            
+        finally:
+            cur.close()
+            conn.close()
     
     except Exception as e:
         logger.error(f"Error in multiple_courses: {e}")
+        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/process-pdf', methods=['POST'])
 def process_pdf():
     logger.info("=== PDF PROCESSING STARTED ===")
-    
-    if not course_manager:
-        logger.error("Course manager not initialized")
-        return jsonify({"error": "Course manager not initialized"}), 500
     
     try:
         if 'pdf_file' not in request.files:
@@ -558,39 +618,57 @@ def process_pdf():
             courses = raw_fetch_courses_info(reader)
             logger.info(f"Extracted {len(courses)} courses: {courses}")
             
-            logger.info("Processing course requirements...")
-            course_results = []
-            for i, course_info in enumerate(courses):
-                course_code = course_info[0]  
-                logger.info(f"Processing course {i+1}/{len(courses)}: {course_code}")
+            # Get database connection
+            conn = get_db_connection()
+            if not conn:
+                return jsonify({"error": "Database connection failed"}), 500
+            
+            cur = conn.cursor()
+            
+            try:
+                logger.info("Processing course requirements...")
+                course_results = []
                 
-                hub_requirements = course_manager.get_hub_requirements_for_course(course_code)
-                logger.info(f"Found hub requirements for {course_code}: {hub_requirements}")
+                for i, course_info in enumerate(courses):
+                    course_code = course_info[0]
+                    logger.info(f"Processing course {i+1}/{len(courses)}: {course_code}")
+                    
+                    # Get hub requirements from database
+                    cur.execute('''
+                        SELECT hr.name
+                        FROM courses c
+                        JOIN course_hub_requirements chr ON c.id = chr.course_id
+                        JOIN hub_requirements hr ON chr.hub_requirement_id = hr.id
+                        WHERE c.code = %s
+                        ORDER BY hr.display_order
+                    ''', (course_code,))
+                    
+                    hub_requirements = [row[0] for row in cur.fetchall()]
+                    logger.info(f"Found hub requirements for {course_code}: {hub_requirements}")
+                    
+                    course_result = {
+                        "course_code": course_code,
+                        "school": course_info[1],
+                        "department": course_info[2],
+                        "credits": course_info[3],
+                        "hub_requirements": hub_requirements,
+                        "semester": semester
+                    }
+                    course_results.append(course_result)
                 
-                course_result = {
-                    "course_code": course_code,
-                    "school": course_info[1],
-                    "department": course_info[2],
-                    "credits": course_info[3],
-                    "hub_requirements": hub_requirements,
+                response_data = {
+                    "success": True,
+                    "courses": course_results,
+                    "total_courses": len(course_results),
                     "semester": semester
                 }
-                course_results.append(course_result)
-                logger.info(f"Added course result: {course_result}")
-            
-            logger.info(f"Final course results: {course_results}")
-            
-            response_data = {
-                "success": True,
-                "courses": course_results,
-                "total_courses": len(course_results),
-                "semester": semester
-            }
-            
-            logger.info(f"Sending response: {response_data}")
-            logger.info("=== PDF PROCESSING COMPLETED SUCCESSFULLY ===")
-            
-            return jsonify(response_data)
+                
+                logger.info("=== PDF PROCESSING COMPLETED SUCCESSFULLY ===")
+                return jsonify(response_data)
+                
+            finally:
+                cur.close()
+                conn.close()
             
         finally:
             logger.info(f"Cleaning up temporary file: {temp_file_path}")
@@ -622,7 +700,6 @@ def get_user_courses(user_id):
                 'bookmarked_courses': result[1] or []
             })
         else:
-            
             return jsonify({
                 'enrolled_courses': [],
                 'bookmarked_courses': []
@@ -648,7 +725,6 @@ def add_enrolled_course(user_id):
             return jsonify({"error": "Database connection failed"}), 500
             
         cur = conn.cursor()
-        
         
         cur.execute('''
             INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses)
@@ -755,7 +831,6 @@ def remove_bookmarked_course(user_id):
 
 @app.route('/api/user/<int:user_id>/courses/custom', methods=['GET'])
 def get_custom_courses(user_id):
-    
     try:
         conn = get_db_connection()
         if not conn:
@@ -876,7 +951,6 @@ def delete_custom_course(user_id, course_id):
 
 @app.route('/api/user/<int:user_id>/courses/edited', methods=['GET'])
 def get_edited_courses(user_id):
-    
     try:
         conn = get_db_connection()
         if not conn:
@@ -996,6 +1070,52 @@ def delete_edited_course(user_id, course_id):
     finally:
         cur.close()
         conn.close()
+
+@app.before_request
+def track_user_activity():
+    if request.path in ['/api/health', '/sitemap.xml', '/robots.txt']:
+        return
+    user_id = None
+    if request.is_json and request.method in ['POST', 'PUT']:
+        data = request.get_json(silent=True)
+        if data:
+            user_id = data.get('user_id')
+    if not user_id:
+        user_id = request.args.get('user_id')
+    if user_id:
+        try:
+            update_user_activity(int(user_id))
+        except (ValueError, TypeError):
+            pass
+
+@app.route('/api/users/online', methods=['GET'])
+def get_online_users():
+    """Get the count of currently online users"""
+    count = get_online_users_count()
+    return jsonify({
+        'online_users': count,
+        'timestamp': datetime.now().isoformat()
+    })
+
+@app.route('/api/users/heartbeat', methods=['POST'])
+def user_heartbeat():
+    """Endpoint for frontend to ping and update user activity"""
+    try:
+        data = request.json
+        user_id = data.get('user_id')
+        
+        if not user_id:
+            return jsonify({"error": "user_id is required"}), 400
+        
+        update_user_activity(int(user_id))
+        
+        return jsonify({
+            'success': True,
+            'online_users': get_online_users_count()
+        })
+    except Exception as e:
+        logger.error(f"Error in heartbeat: {e}")
+        return jsonify({'error': str(e)}), 500
 
 @app.errorhandler(404)
 def not_found(error):
