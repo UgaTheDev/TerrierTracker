@@ -139,7 +139,7 @@ export default function CourseRecommender({
   useEffect(() => {
     const loadAllCourses = async () => {
       try {
-        const data = await apiRequest("/all-courses", { method: "GET" });
+        const data = await apiRequest("/api/all-courses", { method: "GET" });
         const coursesArray = Object.entries(data.courses || {}).map(
           ([code, name]) => ({
             courseId: code,
@@ -190,7 +190,7 @@ export default function CourseRecommender({
     courseCode: string
   ): Promise<string[]> => {
     try {
-      const data = await apiRequest("/search-course", {
+      const data = await apiRequest("/api/search-course", {
         method: "POST",
         body: JSON.stringify({
           course_identifier: courseCode,

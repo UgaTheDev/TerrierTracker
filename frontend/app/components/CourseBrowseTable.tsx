@@ -110,7 +110,7 @@ const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
 
 const fetchAllCourses = async (): Promise<CourseData[]> => {
   try {
-    const data = await apiRequest("/all-courses", { method: "GET" });
+    const data = await apiRequest("/api/all-courses", { method: "GET" });
 
     const coursesArray = Object.entries(data.courses || {}).map(
       ([code, name]) => ({
@@ -144,7 +144,7 @@ const fetchMultipleHubRequirements = async (
 
   const allChunkPromises = chunks.map(async (chunk) => {
     try {
-      const data = await apiRequest("/bulk-hub-requirements", {
+      const data = await apiRequest("/api/bulk-hub-requirements", {
         method: "POST",
         body: JSON.stringify({ course_codes: chunk }),
       });
@@ -318,7 +318,7 @@ export default function CourseBrowseTable({
     const initializeData = async () => {
       try {
         console.log("Starting API health check...");
-        await apiRequest("/health", { method: "GET" });
+        await apiRequest("/api/health", { method: "GET" });
         console.log("API health check passed");
         setApiHealthy(true);
 
