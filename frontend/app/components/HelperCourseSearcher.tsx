@@ -367,16 +367,20 @@ export default function HelperCourseSearcher({
 
     if (coursesNeedingRequirements.length === 0) return;
 
+    console.log(
+      `Batch loading requirements for ${coursesNeedingRequirements.length} courses`
+    );
     setBatchLoading(true);
 
     try {
-      const requirementsMap = await fetchMultipleHubRequirements(
-        coursesNeedingRequirements
-      );
+      const data = await apiRequest("/bulk-hub-requirements", {
+        method: "POST",
+        body: JSON.stringify({ course_codes: coursesNeedingRequirements }),
+      });
 
       setAllCourses((prev) =>
         prev.map((course) => {
-          const hubRequirements = requirementsMap.get(course.courseId);
+          const hubRequirements = data.results[course.courseId];
           if (hubRequirements !== undefined) {
             const requirementsText =
               hubRequirements.length > 0
@@ -387,6 +391,8 @@ export default function HelperCourseSearcher({
           return course;
         })
       );
+
+      console.log("Batch loading complete");
     } catch (error) {
       console.error("Failed to batch load requirements:", error);
     } finally {

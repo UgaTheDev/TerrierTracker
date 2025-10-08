@@ -5,11 +5,9 @@ import { Users } from "lucide-react";
 const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
 
 export default function OnlineUsersIndicator() {
-  // No props needed
   const [onlineCount, setOnlineCount] = useState<number>(0);
 
   useEffect(() => {
-    // Get userId from localStorage
     const getUserId = () => {
       try {
         const savedUser = localStorage.getItem("user");
