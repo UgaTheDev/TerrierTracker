@@ -24,7 +24,7 @@ interface CourseSearchProps {
   isEnrolled: (courseId: string) => boolean;
 }
 
-const API_BASE_URL = "https://terriertracker-production.up.railway.app/api";
+const API_BASE_URL = "https://terriertracker-production.up.railway.app";
 
 const apiRequest = async (endpoint: string, options: RequestInit = {}) => {
   try {
