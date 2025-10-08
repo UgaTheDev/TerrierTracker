@@ -116,7 +116,7 @@ export default function CourseSearch({
   useEffect(() => {
     const checkApiHealth = async () => {
       try {
-        await apiRequest("/api/health", { method: "GET" });
+        await apiRequest("/health", { method: "GET" });
         setApiHealthy(true);
       } catch (error) {
         console.error("API health check failed:", error);
@@ -141,6 +141,35 @@ export default function CourseSearch({
         const coursesData = await fetchAllCourses();
         setAllCourses(coursesData);
         setFilteredCourses(coursesData.slice(0, 50));
+
+        const initialCodes = coursesData.slice(0, 100).map((c) => c.courseId);
+
+        try {
+          const bulkData = await apiRequest("/bulk-hub-requirements", {
+            method: "POST",
+            body: JSON.stringify({ course_codes: initialCodes }),
+          });
+
+          const updatedCourses = coursesData.map((course) => {
+            const hubRequirements = bulkData.results[course.courseId];
+            if (hubRequirements !== undefined) {
+              return {
+                ...course,
+                hubRequirements,
+                requirementsText:
+                  hubRequirements.length > 0
+                    ? hubRequirements.join(", ")
+                    : "No hub requirements",
+              };
+            }
+            return course;
+          });
+
+          setAllCourses(updatedCourses);
+          setFilteredCourses(updatedCourses.slice(0, 50));
+        } catch (bulkError) {
+          console.error("Failed to preload hub requirements:", bulkError);
+        }
       } catch (error: any) {
         console.error("Error loading course data:", error);
         setError(error.message);
