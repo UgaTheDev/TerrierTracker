@@ -373,7 +373,7 @@ export default function HelperCourseSearcher({
     setBatchLoading(true);
 
     try {
-      const data = await apiRequest("/bulk-hub-requirements", {
+      const data = await apiRequest("/api/bulk-hub-requirements", {
         method: "POST",
         body: JSON.stringify({ course_codes: coursesNeedingRequirements }),
       });
