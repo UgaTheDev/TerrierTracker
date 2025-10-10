@@ -34,7 +34,6 @@ def filter_courses(input_csv='cas_hub_courses.csv', output_csv='filtered_courses
         print("No courses found meeting the criteria.")
 
 def print_sample_results(csv_file='filtered_courses.csv', num_rows=5):
-    """Prints a sample of the filtered results"""
     try:
         with open(csv_file, mode='r', encoding='utf-8') as file:
             reader = csv.DictReader(file)

@@ -33,7 +33,6 @@ hub_requirements = [
 ]
 
 def get_db_connection():
-    """Create a database connection"""
     try:
         conn = psycopg2.connect(DATABASE_URL)
         return conn
@@ -85,7 +84,6 @@ def scrape_page(page_num):
         return []
 
 def save_to_database(all_courses):
-    """Save courses to PostgreSQL database"""
     conn = get_db_connection()
     if not conn:
         print("Failed to connect to database")

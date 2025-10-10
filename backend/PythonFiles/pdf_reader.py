@@ -3,7 +3,6 @@ from course_data_manager import CourseDataManager
 from pathlib import Path
 
 def fetch_semester(reader):
-    """Extract semester information from the PDF"""
     try:
         page = reader.pages[0]
         text_lines = page.extract_text().split("\n")
@@ -17,7 +16,6 @@ def fetch_semester(reader):
     return "Unknown Semester"
 
 def raw_fetch_courses_info(reader):
-    """Extract course information from all pages of the PDF - FIXED VERSION"""
     courses = []
     
     try:
@@ -83,7 +81,6 @@ def raw_fetch_courses_info(reader):
     return courses
 
 def find_course_requirements(courses):
-    """Find hub requirements for a list of courses"""
     results = []
     
     for course in courses:
