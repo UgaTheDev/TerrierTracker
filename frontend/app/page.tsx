@@ -331,6 +331,11 @@ export default function Home() {
       const result = await response.json();
       console.log("Response JSON:", result);
 
+      if (result.debug_log) {
+        console.log("=== PDF PROCESSING DEBUG LOG ===");
+        console.log(result.debug_log);
+      }
+
       if (response.ok && result.success) {
         console.log("PDF processing successful!");
 
