@@ -20,7 +20,6 @@ load_dotenv()
 database_url = os.getenv('DATABASE_URL')
 if database_url:
     parsed_url = urlparse(database_url)
-
     os.environ['DB_HOST'] = parsed_url.hostname or ''
     os.environ['DB_PORT'] = str(parsed_url.port) if parsed_url.port else ''
     os.environ['DB_NAME'] = parsed_url.path.lstrip('/') if parsed_url.path else ''
@@ -28,60 +27,66 @@ if database_url:
     os.environ['DB_PASSWORD'] = parsed_url.password or ''
 
 app = Flask(__name__)
-
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+
+log_level = logging.DEBUG if os.getenv('FLASK_ENV') == 'development' else logging.WARNING
+logging.basicConfig(level=log_level)
+logger = logging.getLogger(__name__)
+
+SCRIPT_DIR = Path(__file__).parent.absolute()
 
 @app.after_request
 def after_request(response):
     origin = request.headers.get('Origin')
-    
-    if origin and (
-        origin.endswith('.vercel.app') or 
-        origin == 'http://localhost:3000' or 
-        origin == 'http://localhost:5000'
-    ):
+    if origin and (origin.endswith('.vercel.app') or origin == 'http://localhost:3000' or origin == 'http://localhost:5000'):
         response.headers['Access-Control-Allow-Origin'] = origin
         response.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS'
-        response.headers['Access-Control-Allow-Headers'] = 'Content-Type'
-        response.headers['Access-Control-Allow-Age'] = '3600'
+        response.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization'
+        response.headers['Access-Control-Max-Age'] = '3600'
+        response.headers['Access-Control-Allow-Credentials'] = 'true'
     return response
 
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
-
-SCRIPT_DIR = Path(__file__).parent.absolute()
-logger.info(f"Script directory: {SCRIPT_DIR}")
+@app.route('/<path:path>', methods=['OPTIONS'])
+def handle_options(path):
+    return '', 204
 
 def get_db_connection():
     try:
-        host = os.getenv('DB_HOST')
-        port = os.getenv('DB_PORT')
-        database = os.getenv('DB_NAME')
-        user = os.getenv('DB_USER')
-        password = os.getenv('DB_PASSWORD')
-
-        logger.info(f"Trying DB connection with host={host}, port={port}, database={database}, user={user}")
-        
         conn = psycopg2.connect(
-            host=host,
-            port=port,
-            database=database,
-            user=user,
-            password=password
+            host=os.getenv('DB_HOST'),
+            port=os.getenv('DB_PORT'),
+            database=os.getenv('DB_NAME'),
+            user=os.getenv('DB_USER'),
+            password=os.getenv('DB_PASSWORD')
         )
         return conn
     except Exception as e:
         logger.error(f"Database connection failed: {e}")
         return None
 
+active_users = {}
+ACTIVITY_TIMEOUT = timedelta(minutes=5)
+
+def cleanup_inactive_users():
+    now = datetime.now()
+    inactive_users = [user_id for user_id, last_active in active_users.items() if now - last_active > ACTIVITY_TIMEOUT]
+    for user_id in inactive_users:
+        del active_users[user_id]
+
+def update_user_activity(user_id):
+    active_users[user_id] = datetime.now()
+    cleanup_inactive_users()
+
+def get_online_users_count():
+    cleanup_inactive_users()
+    return len(active_users)
+
 @app.route('/sitemap.xml', methods=['GET'])
 def sitemap():
-    logger.info("Sitemap request received - returning 404 to let Next.js handle it")
     return '', 404
 
 @app.route('/robots.txt', methods=['GET'])
 def robots():
-    logger.info("Robots.txt request received - returning 404 to let Next.js handle it")
     return '', 404
 
 @app.route('/api/auth/google', methods=['POST'])
@@ -89,236 +94,110 @@ def google_auth():
     try:
         data = request.json
         token = data.get('credential')
-        
-        logger.info(f"Received Google token (first 20 chars): {token[:20] if token else 'None'}")
-        logger.info(f"Using GOOGLE_CLIENT_ID: {GOOGLE_CLIENT_ID}")
-        
         if not token:
             return jsonify({"error": "No credential provided"}), 400
-        
         if not GOOGLE_CLIENT_ID:
             logger.error("GOOGLE_CLIENT_ID not set in environment!")
             return jsonify({"error": "Server configuration error"}), 500
-        
-        idinfo = id_token.verify_oauth2_token(
-            token, 
-            google_requests.Request(), 
-            GOOGLE_CLIENT_ID
-        )
-        
-        logger.info(f"Token verified successfully for email: {idinfo.get('email')}")
-        
+        idinfo = id_token.verify_oauth2_token(token, google_requests.Request(), GOOGLE_CLIENT_ID)
         email = idinfo.get('email')
-        google_id = idinfo.get('sub')
         first_name = idinfo.get('given_name', '')
         last_name = idinfo.get('family_name', '')
-        
         if not email:
             return jsonify({"error": "Email not found in token"}), 400
-        
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-        
         cur = conn.cursor()
-        
         try:
             cur.execute('SELECT user_id, email FROM userinfo WHERE email = %s', (email,))
             user = cur.fetchone()
-            
             if user:
                 user_id = user[0]
-                logger.info(f"Google user logged in: {email} (ID: {user_id})")
             else:
-                cur.execute(
-                    'INSERT INTO userinfo (email, password, first_name, last_name) VALUES (%s, %s, %s, %s) RETURNING user_id',
-                    (email, '', first_name, last_name)
-                )
+                cur.execute('INSERT INTO userinfo (email, password, first_name, last_name) VALUES (%s, %s, %s, %s) RETURNING user_id', (email, '', first_name, last_name))
                 user_id = cur.fetchone()[0]
                 conn.commit()
-                logger.info(f"New Google user created: {email} (ID: {user_id})")
-            
-            return jsonify({
-                'message': 'Login successful',
-                'user': {
-                    'id': user_id,
-                    'email': email
-                },
-                'success': True
-            }), 200
-            
+            return jsonify({'message': 'Login successful', 'user': {'id': user_id, 'email': email}, 'success': True}), 200
         finally:
             cur.close()
             conn.close()
-        
     except ValueError as e:
         logger.error(f"Invalid Google token: {e}")
         return jsonify({'error': 'Invalid token', 'success': False}), 401
     except Exception as e:
         logger.error(f"Google auth error: {e}")
-        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({'error': 'Authentication failed', 'success': False}), 500
-
-active_users = {}
-ACTIVITY_TIMEOUT = timedelta(minutes=5)
-
-def cleanup_inactive_users():
-    """Remove users who haven't been active recently"""
-    now = datetime.now()
-    inactive_users = [
-        user_id for user_id, last_active in active_users.items()
-        if now - last_active > ACTIVITY_TIMEOUT
-    ]
-    for user_id in inactive_users:
-        del active_users[user_id]
-
-def update_user_activity(user_id):
-    """Update the last activity timestamp for a user"""
-    active_users[user_id] = datetime.now()
-    cleanup_inactive_users()
-
-def get_online_users_count():
-    """Get the count of currently active users"""
-    cleanup_inactive_users()
-    return len(active_users)
 
 @app.route('/api/register', methods=['POST'])
 def register():
-    logger.info("Registration attempt started")
     try:
         data = request.json
         if not data:
-            logger.warning("No JSON data provided for registration")
             return jsonify({"error": "No JSON data provided"}), 400
-            
         email = data.get('email')
         password = data.get('password')
         first_name = data.get('firstName', '')
         last_name = data.get('lastName', '')
-        
         if not email or not password:
-            logger.warning("Missing email or password in registration")
             return jsonify({"error": "Email and password are required"}), 400
-        
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-        
         conn = get_db_connection()
         if not conn:
-            logger.error("Database connection failed during registration")
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        
         try:
             cur.execute('SELECT user_id FROM userinfo WHERE email = %s', (email,))
             if cur.fetchone():
-                logger.info(f"Registration failed - user already exists: {email}")
                 return jsonify({'error': 'User already exists'}), 400
-            
-            cur.execute(
-                'INSERT INTO userinfo (email, password, first_name, last_name) VALUES (%s, %s, %s, %s) RETURNING user_id',
-                (email, hashed_password.decode('utf-8'), first_name, last_name)
-            )
+            cur.execute('INSERT INTO userinfo (email, password, first_name, last_name) VALUES (%s, %s, %s, %s) RETURNING user_id', (email, hashed_password.decode('utf-8'), first_name, last_name))
             user_id = cur.fetchone()[0]
-            
             conn.commit()
-            logger.info(f"User registered successfully: {email} (ID: {user_id})")
-            
-            return jsonify({
-                'message': 'User created successfully', 
-                'user_id': user_id,
-                'success': True
-            }), 201
-            
+            return jsonify({'message': 'User created successfully', 'user_id': user_id, 'success': True}), 201
         finally:
             cur.close()
             conn.close()
-        
     except Exception as e:
         logger.error(f"Registration error: {e}")
-        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({'error': 'Registration failed', 'success': False}), 500
 
 @app.route('/api/login', methods=['POST'])
 def login():
-    logger.info("Login attempt started")
     try:
         data = request.json
         if not data:
-            logger.warning("No JSON data provided for login")
             return jsonify({"error": "No JSON data provided"}), 400
-            
         email = data.get('email')
         password = data.get('password')
-        
         if not email or not password:
-            logger.warning("Missing email or password in login")
             return jsonify({"error": "Email and password are required"}), 400
-        
         conn = get_db_connection()
         if not conn:
-            logger.error("Database connection failed during login")
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        
         try:
             cur.execute('SELECT user_id, email, password FROM userinfo WHERE email = %s', (email,))
             user = cur.fetchone()
-            
             if user and bcrypt.checkpw(password.encode('utf-8'), user[2].encode('utf-8')):
-                logger.info(f"User logged in successfully: {email} (ID: {user[0]})")
-                return jsonify({
-                    'message': 'Login successful',
-                    'user': {
-                        'id': user[0],
-                        'email': user[1]
-                    },
-                    'success': True
-                }), 200
+                return jsonify({'message': 'Login successful', 'user': {'id': user[0], 'email': user[1]}, 'success': True}), 200
             else:
-                logger.warning(f"Failed login attempt for: {email}")
                 return jsonify({'error': 'Invalid credentials', 'success': False}), 401
-                
         finally:
             cur.close()
             conn.close()
-            
     except Exception as e:
         logger.error(f"Login error: {e}")
-        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({'error': 'Login failed', 'success': False}), 500
 
 @app.route('/', methods=['GET'])
 def root():
-    return jsonify({
-        "message": "BU Course API is running!",
-        "version": "2.0.0",
-        "data_source": "PostgreSQL",
-        "endpoints": {
-            "health": "/api/health (GET)",
-            "register": "/api/register (POST)",
-            "login": "/api/login (POST)",
-            "google_auth": "/api/auth/google (POST)",
-            "search_course": "/api/search-course (POST)",
-            "multiple_courses": "/api/multiple-courses (POST)",
-            "bulk_hub_requirements": "/api/bulk-hub-requirements (POST)",
-            "all_courses": "/api/all-courses (GET)",
-            "process_pdf": "/api/process-pdf (POST)",
-            "user_courses": "/api/user/<user_id>/courses (GET)",
-            "add_enrolled": "/api/user/<user_id>/courses/enrolled (POST)",
-            "remove_enrolled": "/api/user/<user_id>/courses/enrolled (DELETE)",
-            "add_bookmarked": "/api/user/<user_id>/courses/bookmarked (POST)",
-            "remove_bookmarked": "/api/user/<user_id>/courses/bookmarked (DELETE)"
-        }
-    })
+    return jsonify({"message": "BU Course API is running!", "version": "2.0.0", "data_source": "PostgreSQL", "endpoints": {"health": "/api/health (GET)", "register": "/api/register (POST)", "login": "/api/login (POST)", "google_auth": "/api/auth/google (POST)", "search_course": "/api/search-course (POST)", "multiple_courses": "/api/multiple-courses (POST)", "bulk_hub_requirements": "/api/bulk-hub-requirements (POST)", "all_courses": "/api/all-courses (GET)", "process_pdf": "/api/process-pdf (POST)", "users_online": "/api/users/online (GET)", "user_heartbeat": "/api/users/heartbeat (POST)", "user_courses": "/api/user/<user_id>/courses (GET)", "add_enrolled": "/api/user/<user_id>/courses/enrolled (POST)", "remove_enrolled": "/api/user/<user_id>/courses/enrolled (DELETE)", "add_bookmarked": "/api/user/<user_id>/courses/bookmarked (POST)", "remove_bookmarked": "/api/user/<user_id>/courses/bookmarked (DELETE)"}})
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
     db_status = "connected"
     course_count = 0
     hub_count = 0
-    
     try:
         conn = get_db_connection()
         if conn:
@@ -333,20 +212,7 @@ def health_check():
             db_status = "disconnected"
     except Exception as e:
         db_status = f"error: {str(e)}"
-    
-    return jsonify({
-        "status": "healthy", 
-        "service": "BU Course API",
-        "database_status": db_status,
-        "data_source": "PostgreSQL",
-        "total_courses": course_count,
-        "total_hub_requirements": hub_count,
-        "environment": {
-            "db_host": os.getenv('DB_HOST', 'localhost'),
-            "db_name": os.getenv('DB_NAME', 'not set'),
-            "db_user": os.getenv('DB_USER', 'not set')
-        }
-    })
+    return jsonify({"status": "healthy", "service": "BU Course API", "database_status": db_status, "data_source": "PostgreSQL", "total_courses": course_count, "total_hub_requirements": hub_count})
 
 @app.route('/api/search-course', methods=['POST'])
 def search_course():
@@ -354,67 +220,28 @@ def search_course():
         data = request.json
         if not data:
             return jsonify({"error": "No JSON data provided"}), 400
-        
         course_identifier = data.get('course_identifier', '')
         if not course_identifier:
             return jsonify({"error": "course_identifier is required"}), 400
-        
-        logger.info(f"Searching for course: {course_identifier}")
-        
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-        
         cur = conn.cursor()
-        
         try:
-            # Search for the course (handle both "CAS CS 111" and "CASCS111" formats)
             normalized_input = course_identifier.replace(' ', '').upper()
-            
-            cur.execute('''
-                SELECT c.id, c.code, c.name
-                FROM courses c
-                WHERE REPLACE(c.code, ' ', '') ILIKE %s
-                LIMIT 1
-            ''', (f'%{normalized_input}%',))
-            
+            cur.execute('SELECT c.id, c.code, c.name FROM courses c WHERE REPLACE(c.code, \' \', \'\') ILIKE %s LIMIT 1', (f'%{normalized_input}%',))
             course = cur.fetchone()
-            
             if not course:
-                logger.info(f"Course not found: {course_identifier}")
-                return jsonify({
-                    "found": False,
-                    "course_code": None,
-                    "hub_requirements": []
-                })
-            
+                return jsonify({"found": False, "course_code": None, "hub_requirements": []})
             course_id, course_code, course_name = course
-            
-            # Get hub requirements
-            cur.execute('''
-                SELECT hr.name
-                FROM hub_requirements hr
-                JOIN course_hub_requirements chr ON hr.id = chr.hub_requirement_id
-                WHERE chr.course_id = %s
-                ORDER BY hr.display_order
-            ''', (course_id,))
-            
+            cur.execute('SELECT hr.name FROM hub_requirements hr JOIN course_hub_requirements chr ON hr.id = chr.hub_requirement_id WHERE chr.course_id = %s ORDER BY hr.display_order', (course_id,))
             hub_requirements = [row[0] for row in cur.fetchall()]
-            logger.info(f"Found course {course_code} with {len(hub_requirements)} hub requirements")
-            
-            return jsonify({
-                "found": True,
-                "course_code": course_code,
-                "hub_requirements": hub_requirements
-            })
-            
+            return jsonify({"found": True, "course_code": course_code, "hub_requirements": hub_requirements})
         finally:
             cur.close()
             conn.close()
-    
     except Exception as e:
         logger.error(f"Error in search_course: {e}")
-        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/bulk-hub-requirements', methods=['POST'])
@@ -423,92 +250,47 @@ def bulk_hub_requirements():
         data = request.json
         if not data:
             return jsonify({"error": "No JSON data provided"}), 400
-        
         course_codes = data.get('course_codes', [])
         if not course_codes:
             return jsonify({"error": "course_codes array is required"}), 400
-        
-        logger.info(f"Bulk fetching hub requirements for {len(course_codes)} courses")
-        
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-        
         cur = conn.cursor()
-        
         try:
-            # Single efficient query instead of multiple CSV scans
-            cur.execute('''
-                SELECT c.code, hr.name
-                FROM courses c
-                JOIN course_hub_requirements chr ON c.id = chr.course_id
-                JOIN hub_requirements hr ON chr.hub_requirement_id = hr.id
-                WHERE c.code = ANY(%s)
-                ORDER BY c.code, hr.display_order
-            ''', (course_codes,))
-            
-            # Group results by course code
+            cur.execute('SELECT c.code, hr.name FROM courses c JOIN course_hub_requirements chr ON c.id = chr.course_id JOIN hub_requirements hr ON chr.hub_requirement_id = hr.id WHERE c.code = ANY(%s) ORDER BY c.code, hr.display_order', (course_codes,))
             results = {}
             for code, hub_name in cur.fetchall():
                 if code not in results:
                     results[code] = []
                 results[code].append(hub_name)
-            
-            # Include courses with no requirements
             for code in course_codes:
                 if code not in results:
                     results[code] = []
-            
-            logger.info(f"Successfully fetched requirements for {len(results)} courses")
-            return jsonify({
-                "success": True,
-                "results": results,
-                "total_courses": len(results)
-            })
-            
+            return jsonify({"success": True, "results": results, "total_courses": len(results)})
         finally:
             cur.close()
             conn.close()
-    
     except Exception as e:
         logger.error(f"Error in bulk_hub_requirements: {e}")
-        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/all-courses', methods=['GET'])
 def get_all_courses():
     try:
-        logger.info("Fetching all courses from database")
-        
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-        
         cur = conn.cursor()
-        
         try:
-            cur.execute('''
-                SELECT code, name 
-                FROM courses 
-                ORDER BY code
-            ''')
-            
-            # Format as dictionary like the old CSV version
+            cur.execute('SELECT code, name FROM courses ORDER BY code')
             all_courses = {row[0]: row[1] for row in cur.fetchall()}
-            logger.info(f"Retrieved {len(all_courses)} courses from database")
-            
-            return jsonify({
-                "courses": all_courses,
-                "total_courses": len(all_courses)
-            })
-            
+            return jsonify({"courses": all_courses, "total_courses": len(all_courses)})
         finally:
             cur.close()
             conn.close()
-    
     except Exception as e:
         logger.error(f"Error in get_all_courses: {e}")
-        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/multiple-courses', methods=['POST'])
@@ -517,167 +299,73 @@ def multiple_courses():
         data = request.json
         if not data:
             return jsonify({"error": "No JSON data provided"}), 400
-        
         courses = data.get('courses', [])
         if not courses:
             return jsonify({"error": "courses array is required"}), 400
-        
-        logger.info(f"Processing multiple courses: {courses}")
-        
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-        
         cur = conn.cursor()
-        
         try:
-            # Get hub requirements for all courses
-            cur.execute('''
-                SELECT c.code, hr.name
-                FROM courses c
-                JOIN course_hub_requirements chr ON c.id = chr.course_id
-                JOIN hub_requirements hr ON chr.hub_requirement_id = hr.id
-                WHERE c.code = ANY(%s)
-                ORDER BY c.code, hr.display_order
-            ''', (courses,))
-            
-            # Group results by course code
+            cur.execute('SELECT c.code, hr.name FROM courses c JOIN course_hub_requirements chr ON c.id = chr.course_id JOIN hub_requirements hr ON chr.hub_requirement_id = hr.id WHERE c.code = ANY(%s) ORDER BY c.code, hr.display_order', (courses,))
             results = []
             hub_req_set = set()
-            
             course_hubs = {}
             for code, hub_name in cur.fetchall():
                 if code not in course_hubs:
                     course_hubs[code] = []
                 course_hubs[code].append(hub_name)
                 hub_req_set.add(hub_name)
-            
-            # Format results
             for course_code in courses:
                 hubs = course_hubs.get(course_code, [])
-                results.append({
-                    "course_code": course_code,
-                    "hub_requirements": hubs
-                })
-            
-            return jsonify({
-                "results": results,
-                "unique_hubs": list(hub_req_set),
-                "total_unique_hubs": len(hub_req_set)
-            })
-            
+                results.append({"course_code": course_code, "hub_requirements": hubs})
+            return jsonify({"results": results, "unique_hubs": list(hub_req_set), "total_unique_hubs": len(hub_req_set)})
         finally:
             cur.close()
             conn.close()
-    
     except Exception as e:
         logger.error(f"Error in multiple_courses: {e}")
-        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/process-pdf', methods=['POST'])
 def process_pdf():
-    logger.info("=== PDF PROCESSING STARTED ===")
-    
     try:
         if 'pdf_file' not in request.files:
-            logger.error("No PDF file in request")
             return jsonify({"error": "No PDF file provided"}), 400
-        
         file = request.files['pdf_file']
-        logger.info(f"Received file: {file.filename}")
-        
         if file.filename == '':
-            logger.error("No file selected")
             return jsonify({"error": "No file selected"}), 400
-        
         if not file.filename.lower().endswith('.pdf'):
-            logger.error(f"Invalid file type: {file.filename}")
             return jsonify({"error": "File must be a PDF"}), 400
-        
         with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
             file.save(temp_file.name)
             temp_file_path = temp_file.name
-        
-        logger.info(f"PDF saved to temporary file: {temp_file_path}")
-        
         try:
-            logger.info("Importing PDF processing functions...")
             from pdf_reader import raw_fetch_courses_info, fetch_semester
             from pypdf import PdfReader
-            
-            logger.info("Creating PDF reader...")
             reader = PdfReader(temp_file_path)
-            logger.info(f"PDF has {len(reader.pages)} pages")
-            
-            logger.info("Extracting semester information...")
             semester = fetch_semester(reader)
-            logger.info(f"Extracted semester: {semester}")
-            
-            logger.info("Extracting courses from PDF...")
             courses = raw_fetch_courses_info(reader)
-            logger.info(f"Extracted {len(courses)} courses: {courses}")
-            
-            # Get database connection
             conn = get_db_connection()
             if not conn:
                 return jsonify({"error": "Database connection failed"}), 500
-            
             cur = conn.cursor()
-            
             try:
-                logger.info("Processing course requirements...")
                 course_results = []
-                
-                for i, course_info in enumerate(courses):
+                for course_info in courses:
                     course_code = course_info[0]
-                    logger.info(f"Processing course {i+1}/{len(courses)}: {course_code}")
-                    
-                    # Get hub requirements from database
-                    cur.execute('''
-                        SELECT hr.name
-                        FROM courses c
-                        JOIN course_hub_requirements chr ON c.id = chr.course_id
-                        JOIN hub_requirements hr ON chr.hub_requirement_id = hr.id
-                        WHERE c.code = %s
-                        ORDER BY hr.display_order
-                    ''', (course_code,))
-                    
+                    cur.execute('SELECT hr.name FROM courses c JOIN course_hub_requirements chr ON c.id = chr.course_id JOIN hub_requirements hr ON chr.hub_requirement_id = hr.id WHERE c.code = %s ORDER BY hr.display_order', (course_code,))
                     hub_requirements = [row[0] for row in cur.fetchall()]
-                    logger.info(f"Found hub requirements for {course_code}: {hub_requirements}")
-                    
-                    course_result = {
-                        "course_code": course_code,
-                        "school": course_info[1],
-                        "department": course_info[2],
-                        "credits": course_info[3],
-                        "hub_requirements": hub_requirements,
-                        "semester": semester
-                    }
+                    course_result = {"course_code": course_code, "school": course_info[1], "department": course_info[2], "credits": course_info[3], "hub_requirements": hub_requirements, "semester": semester}
                     course_results.append(course_result)
-                
-                response_data = {
-                    "success": True,
-                    "courses": course_results,
-                    "total_courses": len(course_results),
-                    "semester": semester
-                }
-                
-                logger.info("=== PDF PROCESSING COMPLETED SUCCESSFULLY ===")
-                return jsonify(response_data)
-                
+                return jsonify({"success": True, "courses": course_results, "total_courses": len(course_results), "semester": semester})
             finally:
                 cur.close()
                 conn.close()
-            
         finally:
-            logger.info(f"Cleaning up temporary file: {temp_file_path}")
             os.unlink(temp_file_path)
-    
     except Exception as e:
         logger.error(f"Error processing PDF: {e}")
-        logger.error(f"Full traceback: {traceback.format_exc()}")
-        logger.error("=== PDF PROCESSING FAILED ===")
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/user/<int:user_id>/courses', methods=['GET'])
@@ -686,24 +374,13 @@ def get_user_courses(user_id):
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        cur.execute(
-            'SELECT enrolled_courses, bookmarked_courses FROM courseinfo WHERE user_id = %s',
-            (user_id,)
-        )
+        cur.execute('SELECT enrolled_courses, bookmarked_courses FROM courseinfo WHERE user_id = %s', (user_id,))
         result = cur.fetchone()
-        
         if result:
-            return jsonify({
-                'enrolled_courses': result[0] or [],
-                'bookmarked_courses': result[1] or []
-            })
+            return jsonify({'enrolled_courses': result[0] or [], 'bookmarked_courses': result[1] or []})
         else:
-            return jsonify({
-                'enrolled_courses': [],
-                'bookmarked_courses': []
-            })
+            return jsonify({'enrolled_courses': [], 'bookmarked_courses': []})
     except Exception as e:
         logger.error(f"Error fetching courses: {e}")
         return jsonify({'error': str(e)}), 500
@@ -716,24 +393,13 @@ def add_enrolled_course(user_id):
     try:
         data = request.json
         course_code = data.get('course_code')
-        
         if not course_code:
             return jsonify({"error": "course_code is required"}), 400
-            
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        
-        cur.execute('''
-            INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses)
-            VALUES (%s, ARRAY[%s], ARRAY[]::TEXT[])
-            ON CONFLICT (user_id) 
-            DO UPDATE SET enrolled_courses = array_append(courseinfo.enrolled_courses, %s)
-            WHERE NOT (%s = ANY(courseinfo.enrolled_courses))
-        ''', (user_id, course_code, course_code, course_code))
-        
+        cur.execute('INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses) VALUES (%s, ARRAY[%s], ARRAY[]::TEXT[]) ON CONFLICT (user_id) DO UPDATE SET enrolled_courses = array_append(courseinfo.enrolled_courses, %s) WHERE NOT (%s = ANY(courseinfo.enrolled_courses))', (user_id, course_code, course_code, course_code))
         conn.commit()
         return jsonify({'success': True, 'message': 'Course added'})
     except Exception as e:
@@ -748,19 +414,13 @@ def remove_enrolled_course(user_id):
     try:
         data = request.json
         course_code = data.get('course_code')
-        
         if not course_code:
             return jsonify({"error": "course_code is required"}), 400
-            
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        cur.execute(
-            'UPDATE courseinfo SET enrolled_courses = array_remove(enrolled_courses, %s) WHERE user_id = %s',
-            (course_code, user_id)
-        )
+        cur.execute('UPDATE courseinfo SET enrolled_courses = array_remove(enrolled_courses, %s) WHERE user_id = %s', (course_code, user_id))
         conn.commit()
         return jsonify({'success': True, 'message': 'Course removed'})
     except Exception as e:
@@ -775,24 +435,13 @@ def add_bookmarked_course(user_id):
     try:
         data = request.json
         course_code = data.get('course_code')
-        
         if not course_code:
             return jsonify({"error": "course_code is required"}), 400
-            
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        
-        cur.execute('''
-            INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses)
-            VALUES (%s, ARRAY[]::TEXT[], ARRAY[%s])
-            ON CONFLICT (user_id) 
-            DO UPDATE SET bookmarked_courses = array_append(courseinfo.bookmarked_courses, %s)
-            WHERE NOT (%s = ANY(courseinfo.bookmarked_courses))
-        ''', (user_id, course_code, course_code, course_code))
-        
+        cur.execute('INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses) VALUES (%s, ARRAY[]::TEXT[], ARRAY[%s]) ON CONFLICT (user_id) DO UPDATE SET bookmarked_courses = array_append(courseinfo.bookmarked_courses, %s) WHERE NOT (%s = ANY(courseinfo.bookmarked_courses))', (user_id, course_code, course_code, course_code))
         conn.commit()
         return jsonify({'success': True, 'message': 'Course bookmarked'})
     except Exception as e:
@@ -807,19 +456,13 @@ def remove_bookmarked_course(user_id):
     try:
         data = request.json
         course_code = data.get('course_code')
-        
         if not course_code:
             return jsonify({"error": "course_code is required"}), 400
-            
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        cur.execute(
-            'UPDATE courseinfo SET bookmarked_courses = array_remove(bookmarked_courses, %s) WHERE user_id = %s',
-            (course_code, user_id)
-        )
+        cur.execute('UPDATE courseinfo SET bookmarked_courses = array_remove(bookmarked_courses, %s) WHERE user_id = %s', (course_code, user_id))
         conn.commit()
         return jsonify({'success': True, 'message': 'Bookmark removed'})
     except Exception as e:
@@ -835,24 +478,13 @@ def get_custom_courses(user_id):
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        cur.execute(
-            'SELECT custom_courses FROM courseinfo WHERE user_id = %s',
-            (user_id,)
-        )
+        cur.execute('SELECT custom_courses FROM courseinfo WHERE user_id = %s', (user_id,))
         result = cur.fetchone()
-        
         if result and result[0]:
-            return jsonify({
-                'custom_courses': result[0],
-                'success': True
-            })
+            return jsonify({'custom_courses': result[0], 'success': True})
         else:
-            return jsonify({
-                'custom_courses': [],
-                'success': True
-            })
+            return jsonify({'custom_courses': [], 'success': True})
     except Exception as e:
         logger.error(f"Error fetching custom courses: {e}")
         return jsonify({'error': str(e)}), 500
@@ -864,58 +496,32 @@ def get_custom_courses(user_id):
 def add_custom_course(user_id):
     try:
         data = request.json
-        
-        custom_course = [
-            data.get('courseId'),
-            data.get('courseName'),
-            ' | '.join(data.get('hubRequirements', [])), 
-            data.get('credits', 4)
-        ]
-        
+        custom_course = [data.get('courseId'), data.get('courseName'), ' | '.join(data.get('hubRequirements', [])), data.get('credits', 4)]
         if not custom_course[0] or not custom_course[1]:
             return jsonify({"error": "courseId and courseName are required"}), 400
-            
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        
         try:
             cur.execute('SELECT custom_courses FROM courseinfo WHERE user_id = %s', (user_id,))
             result = cur.fetchone()
-            
             if result:
                 existing_courses = result[0] if result[0] else []
                 existing_courses.append(custom_course)
-                
-                cur.execute('''
-                    UPDATE courseinfo 
-                    SET custom_courses = %s::jsonb
-                    WHERE user_id = %s
-                ''', (json.dumps(existing_courses), user_id))
+                cur.execute('UPDATE courseinfo SET custom_courses = %s::jsonb WHERE user_id = %s', (json.dumps(existing_courses), user_id))
             else:
-                cur.execute('''
-                    INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses, custom_courses)
-                    VALUES (%s, ARRAY[]::TEXT[], ARRAY[]::TEXT[], %s::jsonb)
-                ''', (user_id, json.dumps([custom_course])))
-            
+                cur.execute('INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses, custom_courses) VALUES (%s, ARRAY[]::TEXT[], ARRAY[]::TEXT[], %s::jsonb)', (user_id, json.dumps([custom_course])))
             conn.commit()
-            logger.info(f"Custom course added for user {user_id}: {custom_course[0]}")
             return jsonify({'success': True, 'message': 'Custom course added', 'course': custom_course})
-            
         except Exception as e:
             conn.rollback()
             logger.error(f"Database error adding custom course: {e}")
-            logger.error(f"Full traceback: {traceback.format_exc()}")
             raise
-            
         finally:
             cur.close()
-            
     except Exception as e:
         logger.error(f"Error adding custom course: {e}")
-        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({'error': str(e)}), 500
     finally:
         if conn:
@@ -927,20 +533,9 @@ def delete_custom_course(user_id, course_id):
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        cur.execute('''
-            UPDATE courseinfo 
-            SET custom_courses = (
-                SELECT jsonb_agg(elem)
-                FROM jsonb_array_elements(custom_courses) elem
-                WHERE elem->>0 != %s
-            )
-            WHERE user_id = %s
-        ''', (course_id, user_id))
-        
+        cur.execute('UPDATE courseinfo SET custom_courses = (SELECT jsonb_agg(elem) FROM jsonb_array_elements(custom_courses) elem WHERE elem->>0 != %s) WHERE user_id = %s', (course_id, user_id))
         conn.commit()
-        logger.info(f"Custom course deleted for user {user_id}: {course_id}")
         return jsonify({'success': True, 'message': 'Custom course deleted'})
     except Exception as e:
         logger.error(f"Error deleting custom course: {e}")
@@ -955,24 +550,13 @@ def get_edited_courses(user_id):
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        cur.execute(
-            'SELECT edited_courses FROM courseinfo WHERE user_id = %s',
-            (user_id,)
-        )
+        cur.execute('SELECT edited_courses FROM courseinfo WHERE user_id = %s', (user_id,))
         result = cur.fetchone()
-        
         if result and result[0]:
-            return jsonify({
-                'edited_courses': result[0],
-                'success': True
-            })
+            return jsonify({'edited_courses': result[0], 'success': True})
         else:
-            return jsonify({
-                'edited_courses': [],
-                'success': True
-            })
+            return jsonify({'edited_courses': [], 'success': True})
     except Exception as e:
         logger.error(f"Error fetching edited courses: {e}")
         return jsonify({'error': str(e)}), 500
@@ -984,59 +568,33 @@ def get_edited_courses(user_id):
 def save_edited_course(user_id):
     try:
         data = request.json
-        
-        edited_course = [
-            data.get('courseId'),
-            data.get('courseName'),
-            ' | '.join(data.get('hubRequirements', [])),
-            data.get('credits', 4)
-        ]
-        
+        edited_course = [data.get('courseId'), data.get('courseName'), ' | '.join(data.get('hubRequirements', [])), data.get('credits', 4)]
         if not edited_course[0]:
             return jsonify({"error": "courseId is required"}), 400
-            
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        
         try:
             cur.execute('SELECT edited_courses FROM courseinfo WHERE user_id = %s', (user_id,))
             result = cur.fetchone()
-            
             if result:
                 existing_edits = result[0] if result[0] else []
                 existing_edits = [e for e in existing_edits if e[0] != edited_course[0]]
                 existing_edits.append(edited_course)
-                
-                cur.execute('''
-                    UPDATE courseinfo 
-                    SET edited_courses = %s::jsonb
-                    WHERE user_id = %s
-                ''', (json.dumps(existing_edits), user_id))
+                cur.execute('UPDATE courseinfo SET edited_courses = %s::jsonb WHERE user_id = %s', (json.dumps(existing_edits), user_id))
             else:
-                cur.execute('''
-                    INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses, custom_courses, edited_courses)
-                    VALUES (%s, ARRAY[]::TEXT[], ARRAY[]::TEXT[], '[]'::jsonb, %s::jsonb)
-                ''', (user_id, json.dumps([edited_course])))
-            
+                cur.execute('INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses, custom_courses, edited_courses) VALUES (%s, ARRAY[]::TEXT[], ARRAY[]::TEXT[], \'[]\'::jsonb, %s::jsonb)', (user_id, json.dumps([edited_course])))
             conn.commit()
-            logger.info(f"Course edit saved for user {user_id}: {edited_course[0]}")
             return jsonify({'success': True, 'message': 'Course edit saved', 'course': edited_course})
-            
         except Exception as e:
             conn.rollback()
             logger.error(f"Database error saving edited course: {e}")
-            logger.error(f"Full traceback: {traceback.format_exc()}")
             raise
-            
         finally:
             cur.close()
-            
     except Exception as e:
         logger.error(f"Error saving edited course: {e}")
-        logger.error(f"Full traceback: {traceback.format_exc()}")
         return jsonify({'error': str(e)}), 500
     finally:
         if conn:
@@ -1048,21 +606,9 @@ def delete_edited_course(user_id, course_id):
         conn = get_db_connection()
         if not conn:
             return jsonify({"error": "Database connection failed"}), 500
-            
         cur = conn.cursor()
-        
-        cur.execute('''
-            UPDATE courseinfo 
-            SET edited_courses = (
-                SELECT jsonb_agg(elem)
-                FROM jsonb_array_elements(edited_courses) elem
-                WHERE elem->>0 != %s
-            )
-            WHERE user_id = %s
-        ''', (course_id, user_id))
-        
+        cur.execute('UPDATE courseinfo SET edited_courses = (SELECT jsonb_agg(elem) FROM jsonb_array_elements(edited_courses) elem WHERE elem->>0 != %s) WHERE user_id = %s', (course_id, user_id))
         conn.commit()
-        logger.info(f"Course edit removed for user {user_id}: {course_id}")
         return jsonify({'success': True, 'message': 'Course edit removed'})
     except Exception as e:
         logger.error(f"Error removing edited course: {e}")
@@ -1090,29 +636,18 @@ def track_user_activity():
 
 @app.route('/api/users/online', methods=['GET'])
 def get_online_users():
-    """Get the count of currently online users"""
     count = get_online_users_count()
-    return jsonify({
-        'online_users': count,
-        'timestamp': datetime.now().isoformat()
-    })
+    return jsonify({'online_users': count, 'timestamp': datetime.now().isoformat()})
 
 @app.route('/api/users/heartbeat', methods=['POST'])
 def user_heartbeat():
-    """Endpoint for frontend to ping and update user activity"""
     try:
         data = request.json
         user_id = data.get('user_id')
-        
         if not user_id:
             return jsonify({"error": "user_id is required"}), 400
-        
         update_user_activity(int(user_id))
-        
-        return jsonify({
-            'success': True,
-            'online_users': get_online_users_count()
-        })
+        return jsonify({'success': True, 'online_users': get_online_users_count()})
     except Exception as e:
         logger.error(f"Error in heartbeat: {e}")
         return jsonify({'error': str(e)}), 500
@@ -1128,6 +663,5 @@ def internal_error(error):
 
 if __name__ == '__main__':
     logger.info("Starting Flask application...")
-    logger.info(f"Database configuration: Host={os.getenv('DB_HOST', 'localhost')}, DB={os.getenv('DB_NAME', 'not set')}")
     port = int(os.environ.get('PORT', 5000))
     app.run(debug=False, host='0.0.0.0', port=port)
