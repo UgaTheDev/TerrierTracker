@@ -320,46 +320,112 @@ def multiple_courses():
             conn.close()
     except Exception:
         return jsonify({"error": "Multiple courses fetch failed"}), 500
-
+    
 @app.route('/api/process-pdf', methods=['POST'])
 def process_pdf():
+    debug_log = []
+    
     try:
         if 'pdf_file' not in request.files:
             return jsonify({"error": "No PDF file provided"}), 400
+        
         file = request.files['pdf_file']
+        debug_log.append(f"File received: {file.filename}")
+        
         if file.filename == '':
             return jsonify({"error": "No file selected"}), 400
+        
         if not file.filename.lower().endswith('.pdf'):
             return jsonify({"error": "File must be a PDF"}), 400
+        
         with tempfile.NamedTemporaryFile(delete=False, suffix='.pdf') as temp_file:
             file.save(temp_file.name)
             temp_file_path = temp_file.name
+        
+        debug_log.append(f"PDF saved temporarily")
+        
         try:
             from pdf_reader import raw_fetch_courses_info, fetch_semester
             from pypdf import PdfReader
+            
             reader = PdfReader(temp_file_path)
+            debug_log.append(f"PDF opened, pages: {len(reader.pages)}")
+            first_page_text = reader.pages[0].extract_text()
+            lines = first_page_text.split("\n")
+            debug_log.append(f"First page has {len(lines)} lines")
+            debug_log.append("=== FIRST 30 LINES ===")
+            for i, line in enumerate(lines[:30]):
+                debug_log.append(f"Line {i}: '{line}'")
+            
             semester = fetch_semester(reader)
+            debug_log.append(f"Semester extracted: {semester}")
+            
             courses = raw_fetch_courses_info(reader)
+            debug_log.append(f"Courses found: {len(courses)}")
+            
+            if len(courses) == 0:
+                debug_log.append("WARNING: No courses were extracted from PDF!")
+            
+            for i, course in enumerate(courses):
+                debug_log.append(f"Course {i+1}: {course}")
+            
             conn = get_db_connection()
             if not conn:
-                return jsonify({"error": "Database connection failed"}), 500
+                debug_log.append("ERROR: Database connection failed")
+                return jsonify({
+                    "error": "Database connection failed",
+                    "debug_log": debug_log
+                }), 500
+            
             cur = conn.cursor()
+            
             try:
                 course_results = []
+                
                 for course_info in courses:
                     course_code = course_info[0]
+                    debug_log.append(f"Looking up hub requirements for: {course_code}")
+                    
                     cur.execute('SELECT hr.name FROM courses c JOIN course_hub_requirements chr ON c.id = chr.course_id JOIN hub_requirements hr ON chr.hub_requirement_id = hr.id WHERE c.code = %s ORDER BY hr.display_order', (course_code,))
+                    
                     hub_requirements = [row[0] for row in cur.fetchall()]
-                    course_result = {"course_code": course_code, "school": course_info[1], "department": course_info[2], "credits": course_info[3], "hub_requirements": hub_requirements, "semester": semester}
+                    debug_log.append(f"  Found {len(hub_requirements)} hub requirements for {course_code}")
+                    
+                    course_result = {
+                        "course_code": course_code,
+                        "school": course_info[1],
+                        "department": course_info[2],
+                        "credits": course_info[3],
+                        "hub_requirements": hub_requirements,
+                        "semester": semester
+                    }
                     course_results.append(course_result)
-                return jsonify({"success": True, "courses": course_results, "total_courses": len(course_results), "semester": semester})
+                
+                return jsonify({
+                    "success": True,
+                    "courses": course_results,
+                    "total_courses": len(course_results),
+                    "semester": semester,
+                    "debug_log": debug_log
+                })
+                
             finally:
                 cur.close()
                 conn.close()
+            
         finally:
             os.unlink(temp_file_path)
-    except Exception:
-        return jsonify({"error": "PDF processing failed"}), 500
+            debug_log.append("Temp file cleaned up")
+    
+    except Exception as e:
+        debug_log.append(f"EXCEPTION: {str(e)}")
+        debug_log.append(f"Exception type: {type(e).__name__}")
+        import traceback
+        debug_log.append(f"Traceback: {traceback.format_exc()}")
+        return jsonify({
+            "error": str(e),
+            "debug_log": debug_log
+        }), 500
 
 @app.route('/api/user/<int:user_id>/courses', methods=['GET'])
 def get_user_courses(user_id):
