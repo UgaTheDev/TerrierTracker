@@ -3,6 +3,7 @@ from course_data_manager import CourseDataManager
 from pathlib import Path
 
 def fetch_semester(reader):
+    """Extract semester information from the PDF"""
     try:
         page = reader.pages[0]
         text_lines = page.extract_text().split("\n")
@@ -16,7 +17,11 @@ def fetch_semester(reader):
     return "Unknown Semester"
 
 def raw_fetch_courses_info(reader):
+    """Extract course information from all pages of the PDF - ALL SCHOOLS SUPPORTED"""
     courses = []
+    
+    # All BU school codes
+    school_codes = ["CAS", "KHC", "ENG", "COM", "QST", "SAR", "MET", "WED", "SHA", "CFA", "CGS", "CDS", "SPH"]
     
     try:
         for page_num in range(len(reader.pages)):
@@ -24,12 +29,12 @@ def raw_fetch_courses_info(reader):
             text_lines = page.extract_text().split("\n")
             
             for line_idx, line_text in enumerate(text_lines):
-                contains_cas = "CAS" in line_text
-                contains_khc = "KHC" in line_text
+                # Check if line contains any school code
+                contains_school = any(code in line_text for code in school_codes)
                 no_room_keyword = "Room" not in line_text
                 minimum_length = len(line_text) > 5  
                 
-                is_course_line = (contains_cas or contains_khc) and no_room_keyword and minimum_length
+                is_course_line = contains_school and no_room_keyword and minimum_length
                 
                 if is_course_line:
                     try:
@@ -81,6 +86,7 @@ def raw_fetch_courses_info(reader):
     return courses
 
 def find_course_requirements(courses):
+    """Find hub requirements for a list of courses"""
     results = []
     
     for course in courses:
