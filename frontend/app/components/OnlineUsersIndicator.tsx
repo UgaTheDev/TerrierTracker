@@ -55,7 +55,7 @@ export default function OnlineUsersIndicator() {
       }, 60000);
     }
 
-    const refreshInterval = setInterval(fetchOnlineCount, 30000);
+    const refreshInterval = setInterval(fetchOnlineCount, 120000);
 
     return () => {
       if (heartbeatInterval) clearInterval(heartbeatInterval);
