@@ -28,9 +28,7 @@ if database_url:
 
 app = Flask(__name__)
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
-
-log_level = logging.DEBUG if os.getenv('FLASK_ENV') == 'development' else logging.WARNING
-logging.basicConfig(level=log_level)
+logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
 SCRIPT_DIR = Path(__file__).parent.absolute()
@@ -61,7 +59,6 @@ def get_db_connection():
         )
         return conn
     except Exception as e:
-        logger.error(f"Database connection failed: {e}")
         return None
 
 active_users = {}
@@ -97,7 +94,6 @@ def google_auth():
         if not token:
             return jsonify({"error": "No credential provided"}), 400
         if not GOOGLE_CLIENT_ID:
-            logger.error("GOOGLE_CLIENT_ID not set in environment!")
             return jsonify({"error": "Server configuration error"}), 500
         idinfo = id_token.verify_oauth2_token(token, google_requests.Request(), GOOGLE_CLIENT_ID)
         email = idinfo.get('email')
@@ -122,11 +118,9 @@ def google_auth():
         finally:
             cur.close()
             conn.close()
-    except ValueError as e:
-        logger.error(f"Invalid Google token: {e}")
+    except ValueError:
         return jsonify({'error': 'Invalid token', 'success': False}), 401
-    except Exception as e:
-        logger.error(f"Google auth error: {e}")
+    except Exception:
         return jsonify({'error': 'Authentication failed', 'success': False}), 500
 
 @app.route('/api/register', methods=['POST'])
@@ -157,8 +151,7 @@ def register():
         finally:
             cur.close()
             conn.close()
-    except Exception as e:
-        logger.error(f"Registration error: {e}")
+    except Exception:
         return jsonify({'error': 'Registration failed', 'success': False}), 500
 
 @app.route('/api/login', methods=['POST'])
@@ -185,8 +178,7 @@ def login():
         finally:
             cur.close()
             conn.close()
-    except Exception as e:
-        logger.error(f"Login error: {e}")
+    except Exception:
         return jsonify({'error': 'Login failed', 'success': False}), 500
 
 @app.route('/', methods=['GET'])
@@ -210,8 +202,8 @@ def health_check():
             conn.close()
         else:
             db_status = "disconnected"
-    except Exception as e:
-        db_status = f"error: {str(e)}"
+    except Exception:
+        db_status = "error"
     return jsonify({"status": "healthy", "service": "BU Course API", "database_status": db_status, "data_source": "PostgreSQL", "total_courses": course_count, "total_hub_requirements": hub_count})
 
 @app.route('/api/search-course', methods=['POST'])
@@ -240,9 +232,8 @@ def search_course():
         finally:
             cur.close()
             conn.close()
-    except Exception as e:
-        logger.error(f"Error in search_course: {e}")
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        return jsonify({"error": "Search failed"}), 500
 
 @app.route('/api/bulk-hub-requirements', methods=['POST'])
 def bulk_hub_requirements():
@@ -271,9 +262,8 @@ def bulk_hub_requirements():
         finally:
             cur.close()
             conn.close()
-    except Exception as e:
-        logger.error(f"Error in bulk_hub_requirements: {e}")
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        return jsonify({"error": "Bulk fetch failed"}), 500
 
 @app.route('/api/all-courses', methods=['GET'])
 def get_all_courses():
@@ -289,9 +279,8 @@ def get_all_courses():
         finally:
             cur.close()
             conn.close()
-    except Exception as e:
-        logger.error(f"Error in get_all_courses: {e}")
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        return jsonify({"error": "Failed to fetch courses"}), 500
 
 @app.route('/api/multiple-courses', methods=['POST'])
 def multiple_courses():
@@ -323,9 +312,8 @@ def multiple_courses():
         finally:
             cur.close()
             conn.close()
-    except Exception as e:
-        logger.error(f"Error in multiple_courses: {e}")
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        return jsonify({"error": "Multiple courses fetch failed"}), 500
 
 @app.route('/api/process-pdf', methods=['POST'])
 def process_pdf():
@@ -364,9 +352,8 @@ def process_pdf():
                 conn.close()
         finally:
             os.unlink(temp_file_path)
-    except Exception as e:
-        logger.error(f"Error processing PDF: {e}")
-        return jsonify({"error": str(e)}), 500
+    except Exception:
+        return jsonify({"error": "PDF processing failed"}), 500
 
 @app.route('/api/user/<int:user_id>/courses', methods=['GET'])
 def get_user_courses(user_id):
@@ -381,9 +368,8 @@ def get_user_courses(user_id):
             return jsonify({'enrolled_courses': result[0] or [], 'bookmarked_courses': result[1] or []})
         else:
             return jsonify({'enrolled_courses': [], 'bookmarked_courses': []})
-    except Exception as e:
-        logger.error(f"Error fetching courses: {e}")
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        return jsonify({'error': 'Failed to fetch courses'}), 500
     finally:
         cur.close()
         conn.close()
@@ -402,9 +388,8 @@ def add_enrolled_course(user_id):
         cur.execute('INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses) VALUES (%s, ARRAY[%s], ARRAY[]::TEXT[]) ON CONFLICT (user_id) DO UPDATE SET enrolled_courses = array_append(courseinfo.enrolled_courses, %s) WHERE NOT (%s = ANY(courseinfo.enrolled_courses))', (user_id, course_code, course_code, course_code))
         conn.commit()
         return jsonify({'success': True, 'message': 'Course added'})
-    except Exception as e:
-        logger.error(f"Error adding enrolled course: {e}")
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        return jsonify({'error': 'Failed to add course'}), 500
     finally:
         cur.close()
         conn.close()
@@ -423,9 +408,8 @@ def remove_enrolled_course(user_id):
         cur.execute('UPDATE courseinfo SET enrolled_courses = array_remove(enrolled_courses, %s) WHERE user_id = %s', (course_code, user_id))
         conn.commit()
         return jsonify({'success': True, 'message': 'Course removed'})
-    except Exception as e:
-        logger.error(f"Error removing enrolled course: {e}")
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        return jsonify({'error': 'Failed to remove course'}), 500
     finally:
         cur.close()
         conn.close()
@@ -444,9 +428,8 @@ def add_bookmarked_course(user_id):
         cur.execute('INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses) VALUES (%s, ARRAY[]::TEXT[], ARRAY[%s]) ON CONFLICT (user_id) DO UPDATE SET bookmarked_courses = array_append(courseinfo.bookmarked_courses, %s) WHERE NOT (%s = ANY(courseinfo.bookmarked_courses))', (user_id, course_code, course_code, course_code))
         conn.commit()
         return jsonify({'success': True, 'message': 'Course bookmarked'})
-    except Exception as e:
-        logger.error(f"Error adding bookmarked course: {e}")
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        return jsonify({'error': 'Failed to bookmark course'}), 500
     finally:
         cur.close()
         conn.close()
@@ -465,9 +448,8 @@ def remove_bookmarked_course(user_id):
         cur.execute('UPDATE courseinfo SET bookmarked_courses = array_remove(bookmarked_courses, %s) WHERE user_id = %s', (course_code, user_id))
         conn.commit()
         return jsonify({'success': True, 'message': 'Bookmark removed'})
-    except Exception as e:
-        logger.error(f"Error removing bookmarked course: {e}")
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        return jsonify({'error': 'Failed to remove bookmark'}), 500
     finally:
         cur.close()
         conn.close()
@@ -485,9 +467,8 @@ def get_custom_courses(user_id):
             return jsonify({'custom_courses': result[0], 'success': True})
         else:
             return jsonify({'custom_courses': [], 'success': True})
-    except Exception as e:
-        logger.error(f"Error fetching custom courses: {e}")
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        return jsonify({'error': 'Failed to fetch custom courses'}), 500
     finally:
         cur.close()
         conn.close()
@@ -514,15 +495,13 @@ def add_custom_course(user_id):
                 cur.execute('INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses, custom_courses) VALUES (%s, ARRAY[]::TEXT[], ARRAY[]::TEXT[], %s::jsonb)', (user_id, json.dumps([custom_course])))
             conn.commit()
             return jsonify({'success': True, 'message': 'Custom course added', 'course': custom_course})
-        except Exception as e:
+        except Exception:
             conn.rollback()
-            logger.error(f"Database error adding custom course: {e}")
             raise
         finally:
             cur.close()
-    except Exception as e:
-        logger.error(f"Error adding custom course: {e}")
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        return jsonify({'error': 'Failed to add custom course'}), 500
     finally:
         if conn:
             conn.close()
@@ -537,9 +516,8 @@ def delete_custom_course(user_id, course_id):
         cur.execute('UPDATE courseinfo SET custom_courses = (SELECT jsonb_agg(elem) FROM jsonb_array_elements(custom_courses) elem WHERE elem->>0 != %s) WHERE user_id = %s', (course_id, user_id))
         conn.commit()
         return jsonify({'success': True, 'message': 'Custom course deleted'})
-    except Exception as e:
-        logger.error(f"Error deleting custom course: {e}")
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        return jsonify({'error': 'Failed to delete custom course'}), 500
     finally:
         cur.close()
         conn.close()
@@ -557,9 +535,8 @@ def get_edited_courses(user_id):
             return jsonify({'edited_courses': result[0], 'success': True})
         else:
             return jsonify({'edited_courses': [], 'success': True})
-    except Exception as e:
-        logger.error(f"Error fetching edited courses: {e}")
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        return jsonify({'error': 'Failed to fetch edited courses'}), 500
     finally:
         cur.close()
         conn.close()
@@ -587,15 +564,13 @@ def save_edited_course(user_id):
                 cur.execute('INSERT INTO courseinfo (user_id, enrolled_courses, bookmarked_courses, custom_courses, edited_courses) VALUES (%s, ARRAY[]::TEXT[], ARRAY[]::TEXT[], \'[]\'::jsonb, %s::jsonb)', (user_id, json.dumps([edited_course])))
             conn.commit()
             return jsonify({'success': True, 'message': 'Course edit saved', 'course': edited_course})
-        except Exception as e:
+        except Exception:
             conn.rollback()
-            logger.error(f"Database error saving edited course: {e}")
             raise
         finally:
             cur.close()
-    except Exception as e:
-        logger.error(f"Error saving edited course: {e}")
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        return jsonify({'error': 'Failed to save edited course'}), 500
     finally:
         if conn:
             conn.close()
@@ -610,9 +585,8 @@ def delete_edited_course(user_id, course_id):
         cur.execute('UPDATE courseinfo SET edited_courses = (SELECT jsonb_agg(elem) FROM jsonb_array_elements(edited_courses) elem WHERE elem->>0 != %s) WHERE user_id = %s', (course_id, user_id))
         conn.commit()
         return jsonify({'success': True, 'message': 'Course edit removed'})
-    except Exception as e:
-        logger.error(f"Error removing edited course: {e}")
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        return jsonify({'error': 'Failed to remove edited course'}), 500
     finally:
         cur.close()
         conn.close()
@@ -648,9 +622,8 @@ def user_heartbeat():
             return jsonify({"error": "user_id is required"}), 400
         update_user_activity(int(user_id))
         return jsonify({'success': True, 'online_users': get_online_users_count()})
-    except Exception as e:
-        logger.error(f"Error in heartbeat: {e}")
-        return jsonify({'error': str(e)}), 500
+    except Exception:
+        return jsonify({'error': 'Heartbeat failed'}), 500
 
 @app.errorhandler(404)
 def not_found(error):
@@ -658,10 +631,8 @@ def not_found(error):
 
 @app.errorhandler(500)
 def internal_error(error):
-    logger.error(f"Internal server error: {error}")
     return jsonify({"error": "Internal server error"}), 500
 
 if __name__ == '__main__':
-    logger.info("Starting Flask application...")
     port = int(os.environ.get('PORT', 5000))
     app.run(debug=False, host='0.0.0.0', port=port)
