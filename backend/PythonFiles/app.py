@@ -15,6 +15,7 @@ from google.auth.transport import requests as google_requests
 import json
 from datetime import datetime, timedelta
 
+
 load_dotenv()
 
 database_url = os.getenv('DATABASE_URL')
@@ -28,6 +29,7 @@ if database_url:
 
 app = Flask(__name__)
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
+logging.getLogger('werkzeug').setLevel(logging.ERROR)
 logging.basicConfig(level=logging.ERROR)
 logger = logging.getLogger(__name__)
 
