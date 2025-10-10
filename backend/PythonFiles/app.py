@@ -3,6 +3,7 @@ from flask_cors import CORS
 from pathlib import Path
 import logging
 import traceback
+from logging import NullHandler
 import os
 import tempfile
 from werkzeug.utils import secure_filename
@@ -14,7 +15,6 @@ from google.oauth2 import id_token
 from google.auth.transport import requests as google_requests
 import json
 from datetime import datetime, timedelta
-
 
 load_dotenv()
 
@@ -29,9 +29,13 @@ if database_url:
 
 app = Flask(__name__)
 GOOGLE_CLIENT_ID = os.getenv('GOOGLE_CLIENT_ID')
-logging.getLogger('werkzeug').setLevel(logging.ERROR)
-logging.basicConfig(level=logging.ERROR)
+werkzeug_logger = logging.getLogger('werkzeug')
+werkzeug_logger.disabled = True
+werkzeug_logger.addHandler(NullHandler())
+werkzeug_logger.propagate = False
+logging.basicConfig(level=logging.CRITICAL)
 logger = logging.getLogger(__name__)
+logger.disabled = True
 
 SCRIPT_DIR = Path(__file__).parent.absolute()
 
