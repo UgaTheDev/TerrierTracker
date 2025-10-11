@@ -16,6 +16,7 @@ def fetch_semester(reader):
     return "Unknown Semester"
 
 def raw_fetch_courses_info(reader):
+    """Extract course information from all pages of the PDF - ALL SCHOOLS SUPPORTED"""
     courses = []
     school_codes = ["CAS", "KHC", "ENG", "COM", "QST", "SAR", "MET", "WED", "SHA", "CFA", "CGS", "CDS", "SPH"]
     
@@ -27,21 +28,28 @@ def raw_fetch_courses_info(reader):
             for line_idx, line_text in enumerate(text_lines):
                 contains_school = any(code in line_text for code in school_codes)
                 no_room_keyword = "Room" not in line_text
+                no_description = "Description:" not in line_text
+                no_section = "Section:" not in line_text       
                 minimum_length = len(line_text) > 5  
                 
-                is_course_line = contains_school and no_room_keyword and minimum_length
+                is_course_line = contains_school and no_room_keyword and no_description and no_section and minimum_length
                 
                 if is_course_line:
                     try:
                         parts = line_text.split()
+                        
                         if len(parts) >= 2:
-                            school_dept = parts[0]
-                            course_num = parts[1]   
-                            
-                            school = school_dept[0:3] if len(school_dept) >= 3 else school_dept
-                            dept = school_dept[3:] if len(school_dept) > 3 else ""
-                            
-                            full_course_code = f"{school} {dept} {course_num}"
+                            first_part = parts[0]
+                            if len(first_part) == 3 and first_part in school_codes:
+                                school = first_part
+                                dept = parts[1] if len(parts) > 1 else ""
+                                course_num = parts[2] if len(parts) > 2 else ""
+                                full_course_code = f"{school} {dept} {course_num}"
+                            else:
+                                school = first_part[0:3]
+                                dept = first_part[3:5] if len(first_part) > 5 else first_part[3:]
+                                course_num = parts[1] if len(parts) > 1 else ""
+                                full_course_code = f"{school} {dept} {course_num}"
                         else:
                             school = line_text[0:3]
                             dept = line_text[3:5] if len(line_text) > 5 else ""
@@ -51,24 +59,26 @@ def raw_fetch_courses_info(reader):
                         course_entry = [full_course_code, school, dept, ""]
                         
                         units_found = False
-                        for k in range(line_idx + 1, min(line_idx + 5, len(text_lines))):
+                        for k in range(line_idx + 1, min(line_idx + 10, len(text_lines))): 
                             if k < len(text_lines):
                                 units_line = text_lines[k]
                                 
-                                if "Units" in units_line:
+                                if "Units:" in units_line or "Units :" in units_line:
                                     units_found = True
                                     
                                     try:
-                                        if len(units_line) > 8:
-                                            credits = units_line[8]
-                                            
-                                            if credits.isdigit():
-                                                if credits == "0":
-                                                    break
-                                                else:
-                                                    course_entry[3] = credits
-                                                    courses.append(course_entry)
-                                                    break
+                                        units_text = units_line.split("Units")[-1].strip()
+                                        units_text = units_text.replace(":", "").strip()
+                                        credits = ""
+                                        for char in units_text:
+                                            if char.isdigit():
+                                                credits = char
+                                                break
+                                        
+                                        if credits and credits != "0":
+                                            course_entry[3] = credits
+                                            courses.append(course_entry)
+                                            break
                                     except (IndexError, ValueError):
                                         break
                             
