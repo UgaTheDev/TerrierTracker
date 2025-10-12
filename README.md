@@ -1,6 +1,6 @@
 # Terrier Tracker
 
-A comprehensive degree planning platform for Boston University students to track academic progress, validate graduation requirements, and optimize course selection across 5,000+ courses.
+A comprehensive degree planning platform for Boston University students to track academic progress, validate graduation requirements, and optimize course selection across 6,000+ courses.
 
 ![React](https://img.shields.io/badge/React-61DAFB?style=flat&logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)
