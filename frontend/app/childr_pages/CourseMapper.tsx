@@ -45,7 +45,11 @@ export default function CourseMapper({
   const [roadmap, setRoadmap] = useState<Roadmap>(() => {
     const saved = localStorage.getItem("terriertracker-roadmap");
     if (saved) {
-      return JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      return {
+        ...parsed,
+        transferCredits: parsed.transferCredits || [],
+      };
     }
 
     return generateDefaultRoadmap({
@@ -78,8 +82,13 @@ export default function CourseMapper({
       if (course) return course;
     }
 
+    const fromTransfer = roadmap.transferCredits.find(
+      (c) => c.courseId === activeId
+    );
+    if (fromTransfer) return fromTransfer;
+
     return null;
-  }, [activeId, availableCourses, roadmap.semesters]);
+  }, [activeId, availableCourses, roadmap.semesters, roadmap.transferCredits]);
 
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string);
@@ -147,15 +156,17 @@ export default function CourseMapper({
         }
 
         if (sourceSemesterId !== "transfer-credits") {
-          newTransferCredits = [
-            ...prev.transferCredits,
-            {
-              ...course!,
-              semesterId: "transfer-credits",
-              isTransfer: true,
-              status: "completed" as const,
-            },
-          ];
+          if (!newTransferCredits.some((c) => c.courseId === courseId)) {
+            newTransferCredits = [
+              ...prev.transferCredits,
+              {
+                ...course!,
+                semesterId: "transfer-credits",
+                isTransfer: true,
+                status: "completed" as const,
+              },
+            ];
+          }
         }
 
         const updated = {
@@ -196,17 +207,19 @@ export default function CourseMapper({
 
       newSemesters = newSemesters.map((semester) => {
         if (semester.id === targetId) {
-          const courseToAdd = {
-            ...course!,
-            semesterId: targetId,
-            isTransfer: false,
-          };
-          const newCourses = [...semester.courses, courseToAdd];
-          return {
-            ...semester,
-            courses: newCourses,
-            totalCredits: calculateSemesterCredits(newCourses),
-          };
+          if (!semester.courses.some((c) => c.courseId === courseId)) {
+            const courseToAdd = {
+              ...course!,
+              semesterId: targetId,
+              isTransfer: false,
+            };
+            const newCourses = [...semester.courses, courseToAdd];
+            return {
+              ...semester,
+              courses: newCourses,
+              totalCredits: calculateSemesterCredits(newCourses),
+            };
+          }
         }
         return semester;
       });
