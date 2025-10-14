@@ -12,6 +12,7 @@ import YourBookmarks from "./childr_pages/YourBookmarks";
 import Login from "./childr_pages/Login";
 import Registration from "./childr_pages/Registration";
 import CourseRecommender from "./childr_pages/Recommender";
+import CourseMapper from "./childr_pages/CourseMapper";
 import AddCustomCourseModal, {
   type CustomCourseArray,
 } from "./components/AddCustomCourseModal";
@@ -51,6 +52,9 @@ type HubRequirement = {
 type UserData = {
   id: number;
   email: string;
+  name?: string;
+  major?: string;
+  minor?: string;
 };
 
 export default function Home() {
@@ -734,6 +738,20 @@ export default function Home() {
             hubRequirements={hubRequirements}
             onRemoveBookmark={handleRemoveBookmark}
             onNavigate={handleNavigate}
+          />
+        );
+      case "course-mapper":
+        return (
+          <CourseMapper
+            enrolledCourses={enrolledCourses}
+            customCourses={customCourses}
+            onNavigate={handleNavigate}
+            userId={currentUser?.id}
+            userInfo={{
+              name: currentUser?.name || currentUser?.email,
+              major: currentUser?.major,
+              minor: currentUser?.minor,
+            }}
           />
         );
       default:

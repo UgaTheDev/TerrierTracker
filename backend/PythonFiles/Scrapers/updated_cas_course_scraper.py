@@ -5,7 +5,6 @@ import time
 import psycopg2
 from datetime import datetime
 
-# Put your database credentials here
 DATABASE_URL = 'postgresql://postgres:yourpassword@nozomi.proxy.rlwy.net:37551/railway'
 
 hub_requirements = [

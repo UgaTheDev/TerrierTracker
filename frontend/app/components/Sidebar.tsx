@@ -43,6 +43,11 @@ export default function Sidebar({
       submenu: [
         { id: "your-courses", label: "Your Courses", page: "your-courses" },
         { id: "add-course", label: "Add Course", page: "add-courses" },
+        {
+          id: "course-roadmap",
+          label: "Course Roadmap",
+          page: "course-mapper",
+        },
       ],
     },
     {
