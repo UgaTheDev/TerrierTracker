@@ -11,7 +11,6 @@ export function generateDefaultRoadmap(config: RoadmapConfig): Roadmap {
   const semesters: Semester[] = [];
   let currentYear = config.startYear;
   let currentTerm: "fall" | "spring" | "summer" = config.startSemester;
-
   const semestersPerYear = config.includesSummer ? 3 : 2;
   const totalSemesters = config.totalYears * semestersPerYear;
 
@@ -43,6 +42,7 @@ export function generateDefaultRoadmap(config: RoadmapConfig): Roadmap {
   return {
     config,
     semesters,
+    transferCredits: [],
     lastModified: new Date(),
   };
 }
@@ -57,7 +57,6 @@ export function validateCoursePlacement(
   allSemesters: Semester[]
 ): ValidationWarning[] {
   const warnings: ValidationWarning[] = [];
-
   const newTotal = targetSemester.totalCredits + course.credits;
   if (newTotal > 20) {
     warnings.push({

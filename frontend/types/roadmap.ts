@@ -16,6 +16,8 @@ export type PlannedCourse = Course & {
   grade?: string;
   semesterId: string;
   warnings?: ValidationWarning[];
+  isTransfer?: boolean;
+  transferSource?: string;
 };
 
 export type ValidationWarning = {
@@ -40,8 +42,9 @@ export type RoadmapConfig = {
 };
 
 export type Roadmap = {
-  userId?: string;
+  userId?: number;
   config: RoadmapConfig;
   semesters: Semester[];
+  transferCredits: PlannedCourse[];
   lastModified: Date;
 };

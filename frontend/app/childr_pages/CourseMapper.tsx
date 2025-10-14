@@ -3,6 +3,7 @@ import React, { useState, useMemo } from "react";
 import { Card, Button } from "@heroui/react";
 import type { CustomCourseArray } from "../components/AddCustomCourseModal";
 import type { Course } from "../../types/roadmap";
+import TransferCreditsSection from "../components/roadmap/TransferCreditsSection";
 import {
   DndContext,
   DragEndEvent,
@@ -83,7 +84,6 @@ export default function CourseMapper({
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string);
   };
-
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -93,11 +93,9 @@ export default function CourseMapper({
     }
 
     const courseId = active.id as string;
-    const targetSemesterId = over.id as string;
-
+    const targetId = over.id as string;
     let course: PlannedCourse | null = null;
     let sourceSemesterId: string | null = null;
-
     course = availableCourses.find((c) => c.courseId === courseId) || null;
 
     if (!course) {
@@ -112,11 +110,71 @@ export default function CourseMapper({
     }
 
     if (!course) {
+      const found = roadmap.transferCredits.find(
+        (c) => c.courseId === courseId
+      );
+      if (found) {
+        course = found;
+        sourceSemesterId = "transfer-credits";
+      }
+    }
+
+    if (!course) {
       setActiveId(null);
       return;
     }
+
+    if (targetId === "transfer-credits") {
+      setRoadmap((prev) => {
+        let newSemesters = prev.semesters;
+        let newTransferCredits = prev.transferCredits;
+
+        if (sourceSemesterId && sourceSemesterId !== "transfer-credits") {
+          newSemesters = prev.semesters.map((semester) => {
+            if (semester.id === sourceSemesterId) {
+              return {
+                ...semester,
+                courses: semester.courses.filter(
+                  (c) => c.courseId !== courseId
+                ),
+                totalCredits: calculateSemesterCredits(
+                  semester.courses.filter((c) => c.courseId !== courseId)
+                ),
+              };
+            }
+            return semester;
+          });
+        }
+
+        if (sourceSemesterId !== "transfer-credits") {
+          newTransferCredits = [
+            ...prev.transferCredits,
+            {
+              ...course!,
+              semesterId: "transfer-credits",
+              isTransfer: true,
+              status: "completed" as const,
+            },
+          ];
+        }
+
+        const updated = {
+          ...prev,
+          semesters: newSemesters,
+          transferCredits: newTransferCredits,
+          lastModified: new Date(),
+        };
+
+        localStorage.setItem("terriertracker-roadmap", JSON.stringify(updated));
+        return updated;
+      });
+
+      setActiveId(null);
+      return;
+    }
+
     setRoadmap((prev) => {
-      const newSemesters = prev.semesters.map((semester) => {
+      let newSemesters = prev.semesters.map((semester) => {
         if (semester.id === sourceSemesterId) {
           return {
             ...semester,
@@ -126,33 +184,59 @@ export default function CourseMapper({
             ),
           };
         }
-        if (semester.id === targetSemesterId) {
-          const newCourses = [
-            ...semester.courses,
-            { ...course!, semesterId: targetSemesterId },
-          ];
+        return semester;
+      });
+
+      let newTransferCredits = prev.transferCredits;
+      if (sourceSemesterId === "transfer-credits") {
+        newTransferCredits = prev.transferCredits.filter(
+          (c) => c.courseId !== courseId
+        );
+      }
+
+      newSemesters = newSemesters.map((semester) => {
+        if (semester.id === targetId) {
+          const courseToAdd = {
+            ...course!,
+            semesterId: targetId,
+            isTransfer: false,
+          };
+          const newCourses = [...semester.courses, courseToAdd];
           return {
             ...semester,
             courses: newCourses,
             totalCredits: calculateSemesterCredits(newCourses),
           };
         }
-
         return semester;
       });
 
       const updated = {
         ...prev,
         semesters: newSemesters,
+        transferCredits: newTransferCredits,
         lastModified: new Date(),
       };
 
       localStorage.setItem("terriertracker-roadmap", JSON.stringify(updated));
-
       return updated;
     });
 
     setActiveId(null);
+  };
+
+  const handleRemoveTransferCredit = (courseId: string) => {
+    setRoadmap((prev) => {
+      const updated = {
+        ...prev,
+        transferCredits: prev.transferCredits.filter(
+          (c) => c.courseId !== courseId
+        ),
+        lastModified: new Date(),
+      };
+      localStorage.setItem("terriertracker-roadmap", JSON.stringify(updated));
+      return updated;
+    });
   };
 
   const handleRemoveCourse = (semesterId: string, courseId: string) => {
@@ -283,8 +367,11 @@ export default function CourseMapper({
                 userInfo={userInfo}
               />
             </div>
-
             <div className="col-span-12 lg:col-span-9">
+              <TransferCreditsSection
+                transferCredits={roadmap.transferCredits}
+                onRemoveTransferCredit={handleRemoveTransferCredit}
+              />
               <div className="space-y-8">
                 {Object.entries(semestersByYear).map(([year, semesters]) => (
                   <Card key={year} className="p-6">
