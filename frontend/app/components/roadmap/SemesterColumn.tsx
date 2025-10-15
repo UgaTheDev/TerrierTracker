@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import { useDroppable } from "@dnd-kit/core";
-import { Card, Chip, Button } from "@heroui/react"; // 👈 Ensure Button is imported
+import { Card, Chip, Button } from "@heroui/react";
 import { Semester } from "../../../types/roadmap";
-import { Trash2 } from "lucide-react"; // Using a better icon for clearing/deleting
+import { Trash2 } from "lucide-react";
 import { getSemesterLabel } from "../../utils/roadmapUtils";
 import CourseCard from "./CourseCard";
 
@@ -42,15 +42,13 @@ export default function SemesterColumn({
           {getSemesterLabel(semester, showYear)}
         </h3>
 
-        {/* New Right-Side Container for Buttons/Chips */}
         <div className="flex items-center gap-2">
-          {/* 1. CLEAR BUTTON (Visible only if courses exist) */}
           {semester.courses.length > 0 && (
             <Button
               size="sm"
-              variant="light" // Using 'light' to keep it small and subtle, but red
+              variant="light"
               color="danger"
-              startContent={<Trash2 size={12} />} // Using Trash2 for clarity
+              startContent={<Trash2 size={12} />}
               onClick={() => onClearSemester(semester.id)}
               className="p-1 h-auto text-xs font-normal"
               title={`Clear all courses from this semester`}
@@ -59,7 +57,6 @@ export default function SemesterColumn({
             </Button>
           )}
 
-          {/* 2. CREDITS CHIP (Always Visible) */}
           <Chip
             size="sm"
             color={getCreditColor(semester.totalCredits)}

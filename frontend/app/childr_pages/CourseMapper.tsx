@@ -124,9 +124,6 @@ export default function CourseMapper({
     let course: PlannedCourse | null = null;
     let sourceSemesterId: string | null = null;
 
-    // --- CRITICAL FIX FOR DUPLICATION: PRIORITIZE FINDING SOURCE ---
-
-    // 1. Search Semesters (Most common source of planned courses)
     for (const semester of roadmap.semesters) {
       const found = semester.courses.find((c) => c.courseId === courseId);
       if (found) {
@@ -135,8 +132,6 @@ export default function CourseMapper({
         break;
       }
     }
-
-    // 2. Search Transfer Credits (If not found in a semester)
     if (!course) {
       const found = roadmap.transferCredits.find(
         (c) => c.courseId === courseId
@@ -147,27 +142,21 @@ export default function CourseMapper({
       }
     }
 
-    // 3. Fallback to Available Courses (Course is being dragged fresh from the sidebar)
+    
     if (!course) {
       course = availableCourses.find((c) => c.courseId === courseId) || null;
-      sourceSemesterId = null; // No existing source to remove from
-    }
-
-    // --- END CRITICAL FIX ---
+      sourceSemesterId = null; 
 
     if (!course) {
       setActiveId(null);
       return;
     }
 
-    // --- LOGIC FOR DROPPING INTO TRANSFER CREDITS ---
-
     if (targetId === "transfer-credits") {
       setRoadmap((prev) => {
         let newSemesters = prev.semesters;
         let newTransferCredits = prev.transferCredits;
 
-        // REMOVAL: Remove from the source semester if it was dragged from one
         if (sourceSemesterId && sourceSemesterId !== "transfer-credits") {
           newSemesters = prev.semesters.map((semester) => {
             if (semester.id === sourceSemesterId) {
@@ -189,7 +178,6 @@ export default function CourseMapper({
             newTransferCredits = [
               ...prev.transferCredits,
               {
-                // Note: Ensure the course has the correct properties for a transfer course
                 ...course!,
                 semesterId: "transfer-credits",
                 isTransfer: true,
@@ -213,13 +201,7 @@ export default function CourseMapper({
       setActiveId(null);
       return;
     }
-
-    // --- LOGIC FOR DROPPING INTO A SEMESTER ---
-
     setRoadmap((prev) => {
-      // 1. REMOVAL: Remove the course from its previous location (semester or transfer)
-
-      // Remove from the source semester
       let newSemesters = prev.semesters.map((semester) => {
         if (semester.id === sourceSemesterId) {
           return {
@@ -233,7 +215,7 @@ export default function CourseMapper({
         return semester;
       });
 
-      // Remove from transfer credits
+    
       let newTransferCredits = prev.transferCredits;
       if (sourceSemesterId === "transfer-credits") {
         newTransferCredits = prev.transferCredits.filter(
@@ -241,10 +223,8 @@ export default function CourseMapper({
         );
       }
 
-      // 2. ADDITION: Add the course to the target semester
       newSemesters = newSemesters.map((semester) => {
         if (semester.id === targetId) {
-          // Prevent adding if course is somehow already there (shouldn't happen with removal above)
           if (!semester.courses.some((c) => c.courseId === courseId)) {
             const courseToAdd = {
               ...course!,
@@ -278,16 +258,9 @@ export default function CourseMapper({
 
   const handleResetRoadmap = () => {
     setRoadmap((prev) => {
-      // 1. Clear all courses from all semesters
       const clearedSemesters = prev.semesters.map((semester) => ({
-        // Preserve core properties like id, term, year
         ...semester,
-
-        // CRITICAL FIX: Generate the 'name' property using the utility function
-        // since the runtime object does not contain it but the type requires it.
         name: getSemesterLabel(semester, prev.config.showYears),
-
-        // Override or clear the arrays/counts
         courses: [],
         totalCredits: 0,
       }));
@@ -306,14 +279,10 @@ export default function CourseMapper({
     setRoadmap((prev) => {
       const newSemesters = prev.semesters.map((semester) => {
         if (semester.id === semesterId) {
-          // Clear courses from ONLY this semester
+        
           return {
             ...semester,
-
-            // CRITICAL FIX: Generate the 'name' property
             name: getSemesterLabel(semester, prev.config.showYears),
-
-            // Override or clear the arrays/counts
             courses: [],
             totalCredits: 0,
           };
@@ -541,7 +510,7 @@ export default function CourseMapper({
                 size="sm"
                 variant="flat"
                 color="danger"
-                startContent={<RotateCcw size={16} />} // Assuming RotateCcw is available (or use another reset icon)
+                startContent={<RotateCcw size={16} />} 
                 onClick={handleResetRoadmap}
                 className="flex-1 sm:flex-none"
               >

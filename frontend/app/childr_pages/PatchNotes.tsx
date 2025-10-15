@@ -10,16 +10,14 @@ import {
   Upload,
   Heart,
 } from "lucide-react";
-import "..../styles/PatchNotes.css"; // Assuming you have a CSS file for timeline styles
-
-// --- Interface for Patch Note Data ---
+import "..../styles/PatchNotes.css";
 interface TimelineItem {
   id: number;
   version: string;
   date: string;
   features: {
     text: string;
-    icon: React.FC<any>; // Icon component from lucide-react
+    icon: React.FC<any>;
     color:
       | "text-primary"
       | "text-success"
@@ -29,7 +27,6 @@ interface TimelineItem {
   }[];
 }
 
-// --- Sample Data ---
 const patchNotesData: TimelineItem[] = [
   {
     id: 3,
@@ -99,9 +96,7 @@ const patchNotesData: TimelineItem[] = [
   },
 ];
 
-// --- Timeline Item Component ---
 const TimelineCard: React.FC<{ item: TimelineItem }> = ({ item }) => {
-  // Determine card alignment for the timeline (for CSS)
   const alignmentClass =
     item.id % 2 === 0 ? "timeline-item--right" : "timeline-item--left";
 
@@ -136,14 +131,12 @@ const TimelineCard: React.FC<{ item: TimelineItem }> = ({ item }) => {
             })}
           </ul>
         </Card>
-        {/* This is the dot for the timeline line */}
         <span className="dot"></span>
       </div>
     </div>
   );
 };
 
-// --- Main PatchNotes Component ---
 interface PatchNotesProps {
   onNavigate: (page: string) => void;
 }
@@ -151,14 +144,13 @@ interface PatchNotesProps {
 const PatchNotes: React.FC<PatchNotesProps> = ({ onNavigate }) => {
   return (
     <div className="space-y-6 ml-[5%] mr-[5%] py-8">
-      {/* Header Block, consistent with your AddCourses page */}
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
           <Button
             size="sm"
             variant="light"
             startContent={<ArrowLeft size={16} />}
-            onClick={() => onNavigate("dashboard")} // Assuming a dashboard or home page
+            onClick={() => onNavigate("dashboard")}
             className="h-8 px-3 text-sm"
           >
             Go Back
@@ -173,10 +165,8 @@ const PatchNotes: React.FC<PatchNotesProps> = ({ onNavigate }) => {
             </p>
           </div>
         </div>
-        {/* You could add a statistics card here if you had one, like Total Users/Terriers */}
       </div>
 
-      {/* The Timeline Section */}
       <div className="timeline">
         {patchNotesData.map((item) => (
           <TimelineCard key={item.id} item={item} />

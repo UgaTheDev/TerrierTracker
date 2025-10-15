@@ -17,6 +17,7 @@ import AddCustomCourseModal, {
   type CustomCourseArray,
 } from "./components/AddCustomCourseModal";
 import { NavBar } from "./components/NavBar";
+import RoadmapAnnouncement from "./components/announcements/CourseRoadmap";
 
 export type EditedCourseArray = [string, string, string, number];
 
@@ -797,6 +798,8 @@ export default function Home() {
         <main className="flex-1 overflow-auto pt-16 lg:pt-0">
           {renderContent()}
         </main>
+
+        <RoadmapAnnouncement onNavigate={handleNavigate} />
 
         <AddCustomCourseModal
           isOpen={isCustomCourseModalOpen}
