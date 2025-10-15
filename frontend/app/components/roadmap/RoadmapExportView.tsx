@@ -36,10 +36,12 @@ export default function RoadmapExportView({
   );
   const totalCredits = totalPlannedCredits + totalTransferCredits;
 
+  const academicYears = Object.entries(semestersByAcademicYear);
+
   return (
-    <div className="min-h-screen bg-white p-8 print:p-0">
+    <div className="bg-white print:min-h-auto">
       {/* Header */}
-      <div className="text-center mb-8 border-b-4 border-blue-600 pb-6 prevent-orphans">
+      <div className="text-center mb-8 border-b-4 border-blue-600 pb-6 print:break-after-avoid">
         <div className="flex items-center justify-center gap-3 mb-4">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQCwX8PlKDGl3Zz5YsKZ3TL6ROXuebh89ZLm-Qa9q1zEchvK9BY5T6ppKEZCKLqcJD7gno&usqp=CAU"
@@ -108,7 +110,7 @@ export default function RoadmapExportView({
 
       {/* Transfer Credits Section */}
       {roadmap.transferCredits.length > 0 && (
-        <div className="mb-8 prevent-orphans">
+        <div className="mb-8 print:break-inside-avoid">
           <div className="bg-green-50 border-2 border-green-300 rounded-lg p-6 print:bg-green-50 print:border-green-400">
             <div className="flex items-center gap-3 mb-4">
               <GraduationCap
@@ -130,7 +132,7 @@ export default function RoadmapExportView({
               {roadmap.transferCredits.map((credit) => (
                 <div
                   key={credit.courseId}
-                  className="bg-white border-2 border-green-200 rounded-lg p-3 print:border-green-300"
+                  className="bg-white border-2 border-green-200 rounded-lg p-3 print:border-green-300 print:break-inside-avoid"
                 >
                   <div className="font-mono text-sm font-bold text-gray-900">
                     {credit.courseId}
@@ -175,62 +177,61 @@ export default function RoadmapExportView({
 
       {/* Academic Years */}
       <div className="space-y-8">
-        {Object.entries(semestersByAcademicYear).map(
-          ([yearNum, semesters], index) => {
-            const academicYearLabel = getAcademicYearLabel(
-              semesters,
-              roadmap.config.showYears
-            );
-            const yearCredits = semesters.reduce(
-              (sum, sem) => sum + sem.totalCredits,
-              0
-            );
+        {academicYears.map(([yearNum, semesters], index) => {
+          const academicYearLabel = getAcademicYearLabel(
+            semesters,
+            roadmap.config.showYears
+          );
+          const yearCredits = semesters.reduce(
+            (sum, sem) => sum + sem.totalCredits,
+            0
+          );
 
-            return (
-              <div
-                key={yearNum}
-                className="academic-year border-2 border-gray-300 rounded-xl overflow-hidden print:border-gray-400"
-                style={index > 0 ? { breakBefore: "page" } : {}}
-              >
-                {/* Year Header */}
-                <div className="bg-blue-600 text-white p-4 print:bg-blue-700">
-                  <div className="flex justify-between items-center">
-                    <div>
-                      <h2 className="text-2xl font-bold">
-                        Year {yearNum}
-                        {academicYearLabel && (
-                          <span className="text-lg font-normal ml-2 opacity-95">
-                            ({academicYearLabel})
-                          </span>
-                        )}
-                      </h2>
-                    </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold">{yearCredits}</div>
-                      <div className="text-sm opacity-95">credits</div>
-                    </div>
+          return (
+            <div
+              key={yearNum}
+              className={`academic-year border-2 border-gray-300 rounded-xl overflow-hidden print:border-gray-400 print:break-before-auto ${
+                index > 0 ? "print:break-before-page" : ""
+              }`}
+            >
+              {/* Year Header */}
+              <div className="bg-blue-600 text-white p-4 print:bg-blue-700">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h2 className="text-2xl font-bold">
+                      Year {yearNum}
+                      {academicYearLabel && (
+                        <span className="text-lg font-normal ml-2 opacity-95">
+                          ({academicYearLabel})
+                        </span>
+                      )}
+                    </h2>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-2xl font-bold">{yearCredits}</div>
+                    <div className="text-sm opacity-95">credits</div>
                   </div>
                 </div>
-
-                {/* Semesters Grid */}
-                <div className="grid grid-cols-2 gap-4 p-4 bg-gray-100 print:bg-gray-100">
-                  {semesters.map((semester) => (
-                    <div key={semester.id} className="semester-card">
-                      <SemesterCard
-                        semester={semester}
-                        showYear={roadmap.config.showYears}
-                      />
-                    </div>
-                  ))}
-                </div>
               </div>
-            );
-          }
-        )}
+
+              {/* Semesters Grid */}
+              <div className="grid grid-cols-2 gap-4 p-4 bg-gray-100 print:bg-gray-100">
+                {semesters.map((semester) => (
+                  <div key={semester.id} className="print:break-inside-avoid">
+                    <SemesterCard
+                      semester={semester}
+                      showYear={roadmap.config.showYears}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
 
       {/* Footer */}
-      <div className="mt-8 pt-6 border-t-2 border-gray-300 text-center text-sm text-gray-700 print:text-gray-800 prevent-orphans">
+      <div className="mt-8 pt-6 border-t-2 border-gray-300 text-center text-sm text-gray-700 print:text-gray-800 print:break-before-avoid">
         <p>Generated by Terrier Tracker</p>
         <p className="text-xs mt-1">
           Printed on {new Date().toLocaleDateString()}
@@ -259,7 +260,7 @@ function SemesterCard({
   };
 
   return (
-    <div className="bg-white border-2 border-gray-300 rounded-lg p-4 print:border-gray-400">
+    <div className="bg-white border-2 border-gray-300 rounded-lg p-4 print:border-gray-400 h-full">
       {/* Semester Header */}
       <div className="flex justify-between items-center mb-3 pb-2 border-b border-gray-300">
         <h3 className="font-bold text-gray-900">

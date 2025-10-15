@@ -434,123 +434,131 @@ export default function CourseMapper({
     );
   }, [roadmap.semesters, roadmap.config.startSemester]);
 
+  // In your CourseMapper return statement:
   return (
     <div className="min-h-screen bg-background">
-      <div className="border-b bg-content1 sticky top-0 z-10">
-        <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-            <div className="flex items-center gap-2 md:gap-4 w-full sm:w-auto">
-              <Button
-                size="sm"
-                variant="light"
-                startContent={<ArrowLeft size={16} />}
-                onClick={() => onNavigate("your-courses")}
-                className="min-w-fit"
-              >
-                <span className="hidden sm:inline">Back</span>
-              </Button>
-              <div className="flex-1">
-                <h1 className="text-xl md:text-2xl font-bold">My Roadmap</h1>
-                <p className="text-xs md:text-sm text-default-500">
-                  Plan your courses across {roadmap.config.totalYears} years
-                </p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 w-full sm:w-auto">
-              <Button
-                size="sm"
-                variant="flat"
-                startContent={<Download size={16} />}
-                onClick={handleExport}
-                className="flex-1 sm:flex-none"
-              >
-                <span className="sm:inline">Export</span>
-              </Button>
-              <Button
-                size="sm"
-                variant="flat"
-                startContent={<Settings size={16} />}
-                onClick={() => setShowSettings(true)}
-                className="flex-1 sm:flex-none"
-              >
-                <span className="sm:inline">Settings</span>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <div className="container mx-auto px-4 md:px-6 py-4 md:py-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
-            <div className="lg:col-span-3">
-              <RoadmapSidebar
-                roadmap={roadmap}
-                availableCourses={availableCourses}
-                userInfo={userInfo}
-              />
-            </div>
-
-            <div className="lg:col-span-9">
-              <TransferCreditsSection
-                transferCredits={roadmap.transferCredits}
-                onRemoveTransferCredit={handleRemoveTransferCredit}
-              />
-              <div className="space-y-4 md:space-y-8">
-                {Object.entries(semestersByAcademicYear).map(
-                  ([yearNum, semesters]) => {
-                    const academicYearLabel = getAcademicYearLabel(
-                      semesters,
-                      roadmap.config.showYears
-                    );
-
-                    return (
-                      <Card key={yearNum} className="p-4 md:p-6">
-                        <h2 className="text-lg md:text-xl font-bold mb-3 md:mb-4">
-                          Year {yearNum}
-                          {academicYearLabel && (
-                            <span className="text-sm md:text-base font-normal text-default-500 ml-2">
-                              ({academicYearLabel})
-                            </span>
-                          )}
-                        </h2>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
-                          {semesters.map((semester) => (
-                            <SemesterColumn
-                              key={semester.id}
-                              semester={semester}
-                              onRemoveCourse={handleRemoveCourse}
-                              showYear={roadmap.config.showYears}
-                            />
-                          ))}
-                        </div>
-                      </Card>
-                    );
-                  }
-                )}
-
+      {/* Main UI - hidden when printing in export mode */}
+      <div className={showExportView ? "hidden print:hidden" : "block"}>
+        {/* Header */}
+        <div className="border-b bg-content1 sticky top-0 z-10">
+          <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+              <div className="flex items-center gap-2 md:gap-4 w-full sm:w-auto">
                 <Button
-                  variant="bordered"
-                  startContent={<Plus size={16} />}
-                  onClick={handleAddSemester}
-                  className="w-full"
+                  size="sm"
+                  variant="light"
+                  startContent={<ArrowLeft size={16} />}
+                  onClick={() => onNavigate("your-courses")}
+                  className="min-w-fit"
                 >
-                  Add Another Semester
+                  <span className="hidden sm:inline">Back</span>
+                </Button>
+                <div className="flex-1">
+                  <h1 className="text-xl md:text-2xl font-bold">My Roadmap</h1>
+                  <p className="text-xs md:text-sm text-default-500">
+                    Plan your courses across {roadmap.config.totalYears} years
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <Button
+                  size="sm"
+                  variant="flat"
+                  startContent={<Download size={16} />}
+                  onClick={handleExport}
+                  className="flex-1 sm:flex-none"
+                >
+                  <span className="sm:inline">Export</span>
+                </Button>
+                <Button
+                  size="sm"
+                  variant="flat"
+                  startContent={<Settings size={16} />}
+                  onClick={() => setShowSettings(true)}
+                  className="flex-1 sm:flex-none"
+                >
+                  <span className="sm:inline">Settings</span>
                 </Button>
               </div>
             </div>
           </div>
         </div>
 
-        <DragOverlay>
-          {activeCourse ? (
-            <div className="opacity-50">
-              <CourseCard course={activeCourse} isDragging />
-            </div>
-          ) : null}
-        </DragOverlay>
-      </DndContext>
+        <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
+          <div className="container mx-auto px-4 md:px-6 py-4 md:py-6">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
+              {/* Sidebar - Collapsible on mobile */}
+              <div className="lg:col-span-3">
+                <RoadmapSidebar
+                  roadmap={roadmap}
+                  availableCourses={availableCourses}
+                  userInfo={userInfo}
+                />
+              </div>
 
+              {/* Main content */}
+              <div className="lg:col-span-9">
+                <TransferCreditsSection
+                  transferCredits={roadmap.transferCredits}
+                  onRemoveTransferCredit={handleRemoveTransferCredit}
+                />
+                <div className="space-y-4 md:space-y-8">
+                  {Object.entries(semestersByAcademicYear).map(
+                    ([yearNum, semesters]) => {
+                      const academicYearLabel = getAcademicYearLabel(
+                        semesters,
+                        roadmap.config.showYears
+                      );
+
+                      return (
+                        <Card key={yearNum} className="p-4 md:p-6">
+                          <h2 className="text-lg md:text-xl font-bold mb-3 md:mb-4">
+                            Year {yearNum}
+                            {academicYearLabel && (
+                              <span className="text-sm md:text-base font-normal text-default-500 ml-2">
+                                ({academicYearLabel})
+                              </span>
+                            )}
+                          </h2>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                            {semesters.map((semester) => (
+                              <SemesterColumn
+                                key={semester.id}
+                                semester={semester}
+                                onRemoveCourse={handleRemoveCourse}
+                                showYear={roadmap.config.showYears}
+                              />
+                            ))}
+                          </div>
+                        </Card>
+                      );
+                    }
+                  )}
+
+                  <Button
+                    variant="bordered"
+                    startContent={<Plus size={16} />}
+                    onClick={handleAddSemester}
+                    className="w-full"
+                  >
+                    Add Another Semester
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <DragOverlay>
+            {activeCourse ? (
+              <div className="opacity-50">
+                <CourseCard course={activeCourse} isDragging />
+              </div>
+            ) : null}
+          </DragOverlay>
+        </DndContext>
+      </div>
+
+      {/* Settings Modal */}
       <RoadmapSettingsModal
         isOpen={showSettings}
         onClose={() => setShowSettings(false)}
@@ -558,22 +566,10 @@ export default function CourseMapper({
         onSave={handleSaveSettings}
       />
 
-      {showExportView && (
-        <div className="fixed inset-0 z-[60] bg-white overflow-auto">
-          <div className="print:hidden sticky top-0 bg-white border-b p-4 flex justify-between items-center shadow-sm z-10">
-            <h2 className="text-xl font-bold">Export Preview</h2>
-            <div className="flex gap-2">
-              <Button size="sm" variant="flat" onClick={() => window.print()}>
-                Print / Save as PDF
-              </Button>
-              <Button size="sm" variant="light" onClick={handleCloseExport}>
-                Close
-              </Button>
-            </div>
-          </div>
-          <RoadmapExportView roadmap={roadmap} userInfo={userInfo} />
-        </div>
-      )}
+      {/* Export View - Always in DOM but conditionally shown */}
+      <div className={showExportView ? "block" : "hidden"}>
+        <RoadmapExportView roadmap={roadmap} userInfo={userInfo} />
+      </div>
     </div>
   );
 }

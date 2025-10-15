@@ -10,49 +10,61 @@
   body {
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
+    margin: 0;
+    padding: 0;
+    background: white !important;
   }
 
+  /* Hide everything except the RoadmapExportView component */
+  .min-h-screen > :not(.bg-white) {
+    display: none !important;
+  }
+
+  /* Ensure export content is visible and properly styled */
+  .bg-white {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+  }
+
+  /* Hide the print header in export view */
   .print\:hidden {
     display: none !important;
   }
 
-  .print\:p-0 {
-    padding: 0 !important;
-  }
-
-  /* Fix page break issues */
-  .break-inside-avoid {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  /* Allow breaks between academic years but not within them */
-  .academic-year {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  /* Allow breaks between semesters but not within a semester card */
-  .semester-card {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  /* Force page breaks before major sections if they don't fit */
-  .force-page-break-before {
+  /* Page break control */
+  .print\:break-before-page {
     break-before: page;
     page-break-before: always;
   }
 
-  /* Prevent tiny orphans at bottom of pages */
-  .prevent-orphans {
+  .print\:break-after-avoid {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  .print\:break-before-avoid {
+    break-before: avoid;
+    page-break-before: avoid;
+  }
+
+  .print\:break-inside-avoid {
     break-inside: avoid;
-    orphans: 3;
-    widows: 3;
+    page-break-inside: avoid;
   }
 
   * {
     print-color-adjust: exact;
     -webkit-print-color-adjust: exact;
   }
+}
+
+/* Ensure proper display for export view */
+.hidden {
+  display: none;
 }
