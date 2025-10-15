@@ -53,21 +53,21 @@ export default function RoadmapAnnouncement({
         </div>
 
         <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-          We've launched the **Course Roadmap**—a visual tool to plan your
-          academic future semester by semester.
+          We've launched the Course Roadmap, a visual tool to plan your academic
+          future semester by semester.
         </p>
 
         <p className="text-base font-semibold text-gray-800 dark:text-gray-200 flex items-center space-x-2">
           <LayoutList className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
-          <span>Find it in the sidebar under **"Courses"**!</span>
+          <span>Find it in the sidebar under "Courses"!</span>
         </p>
         <div className="bg-indigo-50 dark:bg-gray-800 p-4 rounded-lg border border-indigo-200 dark:border-gray-700">
           <p className="text-sm text-indigo-800 dark:text-indigo-300 font-medium">
             Optimizations Coming Soon!
           </p>
           <p className="text-xs text-indigo-700 dark:text-indigo-400 mt-1">
-            We're actively developing enhancements, including **export
-            functionality** (PDF/Text) and better prerequisite tracking.
+            We're actively developing enhancements, including export
+            functionality.
           </p>
         </div>
 
