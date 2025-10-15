@@ -20,6 +20,17 @@ export function generateDefaultRoadmap(config: RoadmapConfig): Roadmap {
       id: `${currentYear}-${currentTerm}`,
       term: currentTerm,
       year: currentYear,
+      name: getSemesterLabel(
+        {
+          id: `${currentYear}-${currentTerm}`,
+          term: currentTerm,
+          year: currentYear,
+          name: "",
+          courses: [],
+          totalCredits: 0,
+        },
+        config.showYears
+      ),
       courses: [],
       totalCredits: 0,
     });
@@ -27,18 +38,18 @@ export function generateDefaultRoadmap(config: RoadmapConfig): Roadmap {
     if (config.includesSummer) {
       if (currentTerm === "fall") {
         currentTerm = "spring";
-        currentYear++;
       } else if (currentTerm === "spring") {
         currentTerm = "summer";
       } else {
         currentTerm = "fall";
+        currentYear++;
       }
     } else {
       if (currentTerm === "fall") {
         currentTerm = "spring";
-        currentYear++;
       } else {
         currentTerm = "fall";
+        currentYear++;
       }
     }
   }
