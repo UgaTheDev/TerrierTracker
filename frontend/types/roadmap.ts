@@ -39,6 +39,7 @@ export type RoadmapConfig = {
   includesSummer: boolean;
   startYear: number;
   startSemester: "fall" | "spring";
+  showYears: boolean;
 };
 
 export type Roadmap = {

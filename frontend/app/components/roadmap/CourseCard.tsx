@@ -48,15 +48,15 @@ export default function CourseCard({
         <div className="flex-1 min-w-0">
           <div className="flex justify-between items-start gap-2">
             <div className="flex-1 min-w-0">
-              <p className="font-mono text-xs font-semibold truncate">
+              <p className="font-mono text-[10px] md:text-xs font-semibold truncate">
                 {course.courseId}
               </p>
-              <p className="text-xs text-default-600 line-clamp-2 mt-0.5">
+              <p className="text-[10px] md:text-xs text-default-600 line-clamp-2 mt-0.5">
                 {course.course}
               </p>
             </div>
             <div className="flex items-center gap-1 flex-shrink-0">
-              <Chip size="sm" variant="flat" className="text-xs">
+              <Chip size="sm" variant="flat" className="text-[10px] md:text-xs">
                 {course.credits}cr
               </Chip>
               {onRemove && (
@@ -67,7 +67,7 @@ export default function CourseCard({
                   }}
                   className="text-danger hover:bg-danger/10 rounded p-1"
                 >
-                  <X size={14} />
+                  <X size={12} className="md:w-3.5 md:h-3.5" />
                 </button>
               )}
             </div>

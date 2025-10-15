@@ -1,2 +1,58 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
+
+@media print {
+  @page {
+    size: letter;
+    margin: 0.5in;
+  }
+
+  body {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  .print\:p-0 {
+    padding: 0 !important;
+  }
+
+  /* Fix page break issues */
+  .break-inside-avoid {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Allow breaks between academic years but not within them */
+  .academic-year {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Allow breaks between semesters but not within a semester card */
+  .semester-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Force page breaks before major sections if they don't fit */
+  .force-page-break-before {
+    break-before: page;
+    page-break-before: always;
+  }
+
+  /* Prevent tiny orphans at bottom of pages */
+  .prevent-orphans {
+    break-inside: avoid;
+    orphans: 3;
+    widows: 3;
+  }
+
+  * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+}

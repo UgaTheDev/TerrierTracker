@@ -11,7 +11,7 @@ interface TransferCreditsSectionProps {
 }
 
 export default function TransferCreditsSection({
-  transferCredits = [], // Set a default value to prevent undefined errors
+  transferCredits = [],
   onRemoveTransferCredit,
 }: TransferCreditsSectionProps) {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -31,7 +31,6 @@ export default function TransferCreditsSection({
         isOver ? "ring-2 ring-indigo-500 bg-indigo-500/5" : ""
       }`}
     >
-      {/* Header - Always Visible */}
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full flex items-center justify-between hover:opacity-80 transition-opacity"
@@ -59,7 +58,6 @@ export default function TransferCreditsSection({
         </div>
       </button>
 
-      {/* Expandable Content */}
       {isExpanded && (
         <div
           ref={setNodeRef}
@@ -85,7 +83,7 @@ export default function TransferCreditsSection({
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {transferCredits.map((credit) => (
                 <div key={credit.courseId} className="relative">
                   <CourseCard

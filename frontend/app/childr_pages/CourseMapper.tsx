@@ -4,6 +4,8 @@ import { Card, Button } from "@heroui/react";
 import type { CustomCourseArray } from "../components/AddCustomCourseModal";
 import type { Course } from "../../types/roadmap";
 import TransferCreditsSection from "../components/roadmap/TransferCreditsSection";
+import RoadmapSettingsModal from "../components/roadmap/RoadmapSettingsModal";
+import RoadmapExportView from "../components/roadmap/RoadmapExportView";
 import {
   DndContext,
   DragEndEvent,
@@ -20,6 +22,9 @@ import {
 import {
   generateDefaultRoadmap,
   calculateSemesterCredits,
+  groupSemestersByAcademicYear,
+  getAcademicYearLabel,
+  getSemesterLabel,
 } from "../utils/roadmapUtils";
 import SemesterColumn from "../components/roadmap/SemesterColumn";
 import CourseCard from "../components/roadmap/CourseCard";
@@ -43,13 +48,23 @@ export default function CourseMapper({
   userInfo = {},
 }: CourseMapperProps) {
   const [roadmap, setRoadmap] = useState<Roadmap>(() => {
-    const saved = localStorage.getItem("terriertracker-roadmap");
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      return {
-        ...parsed,
-        transferCredits: parsed.transferCredits || [],
-      };
+    try {
+      const saved = localStorage.getItem("terriertracker-roadmap");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        return {
+          ...parsed,
+          transferCredits: parsed.transferCredits || [],
+          config: {
+            ...parsed.config,
+            showYears: parsed.config.showYears ?? false,
+          },
+        };
+      }
+    } catch (error) {
+      console.error("Error parsing saved roadmap from localStorage:", error);
+
+      localStorage.removeItem("terriertracker-roadmap");
     }
 
     return generateDefaultRoadmap({
@@ -57,11 +72,13 @@ export default function CourseMapper({
       includesSummer: false,
       startYear: new Date().getFullYear(),
       startSemester: "fall",
+      showYears: false,
     });
   });
 
   const [activeId, setActiveId] = useState<string | null>(null);
   const [showSettings, setShowSettings] = useState(false);
+  const [showExportView, setShowExportView] = useState(false);
 
   const availableCourses: PlannedCourse[] = useMemo(() => {
     return enrolledCourses.map((course) => ({
@@ -93,6 +110,7 @@ export default function CourseMapper({
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string);
   };
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -275,7 +293,6 @@ export default function CourseMapper({
       };
 
       localStorage.setItem("terriertracker-roadmap", JSON.stringify(updated));
-
       return updated;
     });
   };
@@ -317,53 +334,146 @@ export default function CourseMapper({
     });
   };
 
-  const semestersByYear = useMemo(() => {
-    const grouped: { [year: number]: Semester[] } = {};
-    roadmap.semesters.forEach((semester) => {
-      if (!grouped[semester.year]) {
-        grouped[semester.year] = [];
-      }
-      grouped[semester.year].push(semester);
+  const handleSaveSettings = (newConfig: RoadmapConfig) => {
+    setRoadmap((prev) => {
+      const newRoadmap = generateDefaultRoadmap(newConfig);
+
+      const updated = {
+        ...newRoadmap,
+        transferCredits: prev.transferCredits,
+        lastModified: new Date(),
+      };
+
+      localStorage.setItem("terriertracker-roadmap", JSON.stringify(updated));
+      return updated;
     });
-    return grouped;
-  }, [roadmap.semesters]);
+  };
+  const handleExport = () => {
+    setShowExportView(true);
+
+    setTimeout(() => {
+      window.print();
+    }, 500);
+  };
+
+  const handleCloseExport = () => {
+    setShowExportView(false);
+  };
+
+  const generateRoadmapText = (roadmap: Roadmap): string => {
+    let text = "MY ACADEMIC ROADMAP\n";
+    text += "=" + "=".repeat(50) + "\n\n";
+
+    if (roadmap.transferCredits.length > 0) {
+      text += "TRANSFER CREDITS (AP/IB/Other)\n";
+      text += "-".repeat(50) + "\n";
+      roadmap.transferCredits.forEach((course) => {
+        text += `${course.courseId} - ${course.course} (${course.credits} cr)`;
+        if (course.transferSource) {
+          text += ` [${course.transferSource}]`;
+        }
+        text += "\n";
+      });
+      text += `Total Transfer Credits: ${roadmap.transferCredits.reduce((sum, c) => sum + c.credits, 0)}\n\n`;
+    }
+
+    const grouped = groupSemestersByAcademicYear(
+      roadmap.semesters,
+      roadmap.config.startSemester
+    );
+
+    Object.entries(grouped).forEach(([yearNum, semesters]) => {
+      const academicYearLabel = getAcademicYearLabel(
+        semesters,
+        roadmap.config.showYears
+      );
+
+      text += `YEAR ${yearNum}`;
+      if (academicYearLabel) {
+        text += ` (${academicYearLabel})`;
+      }
+      text += "\n" + "=".repeat(50) + "\n\n";
+
+      semesters.forEach((semester) => {
+        text += `${getSemesterLabel(semester, roadmap.config.showYears)}\n`;
+        text += "-".repeat(30) + "\n";
+
+        if (semester.courses.length === 0) {
+          text += "  No courses planned\n";
+        } else {
+          semester.courses.forEach((course) => {
+            text += `  ${course.courseId} - ${course.course} (${course.credits} cr)\n`;
+          });
+          text += `  Semester Total: ${semester.totalCredits} credits\n`;
+        }
+        text += "\n";
+      });
+    });
+
+    const totalPlannedCredits = roadmap.semesters.reduce(
+      (sum, sem) => sum + sem.totalCredits,
+      0
+    );
+    const totalCredits =
+      totalPlannedCredits +
+      roadmap.transferCredits.reduce((sum, c) => sum + c.credits, 0);
+
+    text += "SUMMARY\n";
+    text += "=".repeat(50) + "\n";
+    text += `Transfer Credits: ${roadmap.transferCredits.reduce((sum, c) => sum + c.credits, 0)}\n`;
+    text += `Planned Credits: ${totalPlannedCredits}\n`;
+    text += `Total Credits: ${totalCredits}\n`;
+
+    return text;
+  };
+
+  const semestersByAcademicYear = useMemo(() => {
+    return groupSemestersByAcademicYear(
+      roadmap.semesters,
+      roadmap.config.startSemester
+    );
+  }, [roadmap.semesters, roadmap.config.startSemester]);
 
   return (
     <div className="min-h-screen bg-background">
       <div className="border-b bg-content1 sticky top-0 z-10">
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-4">
+        <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <div className="flex items-center gap-2 md:gap-4 w-full sm:w-auto">
               <Button
                 size="sm"
                 variant="light"
                 startContent={<ArrowLeft size={16} />}
                 onClick={() => onNavigate("your-courses")}
+                className="min-w-fit"
               >
-                Back
+                <span className="hidden sm:inline">Back</span>
               </Button>
-              <div>
-                <h1 className="text-2xl font-bold">My Roadmap</h1>
-                <p className="text-sm text-default-500">
+              <div className="flex-1">
+                <h1 className="text-xl md:text-2xl font-bold">My Roadmap</h1>
+                <p className="text-xs md:text-sm text-default-500">
                   Plan your courses across {roadmap.config.totalYears} years
                 </p>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 w-full sm:w-auto">
               <Button
                 size="sm"
                 variant="flat"
                 startContent={<Download size={16} />}
+                onClick={handleExport}
+                className="flex-1 sm:flex-none"
               >
-                Export
+                <span className="sm:inline">Export</span>
               </Button>
               <Button
                 size="sm"
                 variant="flat"
                 startContent={<Settings size={16} />}
                 onClick={() => setShowSettings(true)}
+                className="flex-1 sm:flex-none"
               >
-                Settings
+                <span className="sm:inline">Settings</span>
               </Button>
             </div>
           </div>
@@ -371,38 +481,53 @@ export default function CourseMapper({
       </div>
 
       <DndContext onDragStart={handleDragStart} onDragEnd={handleDragEnd}>
-        <div className="container mx-auto px-6 py-6">
-          <div className="grid grid-cols-12 gap-6">
-            <div className="col-span-12 lg:col-span-3">
+        <div className="container mx-auto px-4 md:px-6 py-4 md:py-6">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 md:gap-6">
+            <div className="lg:col-span-3">
               <RoadmapSidebar
                 roadmap={roadmap}
                 availableCourses={availableCourses}
                 userInfo={userInfo}
               />
             </div>
-            <div className="col-span-12 lg:col-span-9">
+
+            <div className="lg:col-span-9">
               <TransferCreditsSection
                 transferCredits={roadmap.transferCredits}
                 onRemoveTransferCredit={handleRemoveTransferCredit}
               />
-              <div className="space-y-8">
-                {Object.entries(semestersByYear).map(([year, semesters]) => (
-                  <Card key={year} className="p-6">
-                    <h2 className="text-xl font-bold mb-4">
-                      Year {parseInt(year) - roadmap.config.startYear + 1} (
-                      {year})
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {semesters.map((semester) => (
-                        <SemesterColumn
-                          key={semester.id}
-                          semester={semester}
-                          onRemoveCourse={handleRemoveCourse}
-                        />
-                      ))}
-                    </div>
-                  </Card>
-                ))}
+              <div className="space-y-4 md:space-y-8">
+                {Object.entries(semestersByAcademicYear).map(
+                  ([yearNum, semesters]) => {
+                    const academicYearLabel = getAcademicYearLabel(
+                      semesters,
+                      roadmap.config.showYears
+                    );
+
+                    return (
+                      <Card key={yearNum} className="p-4 md:p-6">
+                        <h2 className="text-lg md:text-xl font-bold mb-3 md:mb-4">
+                          Year {yearNum}
+                          {academicYearLabel && (
+                            <span className="text-sm md:text-base font-normal text-default-500 ml-2">
+                              ({academicYearLabel})
+                            </span>
+                          )}
+                        </h2>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                          {semesters.map((semester) => (
+                            <SemesterColumn
+                              key={semester.id}
+                              semester={semester}
+                              onRemoveCourse={handleRemoveCourse}
+                              showYear={roadmap.config.showYears}
+                            />
+                          ))}
+                        </div>
+                      </Card>
+                    );
+                  }
+                )}
 
                 <Button
                   variant="bordered"
@@ -416,6 +541,7 @@ export default function CourseMapper({
             </div>
           </div>
         </div>
+
         <DragOverlay>
           {activeCourse ? (
             <div className="opacity-50">
@@ -424,6 +550,30 @@ export default function CourseMapper({
           ) : null}
         </DragOverlay>
       </DndContext>
+
+      <RoadmapSettingsModal
+        isOpen={showSettings}
+        onClose={() => setShowSettings(false)}
+        config={roadmap.config}
+        onSave={handleSaveSettings}
+      />
+
+      {showExportView && (
+        <div className="fixed inset-0 z-[60] bg-white overflow-auto">
+          <div className="print:hidden sticky top-0 bg-white border-b p-4 flex justify-between items-center shadow-sm z-10">
+            <h2 className="text-xl font-bold">Export Preview</h2>
+            <div className="flex gap-2">
+              <Button size="sm" variant="flat" onClick={() => window.print()}>
+                Print / Save as PDF
+              </Button>
+              <Button size="sm" variant="light" onClick={handleCloseExport}>
+                Close
+              </Button>
+            </div>
+          </div>
+          <RoadmapExportView roadmap={roadmap} userInfo={userInfo} />
+        </div>
+      )}
     </div>
   );
 }
