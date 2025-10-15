@@ -32,6 +32,7 @@ export type Semester = {
   year: number;
   courses: PlannedCourse[];
   totalCredits: number;
+  name: string;
 };
 
 export type RoadmapConfig = {

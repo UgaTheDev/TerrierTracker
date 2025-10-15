@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, Response
+from flask import Flask, jsonify, request, Response, make_response
 from flask_cors import CORS
 from pathlib import Path
 import logging
@@ -243,33 +243,57 @@ def search_course():
 
 @app.route('/api/bulk-hub-requirements', methods=['POST'])
 def bulk_hub_requirements():
+    conn = None
+    cur = None
     try:
         data = request.json
         if not data:
+            # Explicitly return JSON on 400
             return jsonify({"error": "No JSON data provided"}), 400
+
         course_codes = data.get('course_codes', [])
         if not course_codes:
+            # Explicitly return JSON on 400
             return jsonify({"error": "course_codes array is required"}), 400
+
         conn = get_db_connection()
         if not conn:
-            return jsonify({"error": "Database connection failed"}), 500
+            # This is the line most likely to fail in production!
+            # It's better to let the Exception block handle a connection failure
+            raise Exception("Database connection failed")
+            
         cur = conn.cursor()
-        try:
-            cur.execute('SELECT c.code, hr.name FROM courses c JOIN course_hub_requirements chr ON c.id = chr.course_id JOIN hub_requirements hr ON chr.hub_requirement_id = hr.id WHERE c.code = ANY(%s) ORDER BY c.code, hr.display_order', (course_codes,))
-            results = {}
-            for code, hub_name in cur.fetchall():
-                if code not in results:
-                    results[code] = []
-                results[code].append(hub_name)
-            for code in course_codes:
-                if code not in results:
-                    results[code] = []
-            return jsonify({"success": True, "results": results, "total_courses": len(results)})
-        finally:
+        
+        cur.execute('SELECT c.code, hr.name FROM courses c JOIN course_hub_requirements chr ON c.id = chr.course_id JOIN hub_requirements hr ON chr.hub_requirement_id = hr.id WHERE c.code = ANY(%s) ORDER BY c.code, hr.display_order', (course_codes,))
+        
+        results = {}
+        for code, hub_name in cur.fetchall():
+            if code not in results:
+                results[code] = []
+            results[code].append(hub_name)
+        
+        for code in course_codes:
+            if code not in results:
+                results[code] = []
+        
+        return jsonify({"success": True, "results": results, "total_courses": len(results)})
+
+    except Exception as e:
+        # ⚠️ This is the critical change
+        response = make_response(
+            json.dumps({"error": "Bulk fetch failed: " + str(e)}), # Include error message for debugging
+            500
+        )
+        response.headers["Content-Type"] = "application/json"
+        # In Vercel logs, this should now show a clean 500 response
+        # with a JSON body, not an HTML page.
+        return response
+        
+    finally:
+        if cur:
             cur.close()
+        if conn:
             conn.close()
-    except Exception:
-        return jsonify({"error": "Bulk fetch failed"}), 500
 
 @app.route('/api/all-courses', methods=['GET'])
 def get_all_courses():
