@@ -1,0 +1,103 @@
+/* --- Timeline Structure --- */
+.timeline {
+  position: relative;
+  padding: 20px 0;
+}
+
+/* The vertical line in the middle */
+.timeline::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%; /* Center the line */
+  width: 2px;
+  background: #e0e0e0;
+  transform: translateX(-50%);
+}
+
+/* --- Timeline Item Styling --- */
+.timeline-item {
+  position: relative;
+  width: 50%;
+  margin-bottom: 40px; /* Increased spacing between items */
+  padding: 10px 0;
+}
+
+/* Items on the left side */
+.timeline-item--left {
+  left: 0;
+  padding-right: 40px; /* Space for the dot */
+  text-align: right;
+}
+
+/* Items on the right side */
+.timeline-item--right {
+  left: 50%;
+  padding-left: 40px; /* Space for the dot */
+  text-align: left;
+}
+
+/* Adjust content for left-aligned cards */
+.timeline-item--left .timeline-content {
+  /* To ensure list items/text align right */
+  text-align: right;
+}
+.timeline-item--left .timeline-content ul {
+  /* Overrides the above to align feature content left */
+  text-align: left;
+}
+
+/* --- The Dot (The actual 'patch' point on the line) --- */
+.dot {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background: #ffffff; /* White center */
+  border: 3px solid var(--heroui-primary); /* Uses your primary theme color */
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1; /* Ensure dot is above the line */
+}
+
+/* Position dots for left items */
+.timeline-item--left .dot {
+  right: -8px; /* Half the width of the dot to center it on the line */
+}
+
+/* Position dots for right items */
+.timeline-item--right .dot {
+  left: -8px; /* Half the width of the dot to center it on the line */
+}
+
+/* --- Responsiveness for Smaller Screens (Mobile View) --- */
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 20px; /* Move the line to the left */
+  }
+
+  .timeline-item,
+  .timeline-item--left,
+  .timeline-item--right {
+    width: 100%; /* Full width */
+    left: 0;
+    padding-left: 40px; /* Space for the dot */
+    padding-right: 0;
+    text-align: left; /* All text aligned left */
+  }
+
+  /* Reset content text alignment for mobile */
+  .timeline-item--left .timeline-content,
+  .timeline-item--right .timeline-content,
+  .timeline-item--left .timeline-content ul {
+    text-align: left;
+  }
+
+  /* Align all dots with the new line position */
+  .timeline-item--left .dot,
+  .timeline-item--right .dot {
+    right: auto;
+    left: 12px;
+  }
+}

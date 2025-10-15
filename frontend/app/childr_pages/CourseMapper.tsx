@@ -436,7 +436,7 @@ export default function CourseMapper({
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="border-b bg-content1 sticky top-0 z-10">
+      <div className="border-b bg-content1 top-0 z-10">
         <div className="container mx-auto px-4 md:px-6 py-3 md:py-4">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <div className="flex items-center gap-2 md:gap-4 w-full sm:w-auto">
@@ -457,7 +457,7 @@ export default function CourseMapper({
               </div>
             </div>
             <div className="flex items-center gap-2 w-full sm:w-auto">
-              <Button
+              {/* <Button
                 size="sm"
                 variant="flat"
                 startContent={<Download size={16} />}
@@ -466,6 +466,7 @@ export default function CourseMapper({
               >
                 <span className="sm:inline">Export</span>
               </Button>
+              */}
               <Button
                 size="sm"
                 variant="flat"
