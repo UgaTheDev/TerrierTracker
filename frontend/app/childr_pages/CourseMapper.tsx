@@ -47,7 +47,7 @@ export default function CourseMapper({
   enrolledCourses,
   onNavigate,
   userInfo = {},
-}: CourseMapperProps) {
+}: CourseMapperProps): JSX.Element {
   const [roadmap, setRoadmap] = useState<Roadmap>(() => {
     try {
       const saved = localStorage.getItem("terriertracker-roadmap");
@@ -111,6 +111,7 @@ export default function CourseMapper({
   const handleDragStart = (event: DragStartEvent) => {
     setActiveId(event.active.id as string);
   };
+
   const handleDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -142,105 +143,79 @@ export default function CourseMapper({
       }
     }
 
-    
     if (!course) {
       course = availableCourses.find((c) => c.courseId === courseId) || null;
-      sourceSemesterId = null; 
+      sourceSemesterId = null;
+
+      if (!course) {
+        setActiveId(null);
+        return;
+      }
+    }
 
     if (!course) {
       setActiveId(null);
       return;
     }
 
-    if (targetId === "transfer-credits") {
-      setRoadmap((prev) => {
-        let newSemesters = prev.semesters;
-        let newTransferCredits = prev.transferCredits;
-
-        if (sourceSemesterId && sourceSemesterId !== "transfer-credits") {
-          newSemesters = prev.semesters.map((semester) => {
-            if (semester.id === sourceSemesterId) {
-              return {
-                ...semester,
-                courses: semester.courses.filter(
-                  (c) => c.courseId !== courseId
-                ),
-                totalCredits: calculateSemesterCredits(
-                  semester.courses.filter((c) => c.courseId !== courseId)
-                ),
-              };
-            }
-            return semester;
-          });
-        }
-        if (sourceSemesterId !== "transfer-credits") {
-          if (!newTransferCredits.some((c) => c.courseId === courseId)) {
-            newTransferCredits = [
-              ...prev.transferCredits,
-              {
-                ...course!,
-                semesterId: "transfer-credits",
-                isTransfer: true,
-                status: "completed" as const,
-              },
-            ];
-          }
-        }
-
-        const updated = {
-          ...prev,
-          semesters: newSemesters,
-          transferCredits: newTransferCredits,
-          lastModified: new Date(),
-        };
-
-        localStorage.setItem("terriertracker-roadmap", JSON.stringify(updated));
-        return updated;
-      });
-
-      setActiveId(null);
-      return;
-    }
     setRoadmap((prev) => {
-      let newSemesters = prev.semesters.map((semester) => {
-        if (semester.id === sourceSemesterId) {
-          return {
-            ...semester,
-            courses: semester.courses.filter((c) => c.courseId !== courseId),
-            totalCredits: calculateSemesterCredits(
-              semester.courses.filter((c) => c.courseId !== courseId)
-            ),
-          };
-        }
-        return semester;
-      });
-
-    
+      let newSemesters = prev.semesters;
       let newTransferCredits = prev.transferCredits;
-      if (sourceSemesterId === "transfer-credits") {
-        newTransferCredits = prev.transferCredits.filter(
-          (c) => c.courseId !== courseId
-        );
-      }
-
-      newSemesters = newSemesters.map((semester) => {
-        if (semester.id === targetId) {
-          if (!semester.courses.some((c) => c.courseId === courseId)) {
-            const courseToAdd = {
-              ...course!,
-              semesterId: targetId,
-              isTransfer: false,
-            };
-            const newCourses = [...semester.courses, courseToAdd];
+      if (sourceSemesterId && sourceSemesterId !== "transfer-credits") {
+        newSemesters = newSemesters.map((semester) => {
+          if (semester.id === sourceSemesterId) {
+            const newCourses = semester.courses.filter(
+              (c) => c.courseId !== courseId
+            );
             return {
               ...semester,
               courses: newCourses,
               totalCredits: calculateSemesterCredits(newCourses),
             };
           }
+          return semester;
+        });
+      }
+
+      if (sourceSemesterId === "transfer-credits") {
+        newTransferCredits = newTransferCredits.filter(
+          (c) => c.courseId !== courseId
+        );
+      }
+
+      if (targetId === "transfer-credits") {
+        if (!newTransferCredits.some((c) => c.courseId === courseId)) {
+          newTransferCredits = [
+            ...newTransferCredits,
+            {
+              ...course!,
+              semesterId: "transfer-credits",
+              isTransfer: true,
+              status: "completed" as const,
+            },
+          ];
         }
-        return semester;
-      });
+      } else {
+        newSemesters = newSemesters.map((semester) => {
+          if (semester.id === targetId) {
+            if (!semester.courses.some((c) => c.courseId === courseId)) {
+              const courseToAdd = {
+                ...course!,
+                semesterId: targetId,
+                isTransfer: false,
+                status: "planned" as const,
+              };
+              const newCourses = [...semester.courses, courseToAdd];
+              return {
+                ...semester,
+                courses: newCourses,
+                totalCredits: calculateSemesterCredits(newCourses),
+              };
+            }
+          }
+          return semester;
+        });
+      }
 
       const updated = {
         ...prev,
@@ -279,7 +254,6 @@ export default function CourseMapper({
     setRoadmap((prev) => {
       const newSemesters = prev.semesters.map((semester) => {
         if (semester.id === semesterId) {
-        
           return {
             ...semester,
             name: getSemesterLabel(semester, prev.config.showYears),
@@ -376,10 +350,14 @@ export default function CourseMapper({
         totalCredits: 0,
       };
 
-      return {
+      const updated = {
         ...prev,
         semesters: [...prev.semesters, newSemester],
+        lastModified: new Date(),
       };
+
+      localStorage.setItem("terriertracker-roadmap", JSON.stringify(updated));
+      return updated;
     });
   };
 
@@ -510,22 +488,22 @@ export default function CourseMapper({
                 size="sm"
                 variant="flat"
                 color="danger"
-                startContent={<RotateCcw size={16} />} 
+                startContent={<RotateCcw size={16} />}
                 onClick={handleResetRoadmap}
                 className="flex-1 sm:flex-none"
               >
                 <span className="sm:inline">Reset Roadmap</span>
               </Button>
               {/* <Button
-                size="sm"
-                variant="flat"
-                startContent={<Download size={16} />}
-                onClick={handleExport}
-                className="flex-1 sm:flex-none"
-              >
-                <span className="sm:inline">Export</span>
-              </Button>
-              */}
+              size="sm"
+              variant="flat"
+              startContent={<Download size={16} />}
+              onClick={handleExport}
+              className="flex-1 sm:flex-none"
+            >
+              <span className="sm:inline">Export</span>
+            </Button>
+            */}
               <Button
                 size="sm"
                 variant="flat"
