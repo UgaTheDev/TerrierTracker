@@ -145,7 +145,7 @@ export default function CourseSearch({
         const initialCodes = coursesData.slice(0, 100).map((c) => c.courseId);
 
         try {
-          const bulkData = await apiRequest("/bulk-hub-requirements", {
+          const bulkData = await apiRequest("/api/bulk-hub-requirements", {
             method: "POST",
             body: JSON.stringify({ course_codes: initialCodes }),
           });

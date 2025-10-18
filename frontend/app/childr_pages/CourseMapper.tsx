@@ -45,6 +45,7 @@ interface CourseMapperProps {
 
 export default function CourseMapper({
   enrolledCourses,
+  customCourses,
   onNavigate,
   userInfo = {},
 }: CourseMapperProps): JSX.Element {
@@ -82,12 +83,31 @@ export default function CourseMapper({
   const [showExportView, setShowExportView] = useState(false);
 
   const availableCourses: PlannedCourse[] = useMemo(() => {
-    return enrolledCourses.map((course) => ({
+    const enrolled = enrolledCourses.map((course) => ({
       ...course,
       status: "planned" as const,
       semesterId: "",
     }));
-  }, [enrolledCourses]);
+
+    const custom = customCourses.map((courseArray, index) => {
+      const [courseId, courseName, hubsString, credits] = courseArray;
+      const stableId = courseId.split("").reduce((acc, char) => {
+        return acc + char.charCodeAt(0);
+      }, 0);
+
+      return {
+        id: stableId,
+        courseId: courseId,
+        course: courseName,
+        credits: credits,
+        requirements: hubsString,
+        status: "planned" as const,
+        semesterId: "",
+      } as PlannedCourse;
+    });
+
+    return [...enrolled, ...custom];
+  }, [enrolledCourses, customCourses]);
 
   const activeCourse = useMemo(() => {
     if (!activeId) return null;
