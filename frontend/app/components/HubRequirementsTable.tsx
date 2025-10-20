@@ -12,6 +12,7 @@ import {
   Tooltip,
   Progress,
 } from "@heroui/react";
+import ViewRequirementsModal from "./ViewRequirementsModal";
 
 export type IconSvgProps = SVGProps<SVGSVGElement> & {
   size?: number;
@@ -54,46 +55,6 @@ export const EyeIcon = (props: IconSvgProps) => {
   );
 };
 
-export const EditIcon = (props: IconSvgProps) => {
-  return (
-    <svg
-      aria-hidden="true"
-      fill="none"
-      focusable="false"
-      height="1em"
-      role="presentation"
-      viewBox="0 0 20 20"
-      width="1em"
-      {...props}
-    >
-      <path
-        d="M11.05 3.00002L4.20835 10.2417C3.95002 10.5167 3.70002 11.0584 3.65002 11.4334L3.34169 14.1334C3.23335 15.1084 3.93335 15.775 4.90002 15.6084L7.58335 15.15C7.95835 15.0834 8.48335 14.8084 8.74168 14.525L15.5834 7.28335C16.7667 6.03335 17.3 4.60835 15.4583 2.86668C13.625 1.14168 12.2334 1.75002 11.05 3.00002Z"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeMiterlimit={10}
-        strokeWidth={1.5}
-      />
-      <path
-        d="M9.90833 4.20831C10.2667 6.50831 12.1333 8.26665 14.45 8.49998"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeMiterlimit={10}
-        strokeWidth={1.5}
-      />
-      <path
-        d="M2.5 18.3333H17.5"
-        stroke="currentColor"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeMiterlimit={10}
-        strokeWidth={1.5}
-      />
-    </svg>
-  );
-};
-
 const statusColorMap: Record<string, ChipProps["color"]> = {
   fulfilled: "success",
   unfulfilled: "danger",
@@ -104,6 +65,11 @@ type HubRequirement = {
   name: string;
   required: number;
   current: number;
+  courses?: Array<{
+    courseId: string;
+    course: string;
+    credits: number;
+  }>;
 };
 
 interface HubRequirementsTableProps {
@@ -113,6 +79,16 @@ interface HubRequirementsTableProps {
 export default function HubRequirementsTable({
   hubRequirements,
 }: HubRequirementsTableProps) {
+  const [viewModalOpen, setViewModalOpen] = React.useState(false);
+  const [selectedRequirement, setSelectedRequirement] =
+    React.useState<HubRequirement | null>(null);
+
+  const handleViewCourses = (requirement: HubRequirement) => {
+    console.log("View clicked for:", requirement.name);
+    setSelectedRequirement(requirement);
+    setViewModalOpen(true);
+  };
+
   const renderCell = React.useCallback(
     (requirement: HubRequirement, columnKey: React.Key) => {
       const status =
@@ -181,13 +157,11 @@ export default function HubRequirementsTable({
           return (
             <div className="relative flex items-center gap-2">
               <Tooltip content="View courses fulfilling this requirement">
-                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
+                <span
+                  className="text-lg text-default-400 cursor-pointer active:opacity-50"
+                  onClick={() => handleViewCourses(requirement)}
+                >
                   <EyeIcon />
-                </span>
-              </Tooltip>
-              <Tooltip content="Edit requirement">
-                <span className="text-lg text-default-400 cursor-pointer active:opacity-50">
-                  <EditIcon />
                 </span>
               </Tooltip>
             </div>
@@ -200,28 +174,36 @@ export default function HubRequirementsTable({
   );
 
   return (
-    <div className="h-[510px] overflow-auto">
-      <Table aria-label="Hub requirements table" className="h-full">
-        <TableHeader columns={columns}>
-          {(column) => (
-            <TableColumn
-              key={column.uid}
-              align={column.uid === "actions" ? "center" : "start"}
-            >
-              {column.name}
-            </TableColumn>
-          )}
-        </TableHeader>
-        <TableBody items={hubRequirements}>
-          {(item) => (
-            <TableRow key={item.name}>
-              {(columnKey) => (
-                <TableCell>{renderCell(item, columnKey)}</TableCell>
-              )}
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
-    </div>
+    <>
+      <div className="h-[510px] overflow-auto">
+        <Table aria-label="Hub requirements table" className="h-full">
+          <TableHeader columns={columns}>
+            {(column) => (
+              <TableColumn
+                key={column.uid}
+                align={column.uid === "actions" ? "center" : "start"}
+              >
+                {column.name}
+              </TableColumn>
+            )}
+          </TableHeader>
+          <TableBody items={hubRequirements}>
+            {(item) => (
+              <TableRow key={item.name}>
+                {(columnKey) => (
+                  <TableCell>{renderCell(item, columnKey)}</TableCell>
+                )}
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+
+      <ViewRequirementsModal
+        isOpen={viewModalOpen}
+        onClose={() => setViewModalOpen(false)}
+        requirement={selectedRequirement}
+      />
+    </>
   );
 }

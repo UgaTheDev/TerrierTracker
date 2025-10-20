@@ -48,6 +48,11 @@ type HubRequirement = {
   name: string;
   required: number;
   current: number;
+  courses?: Array<{
+    courseId: string;
+    course: string;
+    credits: number;
+  }>;
 };
 
 type UserData = {
@@ -227,17 +232,40 @@ export default function Home() {
     "Teamwork/Collaboration": 2,
     "Creativity/Innovation": 2,
   };
-
   const calculateHubRequirements = (): HubRequirement[] => {
     const hubCounts: { [key: string]: number } = {};
+    const hubCourses: {
+      [key: string]: Array<{
+        courseId: string;
+        course: string;
+        credits: number;
+      }>;
+    } = {};
 
     enrolledCourses.forEach((course) => {
       if (course.hubRequirements && Array.isArray(course.hubRequirements)) {
         course.hubRequirements.forEach((hub) => {
           hubCounts[hub] = (hubCounts[hub] || 0) + 1;
+          if (!hubCourses[hub]) {
+            hubCourses[hub] = [];
+          }
+          hubCourses[hub].push({
+            courseId: course.courseId,
+            course: course.course,
+            credits: course.credits,
+          });
+
           if (hub === "Scientific Inquiry II" || hub === "Social Inquiry II") {
             const orRequirement = "Scientific Inquiry II or Social Inquiry II";
             hubCounts[orRequirement] = (hubCounts[orRequirement] || 0) + 1;
+            if (!hubCourses[orRequirement]) {
+              hubCourses[orRequirement] = [];
+            }
+            hubCourses[orRequirement].push({
+              courseId: course.courseId,
+              course: course.course,
+              credits: course.credits,
+            });
           }
         });
       }
@@ -252,9 +280,27 @@ export default function Home() {
           .filter((h) => h);
         hubs.forEach((hub) => {
           hubCounts[hub] = (hubCounts[hub] || 0) + 1;
+
+          if (!hubCourses[hub]) {
+            hubCourses[hub] = [];
+          }
+          hubCourses[hub].push({
+            courseId: course[0],
+            course: course[1],
+            credits: course[3],
+          });
+
           if (hub === "Scientific Inquiry II" || hub === "Social Inquiry II") {
             const orRequirement = "Scientific Inquiry II or Social Inquiry II";
             hubCounts[orRequirement] = (hubCounts[orRequirement] || 0) + 1;
+            if (!hubCourses[orRequirement]) {
+              hubCourses[orRequirement] = [];
+            }
+            hubCourses[orRequirement].push({
+              courseId: course[0],
+              course: course[1],
+              credits: course[3],
+            });
           }
         });
       }
@@ -265,6 +311,7 @@ export default function Home() {
         name,
         required,
         current: hubCounts[name] || 0,
+        courses: hubCourses[name] || [],
       })
     );
   };
