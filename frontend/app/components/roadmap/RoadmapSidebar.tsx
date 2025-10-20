@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { Card, Divider, Button, Chip } from "@heroui/react";
 import { Roadmap, PlannedCourse } from "../../../types/roadmap";
 import CourseCard from "./CourseCard";
@@ -21,17 +21,35 @@ export default function RoadmapSidebar({
   userInfo = {},
 }: RoadmapSidebarProps) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const unplacedCourses = useMemo(() => {
+    const placedCourseIds = new Set(
+      roadmap.semesters.flatMap((s) => s.courses.map((c) => c.courseId))
+    );
+    const transferCourseIds = new Set(
+      roadmap.transferCredits.map((c) => c.courseId)
+    );
 
-  const placedCourseIds = new Set(
-    roadmap.semesters.flatMap((s) => s.courses.map((c) => c.courseId))
-  );
-  const transferCourseIds = new Set(
-    roadmap.transferCredits.map((c) => c.courseId)
-  );
-  const unplacedCourses = availableCourses.filter(
-    (c) =>
-      !placedCourseIds.has(c.courseId) && !transferCourseIds.has(c.courseId)
-  );
+    console.log("=== SIDEBAR RECALCULATING ===");
+    console.log(
+      "Available courses:",
+      availableCourses.map((c) => c.courseId)
+    );
+    console.log("Placed course IDs:", Array.from(placedCourseIds));
+    console.log("Transfer course IDs:", Array.from(transferCourseIds));
+
+    const result = availableCourses.filter(
+      (c) =>
+        !placedCourseIds.has(c.courseId) && !transferCourseIds.has(c.courseId)
+    );
+
+    console.log(
+      "Unplaced courses:",
+      result.map((c) => c.courseId)
+    );
+    console.log("=========================");
+
+    return result;
+  }, [availableCourses, roadmap.semesters, roadmap.transferCredits]);
 
   return (
     <div className="space-y-4 lg:sticky lg:top-24">
@@ -45,7 +63,6 @@ export default function RoadmapSidebar({
       >
         Available Courses ({unplacedCourses.length})
       </Button>
-
       <div className={`space-y-4 ${isExpanded ? "block" : "hidden lg:block"}`}>
         {(userInfo.name || userInfo.major || userInfo.minor) && (
           <Card className="p-4">
@@ -72,7 +89,6 @@ export default function RoadmapSidebar({
             </div>
           </Card>
         )}
-
         <Card className="p-4">
           <div className="flex justify-between items-center mb-3">
             <h3 className="font-semibold text-sm md:text-base">
@@ -97,6 +113,7 @@ export default function RoadmapSidebar({
                   key={course.courseId}
                   course={course}
                   showDragHandle
+                  isInSidebar={true}
                 />
               ))
             )}

@@ -10,6 +10,7 @@ interface CourseCardProps {
   isDragging?: boolean;
   onRemove?: () => void;
   showDragHandle?: boolean;
+  isInSidebar?: boolean;
 }
 
 export default function CourseCard({
@@ -17,6 +18,7 @@ export default function CourseCard({
   isDragging = false,
   onRemove,
   showDragHandle = true,
+  isInSidebar = false,
 }: CourseCardProps) {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: course.courseId,
@@ -32,18 +34,20 @@ export default function CourseCard({
     <Card
       ref={setNodeRef}
       style={style}
-      className={`p-3 cursor-grab active:cursor-grabbing ${
-        isDragging ? "opacity-50" : ""
-      }`}
-      {...attributes}
-      {...listeners}
+      className={`p-3 ${isDragging ? "opacity-50" : ""}`}
     >
       <div className="flex items-start gap-2">
         {showDragHandle && (
-          <GripVertical
-            size={16}
-            className="text-default-400 mt-0.5 flex-shrink-0"
-          />
+          <div
+            {...attributes}
+            {...listeners}
+            className="cursor-grab active:cursor-grabbing"
+          >
+            <GripVertical
+              size={16}
+              className="text-default-400 mt-0.5 flex-shrink-0"
+            />
+          </div>
         )}
         <div className="flex-1 min-w-0">
           <div className="flex justify-between items-start gap-2">
@@ -62,10 +66,13 @@ export default function CourseCard({
               {onRemove && (
                 <button
                   onClick={(e) => {
+                    e.preventDefault();
                     e.stopPropagation();
+                    console.log("X button clicked for:", course.courseId);
                     onRemove();
                   }}
-                  className="text-danger hover:bg-danger/10 rounded p-1"
+                  className="text-danger hover:bg-danger/10 rounded p-1 z-10"
+                  type="button"
                 >
                   <X size={12} className="md:w-3.5 md:h-3.5" />
                 </button>

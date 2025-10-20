@@ -65,7 +65,6 @@ export default function CourseMapper({
       }
     } catch (error) {
       console.error("Error parsing saved roadmap from localStorage:", error);
-
       localStorage.removeItem("terriertracker-roadmap");
     }
 
@@ -270,6 +269,7 @@ export default function CourseMapper({
       return updated;
     });
   };
+
   const handleClearSemester = (semesterId: string) => {
     setRoadmap((prev) => {
       const newSemesters = prev.semesters.map((semester) => {
@@ -310,6 +310,8 @@ export default function CourseMapper({
   };
 
   const handleRemoveCourse = (semesterId: string, courseId: string) => {
+    console.log("Removing course:", courseId, "from semester:", semesterId);
+
     setRoadmap((prev) => {
       const newSemesters = prev.semesters.map((semester) => {
         if (semester.id === semesterId) {
@@ -395,6 +397,7 @@ export default function CourseMapper({
       return updated;
     });
   };
+
   const handleExport = () => {
     setShowExportView(true);
 
@@ -514,16 +517,6 @@ export default function CourseMapper({
               >
                 <span className="sm:inline">Reset Roadmap</span>
               </Button>
-              {/* <Button
-              size="sm"
-              variant="flat"
-              startContent={<Download size={16} />}
-              onClick={handleExport}
-              className="flex-1 sm:flex-none"
-            >
-              <span className="sm:inline">Export</span>
-            </Button>
-            */}
               <Button
                 size="sm"
                 variant="flat"
