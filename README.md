@@ -19,12 +19,11 @@ Terrier Tracker revolutionizes academic planning for BU students by automating d
 ### Academic Planning
 - **Intelligent Course Tracking** - Monitor progress across all BU Hub requirements and major/minor requirements
 - **Real-time Validation** - Instant feedback on degree completion status as courses are added
-- **Course Search** - Search and filter through 5,000+ BU courses with autocomplete
+- **Course Search** - Search and filter through 6,000 BU courses with autocomplete
 - **Progress Visualization** - Clear visual indicators for requirement fulfillment
 
 ### Smart Analysis
 - **Requirement Calculator** - Automatically maps courses to Hub areas and calculates credits
-- **Graduation Timeline** - Projects completion date based on current progress
 - **Course Recommendations** - Suggests courses to efficiently fulfill remaining requirements
 
 ### User Experience
@@ -32,11 +31,6 @@ Terrier Tracker revolutionizes academic planning for BU students by automating d
 - **Dynamic Forms** - Client-side validation with instant error feedback
 - **Persistent Sessions** - Save and resume planning across multiple sessions
 - **Export Functionality** - Download degree plans as PDF or shareable links
-
-### Security & Authentication
-- **Google OAuth 2.0** - Secure BU student authentication
-- **Role-based Access** - Protected routes with session management
-- **Data Privacy** - Encrypted storage of academic records
 
 ## 🛠️ Tech Stack
 
